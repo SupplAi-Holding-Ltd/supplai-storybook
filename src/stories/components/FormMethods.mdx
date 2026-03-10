@@ -1,0 +1,174 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Components/Form Methods" />
+
+<div className="fm-page">
+
+  <div className="fm-header">
+    <h1>Form Methods</h1>
+    <p>Form components provide the building blocks for collecting user input. They are designed for consistency, accessibility, and clarity across the platform.</p>
+  </div>
+
+  <div className="fm-section">
+    <h2>Components</h2>
+    <div className="fm-index-grid">
+      <div className="fm-index-card">
+        <div className="fm-index-preview fm-preview--text">
+          <div className="fm-mock-input">Placeholder</div>
+        </div>
+        <div className="fm-index-info">
+          <span className="fm-index-name">Text Input</span>
+          <span className="fm-index-desc">Single-line text entry with multiple states</span>
+        </div>
+      </div>
+      <div className="fm-index-card">
+        <div className="fm-index-preview fm-preview--password">
+          <div className="fm-mock-input">••••••••</div>
+        </div>
+        <div className="fm-index-info">
+          <span className="fm-index-name">Password Input</span>
+          <span className="fm-index-desc">Masked text entry for sensitive values</span>
+        </div>
+      </div>
+      <div className="fm-index-card">
+        <div className="fm-index-preview fm-preview--radio">
+          <div className="fm-mock-radio"><span className="fm-mock-radio-dot" />Option A</div>
+          <div className="fm-mock-radio">Option B</div>
+        </div>
+        <div className="fm-index-info">
+          <span className="fm-index-name">Radio Buttons</span>
+          <span className="fm-index-desc">Single-select from a list of options</span>
+        </div>
+      </div>
+      <div className="fm-index-card">
+        <div className="fm-index-preview fm-preview--check">
+          <div className="fm-mock-check"><span className="fm-mock-check-box fm-mock-check-box--on">✓</span>Option A</div>
+          <div className="fm-mock-check"><span className="fm-mock-check-box" />Option B</div>
+        </div>
+        <div className="fm-index-info">
+          <span className="fm-index-name">Checkbox</span>
+          <span className="fm-index-desc">Multi-select toggle for independent options</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>{`
+  .fm-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 0 64px;
+    font-family: 'Manrope', sans-serif;
+  }
+  .fm-header {
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #E5E7EB;
+  }
+  .fm-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111625;
+    margin: 0 0 12px;
+  }
+  .fm-header p {
+    font-size: 15px;
+    color: #6B7280;
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0;
+  }
+  .fm-section h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111625;
+    margin: 0 0 20px;
+  }
+  .fm-index-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .fm-index-card {
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #FFFFFF;
+  }
+  .fm-index-preview {
+    padding: 28px 24px;
+    background: #F9FAFB;
+    border-bottom: 1px solid #E5E7EB;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 90px;
+    justify-content: center;
+  }
+  .fm-mock-input {
+    padding: 7px 12px;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #9CA3AF;
+    background: #FFFFFF;
+    max-width: 200px;
+  }
+  .fm-mock-radio, .fm-mock-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #374151;
+  }
+  .fm-mock-radio-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #4169E1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .fm-mock-radio-dot::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4169E1;
+  }
+  .fm-mock-check-box {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    border: 2px solid #D1D5DB;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    flex-shrink: 0;
+  }
+  .fm-mock-check-box--on {
+    background: #4169E1;
+    border-color: #4169E1;
+    color: #FFFFFF;
+  }
+  .fm-index-info {
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .fm-index-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111625;
+  }
+  .fm-index-desc {
+    font-size: 12px;
+    color: #9CA3AF;
+  }
+`}</style>

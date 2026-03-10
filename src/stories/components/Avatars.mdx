@@ -1,0 +1,84 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Components/Avatars" />
+
+<div className="sb-container">
+  <div className="sb-section-title">
+    # Avatars
+
+    Avatars represent users or entities in the interface. They can display a profile photo, initials, or a fallback icon when no image is available.
+  </div>
+
+  <div style={{ marginBottom: '40px' }}>
+    <h3>Sizes</h3>
+    <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-end', marginTop: '16px', flexWrap: 'wrap' }}>
+      {[
+        { size: 24, label: 'XS' },
+        { size: 32, label: 'SM' },
+        { size: 40, label: 'MD' },
+        { size: 48, label: 'LG' },
+        { size: 64, label: 'XL' },
+      ].map(({ size, label }) => (
+        <div key={label} style={{ textAlign: 'center' }}>
+          <div style={{
+            width: `${size}px`, height: `${size}px`,
+            borderRadius: '50%', background: '#1A56DB',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            color: '#FFFFFF', fontWeight: 600,
+            fontSize: `${Math.max(10, size * 0.35)}px`,
+          }}>
+            AJ
+          </div>
+          <p style={{ margin: '6px 0 0', fontSize: '11px', color: '#6B7280' }}>{label}</p>
+          <p style={{ margin: '2px 0 0', fontSize: '11px', color: '#9CA3AF' }}>{size}px</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div style={{ marginBottom: '40px' }}>
+    <h3>Variants</h3>
+    <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginTop: '16px', flexWrap: 'wrap' }}>
+      <div style={{ textAlign: 'center' }}>
+        <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#1A56DB', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFFFFF', fontWeight: 600, fontSize: '16px' }}>AJ</div>
+        <p style={{ margin: '6px 0 0', fontSize: '11px', color: '#6B7280' }}>Initials</p>
+      </div>
+      <div style={{ textAlign: 'center' }}>
+        <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#E5E7EB', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>👤</div>
+        <p style={{ margin: '6px 0 0', fontSize: '11px', color: '#6B7280' }}>Fallback</p>
+      </div>
+      <div style={{ textAlign: 'center' }}>
+        <div style={{ position: 'relative', display: 'inline-block' }}>
+          <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#1A56DB', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFFFFF', fontWeight: 600, fontSize: '16px' }}>AJ</div>
+          <div style={{ position: 'absolute', bottom: '1px', right: '1px', width: '12px', height: '12px', borderRadius: '50%', background: '#057A55', border: '2px solid #FFFFFF' }} />
+        </div>
+        <p style={{ margin: '6px 0 0', fontSize: '11px', color: '#6B7280' }}>With Status</p>
+      </div>
+      <div style={{ textAlign: 'center' }}>
+        <div style={{ display: 'flex' }}>
+          {['#1A56DB', '#057A55', '#C27803', '#C81E1E'].map((color, i) => (
+            <div key={color} style={{ width: '36px', height: '36px', borderRadius: '50%', background: color, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFFFFF', fontWeight: 600, fontSize: '12px', marginLeft: i > 0 ? '-8px' : 0, border: '2px solid #FFFFFF', zIndex: 4 - i }} >
+              {String.fromCharCode(65 + i)}
+            </div>
+          ))}
+        </div>
+        <p style={{ margin: '6px 0 0', fontSize: '11px', color: '#6B7280' }}>Group</p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h3>Status</h3>
+    <p style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FEF3C7', color: '#92400E', padding: '6px 12px', borderRadius: '99px', fontSize: '13px', fontWeight: 500 }}>
+      🚧 In Development
+    </p>
+    <p>Interactive stories and full documentation will be added when the component is finalized.</p>
+  </div>
+</div>
+
+<style>
+  {`
+  .sb-container { margin-bottom: 48px; }
+  .sb-section-title { margin-bottom: 32px; }
+  `}
+</style>

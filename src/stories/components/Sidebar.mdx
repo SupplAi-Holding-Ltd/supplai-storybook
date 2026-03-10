@@ -1,0 +1,60 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Components/Sidebar" />
+
+<div className="sb-container">
+  <div className="sb-section-title">
+    # Sidebar
+
+    The sidebar is a persistent or collapsible navigation panel used for primary app navigation. It provides quick access to top-level sections and supports nested navigation hierarchies.
+  </div>
+
+  <div style={{ marginBottom: '40px' }}>
+    <h3>Preview</h3>
+    <div style={{ border: '1px solid #E5E7EB', borderRadius: '8px', overflow: 'hidden', display: 'flex', height: '320px', marginTop: '16px' }}>
+      <div style={{ width: '220px', background: '#111827', padding: '16px 0', flexShrink: 0 }}>
+        <div style={{ padding: '8px 16px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)', marginBottom: '8px' }}>
+          <p style={{ margin: 0, fontSize: '14px', fontWeight: 700, color: '#FFFFFF' }}>Supplai</p>
+          <p style={{ margin: 0, fontSize: '11px', color: '#9CA3AF' }}>Design System</p>
+        </div>
+        {[
+          { label: 'Dashboard', icon: '⊞', active: true },
+          { label: 'Analytics', icon: '📈', active: false },
+          { label: 'Users', icon: '👤', active: false },
+          { label: 'Settings', icon: '⚙', active: false },
+        ].map(({ label, icon, active }) => (
+          <div
+            key={label}
+            style={{
+              display: 'flex', alignItems: 'center', gap: '10px',
+              padding: '10px 16px', margin: '2px 8px', borderRadius: '6px',
+              background: active ? 'rgba(255,255,255,0.1)' : 'transparent',
+              cursor: 'pointer',
+            }}
+          >
+            <span style={{ fontSize: '14px' }}>{icon}</span>
+            <span style={{ fontSize: '13px', fontWeight: active ? 500 : 400, color: active ? '#FFFFFF' : '#9CA3AF' }}>{label}</span>
+          </div>
+        ))}
+      </div>
+      <div style={{ flex: 1, background: '#F9FAFB', padding: '24px' }}>
+        <p style={{ margin: 0, fontSize: '14px', color: '#6B7280' }}>Main content area</p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h3>Status</h3>
+    <p style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FEF3C7', color: '#92400E', padding: '6px 12px', borderRadius: '99px', fontSize: '13px', fontWeight: 500 }}>
+      🚧 In Development
+    </p>
+    <p>Interactive stories and full documentation will be added when the component is finalized.</p>
+  </div>
+</div>
+
+<style>
+  {`
+  .sb-container { margin-bottom: 48px; }
+  .sb-section-title { margin-bottom: 32px; }
+  `}
+</style>

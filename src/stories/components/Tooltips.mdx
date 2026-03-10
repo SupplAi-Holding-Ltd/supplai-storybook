@@ -1,0 +1,331 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Components/Tooltips" />
+
+<div className="tt-page">
+
+  <div className="tt-header">
+    <h1>Tooltips</h1>
+    <p>Tooltips provide contextual information when a user hovers over or focuses on an element. They clarify the purpose of icons, truncated text, or actions that may not be immediately obvious.</p>
+  </div>
+
+  {/* ── Anatomy ──────────────────────────────────────────────────────── */}
+  <div className="tt-section">
+    <h2>Anatomy</h2>
+    <div className="tt-anatomy-box">
+      <div className="tt-bubble">Tooltip</div>
+    </div>
+    <ul className="tt-anatomy-list">
+      <li><strong>Background</strong> — Dark navy <code>#111625</code></li>
+      <li><strong>Text</strong> — Near-white <code>#F8FBFF</code>, Manrope SemiBold 14px</li>
+      <li><strong>Padding</strong> — 4px top/bottom · 8px left/right</li>
+      <li><strong>Border radius</strong> — 8px</li>
+    </ul>
+  </div>
+
+  {/* ── Positions ────────────────────────────────────────────────────── */}
+  <div className="tt-section">
+    <h2>Positions</h2>
+    <p className="tt-desc">Tooltips can appear on any of the four sides of the trigger element depending on available space.</p>
+
+    <div className="tt-positions-grid">
+
+      {/* TOP */}
+      <div className="tt-pos-cell">
+        <div className="tt-pos-label">Top</div>
+        <div className="tt-pos-demo">
+          <div className="tt-bubble">Tooltip</div>
+          <div className="tt-arrow tt-arrow--down" />
+          <button className="tt-trigger">Hover me</button>
+        </div>
+      </div>
+
+      {/* RIGHT */}
+      <div className="tt-pos-cell">
+        <div className="tt-pos-label">Right</div>
+        <div className="tt-pos-demo tt-pos-demo--row">
+          <button className="tt-trigger">Hover me</button>
+          <div className="tt-arrow tt-arrow--right" />
+          <div className="tt-bubble">Tooltip</div>
+        </div>
+      </div>
+
+      {/* BOTTOM */}
+      <div className="tt-pos-cell">
+        <div className="tt-pos-label">Bottom</div>
+        <div className="tt-pos-demo">
+          <button className="tt-trigger">Hover me</button>
+          <div className="tt-arrow tt-arrow--up" />
+          <div className="tt-bubble">Tooltip</div>
+        </div>
+      </div>
+
+      {/* LEFT */}
+      <div className="tt-pos-cell">
+        <div className="tt-pos-label">Left</div>
+        <div className="tt-pos-demo tt-pos-demo--row">
+          <div className="tt-bubble">Tooltip</div>
+          <div className="tt-arrow tt-arrow--left" />
+          <button className="tt-trigger">Hover me</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  {/* ── Usage Guidelines ─────────────────────────────────────────────── */}
+  <div className="tt-section">
+    <h2>Usage Guidelines</h2>
+    <div className="tt-guidelines">
+      <div className="tt-guideline tt-guideline--do">
+        <span className="tt-gl-tag tt-gl-tag--do">Do</span>
+        <ul>
+          <li>Use for supplementary, non-critical information</li>
+          <li>Keep text short — ideally under 60 characters</li>
+          <li>Trigger on both hover and keyboard focus</li>
+          <li>Position away from screen edges when possible</li>
+        </ul>
+      </div>
+      <div className="tt-guideline tt-guideline--dont">
+        <span className="tt-gl-tag tt-gl-tag--dont">Don't</span>
+        <ul>
+          <li>Don't use tooltips on mobile — use other disclosure patterns</li>
+          <li>Don't put critical actions or interactive content inside a tooltip</li>
+          <li>Don't use tooltips on elements that are already self-explanatory</li>
+          <li>Don't use on touch-only devices where hover doesn't exist</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  {/* ── Status ───────────────────────────────────────────────────────── */}
+  <div className="tt-section">
+    <h2>Status</h2>
+    <span className="tt-status-badge">🚧 In Development</span>
+    <p className="tt-status-note">Interactive stories and full documentation will be added when the component is finalized.</p>
+  </div>
+
+</div>
+
+<style>{`
+  .tt-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 0 64px;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  /* ── Header ── */
+  .tt-header {
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #E5E7EB;
+  }
+  .tt-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111625;
+    margin: 0 0 12px;
+  }
+  .tt-header p {
+    font-size: 15px;
+    color: #6B7280;
+    line-height: 1.7;
+    max-width: 540px;
+    margin: 0;
+  }
+
+  /* ── Section ── */
+  .tt-section {
+    margin-bottom: 52px;
+  }
+  .tt-section h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111625;
+    margin: 0 0 16px;
+  }
+  .tt-desc {
+    font-size: 14px;
+    color: #6B7280;
+    margin: -8px 0 24px;
+    line-height: 1.6;
+  }
+
+  /* ── Tooltip bubble ── */
+  .tt-bubble {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    background: #111625;
+    color: #F8FBFF;
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  /* ── Anatomy box ── */
+  .tt-anatomy-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    margin-bottom: 16px;
+  }
+  .tt-anatomy-list {
+    margin: 0;
+    padding: 0 0 0 20px;
+    list-style: disc;
+    font-size: 14px;
+    color: #4B5563;
+    line-height: 2;
+  }
+  .tt-anatomy-list code {
+    font-family: 'Courier New', monospace;
+    background: #F3F4F6;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  /* ── Arrows ── */
+  .tt-arrow {
+    width: 0;
+    height: 0;
+    flex-shrink: 0;
+  }
+  .tt-arrow--down {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #111625;
+  }
+  .tt-arrow--up {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 6px solid #111625;
+  }
+  .tt-arrow--right {
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 6px solid #111625;
+  }
+  .tt-arrow--left {
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 6px solid #111625;
+  }
+
+  /* ── Trigger button ── */
+  .tt-trigger {
+    padding: 6px 16px;
+    background: #FFFFFF;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+  }
+
+  /* ── Positions grid ── */
+  .tt-positions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .tt-pos-cell {
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    background: #F9FAFB;
+    padding: 24px 16px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .tt-pos-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    align-self: flex-start;
+  }
+
+  .tt-pos-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .tt-pos-demo--row {
+    flex-direction: row;
+    gap: 6px;
+  }
+
+  /* ── Guidelines ── */
+  .tt-guidelines {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .tt-guideline {
+    border-radius: 10px;
+    padding: 20px 20px 20px 24px;
+    border: 1px solid #E5E7EB;
+  }
+  .tt-guideline--do   { border-top: 3px solid #2D9C93; }
+  .tt-guideline--dont { border-top: 3px solid #D13145; }
+
+  .tt-guideline ul {
+    margin: 8px 0 0;
+    padding-left: 18px;
+    font-size: 13px;
+    color: #4B5563;
+    line-height: 2;
+  }
+
+  .tt-gl-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .tt-gl-tag--do   { color: #2D9C93; }
+  .tt-gl-tag--dont { color: #D13145; }
+
+  /* ── Status ── */
+  .tt-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #FEF3C7;
+    color: #92400E;
+    padding: 5px 14px;
+    border-radius: 99px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .tt-status-note {
+    margin: 12px 0 0;
+    font-size: 14px;
+    color: #6B7280;
+  }
+
+  @media (max-width: 640px) {
+    .tt-positions-grid { grid-template-columns: 1fr; }
+    .tt-guidelines { grid-template-columns: 1fr; }
+  }
+`}</style>

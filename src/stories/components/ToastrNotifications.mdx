@@ -1,0 +1,658 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Components/Toastr Notifications" />
+
+<div className="tn-page">
+
+  {/* ─── Header ───────────────────────────────────────────────────── */}
+  <div className="tn-header">
+    <h1>Toastr Notification</h1>
+    <p>Toaster Notifications are used to acknowledge user actions within the application. They're useful in our platform to let the user know their actions have taken an effect.</p>
+  </div>
+
+  {/* ─── Types of Toastrs ─────────────────────────────────────────── */}
+  <div className="tn-section">
+    <h2>Types of Toastrs</h2>
+    <p className="tn-desc">The toast notification can have different colors depending upon the action. Just as discussed in buttons, semantic colors can be utilised for different states.</p>
+
+    <div className="tn-types-grid">
+
+      {/* DEFAULT */}
+      <div className="tn-type-group">
+        <span className="tn-type-label">DEFAULT</span>
+        <div className="tn-toast tn-toast--default">
+          <span className="tn-toast-icon">🚫</span>
+          <span className="tn-toast-text">This is a tooltip</span>
+        </div>
+      </div>
+
+      {/* SUCCESS */}
+      <div className="tn-type-group">
+        <span className="tn-type-label">SUCCESS</span>
+        <div className="tn-toast tn-toast--success">
+          <span className="tn-toast-icon">✅</span>
+          <span className="tn-toast-text">This is a tooltip</span>
+        </div>
+      </div>
+
+      {/* WARNING */}
+      <div className="tn-type-group">
+        <span className="tn-type-label">WARNING</span>
+        <div className="tn-toast tn-toast--warning">
+          <span className="tn-toast-icon">🔷</span>
+          <span className="tn-toast-text">This is a tooltip</span>
+        </div>
+      </div>
+
+      {/* ERROR */}
+      <div className="tn-type-group">
+        <span className="tn-type-label">ERROR</span>
+        <div className="tn-toast tn-toast--error">
+          <span className="tn-toast-icon">🧑‍💻</span>
+          <span className="tn-toast-text">This is a tooltip</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  {/* ─── Usage of Toastr ──────────────────────────────────────────── */}
+  <div className="tn-section">
+    <h2>Usage of Toastr</h2>
+
+    {/* App screenshot mockup */}
+    <div className="tn-usage-card">
+      <div className="tn-app-frame">
+
+        {/* Sidebar */}
+        <div className="tn-sidebar">
+          <div className="tn-sidebar-logo">
+            <div className="tn-logo-mark" />
+            <span>aispace</span>
+          </div>
+          <div className="tn-sidebar-nav">
+            {["Dashboard", "Today", "Trips", "Orders", "Drivers", "Bids", "Help / FAQ", "Settings"].map((item, i) => (
+              <div key={item} className={`tn-nav-item ${i === 2 ? "tn-nav-item--active" : ""}`}>
+                <div className="tn-nav-dot" />
+                <span>{item}</span>
+                {i === 2 && (
+                  <div className="tn-nav-sub">
+                    {["Allocated", "In Transit", "Cancelled", "Completed"].map(s => (
+                      <div key={s} className="tn-nav-sub-item">{s}</div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Main content */}
+        <div className="tn-main">
+          {/* Top bar */}
+          <div className="tn-topbar">
+            <div className="tn-topbar-title">
+              <div className="tn-aispace-icon" />
+              <span className="tn-page-title">Trips</span>
+            </div>
+            <div className="tn-topbar-actions">
+              <div className="tn-search-mock">
+                <span>🔍</span>
+                <span className="tn-search-text">Search Trips</span>
+              </div>
+              <div className="tn-btn-mock-primary">+ Create New Listing</div>
+            </div>
+          </div>
+
+          {/* Table */}
+          <div className="tn-table">
+            {/* Table header */}
+            <div className="tn-table-header">
+              {["All Trips", "Allocated", "In Transit", "Cancelled", "Completed"].map((tab, i) => (
+                <div key={tab} className={`tn-tab-item ${i === 0 ? "tn-tab-item--active" : ""}`}>{tab}</div>
+              ))}
+            </div>
+            <div className="tn-table-cols">
+              {["ID", "ROUTE", "SCHEDULE ↑", "", "", "TIME ↑", "AVAILABILITY", "TYPE ↑", "STATUS ↑"].map((col, i) => (
+                <div key={i} className="tn-col-head">{col}</div>
+              ))}
+            </div>
+            {/* Table rows */}
+            {[
+              { id: "0681-01", route: "Eldoret → Nairobi", schedule: "Weekly (Mo, Tu, Fr)", status: "Ongoing", statusColor: "#2D9C93" },
+              { id: "0681-02", route: "Embu → Gori", schedule: "Weekly (Mo, Tu, Fr)", status: "Ongoing", statusColor: "#2D9C93" },
+              { id: "7858-4a", route: "Dagoretti → Telt", schedule: "02/01/25 - 09/01/25", status: "Ongoing", statusColor: "#2D9C93" },
+              { id: "0681-06", route: "Dagoretti → Telt", schedule: "02/01/25 - 09/01/25", status: "Cancelled", statusColor: "#D13145" },
+              { id: "0681-08", route: "Dagoretti → Telt", schedule: "02/01/25 - Monday", status: "Ongoing", statusColor: "#2D9C93" },
+              { id: "0681-10", route: "Tult → Dagoretti", schedule: "02/01/25 - Monday", status: "Completed", statusColor: "#6B7280" },
+              { id: "0681-11", route: "Dagoretti → Telt", schedule: "02/01/25 - Monday", status: "Ongoing", statusColor: "#2D9C93" },
+              { id: "0681-12", route: "Tult → Dagoretti", schedule: "02/01/25 - Monday", status: "Completed", statusColor: "#6B7280" },
+              { id: "0681-13", route: "Dagoretti → Telt", schedule: "02/01/25 - Monday", status: "Ongoing", statusColor: "#2D9C93" },
+            ].map((row) => (
+              <div key={row.id} className="tn-table-row">
+                <span className="tn-cell tn-cell-id">{row.id}</span>
+                <span className="tn-cell">{row.route}</span>
+                <span className="tn-cell tn-cell-dim">{row.schedule}</span>
+                <span className="tn-cell" />
+                <span className="tn-cell" />
+                <span className="tn-cell tn-cell-dim">—</span>
+                <span className="tn-cell">
+                  <span className="tn-avail-dot" />
+                </span>
+                <span className="tn-cell tn-cell-dim">—</span>
+                <span className="tn-cell">
+                  <span className="tn-status-badge" style={{ background: row.statusColor + "20", color: row.statusColor }}>{row.status}</span>
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Toast notification — bottom right corner */}
+          <div className="tn-live-toast tn-live-toast--success">
+            <span className="tn-live-icon">✅</span>
+            <span className="tn-live-text">A New Trip has been Created!</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Caption */}
+      <div className="tn-usage-caption">
+        <p>In this example, a success toastr notification appears on the bottom right corner of the screen after the user has created a new trip. It will have a slide-in animation (from bottom) and will fade away after a few seconds.</p>
+      </div>
+    </div>
+  </div>
+
+  {/* ─── Behaviour ────────────────────────────────────────────────── */}
+  <div className="tn-section">
+    <h2>Behaviour</h2>
+    <div className="tn-behaviour-grid">
+      <div className="tn-behaviour-card">
+        <span className="tn-behaviour-title">Position</span>
+        <p>Toastrs always appear in the <strong>bottom-right</strong> corner of the screen, stacking upwards if multiple notifications are triggered.</p>
+      </div>
+      <div className="tn-behaviour-card">
+        <span className="tn-behaviour-title">Duration</span>
+        <p>Toastrs auto-dismiss after <strong>4 seconds</strong> by default. Error toastrs stay visible until manually dismissed.</p>
+      </div>
+      <div className="tn-behaviour-card">
+        <span className="tn-behaviour-title">Animation</span>
+        <p>Toastrs <strong>slide in from the bottom</strong> and fade out when dismissed. They should not interrupt the user's current interaction.</p>
+      </div>
+      <div className="tn-behaviour-card">
+        <span className="tn-behaviour-title">Dismissal</span>
+        <p>All toastrs can be <strong>manually dismissed</strong> by clicking the × icon. Only one instance of the same message should appear at a time.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  {`
+  .tn-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 0 64px;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  /* ── Header ── */
+  .tn-header {
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #E5E7EB;
+  }
+  .tn-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 12px;
+  }
+  .tn-header p {
+    font-size: 15px;
+    color: #6B7280;
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0;
+  }
+
+  /* ── Section ── */
+  .tn-section {
+    margin-bottom: 56px;
+  }
+  .tn-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 8px;
+  }
+  .tn-desc {
+    font-size: 14px;
+    color: #6B7280;
+    line-height: 1.7;
+    margin: 0 0 28px;
+    max-width: 600px;
+  }
+
+  /* ── Toast types grid ── */
+  .tn-types-grid {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .tn-type-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .tn-type-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── Toast base ── */
+  /* Each variant sets --tn-color to its brand/semantic colour */
+  .tn-toast {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px 10px 28px;  /* extra left padding for the accent bar */
+    border-radius: 8px;
+    border: 1px solid var(--tn-color, #4169E1);
+    background: #FFFFFF;
+    box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.12);
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2D394B;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Left accent bar */
+  .tn-toast::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 12px;
+    background: var(--tn-color, #4169E1);
+    border-radius: 7px 0 0 7px;
+  }
+
+  .tn-toast-icon {
+    font-size: 14px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .tn-toast-text {
+    font-size: 14px;
+  }
+
+  /* ── Variants ── */
+  .tn-toast--default  { --tn-color: #4169E1; }   /* brand blue  */
+  .tn-toast--success  { --tn-color: #2D9C93; }   /* teal        */
+  .tn-toast--warning  { --tn-color: #FF9F05; }   /* amber       */
+  .tn-toast--error    { --tn-color: #D13145; }   /* red         */
+
+  /* ── Usage card ── */
+  .tn-usage-card {
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .tn-app-frame {
+    display: flex;
+    height: 440px;
+    background: #F8FAFC;
+    position: relative;
+  }
+
+  /* ── Sidebar ── */
+  .tn-sidebar {
+    width: 160px;
+    background: #0D1B2A;
+    flex-shrink: 0;
+    padding: 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tn-sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 8px;
+  }
+
+  .tn-logo-mark {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    background: #4169E1;
+  }
+
+  .tn-sidebar-logo span {
+    font-size: 12px;
+    font-weight: 700;
+    color: #FFFFFF;
+  }
+
+  .tn-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding: 0 8px;
+  }
+
+  .tn-nav-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11px;
+    color: #9CA3AF;
+    font-weight: 400;
+  }
+
+  .tn-nav-item--active {
+    background: rgba(255,255,255,0.08);
+    color: #FFFFFF;
+    font-weight: 500;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .tn-nav-item--active > span {
+    margin-left: 18px;
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  .tn-nav-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4169E1;
+    flex-shrink: 0;
+  }
+
+  .tn-nav-item:not(.tn-nav-item--active) .tn-nav-dot {
+    background: rgba(255,255,255,0.2);
+  }
+
+  .tn-nav-sub {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding-left: 18px;
+    width: 100%;
+  }
+
+  .tn-nav-sub-item {
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+    padding: 3px 0;
+  }
+
+  /* ── Main area ── */
+  .tn-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .tn-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid #E5E7EB;
+    background: #FFFFFF;
+  }
+
+  .tn-topbar-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tn-aispace-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    background: #4169E1;
+  }
+
+  .tn-page-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .tn-topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tn-search-mock {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid #E5E7EB;
+    border-radius: 6px;
+    background: #F9FAFB;
+    font-size: 11px;
+    color: #9CA3AF;
+  }
+
+  .tn-search-text { font-size: 11px; }
+
+  .tn-btn-mock-primary {
+    padding: 6px 12px;
+    background: #4169E1;
+    color: #FFFFFF;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* ── Table ── */
+  .tn-table {
+    flex: 1;
+    overflow: hidden;
+    background: #FFFFFF;
+  }
+
+  .tn-table-header {
+    display: flex;
+    gap: 2px;
+    padding: 6px 10px 0;
+    background: #F9FAFB;
+    border-bottom: 1px solid #E5E7EB;
+  }
+
+  .tn-tab-item {
+    padding: 5px 10px;
+    font-size: 10px;
+    color: #9CA3AF;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+  }
+
+  .tn-tab-item--active {
+    background: #FFFFFF;
+    color: #111827;
+    font-weight: 600;
+    border: 1px solid #E5E7EB;
+    border-bottom: 1px solid #FFFFFF;
+  }
+
+  .tn-table-cols {
+    display: grid;
+    grid-template-columns: 60px 120px 140px 30px 30px 50px 70px 50px 80px;
+    padding: 6px 10px;
+    border-bottom: 1px solid #F3F4F6;
+    background: #F9FAFB;
+  }
+
+  .tn-col-head {
+    font-size: 9px;
+    font-weight: 700;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .tn-table-row {
+    display: grid;
+    grid-template-columns: 60px 120px 140px 30px 30px 50px 70px 50px 80px;
+    padding: 5px 10px;
+    border-bottom: 1px solid #F9FAFB;
+    align-items: center;
+  }
+
+  .tn-table-row:nth-child(even) {
+    background: #FAFAFA;
+  }
+
+  .tn-cell {
+    font-size: 10px;
+    color: #374151;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .tn-cell-id { color: #4169E1; font-weight: 600; }
+  .tn-cell-dim { color: #9CA3AF; }
+
+  .tn-avail-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #2D9C93;
+  }
+
+  .tn-status-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 99px;
+    font-size: 9px;
+    font-weight: 600;
+  }
+
+  /* ── Live toast in corner ── */
+  .tn-live-toast {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px 10px 26px;
+    border-radius: 8px;
+    border: 1px solid var(--tn-live-color, #2D9C93);
+    background: #FFFFFF;
+    box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.18);
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2D394B;
+    white-space: nowrap;
+    z-index: 10;
+    position: absolute;
+    overflow: hidden;
+  }
+
+  .tn-live-toast::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    background: var(--tn-live-color, #2D9C93);
+    border-radius: 7px 0 0 7px;
+  }
+
+  .tn-live-toast--success { --tn-live-color: #2D9C93; }
+  .tn-live-toast--default { --tn-live-color: #4169E1; }
+  .tn-live-toast--warning { --tn-live-color: #FF9F05; }
+  .tn-live-toast--error   { --tn-live-color: #D13145; }
+
+  .tn-live-icon { font-size: 13px; flex-shrink: 0; }
+  .tn-live-text { font-size: 12px; }
+
+  /* ── Usage caption ── */
+  .tn-usage-caption {
+    padding: 16px 20px;
+    border-top: 1px solid #E5E7EB;
+    background: #F9FAFB;
+  }
+
+  .tn-usage-caption p {
+    font-size: 13px;
+    color: #6B7280;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ── Behaviour grid ── */
+  .tn-behaviour-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .tn-behaviour-card {
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 18px 20px;
+    background: #FFFFFF;
+  }
+
+  .tn-behaviour-title {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 6px;
+  }
+
+  .tn-behaviour-card p {
+    font-size: 13px;
+    color: #6B7280;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .tn-types-grid { flex-direction: column; }
+    .tn-behaviour-grid { grid-template-columns: 1fr; }
+  }
+  `}
+</style>

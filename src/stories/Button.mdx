@@ -1,0 +1,581 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import * as ButtonStories from "./Button.stories";
+import { Button, PlusIcon, ArrowRightIcon, DownloadIcon, StarIcon, GridIcon, TrashIcon } from "./Button";
+import React from "react";
+
+<Meta of={ButtonStories} />
+
+export const ButtonConfigurator = () => {
+  const [variant, setVariant] = React.useState("filled");
+  const [intent,  setIntent]  = React.useState("primary");
+  const [size,    setSize]    = React.useState("md");
+  const [withLeading,  setWithLeading]  = React.useState(false);
+  const [withTrailing, setWithTrailing] = React.useState(false);
+  const [isDisabled,   setIsDisabled]   = React.useState(false);
+
+  const variants = ["filled", "outlined", "tonal", "ghost"];
+  const intents  = ["primary", "success", "warning", "error", "neutral"];
+  const sizes    = ["xs", "sm", "md", "lg", "xl"];
+
+  const intentColors = {
+    primary: "#4169E1", success: "#2D9C93", warning: "#FF9F05",
+    error: "#D13145", neutral: "#6B7280",
+  };
+
+  return (
+    <div className="bc-wrap">
+      {/* Preview */}
+      <div className="bc-preview">
+        <Button
+          variant={variant}
+          intent={intent}
+          size={size}
+          label="Button"
+          leadingIcon={withLeading ? <PlusIcon /> : undefined}
+          trailingIcon={withTrailing ? <ArrowRightIcon /> : undefined}
+          disabled={isDisabled}
+        />
+      </div>
+
+      {/* Controls */}
+      <div className="bc-controls">
+        <div className="bc-control-group">
+          <span className="bc-ctrl-label">Variant</span>
+          <div className="bc-chips">
+            {variants.map(v => (
+              <button key={v} className={`bc-chip ${variant === v ? "bc-chip--on" : ""}`} onClick={() => setVariant(v)}>{v}</button>
+            ))}
+          </div>
+        </div>
+
+        <div className="bc-control-group">
+          <span className="bc-ctrl-label">Intent</span>
+          <div className="bc-chips">
+            {intents.map(i => (
+              <button
+                key={i}
+                className={`bc-chip ${intent === i ? "bc-chip--on" : ""}`}
+                style={intent === i ? { background: intentColors[i], borderColor: intentColors[i], color: "#fff" } : {}}
+                onClick={() => setIntent(i)}
+              >{i}</button>
+            ))}
+          </div>
+        </div>
+
+        <div className="bc-control-group">
+          <span className="bc-ctrl-label">Size</span>
+          <div className="bc-chips">
+            {sizes.map(s => (
+              <button key={s} className={`bc-chip ${size === s ? "bc-chip--on" : ""}`} onClick={() => setSize(s)}>{s}</button>
+            ))}
+          </div>
+        </div>
+
+        <div className="bc-control-group">
+          <span className="bc-ctrl-label">Options</span>
+          <div className="bc-chips">
+            <button className={`bc-chip ${withLeading  ? "bc-chip--on" : ""}`} onClick={() => setWithLeading(v => !v)}>Leading icon</button>
+            <button className={`bc-chip ${withTrailing ? "bc-chip--on" : ""}`} onClick={() => setWithTrailing(v => !v)}>Trailing icon</button>
+            <button className={`bc-chip ${isDisabled   ? "bc-chip--on" : ""}`} onClick={() => setIsDisabled(v => !v)}>Disabled</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+<div className="bd-page">
+
+  {/* ─── Header ─────────────────────────────────────────────────── */}
+  <div className="bd-header">
+    <h1>Buttons</h1>
+    <p>Buttons allow users to take actions and make choices with a single tap. They communicate actions and guide users through a flow. Choose the button variant that best matches the visual hierarchy and context of the action.</p>
+  </div>
+
+  {/* ─── Live Configurator ──────────────────────────────────────── */}
+  <div className="bd-section">
+    <h2>Live Configurator</h2>
+    <p className="bd-desc">Toggle variant, intent, size, and options to see the button update in real time.</p>
+    <ButtonConfigurator />
+  </div>
+
+  {/* ─── Primary Button ─────────────────────────────────────────── */}
+  <div className="bd-section">
+    <h2>Primary Button</h2>
+    <p className="bd-desc">The filled primary button is the strongest call to action. Use it for the single most important action on a page or within a section.</p>
+
+    <div className="bd-demo-center bd-bg-light">
+      <Button variant="filled" intent="primary" size="lg" label="Button" />
+    </div>
+
+    <p className="bd-desc">Default, with icon, and disabled states of the primary button.</p>
+    <div className="bd-row bd-bg-light">
+      <Button variant="filled" intent="primary" size="md" label="Button" />
+      <Button variant="filled" intent="primary" size="md" label="With icon" leadingIcon={<PlusIcon />} />
+      <Button variant="filled" intent="primary" size="md" label="Trailing" trailingIcon={<ArrowRightIcon />} />
+      <Button variant="filled" intent="primary" size="md" label="Disabled" disabled />
+    </div>
+  </div>
+
+  {/* ─── Secondary / Outlined ───────────────────────────────────── */}
+  <div className="bd-section">
+    <h2>Secondary Buttons or Fill</h2>
+    <p className="bd-desc">Outlined, tonal, and ghost buttons are secondary actions — less prominent than filled buttons. Often paired with a filled button to establish hierarchy.</p>
+
+    <div className="bd-row bd-bg-light">
+      <Button variant="outlined" intent="primary" size="md" label="Outlined" />
+      <Button variant="tonal"    intent="primary" size="md" label="Tonal" />
+      <Button variant="ghost"    intent="primary" size="md" label="Ghost" />
+      <Button variant="outlined" intent="primary" size="md" label="Disabled" disabled />
+      <Button variant="tonal"    intent="primary" size="md" label="Disabled" disabled />
+      <Button variant="ghost"    intent="primary" size="md" label="Disabled" disabled />
+    </div>
+  </div>
+
+  {/* ─── Semantic Buttons ───────────────────────────────────────── */}
+  <div className="bd-section">
+    <h2>Semantic Buttons</h2>
+    <p className="bd-desc">Semantic colour variants communicate meaning — use these for confirmations, warnings, destructive actions, and neutral interactions. Each intent supports all four variants.</p>
+
+    {[
+      { intent: "success", label: "Confirm"  },
+      { intent: "primary", label: "Continue" },
+      { intent: "warning", label: "Caution"  },
+      { intent: "error",   label: "Delete"   },
+      { intent: "neutral", label: "Cancel"   },
+    ].map(({ intent, label }) => (
+      <div key={intent} className="bd-semantic-row">
+        <span className="bd-intent-label">{intent}</span>
+        <div className="bd-semantic-cells">
+          <Button variant="filled"   intent={intent} size="md" label={label} />
+          <Button variant="outlined" intent={intent} size="md" label={label} />
+          <Button variant="tonal"    intent={intent} size="md" label={label} />
+          <Button variant="ghost"    intent={intent} size="md" label={label} />
+          <Button variant="filled"   intent={intent} size="md" label={label} disabled />
+        </div>
+      </div>
+    ))}
+
+    <div className="bd-col-headers">
+      <span style={{ width: "76px" }} />
+      {["Filled", "Outlined", "Tonal", "Ghost", "Disabled"].map(l => (
+        <span key={l} className="bd-col-label">{l}</span>
+      ))}
+    </div>
+  </div>
+
+  {/* ─── Icon Buttons ───────────────────────────────────────────── */}
+  <div className="bd-section">
+    <h2>Icon Buttons</h2>
+    <p className="bd-desc">Icon-only buttons are used in toolbars and compact layouts. Always provide an accessible <code>label</code> prop used as <code>aria-label</code>.</p>
+
+    <div className="bd-row bd-bg-light" style={{ gap: "10px" }}>
+      <Button variant="filled" intent="primary" size="md" iconOnly label="Add"      leadingIcon={<PlusIcon />} />
+      <Button variant="filled" intent="success" size="md" iconOnly label="Download" leadingIcon={<DownloadIcon />} />
+      <Button variant="filled" intent="warning" size="md" iconOnly label="Star"     leadingIcon={<StarIcon />} />
+      <Button variant="filled" intent="error"   size="md" iconOnly label="Delete"   leadingIcon={<TrashIcon />} />
+      <Button variant="filled" intent="neutral" size="md" iconOnly label="Grid"     leadingIcon={<GridIcon />} />
+      <span style={{ width: "1px", background: "#E5E7EB", height: "32px" }} />
+      <Button variant="outlined" intent="primary" size="md" iconOnly label="Add"      leadingIcon={<PlusIcon />} />
+      <Button variant="outlined" intent="success" size="md" iconOnly label="Download" leadingIcon={<DownloadIcon />} />
+      <Button variant="outlined" intent="warning" size="md" iconOnly label="Star"     leadingIcon={<StarIcon />} />
+      <Button variant="outlined" intent="error"   size="md" iconOnly label="Delete"   leadingIcon={<TrashIcon />} />
+      <Button variant="outlined" intent="neutral" size="md" iconOnly label="Grid"     leadingIcon={<GridIcon />} />
+    </div>
+
+    <p className="bd-desc" style={{ marginTop: "16px" }}>Icon button sizes:</p>
+    <div className="bd-row bd-bg-light" style={{ gap: "10px" }}>
+      <Button variant="tonal" intent="primary" size="xs" iconOnly label="Add" leadingIcon={<PlusIcon />} />
+      <Button variant="tonal" intent="primary" size="sm" iconOnly label="Add" leadingIcon={<PlusIcon />} />
+      <Button variant="tonal" intent="primary" size="md" iconOnly label="Add" leadingIcon={<PlusIcon />} />
+      <Button variant="tonal" intent="primary" size="lg" iconOnly label="Add" leadingIcon={<PlusIcon />} />
+      <Button variant="tonal" intent="primary" size="xl" iconOnly label="Add" leadingIcon={<PlusIcon />} />
+    </div>
+  </div>
+
+  {/* ─── Hero Button ────────────────────────────────────────────── */}
+  <div className="bd-section">
+    <h2>Hero Button</h2>
+    <p className="bd-desc">Large CTAs used in marketing sections, landing pages, and onboarding flows where maximum visual impact is needed.</p>
+
+    <div className="bd-hero">
+      <div className="bd-hero-content">
+        <p className="bd-hero-eyebrow">Hero Button</p>
+        <p className="bd-hero-sub">Use a large, prominent button as the primary CTA in hero sections. It should be the only primary action visible at this level.</p>
+        <Button variant="filled" intent="primary" size="xl" label="Get Started" trailingIcon={<ArrowRightIcon />} />
+      </div>
+    </div>
+  </div>
+
+  {/* ─── Visually Distinguishable ───────────────────────────────── */}
+  <div className="bd-section">
+    <h2>Visually Distinguishable</h2>
+    <p className="bd-desc">Icons alongside labels improve scannability and reinforce meaning. Leading icons relate to the action; trailing icons indicate direction or expansion.</p>
+
+    <div className="bd-row bd-bg-light" style={{ flexWrap: "wrap" }}>
+      <Button variant="filled"   intent="primary" size="md" label="Add Item"  leadingIcon={<PlusIcon />} />
+      <Button variant="filled"   intent="success" size="md" label="Download"  leadingIcon={<DownloadIcon />} />
+      <Button variant="filled"   intent="primary" size="md" label="Continue"  trailingIcon={<ArrowRightIcon />} />
+      <Button variant="outlined" intent="primary" size="md" label="Add Item"  leadingIcon={<PlusIcon />} />
+      <Button variant="outlined" intent="error"   size="md" label="Delete"    leadingIcon={<TrashIcon />} />
+      <Button variant="tonal"    intent="success" size="md" label="Confirm"   leadingIcon={<StarIcon />} />
+    </div>
+  </div>
+
+  {/* ─── Layout / Sizes ─────────────────────────────────────────── */}
+  <div className="bd-section">
+    <h2>Layout &amp; Sizes</h2>
+    <p className="bd-desc">Five sizes cover all layout contexts — from dense data tables (xs) to prominent hero actions (xl).</p>
+
+    <div className="bd-sizes-row bd-bg-light">
+      {[
+        { size: "xs", h: "28px" },
+        { size: "sm", h: "32px" },
+        { size: "md", h: "40px" },
+        { size: "lg", h: "48px" },
+        { size: "xl", h: "56px" },
+      ].map(({ size, h }) => (
+        <div key={size} className="bd-size-item">
+          <Button variant="filled" intent="primary" size={size} label="Button" />
+          <div className="bd-size-meta">
+            <code>{size}</code>
+            <span>{h}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div className="bd-form-row">
+      <div className="bd-form-card">
+        <h4>Log In</h4>
+        <div className="bd-form-field"><label>Email</label><div className="bd-input-mock" /></div>
+        <div className="bd-form-field"><label>Password</label><div className="bd-input-mock" /></div>
+        <Button variant="filled" intent="primary" size="md" label="Log In" fullWidth />
+        <Button variant="ghost"  intent="primary" size="md" label="Forgot password?" fullWidth />
+      </div>
+
+      <div className="bd-form-card">
+        <h4>Confirm Deletion</h4>
+        <p style={{ fontSize: "13px", color: "#6B7280", margin: "0 0 16px", lineHeight: "1.6" }}>Are you sure you want to delete this item? This action cannot be undone.</p>
+        <div style={{ display: "flex", gap: "8px" }}>
+          <Button variant="outlined" intent="neutral" size="md" label="Cancel" fullWidth />
+          <Button variant="filled"   intent="error"   size="md" label="Delete" fullWidth leadingIcon={<TrashIcon />} />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* ─── Usage Guidelines ───────────────────────────────────────── */}
+  <div className="bd-section">
+    <h2>Usage Guidelines</h2>
+    <div className="bd-guidelines">
+      <div className="bd-guideline bd-do">
+        <span className="bd-verdict-do">✓ Do</span>
+        <ul>
+          <li>Use one primary (filled) button per section to establish clear hierarchy.</li>
+          <li>Use descriptive, action-oriented labels: "Save changes", "Add to cart".</li>
+          <li>Pair filled buttons with outlined or ghost buttons for secondary actions.</li>
+          <li>Match button size to the density of the surrounding content.</li>
+        </ul>
+      </div>
+      <div className="bd-guideline bd-dont">
+        <span className="bd-verdict-dont">✕ Don't</span>
+        <ul>
+          <li>Don't place more than one filled button of the same intent side by side.</li>
+          <li>Don't use vague labels like "Click here" or "Submit".</li>
+          <li>Don't mix sizes within the same button group.</li>
+          <li>Don't use icon-only buttons without an accessible aria-label.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  {`
+  /* ── Button Configurator ── */
+  .bc-wrap {
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #FFFFFF;
+  }
+  .bc-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+    background: #F4F6FE;
+    border-bottom: 1px solid #E5E7EB;
+    padding: 32px;
+  }
+  .bc-controls {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .bc-control-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .bc-ctrl-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    width: 68px;
+    flex-shrink: 0;
+  }
+  .bc-chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .bc-chip {
+    padding: 4px 12px;
+    border-radius: 99px;
+    border: 1px solid #E5E7EB;
+    background: #F9FAFB;
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.12s;
+  }
+  .bc-chip:hover { border-color: #9CA3AF; background: #F3F4F6; }
+  .bc-chip--on {
+    background: #4169E1;
+    border-color: #4169E1;
+    color: #FFFFFF;
+  }
+
+  .bd-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 0 64px;
+    font-family: 'Manrope', sans-serif;
+  }
+  .bd-header {
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #E5E7EB;
+  }
+  .bd-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 12px;
+  }
+  .bd-header p {
+    font-size: 15px;
+    color: #6B7280;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0;
+  }
+  .bd-section {
+    margin-bottom: 56px;
+  }
+  .bd-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 8px;
+  }
+  .bd-desc {
+    font-size: 14px;
+    color: #6B7280;
+    line-height: 1.7;
+    margin: 0 0 20px;
+    max-width: 680px;
+  }
+  .bd-bg-light {
+    background: #F4F6FE;
+    border-radius: 10px;
+    border: 1px solid #E5E7EB;
+  }
+  .bd-demo-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    margin-bottom: 16px;
+  }
+  .bd-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .bd-semantic-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #F3F4F6;
+  }
+  .bd-intent-label {
+    width: 76px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    flex-shrink: 0;
+  }
+  .bd-semantic-cells {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .bd-col-headers {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .bd-col-label {
+    font-size: 10px;
+    color: #9CA3AF;
+    font-weight: 600;
+    width: 100px;
+    text-align: center;
+  }
+  .bd-hero {
+    background: #0D1B2A;
+    border-radius: 12px;
+    padding: 64px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bd-hero-content {
+    text-align: center;
+    max-width: 480px;
+  }
+  .bd-hero-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin: 0 0 10px;
+  }
+  .bd-hero-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    margin: 0 0 28px;
+  }
+  .bd-sizes-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 28px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .bd-size-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .bd-size-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .bd-size-meta code {
+    font-size: 11px;
+    background: #E8EEFB;
+    color: #4169E1;
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+  .bd-size-meta span {
+    font-size: 10px;
+    color: #9CA3AF;
+  }
+  .bd-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .bd-form-card {
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 24px;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .bd-form-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+  }
+  .bd-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .bd-form-field label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+  }
+  .bd-input-mock {
+    height: 36px;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    background: #F9FAFB;
+  }
+  .bd-guidelines {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .bd-guideline {
+    border-radius: 10px;
+    padding: 20px 24px;
+  }
+  .bd-do   { background: #F0FDF4; border: 2px solid #BBF7D0; }
+  .bd-dont { background: #FFF1F2; border: 2px solid #FECDD3; }
+  .bd-verdict-do, .bd-verdict-dont {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .bd-verdict-do   { color: #065F46; }
+  .bd-verdict-dont { color: #9F1239; }
+  .bd-guideline ul {
+    margin: 0;
+    padding-left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .bd-guideline li {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #374151;
+  }
+  @media (max-width: 640px) {
+    .bd-form-row, .bd-guidelines { grid-template-columns: 1fr; }
+  }
+  `}
+</style>

@@ -1,0 +1,386 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundation/Grid and Layout" />
+
+<div className="gl-page">
+
+  {/* ─── Header ───────────────────────────────────────────────────── */}
+  <div className="gl-header">
+    <h1>Grid and Layout</h1>
+    <p>The Grid System defines all the Grid Layouts for various screens on the web application and the website. It also includes spacing, padding, and other general rules.</p>
+  </div>
+
+  {/* ─── 4px Hero ─────────────────────────────────────────────────── */}
+  <div className="gl-hero">
+    <span className="gl-hero-text">4px</span>
+  </div>
+
+  <div className="gl-4px-desc">
+    <p>SupplAI utilizes a 4px grid for most of its components, spacing and elements. This will help create a visual harmony and also speed up the development process.</p>
+  </div>
+
+  {/* ─── How to use the 4px rule ──────────────────────────────────── */}
+  <div className="gl-section">
+    <h2>How to use the 4px rule?</h2>
+    <ol className="gl-rules-list">
+      <li>Use multiples of 4 (4, 8, 12, 16, 20…) when defining paddings, margins, spacings wherever possible to create a visually harmonious design.</li>
+      <li>In certain cases other spacing rules can be used based on the context. (eg. 2, 6, 5, 13)</li>
+      <li>Elements also use the 4px rule for their sizes. For examples, buttons, tabs, forms have height of 32, 40, 48, 60…</li>
+    </ol>
+  </div>
+
+  {/* ─── Spacing Rules ────────────────────────────────────────────── */}
+  <div className="gl-section">
+    <h2>Spacing Rules</h2>
+    <p className="gl-description">Use the spacing defined below to position elements.</p>
+
+    <div className="gl-spacing-chart">
+      {[
+        { size: 4,   pct: 0.8  },
+        { size: 8,   pct: 1.6  },
+        { size: 12,  pct: 2.3  },
+        { size: 16,  pct: 3.1  },
+        { size: 20,  pct: 3.9  },
+        { size: 24,  pct: 4.7  },
+        { size: 32,  pct: 6.3  },
+        { size: 40,  pct: 7.8  },
+        { size: 48,  pct: 9.4  },
+        { size: 60,  pct: 11.7 },
+        { size: 80,  pct: 15.6 },
+        { size: 100, pct: 19.5 },
+        { size: 120, pct: 23.4 },
+        { size: 160, pct: 31.3 },
+        { size: 256, pct: 50.0 },
+        { size: 512, pct: 100.0 },
+      ].map(({ size, pct }) => (
+        <div key={size} className="gl-bar-row">
+          <span className="gl-bar-label">{size}px</span>
+          <div className="gl-bar-track">
+            <div
+              className="gl-bar-fill"
+              style={{ width: `${pct}%` }}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* ─── Spacing Scale Visual ─────────────────────────────────────── */}
+  <div className="gl-section">
+    <h2>Spacing Scale</h2>
+    <p className="gl-description">Visual reference for the 4px-based spacing tokens used across all components.</p>
+    <div className="gl-scale-row">
+      {[4, 8, 12, 16, 20, 24, 32, 40, 48, 60, 80].map((size) => (
+        <div key={size} className="gl-scale-item">
+          <div className="gl-scale-box" style={{ width: `${Math.min(size, 80)}px`, height: `${Math.min(size, 80)}px` }} />
+          <span className="gl-scale-label">{size}px</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* ─── Column Grid ──────────────────────────────────────────────── */}
+  <div className="gl-section">
+    <h2>Column Grid</h2>
+    <p className="gl-description">The layout uses a <strong>12-column grid</strong> with a 24px gutter. Page-level margins are responsive and adjust at each breakpoint.</p>
+    <div className="gl-column-demo">
+      <div className="gl-columns">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <div key={i} className="gl-col">
+            <span>{i + 1}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {/* ─── Breakpoints ──────────────────────────────────────────────── */}
+  <div className="gl-section">
+    <h2>Breakpoints</h2>
+    <p className="gl-description">Breakpoints define where the layout adapts to different screen sizes.</p>
+    <div className="gl-bp-table">
+      <div className="gl-bp-header">
+        <span>Breakpoint</span>
+        <span>Token</span>
+        <span>Width</span>
+        <span>Columns</span>
+        <span>Margin</span>
+        <span>Gutter</span>
+      </div>
+      {[
+        { name: "Mobile",  token: "xs", width: "< 480px",        cols: 4,  margin: "16px", gutter: "16px" },
+        { name: "Tablet",  token: "sm", width: "480px – 768px",  cols: 8,  margin: "24px", gutter: "20px" },
+        { name: "Laptop",  token: "md", width: "768px – 1024px", cols: 12, margin: "32px", gutter: "24px" },
+        { name: "Desktop", token: "lg", width: "1024px – 1280px",cols: 12, margin: "40px", gutter: "24px" },
+        { name: "Wide",    token: "xl", width: "> 1280px",        cols: 12, margin: "48px", gutter: "24px" },
+      ].map(({ name, token, width, cols, margin, gutter }) => (
+        <div key={token} className="gl-bp-row">
+          <span className="gl-bp-name">{name}</span>
+          <span><code className="gl-code">{token}</code></span>
+          <span className="gl-bp-meta">{width}</span>
+          <span className="gl-bp-meta">{cols}</span>
+          <span className="gl-bp-meta">{margin}</span>
+          <span className="gl-bp-meta">{gutter}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+</div>
+
+<style>
+  {`
+  .gl-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 0 64px;
+    font-family: inherit;
+  }
+
+  /* ── Header ── */
+  .gl-header {
+    margin-bottom: 0;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #E5E7EB;
+    margin-bottom: 40px;
+  }
+
+  .gl-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 12px;
+  }
+
+  .gl-header p {
+    font-size: 14px;
+    color: #6B7280;
+    line-height: 1.7;
+    max-width: 400px;
+    margin: 0;
+  }
+
+  /* ── 4px Hero ── */
+  .gl-hero {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .gl-hero-text {
+    font-size: 120px;
+    font-weight: 800;
+    color: #E8EEFB;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    user-select: none;
+  }
+
+  .gl-4px-desc {
+    margin-bottom: 40px;
+    max-width: 440px;
+  }
+
+  .gl-4px-desc p {
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ── Section ── */
+  .gl-section {
+    margin-bottom: 56px;
+  }
+
+  .gl-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 8px;
+  }
+
+  .gl-description {
+    font-size: 14px;
+    color: #6B7280;
+    line-height: 1.7;
+    margin: 0 0 24px;
+  }
+
+  /* ── Rules list ── */
+  .gl-rules-list {
+    padding-left: 20px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .gl-rules-list li {
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.6;
+    max-width: 560px;
+  }
+
+  /* ── Spacing chart (bar chart) ── */
+  .gl-spacing-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 600px;
+  }
+
+  .gl-bar-row {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .gl-bar-label {
+    font-size: 12px;
+    color: #6B7280;
+    text-align: right;
+    font-family: monospace;
+  }
+
+  .gl-bar-track {
+    height: 10px;
+    background: #F3F4F6;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .gl-bar-fill {
+    height: 100%;
+    background: #4169E1;
+    border-radius: 99px;
+    min-width: 4px;
+  }
+
+  /* ── Spacing scale visual ── */
+  .gl-scale-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .gl-scale-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .gl-scale-box {
+    background: #4169E1;
+    border-radius: 3px;
+    opacity: 0.15;
+  }
+
+  .gl-scale-label {
+    font-size: 10px;
+    color: #9CA3AF;
+    font-family: monospace;
+  }
+
+  /* ── Column grid demo ── */
+  .gl-column-demo {
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .gl-columns {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 8px;
+  }
+
+  .gl-col {
+    background: #BFDBFE;
+    border-radius: 4px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #1E429F;
+  }
+
+  /* ── Breakpoints table ── */
+  .gl-bp-table {
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .gl-bp-header,
+  .gl-bp-row {
+    display: grid;
+    grid-template-columns: 100px 80px 1fr 80px 80px 80px;
+    border-bottom: 1px solid #F3F4F6;
+  }
+
+  .gl-bp-header {
+    background: #F9FAFB;
+    border-bottom: 1px solid #E5E7EB;
+  }
+
+  .gl-bp-row:last-child {
+    border-bottom: none;
+  }
+
+  .gl-bp-row:nth-child(even) {
+    background: #FAFAFA;
+  }
+
+  .gl-bp-header > span {
+    padding: 10px 14px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  .gl-bp-row > span {
+    padding: 12px 14px;
+    font-size: 13px;
+    color: #374151;
+  }
+
+  .gl-bp-name {
+    font-weight: 600;
+    color: #111827 !important;
+  }
+
+  .gl-bp-meta {
+    color: #6B7280 !important;
+    font-size: 12px !important;
+  }
+
+  .gl-code {
+    font-size: 11px;
+    background: #F3F4F6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    color: #4169E1;
+  }
+
+  @media (max-width: 640px) {
+    .gl-hero-text { font-size: 72px; }
+    .gl-columns { grid-template-columns: repeat(4, 1fr); }
+    .gl-bp-header, .gl-bp-row {
+      grid-template-columns: 90px 60px 1fr;
+    }
+  }
+  `}
+</style>

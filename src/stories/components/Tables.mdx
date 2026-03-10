@@ -1,0 +1,66 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Components/Tables" />
+
+<div className="sb-container">
+  <div className="sb-section-title">
+    # Tables
+
+    Tables organize and display structured data in rows and columns. They allow users to compare, sort, filter, and act on information efficiently.
+  </div>
+
+  <div style={{ marginBottom: '40px' }}>
+    <h3>Preview</h3>
+    <div style={{ border: '1px solid #E5E7EB', borderRadius: '8px', overflow: 'hidden', marginTop: '16px' }}>
+      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px' }}>
+        <thead>
+          <tr style={{ background: '#F9FAFB', borderBottom: '1px solid #E5E7EB' }}>
+            {['Name', 'Role', 'Status', 'Joined'].map((h) => (
+              <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontWeight: 600, color: '#374151', fontSize: '13px' }}>{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            ['Alice Johnson', 'Admin', 'Active', 'Jan 2024'],
+            ['Bob Smith', 'Editor', 'Active', 'Mar 2024'],
+            ['Carol White', 'Viewer', 'Inactive', 'Jun 2024'],
+          ].map(([name, role, status, joined], i) => (
+            <tr key={name} style={{ borderBottom: i < 2 ? '1px solid #E5E7EB' : 'none', background: '#FFFFFF' }}>
+              <td style={{ padding: '12px 16px', color: '#111827', fontWeight: 500 }}>{name}</td>
+              <td style={{ padding: '12px 16px', color: '#6B7280' }}>{role}</td>
+              <td style={{ padding: '12px 16px' }}>
+                <span style={{
+                  padding: '2px 8px',
+                  borderRadius: '99px',
+                  fontSize: '12px',
+                  fontWeight: 500,
+                  background: status === 'Active' ? '#ECFDF5' : '#F3F4F6',
+                  color: status === 'Active' ? '#057A55' : '#6B7280',
+                }}>
+                  {status}
+                </span>
+              </td>
+              <td style={{ padding: '12px 16px', color: '#6B7280' }}>{joined}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div>
+    <h3>Status</h3>
+    <p style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FEF3C7', color: '#92400E', padding: '6px 12px', borderRadius: '99px', fontSize: '13px', fontWeight: 500 }}>
+      🚧 In Development
+    </p>
+    <p>Interactive stories and full documentation will be added when the component is finalized.</p>
+  </div>
+</div>
+
+<style>
+  {`
+  .sb-container { margin-bottom: 48px; }
+  .sb-section-title { margin-bottom: 32px; }
+  `}
+</style>

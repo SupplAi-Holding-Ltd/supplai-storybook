@@ -1,0 +1,202 @@
+/* ─────────────────────────────────────────────────────────────────
+   Button — Supplai Design System
+   ───────────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
+/* ── Base ──────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1.5px solid transparent;
+  border-radius: 8px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  text-decoration: none;
+  outline: none;
+  position: relative;
+  user-select: none;
+}
+
+.btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.3);
+}
+
+.btn__label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Sizes ─────────────────────────────────────────────────────── */
+.btn--xs {
+  height: 28px;
+  padding: 0 10px;
+  font-size: 11px;
+  border-radius: 6px;
+  gap: 4px;
+}
+
+.btn--sm {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 12px;
+  border-radius: 6px;
+  gap: 5px;
+}
+
+.btn--md {
+  height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+  border-radius: 8px;
+  gap: 6px;
+}
+
+.btn--lg {
+  height: 48px;
+  padding: 0 20px;
+  font-size: 15px;
+  border-radius: 8px;
+  gap: 7px;
+}
+
+.btn--xl {
+  height: 56px;
+  padding: 0 24px;
+  font-size: 16px;
+  border-radius: 10px;
+  gap: 8px;
+}
+
+/* ── Icon-only: square ─────────────────────────────────────────── */
+.btn--icon { padding: 0; }
+.btn--icon.btn--xs { width: 28px; }
+.btn--icon.btn--sm { width: 32px; }
+.btn--icon.btn--md { width: 40px; }
+.btn--icon.btn--lg { width: 48px; }
+.btn--icon.btn--xl { width: 56px; }
+
+/* ── Full width ────────────────────────────────────────────────── */
+.btn--full-width {
+  width: 100%;
+}
+
+/* ── Intent colour tokens ──────────────────────────────────────── */
+[data-intent="primary"] {
+  --c:     #4169E1;
+  --c-dk:  #2B44BF;
+  --c-lt:  #E8EEFB;
+  --c-mid: rgba(65, 105, 225, 0.10);
+  --c-bdr: rgba(65, 105, 225, 0.35);
+}
+
+[data-intent="success"] {
+  --c:     #2D9C93;
+  --c-dk:  #1E6F69;
+  --c-lt:  #E0F5F4;
+  --c-mid: rgba(45, 156, 147, 0.10);
+  --c-bdr: rgba(45, 156, 147, 0.35);
+}
+
+[data-intent="warning"] {
+  --c:     #D97706;
+  --c-dk:  #B45309;
+  --c-lt:  #FEF3C7;
+  --c-mid: rgba(217, 119, 6, 0.10);
+  --c-bdr: rgba(217, 119, 6, 0.35);
+}
+
+[data-intent="error"] {
+  --c:     #EF4444;
+  --c-dk:  #DC2626;
+  --c-lt:  #FEE2E2;
+  --c-mid: rgba(239, 68, 68, 0.10);
+  --c-bdr: rgba(239, 68, 68, 0.35);
+}
+
+[data-intent="neutral"] {
+  --c:     #6B7280;
+  --c-dk:  #374151;
+  --c-lt:  #F3F4F6;
+  --c-mid: rgba(107, 114, 128, 0.10);
+  --c-bdr: rgba(107, 114, 128, 0.35);
+}
+
+/* ── Filled ────────────────────────────────────────────────────── */
+.btn--filled {
+  background: var(--c);
+  color: #FFFFFF;
+  border-color: var(--c);
+}
+
+.btn--filled:hover:not(:disabled) {
+  background: var(--c-dk);
+  border-color: var(--c-dk);
+}
+
+.btn--filled:active:not(:disabled) {
+  background: var(--c-dk);
+  transform: translateY(1px);
+}
+
+/* ── Outlined ──────────────────────────────────────────────────── */
+.btn--outlined {
+  background: transparent;
+  color: var(--c);
+  border-color: var(--c);
+}
+
+.btn--outlined:hover:not(:disabled) {
+  background: var(--c-mid);
+}
+
+.btn--outlined:active:not(:disabled) {
+  background: var(--c-lt);
+}
+
+/* ── Ghost ─────────────────────────────────────────────────────── */
+.btn--ghost {
+  background: transparent;
+  color: var(--c);
+  border-color: transparent;
+}
+
+.btn--ghost:hover:not(:disabled) {
+  background: var(--c-mid);
+}
+
+.btn--ghost:active:not(:disabled) {
+  background: var(--c-lt);
+}
+
+/* ── Tonal ─────────────────────────────────────────────────────── */
+.btn--tonal {
+  background: var(--c-lt);
+  color: var(--c);
+  border-color: transparent;
+}
+
+.btn--tonal:hover:not(:disabled) {
+  background: var(--c-mid);
+  border-color: var(--c-bdr);
+}
+
+/* ── Disabled ──────────────────────────────────────────────────── */
+.btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  pointer-events: none;
+}

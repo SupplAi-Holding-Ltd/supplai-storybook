@@ -1,0 +1,371 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+import supplaiHorizontal from "./assets/logo/supplWhiteBGAlt.svg";
+import supplaiHorizontalAlt from "./assets/logo/supplWhiteBGAlt-1.svg";
+import aispaceHorizontal from "./assets/logo/aispaceWhiteBGAlt.svg";
+import aispaceHorizontalAlt from "./assets/logo/aispaceWhiteBGAlt-1.svg";
+import supplaiAppCard from "./assets/logo/supplaiWhiteBG.svg";
+import supplaiAppCardAlt from "./assets/logo/supplaiWhiteBG-1.svg";
+import supplaiAppIcon from "./assets/logo/group-2425.svg";
+import aispaceAppIconBlack from "./assets/logo/frame-1399.svg";
+import aispaceAppIconWhite from "./assets/logo/frame-1402.svg";
+import aispaceIcon from "./assets/logo/group-2424.svg";
+import darkLockup from "./assets/logo/group-1317.svg";
+
+<Meta title="Foundation/Logo and Branding" />
+
+<div className="lb-page">
+
+  <div className="lb-header">
+    <h1>Logo</h1>
+    <p>The Supplai and Aispace logos are the primary visual identifiers of our brand. They appear across all products, communications, and touchpoints. This guide defines how to use them correctly and consistently across different environments.</p>
+  </div>
+
+  {/* ─── Complete Logo ─────────────────────────────────────────────── */}
+  <div className="lb-section">
+    <h2>Complete Logo</h2>
+    <p className="lb-description">The complete logo combines the icon mark with the wordmark. Use this version as the default in most contexts. Maintain clear space around the logo at all times.</p>
+
+    {/* White background row */}
+    <div className="lb-logo-row">
+      <div className="lb-logo-card lb-bg-white">
+        <img src={supplaiHorizontal} alt="Supplai logo on white background" />
+      </div>
+      <div className="lb-logo-card lb-bg-white">
+        <img src={aispaceHorizontal} alt="Aispace logo on white background" />
+      </div>
+    </div>
+
+    {/* Dark background lockup */}
+    <div className="lb-logo-card lb-bg-dark lb-wide">
+      <div className="lb-dark-logos">
+        <img src={supplaiHorizontalAlt} alt="Supplai logo on dark background" />
+        <img src={aispaceHorizontalAlt} alt="Aispace logo on dark background" />
+      </div>
+    </div>
+    <p className="lb-caption">On dark backgrounds, always use the reversed logo variant. Do not use the standard logo on dark or heavily saturated backgrounds.</p>
+
+    {/* Light gray background row */}
+    <div className="lb-logo-row">
+      <div className="lb-logo-card lb-bg-gray">
+        <img src={supplaiHorizontal} alt="Supplai logo on light background" />
+      </div>
+      <div className="lb-logo-card lb-bg-gray">
+        <img src={aispaceHorizontal} alt="Aispace logo on light background" />
+      </div>
+    </div>
+    <p className="lb-caption">On light gray or off-white backgrounds, the standard logo can be used as-is.</p>
+  </div>
+
+  {/* ─── App Logo Variations ───────────────────────────────────────── */}
+  <div className="lb-section">
+    <h2>App Logo Variations</h2>
+    <p className="lb-description">App icons are used in mobile and desktop application contexts such as home screens, app stores, and browser tabs. They represent the brand in small, confined spaces and should never be modified.</p>
+
+    <div className="lb-app-icons-grid">
+      <div>
+        <p className="lb-app-label">Supplai</p>
+        <div className="lb-app-icons-row">
+          <div className="lb-app-icon-wrap">
+            <img src={supplaiAppCard} alt="Supplai app icon large" className="lb-app-lg" />
+            <span>Large</span>
+          </div>
+          <div className="lb-app-icon-wrap">
+            <img src={supplaiAppCardAlt} alt="Supplai app icon medium" className="lb-app-md" />
+            <span>Medium</span>
+          </div>
+          <div className="lb-app-icon-wrap">
+            <img src={supplaiAppIcon} alt="Supplai app icon small" className="lb-app-sm" />
+            <span>Small</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p className="lb-app-label">Aispace</p>
+        <div className="lb-app-icons-row">
+          <div className="lb-app-icon-wrap">
+            <img src={aispaceIcon} alt="Aispace app icon large" className="lb-app-lg" />
+            <span>Large</span>
+          </div>
+          <div className="lb-app-icon-wrap">
+            <img src={aispaceAppIconWhite} alt="Aispace app icon medium" className="lb-app-md" />
+            <span>Medium</span>
+          </div>
+          <div className="lb-app-icon-wrap">
+            <img src={aispaceAppIconBlack} alt="Aispace app icon small" className="lb-app-sm" />
+            <span>Small</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* ─── Logo in Context ───────────────────────────────────────────── */}
+  <div className="lb-section">
+    <h2>Logo in Context</h2>
+    <p className="lb-description">The following shows how our logos appear in a real product environment. Use this as a reference for placement, sizing, and contrast in interface design.</p>
+    <div className="lb-context-wrap">
+      <img src={darkLockup} alt="Supplai and Aispace logos shown in a dark product UI context" className="lb-context-img" />
+    </div>
+  </div>
+
+  {/* ─── Dos and Don'ts ────────────────────────────────────────────── */}
+  <div className="lb-section">
+    <h2>Dos and Don'ts</h2>
+    <p className="lb-description">To maintain brand integrity, always follow these usage guidelines. Incorrect usage weakens brand recognition and should be avoided at all times.</p>
+
+    <div className="lb-dos-donts">
+      <div className="lb-do">
+        <div className="lb-verdict lb-verdict-do">✓ Do</div>
+        <div className="lb-dd-card lb-bg-white">
+          <img src={supplaiHorizontal} alt="Correct: Supplai logo on white" />
+        </div>
+        <p>Use the logo on clean, high-contrast backgrounds.</p>
+      </div>
+      <div className="lb-do">
+        <div className="lb-verdict lb-verdict-do">✓ Do</div>
+        <div className="lb-dd-card lb-bg-dark">
+          <img src={supplaiHorizontalAlt} alt="Correct: Supplai reversed logo on dark" />
+        </div>
+        <p>Use the reversed version on dark backgrounds.</p>
+      </div>
+      <div className="lb-dont">
+        <div className="lb-verdict lb-verdict-dont">✕ Don't</div>
+        <div className="lb-dd-card lb-bg-brand">
+          <img src={supplaiHorizontal} alt="Incorrect: logo on brand color" />
+        </div>
+        <p>Don't place the standard logo on the brand blue background.</p>
+      </div>
+      <div className="lb-dont">
+        <div className="lb-verdict lb-verdict-dont">✕ Don't</div>
+        <div className="lb-dd-card lb-bg-white lb-distorted">
+          <img src={supplaiHorizontal} alt="Incorrect: distorted logo" style={{ transform: 'scaleX(1.4)', opacity: 0.6 }} />
+        </div>
+        <p>Don't stretch, distort, or alter the logo proportions.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  {`
+  .lb-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 0 64px;
+    font-family: inherit;
+  }
+
+  .lb-header {
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #E5E7EB;
+  }
+
+  .lb-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 12px;
+  }
+
+  .lb-header p {
+    font-size: 15px;
+    color: #6B7280;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0;
+  }
+
+  .lb-section {
+    margin-bottom: 56px;
+  }
+
+  .lb-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 8px;
+  }
+
+  .lb-description {
+    font-size: 14px;
+    color: #6B7280;
+    line-height: 1.7;
+    margin: 0 0 24px;
+    max-width: 680px;
+  }
+
+  .lb-caption {
+    font-size: 12px;
+    color: #9CA3AF;
+    margin: 8px 0 20px;
+    font-style: italic;
+  }
+
+  /* Logo cards */
+  .lb-logo-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .lb-logo-card {
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 32px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .lb-logo-card img {
+    max-width: 100%;
+    height: auto;
+    max-height: 90px;
+    object-fit: contain;
+  }
+
+  .lb-bg-white { background: #FFFFFF; }
+  .lb-bg-gray  { background: #F3F4F6; }
+  .lb-bg-dark  { background: #111827; }
+  .lb-bg-brand { background: #4169E1; }
+
+  .lb-wide {
+    margin-bottom: 8px;
+  }
+
+  .lb-dark-logos {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .lb-dark-logos img {
+    max-height: 80px;
+    object-fit: contain;
+  }
+
+  /* App icons */
+  .lb-app-icons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .lb-app-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .lb-app-icons-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+  }
+
+  .lb-app-icon-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .lb-app-icon-wrap span {
+    font-size: 11px;
+    color: #9CA3AF;
+  }
+
+  .lb-app-icon-wrap img {
+    object-fit: contain;
+    border-radius: 16px;
+  }
+
+  .lb-app-lg { width: 100px; height: 100px; }
+  .lb-app-md { width: 72px;  height: 72px;  }
+  .lb-app-sm { width: 48px;  height: 48px;  }
+
+  /* Context */
+  .lb-context-wrap {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .lb-context-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Dos and Don'ts */
+  .lb-dos-donts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .lb-do, .lb-dont {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .lb-do p, .lb-dont p {
+    font-size: 12px;
+    color: #6B7280;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .lb-verdict {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .lb-verdict-do   { color: #057A55; }
+  .lb-verdict-dont { color: #C81E1E; }
+
+  .lb-dd-card {
+    border-radius: 10px;
+    padding: 24px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+    border: 1px solid rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+
+  .lb-dd-card img {
+    max-width: 100%;
+    max-height: 60px;
+    object-fit: contain;
+  }
+
+  .lb-dont .lb-dd-card {
+    border: 2px solid #FCA5A5;
+  }
+
+  .lb-do .lb-dd-card {
+    border: 2px solid #6EE7B7;
+  }
+
+  @media (max-width: 700px) {
+    .lb-logo-row,
+    .lb-app-icons-grid,
+    .lb-dos-donts {
+      grid-template-columns: 1fr;
+    }
+  }
+  `}
+</style>

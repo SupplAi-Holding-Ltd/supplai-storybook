@@ -1,0 +1,527 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundation/Typography" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<div className="ty-page">
+
+  {/* ─── Header ───────────────────────────────────────────────────── */}
+  <div className="ty-header">
+    <h1>Typography</h1>
+    <p>Typography is the backbone of our visual system. The typefaces we use, and how we use them, directly impacts the clarity, tone, and accessibility of all our products. This page documents our typographic foundations, scales, and usage guidelines.</p>
+  </div>
+
+  {/* ═══════════════════════════════════════════════════════════════ */}
+  {/*  MANROPE                                                        */}
+  {/* ═══════════════════════════════════════════════════════════════ */}
+  <div className="ty-section">
+    <div className="ty-font-intro">
+      <div className="ty-font-icon ty-font-icon-green">Aa</div>
+      <div>
+        <h2 className="ty-font-name">Manrope</h2>
+        <p className="ty-font-desc">Primary typeface — used for all headings, UI labels, and display text.</p>
+      </div>
+    </div>
+
+    {/* Alphabet specimen */}
+    <div className="ty-alphabet" style={{ fontFamily: "'Manrope', sans-serif" }}>
+      <p>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
+      <p>a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
+      <p>1 2 3 4 5 6 7 8 9 0 ! @ # $ % &amp; * ( )</p>
+    </div>
+
+    {/* Weight samples */}
+    <div className="ty-weights-grid" style={{ fontFamily: "'Manrope', sans-serif" }}>
+      {[
+        { weight: 300, label: "Light" },
+        { weight: 400, label: "Regular" },
+        { weight: 500, label: "Medium" },
+        { weight: 600, label: "SemiBold" },
+        { weight: 700, label: "Bold" },
+        { weight: 800, label: "ExtraBold" },
+      ].map(({ weight, label }) => (
+        <div key={weight} className="ty-weight-item">
+          <span className="ty-weight-sample" style={{ fontWeight: weight }}>Aa</span>
+          <span className="ty-weight-label">{label}</span>
+          <span className="ty-weight-num">{weight}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* ─── Type Scale ───────────────────────────────────────────────── */}
+  <div className="ty-section">
+    <h2>Type Scale</h2>
+    <p className="ty-description">The type scale defines the range of text sizes used across the design system. Each step has a designated role and should be used consistently.</p>
+
+    <div className="ty-scale-table">
+      <div className="ty-scale-header">
+        <span className="ty-col-name">Name</span>
+        <span className="ty-col-size">Size</span>
+        <span className="ty-col-weight">Weight</span>
+        <span className="ty-col-lh">Line Height</span>
+        <span className="ty-col-ls">Letter Spacing</span>
+        <span className="ty-col-preview">Example</span>
+      </div>
+
+      {[
+        { name: "Title Header",   size: "56px", weight: "700 Bold",      lh: "1.1",  ls: "−0.02em", preview: "Title Header",          previewSize: 42, previewWeight: 700 },
+        { name: "Heading 2",      size: "40px", weight: "700 Bold",      lh: "1.2",  ls: "−0.01em", preview: "Heading 2",              previewSize: 28, previewWeight: 700 },
+        { name: "Heading 3",      size: "32px", weight: "700 Bold",      lh: "1.25", ls: "−0.01em", preview: "Heading 3",              previewSize: 22, previewWeight: 700 },
+        { name: "Heading 4",      size: "24px", weight: "600 SemiBold",  lh: "1.3",  ls: "0",       preview: "Heading 4",              previewSize: 18, previewWeight: 600 },
+        { name: "Heading 5",      size: "20px", weight: "600 SemiBold",  lh: "1.4",  ls: "0",       preview: "Heading 5",              previewSize: 16, previewWeight: 600 },
+        { name: "Heading 6",      size: "16px", weight: "700 Bold",      lh: "1.5",  ls: "0",       preview: "Heading 6",              previewSize: 14, previewWeight: 700 },
+        { name: "Body Large",     size: "16px", weight: "400 Regular",   lh: "1.6",  ls: "0",       preview: "Body large paragraph text", previewSize: 14, previewWeight: 400 },
+        { name: "Body Default",   size: "14px", weight: "400 Regular",   lh: "1.6",  ls: "0",       preview: "Body default paragraph text", previewSize: 13, previewWeight: 400 },
+        { name: "Body Small",     size: "13px", weight: "400 Regular",   lh: "1.5",  ls: "0",       preview: "Body small paragraph text",  previewSize: 12, previewWeight: 400 },
+        { name: "Label",          size: "12px", weight: "500 Medium",    lh: "1.3",  ls: "0.05em",  preview: "LABEL TEXT",             previewSize: 11, previewWeight: 500 },
+        { name: "Caption",        size: "12px", weight: "400 Regular",   lh: "1.4",  ls: "0.02em",  preview: "Caption text",           previewSize: 11, previewWeight: 400 },
+        { name: "Code",           size: "13px", weight: "400 Regular",   lh: "1.5",  ls: "0",       preview: "const value = true",     previewSize: 12, previewWeight: 400, mono: true },
+      ].map(({ name, size, weight, lh, ls, preview, previewSize, previewWeight, mono }) => (
+        <div key={name} className="ty-scale-row">
+          <span className="ty-col-name ty-row-name">{name}</span>
+          <span className="ty-col-size ty-row-meta">{size}</span>
+          <span className="ty-col-weight ty-row-meta">{weight}</span>
+          <span className="ty-col-lh ty-row-meta">{lh}</span>
+          <span className="ty-col-ls ty-row-meta">{ls}</span>
+          <span
+            className="ty-col-preview"
+            style={{
+              fontFamily: mono ? "monospace" : "'Manrope', sans-serif",
+              fontSize: `${previewSize}px`,
+              fontWeight: previewWeight,
+              color: "#111827",
+            }}
+          >
+            {preview}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* ─── Line Length ──────────────────────────────────────────────── */}
+  <div className="ty-section">
+    <h2>Line Length</h2>
+    <p className="ty-description">Optimal line length is between 60–80 characters per line for body text. Lines that are too short create a choppy reading rhythm; lines that are too long cause the eye to lose its place when moving to the next line.</p>
+
+    <div className="ty-linelength-grid">
+      <div className="ty-ll-card">
+        <p className="ty-ll-text" style={{ maxWidth: "160px" }}>
+          Paragraph text that has been set with a line that is far too short for comfortable reading. The reader's eye must jump lines very frequently.
+        </p>
+        <span className="ty-ll-badge ty-ll-warn">Too Short</span>
+      </div>
+      <div className="ty-ll-card ty-ll-ideal">
+        <p className="ty-ll-text" style={{ maxWidth: "480px" }}>
+          Paragraph text set at an ideal line length provides a comfortable reading rhythm. The eye can follow each line from start to finish without difficulty, and finding the next line is natural and effortless.
+        </p>
+        <span className="ty-ll-badge ty-ll-good">Ideal</span>
+      </div>
+      <div className="ty-ll-card">
+        <p className="ty-ll-text" style={{ maxWidth: "100%" }}>
+          Paragraph text set at a line length that is far too long. When a line of text is extremely wide, the human eye has trouble tracking from the end of one line to the beginning of the next, causing the reader to lose their place and slow down significantly.
+        </p>
+        <span className="ty-ll-badge ty-ll-bad">Too Long</span>
+      </div>
+    </div>
+  </div>
+
+  {/* ─── Download Links ───────────────────────────────────────────── */}
+  <div className="ty-section">
+    <h2>Download Links</h2>
+    <div className="ty-downloads">
+      <a
+        className="ty-download-link"
+        href="https://fonts.google.com/specimen/Manrope"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <div className="ty-dl-icon" style={{ background: "linear-gradient(135deg, #4ade80, #16a34a)" }}>G</div>
+        <div>
+          <span className="ty-dl-name">Manrope</span>
+          <span className="ty-dl-source">Google Fonts ↗</span>
+        </div>
+      </a>
+      <a
+        className="ty-download-link"
+        href="https://fonts.google.com/specimen/Lexend+Deca"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <div className="ty-dl-icon" style={{ background: "linear-gradient(135deg, #60a5fa, #2563eb)" }}>G</div>
+        <div>
+          <span className="ty-dl-name">Lexend Deca</span>
+          <span className="ty-dl-source">Google Fonts ↗</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  {/* ═══════════════════════════════════════════════════════════════ */}
+  {/*  LEXEND DECA                                                    */}
+  {/* ═══════════════════════════════════════════════════════════════ */}
+  <div className="ty-section">
+    <div className="ty-font-intro">
+      <div className="ty-font-icon ty-font-icon-blue">Aa</div>
+      <div>
+        <h2 className="ty-font-name">Lexend Deca</h2>
+        <p className="ty-font-desc">Secondary typeface — optimised for body text readability and accessibility.</p>
+      </div>
+    </div>
+
+    {/* Alphabet specimen */}
+    <div className="ty-alphabet" style={{ fontFamily: "'Lexend Deca', sans-serif" }}>
+      <p>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
+      <p>a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
+      <p>1 2 3 4 5 6 7 8 9 0 ! @ # $ % &amp; * ( )</p>
+    </div>
+
+    {/* Weight samples */}
+    <div className="ty-weights-grid" style={{ fontFamily: "'Lexend Deca', sans-serif" }}>
+      {[
+        { weight: 300, label: "Light" },
+        { weight: 400, label: "Regular" },
+        { weight: 500, label: "Medium" },
+        { weight: 600, label: "SemiBold" },
+        { weight: 700, label: "Bold" },
+        { weight: 800, label: "ExtraBold" },
+      ].map(({ weight, label }) => (
+        <div key={weight} className="ty-weight-item">
+          <span className="ty-weight-sample" style={{ fontWeight: weight }}>Aa</span>
+          <span className="ty-weight-label">{label}</span>
+          <span className="ty-weight-num">{weight}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+</div>
+
+<style>
+  {`
+  .ty-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 0 64px;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  /* ── Header ── */
+  .ty-header {
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #E5E7EB;
+  }
+
+  .ty-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 12px;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .ty-header p {
+    font-size: 15px;
+    color: #6B7280;
+    line-height: 1.7;
+    max-width: 700px;
+    margin: 0;
+  }
+
+  /* ── Section ── */
+  .ty-section {
+    margin-bottom: 56px;
+  }
+
+  .ty-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 8px;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .ty-description {
+    font-size: 14px;
+    color: #6B7280;
+    line-height: 1.7;
+    margin: 0 0 24px;
+    max-width: 680px;
+  }
+
+  /* ── Font intro block ── */
+  .ty-font-intro {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+
+  .ty-font-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: #FFFFFF;
+    flex-shrink: 0;
+    font-family: inherit;
+  }
+
+  .ty-font-icon-green {
+    background: linear-gradient(135deg, #34d399, #059669);
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .ty-font-icon-blue {
+    background: linear-gradient(135deg, #60a5fa, #2563eb);
+    font-family: 'Lexend Deca', sans-serif;
+  }
+
+  .ty-font-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 4px;
+  }
+
+  .ty-font-desc {
+    font-size: 13px;
+    color: #6B7280;
+    margin: 0;
+  }
+
+  /* ── Alphabet ── */
+  .ty-alphabet {
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+  }
+
+  .ty-alphabet p {
+    margin: 0;
+  }
+
+  /* ── Weights grid ── */
+  .ty-weights-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+
+  .ty-weight-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 16px;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    background: #FFFFFF;
+  }
+
+  .ty-weight-sample {
+    font-size: 32px;
+    color: #111827;
+    line-height: 1;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .ty-weight-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .ty-weight-num {
+    font-size: 11px;
+    color: #9CA3AF;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  /* ── Type Scale Table ── */
+  .ty-scale-table {
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .ty-scale-header,
+  .ty-scale-row {
+    display: grid;
+    grid-template-columns: 140px 70px 140px 90px 110px 1fr;
+    gap: 0;
+    border-bottom: 1px solid #F3F4F6;
+    align-items: center;
+  }
+
+  .ty-scale-header {
+    background: #F9FAFB;
+    border-bottom: 1px solid #E5E7EB;
+  }
+
+  .ty-scale-row:last-child {
+    border-bottom: none;
+  }
+
+  .ty-scale-row:nth-child(even) {
+    background: #FAFAFA;
+  }
+
+  .ty-scale-header > span {
+    padding: 10px 14px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .ty-col-name   { }
+  .ty-col-size   { }
+  .ty-col-weight { }
+  .ty-col-lh     { }
+  .ty-col-ls     { }
+  .ty-col-preview { border-left: 1px solid #F3F4F6; }
+
+  .ty-scale-row > span {
+    padding: 12px 14px;
+  }
+
+  .ty-row-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .ty-row-meta {
+    font-size: 12px;
+    color: #6B7280;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  /* ── Line Length ── */
+  .ty-linelength-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ty-ll-card {
+    background: #F0F4FF;
+    border-radius: 10px;
+    padding: 20px 24px 16px;
+  }
+
+  .ty-ll-ideal {
+    background: #F0FDF4;
+  }
+
+  .ty-ll-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #374151;
+    margin: 0 0 12px;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .ty-ll-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 99px;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .ty-ll-warn { background: #FEF3C7; color: #92400E; }
+  .ty-ll-good { background: #D1FAE5; color: #065F46; }
+  .ty-ll-bad  { background: #FEE2E2; color: #991B1B; }
+
+  /* ── Downloads ── */
+  .ty-downloads {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .ty-download-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    text-decoration: none;
+    background: #FFFFFF;
+    transition: box-shadow 0.15s;
+  }
+
+  .ty-download-link:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .ty-dl-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+    color: #FFFFFF;
+    flex-shrink: 0;
+  }
+
+  .ty-dl-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .ty-dl-source {
+    display: block;
+    font-size: 11px;
+    color: #6B7280;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  @media (max-width: 700px) {
+    .ty-weights-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .ty-scale-header,
+    .ty-scale-row {
+      grid-template-columns: 1fr 60px 80px;
+    }
+    .ty-col-lh,
+    .ty-col-ls,
+    .ty-col-weight {
+      display: none;
+    }
+  }
+  `}
+</style>
