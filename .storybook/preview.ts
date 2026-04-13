@@ -1,5 +1,9 @@
 import type { Preview } from '@storybook/react-vite'
 import './global.css'
+import '@fontsource/jetbrains-mono/400.css'
+import '@fontsource/jetbrains-mono/500.css'
+import '@fontsource/jetbrains-mono/600.css'
+import '@fontsource/jetbrains-mono/400-italic.css'
 
 const preview: Preview = {
   parameters: {
@@ -33,6 +37,7 @@ const preview: Preview = {
           'Components',
           [
             'Button',
+            'Toggle',
             'Tab Bars',
             'Form Methods',
             [

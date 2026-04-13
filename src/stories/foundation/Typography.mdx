@@ -68,19 +68,19 @@ import { Meta } from "@storybook/addon-docs/blocks";
       </div>
 
       {[
-        { name: "Title Header",   size: "56px", weight: "700 Bold",      lh: "1.1",  ls: "−0.02em", preview: "Title Header",          previewSize: 42, previewWeight: 700 },
-        { name: "Heading 2",      size: "40px", weight: "700 Bold",      lh: "1.2",  ls: "−0.01em", preview: "Heading 2",              previewSize: 28, previewWeight: 700 },
-        { name: "Heading 3",      size: "32px", weight: "700 Bold",      lh: "1.25", ls: "−0.01em", preview: "Heading 3",              previewSize: 22, previewWeight: 700 },
-        { name: "Heading 4",      size: "24px", weight: "600 SemiBold",  lh: "1.3",  ls: "0",       preview: "Heading 4",              previewSize: 18, previewWeight: 600 },
-        { name: "Heading 5",      size: "20px", weight: "600 SemiBold",  lh: "1.4",  ls: "0",       preview: "Heading 5",              previewSize: 16, previewWeight: 600 },
-        { name: "Heading 6",      size: "16px", weight: "700 Bold",      lh: "1.5",  ls: "0",       preview: "Heading 6",              previewSize: 14, previewWeight: 700 },
+        { name: "Title Header",   size: "56px", weight: "700 Bold",      lh: "1.1",  ls: "−0.04em", lsValue: "-0.04em", preview: "Title Header",          previewSize: 42, previewWeight: 700 },
+        { name: "Heading 2",      size: "40px", weight: "700 Bold",      lh: "1.2",  ls: "−0.04em", lsValue: "-0.04em", preview: "Heading 2",              previewSize: 28, previewWeight: 700 },
+        { name: "Heading 3",      size: "32px", weight: "700 Bold",      lh: "1.25", ls: "−0.04em", lsValue: "-0.04em", preview: "Heading 3",              previewSize: 22, previewWeight: 700 },
+        { name: "Heading 4",      size: "24px", weight: "600 SemiBold",  lh: "1.3",  ls: "−0.04em", lsValue: "-0.04em", preview: "Heading 4",              previewSize: 18, previewWeight: 600 },
+        { name: "Heading 5",      size: "20px", weight: "600 SemiBold",  lh: "1.4",  ls: "−0.04em", lsValue: "-0.04em", preview: "Heading 5",              previewSize: 16, previewWeight: 600 },
+        { name: "Heading 6",      size: "16px", weight: "700 Bold",      lh: "1.5",  ls: "−0.04em", lsValue: "-0.04em", preview: "Heading 6",              previewSize: 14, previewWeight: 700 },
         { name: "Body Large",     size: "16px", weight: "400 Regular",   lh: "1.6",  ls: "0",       preview: "Body large paragraph text", previewSize: 14, previewWeight: 400 },
         { name: "Body Default",   size: "14px", weight: "400 Regular",   lh: "1.6",  ls: "0",       preview: "Body default paragraph text", previewSize: 13, previewWeight: 400 },
         { name: "Body Small",     size: "13px", weight: "400 Regular",   lh: "1.5",  ls: "0",       preview: "Body small paragraph text",  previewSize: 12, previewWeight: 400 },
         { name: "Label",          size: "12px", weight: "500 Medium",    lh: "1.3",  ls: "0.05em",  preview: "LABEL TEXT",             previewSize: 11, previewWeight: 500 },
         { name: "Caption",        size: "12px", weight: "400 Regular",   lh: "1.4",  ls: "0.02em",  preview: "Caption text",           previewSize: 11, previewWeight: 400 },
         { name: "Code",           size: "13px", weight: "400 Regular",   lh: "1.5",  ls: "0",       preview: "const value = true",     previewSize: 12, previewWeight: 400, mono: true },
-      ].map(({ name, size, weight, lh, ls, preview, previewSize, previewWeight, mono }) => (
+      ].map(({ name, size, weight, lh, ls, lsValue, preview, previewSize, previewWeight, mono }) => (
         <div key={name} className="ty-scale-row">
           <span className="ty-col-name ty-row-name">{name}</span>
           <span className="ty-col-size ty-row-meta">{size}</span>
@@ -93,6 +93,7 @@ import { Meta } from "@storybook/addon-docs/blocks";
               fontFamily: mono ? "monospace" : "'Manrope', sans-serif",
               fontSize: `${previewSize}px`,
               fontWeight: previewWeight,
+              letterSpacing: lsValue ?? "0",
               color: "#111827",
             }}
           >

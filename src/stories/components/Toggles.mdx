@@ -1,0 +1,454 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import React from "react";
+import { CodePanel } from "./CodePanel";
+
+<Meta title="Components/Toggle" />
+
+export const TOGGLE_CODE = `// Toggle · Supplai Design System
+import React, { useState } from 'react';
+
+function Toggle({ checked = false, onChange, disabled = false, label }) {
+  const handleKey = e => {
+    if (!disabled && (e.key === ' ' || e.key === 'Enter')) {
+      e.preventDefault();
+      onChange?.(!checked);
+    }
+  };
+
+  return (
+    <label
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 10,
+        cursor: disabled ? 'not-allowed' : 'pointer',
+        opacity: disabled ? 0.45 : 1,
+      }}
+    >
+      <span
+        role="switch"
+        aria-checked={checked}
+        tabIndex={disabled ? -1 : 0}
+        onClick={() => !disabled && onChange?.(!checked)}
+        onKeyDown={handleKey}
+        style={{
+          position: 'relative',
+          display: 'inline-block',
+          width: 44,
+          height: 24,
+          borderRadius: 99,
+          background: checked ? '#4169E1' : '#D1D5DB',
+          transition: 'background 0.2s',
+          cursor: disabled ? 'not-allowed' : 'pointer',
+          flexShrink: 0,
+          outline: 'none',
+        }}
+      >
+        <span
+          style={{
+            position: 'absolute',
+            top: 2,
+            left: checked ? 22 : 2,
+            width: 20,
+            height: 20,
+            borderRadius: '50%',
+            background: '#FFFFFF',
+            boxShadow: '0 1px 4px rgba(0,0,0,0.2)',
+            transition: 'left 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+          }}
+        />
+      </span>
+      {label && (
+        <span style={{ fontSize: 13, fontWeight: 500, color: disabled ? '#9CA3AF' : '#374151' }}>
+          {label}
+        </span>
+      )}
+    </label>
+  );
+}
+
+// ── Usage ─────────────────────────────────────────────────────────────
+function App() {
+  const [on, setOn] = useState(false);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      {/* Basic */}
+      <Toggle checked={on} onChange={setOn} />
+
+      {/* With label */}
+      <Toggle checked={on} onChange={setOn} label={on ? 'On' : 'Off'} />
+
+      {/* Disabled */}
+      <Toggle checked={false} disabled label="Disabled off" />
+      <Toggle checked={true}  disabled label="Disabled on" />
+    </div>
+  );
+}`;
+
+export const TogglePlayground = () => {
+  const [checked, setChecked] = React.useState(false);
+  const [disabled, setDisabled] = React.useState(false);
+  const [withLabel, setWithLabel] = React.useState(false);
+
+  return (
+    <div className="tgp-wrap">
+      {/* Preview */}
+      <div className="tgp-preview">
+        <label
+          className="tgp-toggle-label"
+          style={{ opacity: disabled ? 0.45 : 1, cursor: disabled ? "not-allowed" : "pointer" }}
+        >
+          <span
+            role="switch"
+            aria-checked={checked}
+            tabIndex={disabled ? -1 : 0}
+            onClick={() => !disabled && setChecked(v => !v)}
+            onKeyDown={e => { if (!disabled && (e.key === " " || e.key === "Enter")) { e.preventDefault(); setChecked(v => !v); } }}
+            className="tgp-track"
+            style={{ background: checked ? "#4169E1" : "#D1D5DB" }}
+          >
+            <span
+              className="tgp-thumb"
+              style={{ left: checked ? "22px" : "2px" }}
+            />
+          </span>
+          {withLabel && (
+            <span className="tgp-text" style={{ color: disabled ? "#9CA3AF" : "#374151" }}>
+              {checked ? "On" : "Off"}
+            </span>
+          )}
+        </label>
+      </div>
+
+      {/* Controls */}
+      <div className="tgp-controls">
+        <div className="tgp-ctrl-group">
+          <span className="tgp-ctrl-label">State</span>
+          <div className="tgp-chips">
+            <button
+              className={`tgp-chip ${checked && !disabled ? "tgp-chip--on" : ""}`}
+              onClick={() => { setDisabled(false); setChecked(true); }}
+            >On</button>
+            <button
+              className={`tgp-chip ${!checked && !disabled ? "tgp-chip--on" : ""}`}
+              onClick={() => { setDisabled(false); setChecked(false); }}
+            >Off</button>
+            <button
+              className={`tgp-chip ${disabled ? "tgp-chip--on" : ""}`}
+              onClick={() => setDisabled(v => !v)}
+            >Disabled</button>
+          </div>
+        </div>
+        <div className="tgp-ctrl-group">
+          <span className="tgp-ctrl-label">Options</span>
+          <div className="tgp-chips">
+            <button
+              className={`tgp-chip ${withLabel ? "tgp-chip--on" : ""}`}
+              onClick={() => setWithLabel(v => !v)}
+            >With label</button>
+          </div>
+        </div>
+        <div className="tgp-state-display">
+          Current state: <strong>{disabled ? "disabled" : checked ? "on" : "off"}</strong>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+<div className="tg-page">
+
+  <div className="tg-header">
+    <h1>Toggle</h1>
+    <p>The toggle switch allows users to switch on/off various options within the application. It provides immediate visual feedback and is used for binary settings throughout the platform.</p>
+  </div>
+
+  {/* ── Playground ── */}
+  <div className="tg-section">
+    <h2>Live Playground</h2>
+    <p className="tg-desc">Click the toggle or use the controls below to explore all states. Switch to the Code tab to copy the component implementation.</p>
+    <CodePanel code={TOGGLE_CODE}>
+      <TogglePlayground />
+    </CodePanel>
+  </div>
+
+  {/* ── States ── */}
+  <div className="tg-section">
+    <h2>States</h2>
+
+    <div className="tg-states-row">
+
+      <div className="tg-state-group">
+        <label className="tg-toggle-label">
+          <span className="tg-track tg-track--off">
+            <span className="tg-thumb tg-thumb--off" />
+          </span>
+        </label>
+        <span className="tg-state-tag">OFF</span>
+      </div>
+
+      <div className="tg-state-group">
+        <label className="tg-toggle-label">
+          <span className="tg-track tg-track--on">
+            <span className="tg-thumb tg-thumb--on" />
+          </span>
+        </label>
+        <span className="tg-state-tag">ON</span>
+      </div>
+
+      <div className="tg-state-group">
+        <label className="tg-toggle-label" style={{ opacity: 0.45, cursor: "not-allowed" }}>
+          <span className="tg-track tg-track--off">
+            <span className="tg-thumb tg-thumb--off" />
+          </span>
+        </label>
+        <span className="tg-state-tag">DISABLED OFF</span>
+      </div>
+
+      <div className="tg-state-group">
+        <label className="tg-toggle-label" style={{ opacity: 0.45, cursor: "not-allowed" }}>
+          <span className="tg-track tg-track--on">
+            <span className="tg-thumb tg-thumb--on" />
+          </span>
+        </label>
+        <span className="tg-state-tag">DISABLED ON</span>
+      </div>
+
+    </div>
+  </div>
+
+  {/* ── With Label ── */}
+  <div className="tg-section">
+    <h2>With Label</h2>
+    <p className="tg-desc">Toggles can include an inline label that reflects the current state.</p>
+
+    <div className="tg-states-row">
+      <div className="tg-state-group">
+        <label className="tg-toggle-label">
+          <span className="tg-track tg-track--off"><span className="tg-thumb tg-thumb--off" /></span>
+          <span className="tg-label-text tg-label-text--off">Off</span>
+        </label>
+        <span className="tg-state-tag">OFF</span>
+      </div>
+      <div className="tg-state-group">
+        <label className="tg-toggle-label">
+          <span className="tg-track tg-track--on"><span className="tg-thumb tg-thumb--on" /></span>
+          <span className="tg-label-text tg-label-text--on">On</span>
+        </label>
+        <span className="tg-state-tag">ON</span>
+      </div>
+    </div>
+  </div>
+
+  {/* ── Specs ── */}
+  <div className="tg-section">
+    <h2>Specifications</h2>
+    <div className="tg-specs-grid">
+      <div className="tg-spec-card"><span className="tg-spec-label">Track width</span><span className="tg-spec-value">44px</span></div>
+      <div className="tg-spec-card"><span className="tg-spec-label">Track height</span><span className="tg-spec-value">24px</span></div>
+      <div className="tg-spec-card"><span className="tg-spec-label">Thumb size</span><span className="tg-spec-value">20 × 20px</span></div>
+      <div className="tg-spec-card"><span className="tg-spec-label">Thumb inset</span><span className="tg-spec-value">2px</span></div>
+      <div className="tg-spec-card"><span className="tg-spec-label">Track ON</span><span className="tg-spec-value">#4169E1</span></div>
+      <div className="tg-spec-card"><span className="tg-spec-label">Track OFF</span><span className="tg-spec-value">#D1D5DB</span></div>
+      <div className="tg-spec-card"><span className="tg-spec-label">Thumb colour</span><span className="tg-spec-value">#FFFFFF</span></div>
+      <div className="tg-spec-card"><span className="tg-spec-label">Disabled opacity</span><span className="tg-spec-value">45%</span></div>
+      <div className="tg-spec-card"><span className="tg-spec-label">Transition</span><span className="tg-spec-value">0.2s ease</span></div>
+    </div>
+  </div>
+
+</div>
+
+<style>{`
+
+  /* ── Page ── */
+  .tg-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 0 64px;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .tg-header {
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #E5E7EB;
+  }
+  .tg-header h1 { font-size: 32px; font-weight: 700; color: #111625; margin: 0 0 12px; }
+  .tg-header p  { font-size: 15px; color: #6B7280; line-height: 1.7; max-width: 520px; margin: 0; }
+
+  .tg-section  { margin-bottom: 52px; }
+  .tg-section h2 { font-size: 18px; font-weight: 700; color: #111625; margin: 0 0 16px; }
+  .tg-desc { font-size: 14px; color: #6B7280; margin: -8px 0 20px; line-height: 1.6; }
+
+  /* ── Static toggle atoms ── */
+  .tg-track {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    border-radius: 99px;
+    flex-shrink: 0;
+  }
+  .tg-track--on  { background: #4169E1; }
+  .tg-track--off { background: #D1D5DB; }
+
+  .tg-thumb {
+    position: absolute;
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+  .tg-thumb--on  { left: 22px; }
+  .tg-thumb--off { left: 2px;  }
+
+  .tg-toggle-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .tg-label-text {
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .tg-label-text--on  { color: #4169E1; }
+  .tg-label-text--off { color: #6B7280; }
+
+  /* ── States grid ── */
+  .tg-states-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 4px;
+  }
+
+  .tg-state-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .tg-state-tag {
+    font-size: 9px;
+    font-weight: 700;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── Playground widget ── */
+  .tgp-wrap {
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #FFFFFF;
+  }
+
+  .tgp-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E5E7EB;
+    padding: 32px;
+  }
+
+  .tgp-toggle-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .tgp-track {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    border-radius: 99px;
+    transition: background 0.2s;
+    cursor: pointer;
+    outline: none;
+    flex-shrink: 0;
+  }
+  .tgp-track:focus-visible {
+    box-shadow: 0 0 0 3px rgba(65,105,225,0.25);
+  }
+
+  .tgp-thumb {
+    position: absolute;
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .tgp-text {
+    font-size: 13px;
+    font-weight: 500;
+    min-width: 24px;
+  }
+
+  .tgp-controls {
+    padding: 18px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .tgp-ctrl-group { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .tgp-ctrl-label {
+    font-size: 11px; font-weight: 700; color: #9CA3AF;
+    text-transform: uppercase; letter-spacing: 0.08em; width: 80px; flex-shrink: 0;
+  }
+  .tgp-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tgp-chip {
+    padding: 4px 14px;
+    border-radius: 99px;
+    border: 1px solid #E5E7EB;
+    background: #F9FAFB;
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.12s;
+  }
+  .tgp-chip:hover { border-color: #4169E1; background: #E8EEFB; color: #2B44BF; }
+  .tgp-chip--on   { background: #4169E1; border-color: #4169E1; color: #FFFFFF; }
+  .tgp-state-display { font-size: 12px; color: #9CA3AF; padding-top: 4px; }
+  .tgp-state-display strong { color: #374151; }
+
+  /* ── Specs ── */
+  .tg-specs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .tg-spec-card {
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 14px 16px;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .tg-spec-label { font-size: 11px; font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.07em; }
+  .tg-spec-value { font-size: 14px; font-weight: 600; color: #111625; }
+
+  @media (max-width: 640px) {
+    .tg-specs-grid { grid-template-columns: 1fr 1fr; }
+    .tg-states-row { gap: 28px; }
+  }
+`}</style>

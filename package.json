@@ -13,6 +13,8 @@
     "deploy-storybook": "npm run build-storybook && npx storybook-to-ghpages --existing-output-dir storybook-static"
   },
   "dependencies": {
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "prism-react-renderer": "^2.4.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

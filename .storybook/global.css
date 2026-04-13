@@ -18,3 +18,121 @@ body,
 :root {
   --sbdocs-font-family: 'Manrope', sans-serif;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.04em;
+}
+
+/* ── Code Panel (shared playground + code tab UI) ── */
+.cpanel {
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+/* ── Tab bar ── */
+.cpanel__bar {
+  display: flex;
+  align-items: center;
+  padding: 0 16px 0 4px;
+  background: #F9FAFB;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.cpanel__tabs {
+  display: flex;
+}
+
+.cpanel__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6B7280;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  margin-bottom: -1px;
+  letter-spacing: 0;
+}
+
+.cpanel__tab:hover {
+  background: #E8EEFB;
+  color: #2B44BF;
+}
+
+.cpanel__tab--active {
+  color: #4169E1;
+  font-weight: 600;
+  border-bottom-color: #4169E1;
+}
+
+/* Strip inner card borders when playground sits inside CodePanel */
+.cpanel .tip-wrap,
+.cpanel .pip-wrap,
+.cpanel .tb-live-wrap {
+  border: none;
+  border-radius: 0;
+}
+
+.cpanel__preview {
+  background: #FFFFFF;
+}
+
+/* ── IDE-style code block ── */
+.cpanel__code {
+  background: #1E1E2E;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating copy button inside the code block */
+.cpanel__copy-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(30, 30, 46, 0.85);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(205, 214, 244, 0.55);
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0;
+  backdrop-filter: blur(6px);
+}
+
+.cpanel__copy-btn:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(205, 214, 244, 0.95);
+}
+
+.cpanel__copy-btn--done {
+  border-color: rgba(45, 156, 147, 0.5) !important;
+  background: rgba(45, 156, 147, 0.15) !important;
+  color: #2DD4BF !important;
+}
+
+/* Ensure JetBrains Mono + ligatures propagate into the rendered pre/code */
+.cpanel__code pre,
+.cpanel__code code,
+.cpanel__code span {
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace !important;
+  font-feature-settings: "liga" 1, "calt" 1, "kern" 1 !important;
+  font-variant-ligatures: common-ligatures contextual !important;
+  letter-spacing: 0 !important;
+}

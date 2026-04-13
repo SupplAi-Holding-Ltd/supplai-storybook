@@ -59,7 +59,12 @@ import { Meta } from "@storybook/addon-docs/blocks";
         { shade: "50",  hex: "#F4F7FE" },
       ].map(({ shade, hex, brand }) => (
         <div key={shade} className="cp-swatch-wrap">
-          <div className="cp-swatch" style={{ background: hex, outline: brand ? "2px solid #4169E1" : "none", outlineOffset: "2px" }} />
+          <div className="cp-swatch" style={{ background: hex, outline: brand ? "2px solid #4169E1" : "none", outlineOffset: "2px" }}>
+            <button className="cp-copy-btn" onClick={(e) => { navigator.clipboard.writeText(hex); const b = e.currentTarget; b.classList.add('cp-copy-btn--copied'); setTimeout(() => b.classList.remove('cp-copy-btn--copied'), 1500); }} title={`Copy ${hex}`}>
+              <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+              <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
+          </div>
           <span className="cp-swatch-shade">{shade}</span>
           <span className="cp-swatch-hex">{hex}</span>
           {brand && <span className="cp-swatch-tag">Brand</span>}
@@ -84,7 +89,12 @@ import { Meta } from "@storybook/addon-docs/blocks";
         { shade: "50",  hex: "#F2FBFA" },
       ].map(({ shade, hex }) => (
         <div key={shade} className="cp-swatch-wrap">
-          <div className="cp-swatch" style={{ background: hex }} />
+          <div className="cp-swatch" style={{ background: hex }}>
+            <button className="cp-copy-btn" onClick={(e) => { navigator.clipboard.writeText(hex); const b = e.currentTarget; b.classList.add('cp-copy-btn--copied'); setTimeout(() => b.classList.remove('cp-copy-btn--copied'), 1500); }} title={`Copy ${hex}`}>
+              <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+              <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
+          </div>
           <span className="cp-swatch-shade">{shade}</span>
           <span className="cp-swatch-hex">{hex}</span>
         </div>
@@ -108,7 +118,12 @@ import { Meta } from "@storybook/addon-docs/blocks";
         { shade: "50",  hex: "#F0F9FF" },
       ].map(({ shade, hex }) => (
         <div key={shade} className="cp-swatch-wrap">
-          <div className="cp-swatch" style={{ background: hex }} />
+          <div className="cp-swatch" style={{ background: hex }}>
+            <button className="cp-copy-btn" onClick={(e) => { navigator.clipboard.writeText(hex); const b = e.currentTarget; b.classList.add('cp-copy-btn--copied'); setTimeout(() => b.classList.remove('cp-copy-btn--copied'), 1500); }} title={`Copy ${hex}`}>
+              <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+              <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
+          </div>
           <span className="cp-swatch-shade">{shade}</span>
           <span className="cp-swatch-hex">{hex}</span>
         </div>
@@ -143,7 +158,12 @@ import { Meta } from "@storybook/addon-docs/blocks";
         { shade: "50",  hex: "#FFFBEB" },
       ].map(({ shade, hex }) => (
         <div key={shade} className="cp-swatch-wrap">
-          <div className="cp-swatch" style={{ background: hex }} />
+          <div className="cp-swatch" style={{ background: hex }}>
+            <button className="cp-copy-btn" onClick={(e) => { navigator.clipboard.writeText(hex); const b = e.currentTarget; b.classList.add('cp-copy-btn--copied'); setTimeout(() => b.classList.remove('cp-copy-btn--copied'), 1500); }} title={`Copy ${hex}`}>
+              <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+              <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
+          </div>
           <span className="cp-swatch-shade">{shade}</span>
           <span className="cp-swatch-hex">{hex}</span>
         </div>
@@ -167,7 +187,12 @@ import { Meta } from "@storybook/addon-docs/blocks";
         { shade: "50",  hex: "#FFF5F5" },
       ].map(({ shade, hex }) => (
         <div key={shade} className="cp-swatch-wrap">
-          <div className="cp-swatch" style={{ background: hex }} />
+          <div className="cp-swatch" style={{ background: hex }}>
+            <button className="cp-copy-btn" onClick={(e) => { navigator.clipboard.writeText(hex); const b = e.currentTarget; b.classList.add('cp-copy-btn--copied'); setTimeout(() => b.classList.remove('cp-copy-btn--copied'), 1500); }} title={`Copy ${hex}`}>
+              <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+              <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
+          </div>
           <span className="cp-swatch-shade">{shade}</span>
           <span className="cp-swatch-hex">{hex}</span>
         </div>
@@ -193,7 +218,12 @@ import { Meta } from "@storybook/addon-docs/blocks";
         { shade: "50",  hex: "#F8FAFC" },
       ].map(({ shade, hex }) => (
         <div key={shade} className="cp-swatch-wrap">
-          <div className="cp-swatch" style={{ background: hex }} />
+          <div className="cp-swatch" style={{ background: hex }}>
+            <button className="cp-copy-btn" onClick={(e) => { navigator.clipboard.writeText(hex); const b = e.currentTarget; b.classList.add('cp-copy-btn--copied'); setTimeout(() => b.classList.remove('cp-copy-btn--copied'), 1500); }} title={`Copy ${hex}`}>
+              <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+              <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
+          </div>
           <span className="cp-swatch-shade">{shade}</span>
           <span className="cp-swatch-hex">{hex}</span>
         </div>
@@ -392,6 +422,46 @@ import { Meta } from "@storybook/addon-docs/blocks";
     border-radius: 8px;
     border: 1px solid rgba(0,0,0,0.04);
     min-height: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cp-copy-btn {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.22);
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    color: #ffffff;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .cp-swatch-wrap:hover .cp-copy-btn {
+    opacity: 1;
+  }
+
+  .cp-copy-btn:active {
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  .cp-check-icon {
+    display: none;
+  }
+
+  .cp-copy-btn--copied .cp-copy-icon {
+    display: none;
+  }
+
+  .cp-copy-btn--copied .cp-check-icon {
+    display: block;
   }
 
   .cp-swatch-shade {

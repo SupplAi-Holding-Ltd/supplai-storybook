@@ -1,7 +1,73 @@
 import { Meta } from "@storybook/addon-docs/blocks";
 import React from "react";
+import { CodePanel } from "./CodePanel";
 
 <Meta title="Components/Tab Bars" />
+
+export const TAB_BAR_CODE = `// Tab Bar · Supplai Design System
+import React, { useState } from 'react';
+
+function TabBar({ tabs, defaultIndex = 0, onChange }) {
+  const [active, setActive] = useState(defaultIndex);
+
+  const handleClick = i => {
+    setActive(i);
+    if (onChange) onChange(i, tabs[i]);
+  };
+
+  return (
+    <div style={{ borderBottom: '2px solid #E5E7EB' }}>
+      <div style={{ display: 'flex', gap: 0 }}>
+        {tabs.map((tab, i) => (
+          <button
+            key={tab}
+            onClick={() => handleClick(i)}
+            style={{
+              padding: '10px 16px',
+              fontSize: 13,
+              fontWeight: i === active ? 600 : 400,
+              color: i === active ? '#4169E1' : '#6B7280',
+              background: 'none',
+              border: 'none',
+              borderBottom: '2px solid ' + (i === active ? '#4169E1' : 'transparent'),
+              cursor: 'pointer',
+              fontFamily: 'Manrope, sans-serif',
+              transition: 'color 0.15s, border-color 0.15s',
+              marginBottom: -2,
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Usage ─────────────────────────────────────────────────────────────
+function TripsPage() {
+  const [activeTab, setActiveTab] = useState(0);
+  const tabs = ['All Trips', 'Allocated', 'In Transit', 'Cancelled', 'Completed'];
+
+  return (
+    <div>
+      <TabBar
+        tabs={tabs}
+        defaultIndex={activeTab}
+        onChange={(index, label) => {
+          setActiveTab(index);
+          console.log('Active tab:', label);
+        }}
+      />
+      <div style={{ paddingTop: 24 }}>
+        {activeTab === 0 && <AllTripsView />}
+        {activeTab === 1 && <AllocatedView />}
+        {/* etc. */}
+      </div>
+    </div>
+  );
+}`;
 
 export const InteractiveTabs = () => {
   const [active, setActive] = React.useState(0);
@@ -59,8 +125,10 @@ export const InteractiveTabs = () => {
   {/* ── Interactive Demo ─────────────────────────────────────────── */}
   <div className="tb-section">
     <h2>Interactive Demo</h2>
-    <p className="tb-desc">Click any tab below to switch views. This is how the tab bar behaves in the live application.</p>
-    <InteractiveTabs />
+    <p className="tb-desc">Click any tab below to switch views. Switch to the Code tab to copy the component implementation.</p>
+    <CodePanel code={TAB_BAR_CODE}>
+      <InteractiveTabs />
+    </CodePanel>
   </div>
 
   {/* ── States ───────────────────────────────────────────────────── */}
@@ -182,7 +250,7 @@ export const InteractiveTabs = () => {
     box-shadow: 0 2px 6px rgba(0,0,0,0.10), 0 1px 2px rgba(0,0,0,0.06);
   }
   .tb-tab--inactive { background: transparent; border-color: transparent; color: #9CA3AF; }
-  .tb-tab--hover    { background: #F3F4F6; border-color: transparent; color: #374151; }
+  .tb-tab--hover    { background: #E8EEFB; border-color: transparent; color: #2B44BF; }
   .tb-tab--focused  { background: #EEF2FF; border-color: #4169E1; color: #4169E1; font-weight: 600; box-shadow: 0 0 0 3px rgba(65,105,225,0.18); }
 
   /* ── Tab bar container ── */
