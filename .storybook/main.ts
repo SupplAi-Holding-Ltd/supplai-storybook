@@ -14,13 +14,6 @@ const config: StorybookConfig = {
     "@storybook/addon-onboarding"
   ],
   framework: "@storybook/react-vite",
-  viteFinal: async (config: InlineConfig) => {
-    // Required for GitHub Pages — sets the asset base path to the repo subdirectory
-    if (process.env.NODE_ENV === 'production') {
-      config.base = '/storybook-example01/';
-    }
-    return config;
-  },
 };
 
 export default config;
