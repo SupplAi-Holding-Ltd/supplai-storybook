@@ -1,0 +1,13 @@
+/**
+ * Supplai grey scale (foundation/Colors.mdx) — sidebar brand logo (0.6 = 20% up from 0.5).
+ * Brand link uses `brandTitle` as its accessible title in Storybook’s manager UI.
+ */
+a[title='Supplai'] {
+  display: inline-flex;
+  align-items: center;
+}
+
+a[title='Supplai'] img {
+  transform: scale(0.6);
+  transform-origin: left center;
+}

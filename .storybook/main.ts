@@ -1,5 +1,4 @@
 import type { StorybookConfig } from '@storybook/react-vite';
-import type { InlineConfig } from 'vite';
 
 const config: StorybookConfig = {
   stories: [
@@ -14,6 +13,9 @@ const config: StorybookConfig = {
     "@storybook/addon-onboarding"
   ],
   framework: "@storybook/react-vite",
+  core: {
+    disableWhatsNewNotifications: true,
+  },
 };
 
 export default config;
