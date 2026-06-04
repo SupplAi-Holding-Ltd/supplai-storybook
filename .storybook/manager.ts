@@ -4,7 +4,7 @@ import { addons } from 'storybook/manager-api';
 import { create } from 'storybook/theming/create';
 import brandImage from './supplailogo.svg?url';
 
-/** Supplai foundation greys — src/stories/foundation/Colors.mdx (cool blue-tinted grey) */
+/** supplai foundation greys — src/stories/foundation/Colors.mdx (cool blue-tinted grey) */
 const grey = {
   50: '#F8FAFC',
   100: '#F1F5F9',
@@ -26,7 +26,7 @@ const brand = {
 addons.setConfig({
   theme: create({
     base: 'dark',
-    brandTitle: 'Supplai',
+    brandTitle: 'supplai',
     brandImage,
     colorPrimary: brand[500],
     colorSecondary: brand[600],
