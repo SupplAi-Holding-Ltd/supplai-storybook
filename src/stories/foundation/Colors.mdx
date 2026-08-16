@@ -16,14 +16,22 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
     <div className="cp-brand-hex-row">
       {[
-        { hex: "#000000", label: "Black" },
+        { hex: "#4169E1", label: "Brand Blue" },
         { hex: "#0D1B2A", label: "Dark Navy" },
         { hex: "#2D9C93", label: "Teal" },
-        { hex: "#4169E1", label: "Brand Blue" },
+        { hex: "#000000", label: "Black" },
         { hex: "#FFFFFF", label: "White", outline: true },
       ].map(({ hex, label, outline }) => (
         <div key={hex} className="cp-hex-wrap">
-          <div className="cp-hexagon" style={{ background: hex, border: outline ? "2px solid #D1D5DB" : "none" }} />
+          {/* Rounded hex (~4px); SVG so corners + stroke render (clip-path clips borders) */}
+          <svg className="cp-hexagon" width="40" height="46" viewBox="-1.5 -1.5 43 49" aria-hidden="true">
+            <path
+              d="M 16.53 1.99 Q 20.00 0.00 23.47 1.99 L 36.53 9.51 Q 40.00 11.50 40.00 15.50 L 40.00 30.50 Q 40.00 34.50 36.53 36.49 L 23.47 44.01 Q 20.00 46.00 16.53 44.01 L 3.47 36.49 Q 0.00 34.50 0.00 30.50 L 0.00 15.50 Q 0.00 11.50 3.47 9.51 Z"
+              fill={hex}
+              stroke={outline ? "#F1F5F9" : "none"}
+              strokeWidth={outline ? 1.5 : 0}
+            />
+          </svg>
           <span className="cp-hex-label">{label}</span>
         </div>
       ))}
@@ -36,6 +44,10 @@ import { Meta } from "@storybook/addon-docs/blocks";
         { hex: "#F4F6FE", label: "White Blue", sub: "#F4F6FE", dark: true },
       ].map(({ hex, label, sub, dark }) => (
         <div key={hex} className="cp-brand-large-card" style={{ background: hex }}>
+          <button className="cp-copy-btn" onClick={(e) => { navigator.clipboard.writeText(hex); const b = e.currentTarget; b.classList.add('cp-copy-btn--copied'); setTimeout(() => b.classList.remove('cp-copy-btn--copied'), 1500); }} title={`Copy ${hex}`}>
+            <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
+            <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </button>
           <span className="cp-brand-large-name" style={{ color: dark ? "#111827" : "#FFFFFF" }}>{label}</span>
           <span className="cp-brand-large-hex" style={{ color: dark ? "#6B7280" : "rgba(255,255,255,0.6)" }}>{sub}</span>
         </div>
@@ -47,16 +59,16 @@ import { Meta } from "@storybook/addon-docs/blocks";
   <div className="cp-section">
     <div className="cp-palette-row">
       {[
-        { shade: "900", hex: "#0D1E5C" },
-        { shade: "800", hex: "#162478" },
-        { shade: "700", hex: "#1C2E99" },
-        { shade: "600", hex: "#2B44BF" },
-        { shade: "500", hex: "#4169E1", brand: true },
-        { shade: "400", hex: "#6688E9" },
-        { shade: "300", hex: "#8EAAF1" },
-        { shade: "200", hex: "#BCCDF8" },
-        { shade: "100", hex: "#E8EEFB" },
-        { shade: "50",  hex: "#F4F7FE" },
+        { shade: "900", hex: "#142782" },
+        { shade: "800", hex: "#203AA2" },
+        { shade: "700", hex: "#2F50C1" },
+        { shade: "600", hex: "#4169E1", brand: true },
+        { shade: "500", hex: "#6787E7" },
+        { shade: "400", hex: "#8DA5ED" },
+        { shade: "300", hex: "#B3C3F3" },
+        { shade: "200", hex: "#D9E1F9" },
+        { shade: "100", hex: "#ECF0FC" },
+        { shade: "50",  hex: "#F5F7FD" },
       ].map(({ shade, hex, brand }) => (
         <div key={shade} className="cp-swatch-wrap">
           <div className="cp-swatch" style={{ background: hex, outline: brand ? "2px solid #4169E1" : "none", outlineOffset: "2px" }}>
@@ -73,20 +85,20 @@ import { Meta } from "@storybook/addon-docs/blocks";
     </div>
   </div>
 
-  {/* ─── Teal Palette ─────────────────────────────────────────────── */}
+  {/* ─── Green Palette ────────────────────────────────────────────── */}
   <div className="cp-section">
     <div className="cp-palette-row">
       {[
-        { shade: "900", hex: "#0D3330" },
-        { shade: "800", hex: "#134D49" },
-        { shade: "700", hex: "#196861" },
-        { shade: "600", hex: "#208078" },
-        { shade: "500", hex: "#2D9C93" },
-        { shade: "400", hex: "#50B5AD" },
-        { shade: "300", hex: "#7ECDC7" },
-        { shade: "200", hex: "#B3E5E2" },
-        { shade: "100", hex: "#E0F5F4" },
-        { shade: "50",  hex: "#F2FBFA" },
+        { shade: "900", hex: "#19595B" },
+        { shade: "800", hex: "#28716C" },
+        { shade: "700", hex: "#3B877B" },
+        { shade: "600", hex: "#519E8A" },
+        { shade: "500", hex: "#74B1A1" },
+        { shade: "400", hex: "#97C5B9" },
+        { shade: "300", hex: "#B9D8D0" },
+        { shade: "200", hex: "#DCECE8" },
+        { shade: "100", hex: "#EEF6F4" },
+        { shade: "50",  hex: "#F6FAF9" },
       ].map(({ shade, hex }) => (
         <div key={shade} className="cp-swatch-wrap">
           <div className="cp-swatch" style={{ background: hex }}>
@@ -102,20 +114,18 @@ import { Meta } from "@storybook/addon-docs/blocks";
     </div>
   </div>
 
-  {/* ─── Cyan / Sky Palette ───────────────────────────────────────── */}
+  {/* ─── Teal Palette ─────────────────────────────────────────────── */}
   <div className="cp-section">
     <div className="cp-palette-row">
       {[
-        { shade: "900", hex: "#082F49" },
-        { shade: "800", hex: "#0C4A6E" },
-        { shade: "700", hex: "#0369A1" },
-        { shade: "600", hex: "#0284C7" },
-        { shade: "500", hex: "#0EA5E9" },
-        { shade: "400", hex: "#38BDF8" },
-        { shade: "300", hex: "#7DD3FC" },
-        { shade: "200", hex: "#BAE6FD" },
-        { shade: "100", hex: "#E0F2FE" },
-        { shade: "50",  hex: "#F0F9FF" },
+        { shade: "900", hex: "#30788A" },
+        { shade: "800", hex: "#4CA1AC" },
+        { shade: "700", hex: "#6ECBCD" },
+        { shade: "600", hex: "#97EFE9" },
+        { shade: "500", hex: "#ACF2ED" },
+        { shade: "400", hex: "#C1F5F2" },
+        { shade: "300", hex: "#D5F9F6" },
+        { shade: "200", hex: "#EAFCFB" },
       ].map(({ shade, hex }) => (
         <div key={shade} className="cp-swatch-wrap">
           <div className="cp-swatch" style={{ background: hex }}>
@@ -137,8 +147,14 @@ import { Meta } from "@storybook/addon-docs/blocks";
     <p className="cp-description">These colors communicate meaning and status throughout the interface. They should be used for feedback, alerts, and state indication — not for decoration.</p>
 
     <div className="cp-semantic-icons">
-      <div className="cp-semantic-hex" style={{ background: "#F59E0B" }} />
-      <div className="cp-semantic-hex" style={{ background: "#EF4444" }} />
+      {["#FF9F05", "#D13145"].map((hex) => (
+        <svg key={hex} className="cp-semantic-hex" width="48" height="55" viewBox="0 0 48 55" aria-hidden="true">
+          <path
+            d="M 20.53 1.99 Q 24.00 0.00 27.47 1.99 L 44.53 11.76 Q 48.00 13.75 48.00 17.75 L 48.00 37.25 Q 48.00 41.25 44.53 43.24 L 27.47 53.01 Q 24.00 55.00 20.53 53.01 L 3.47 43.24 Q 0.00 41.25 0.00 37.25 L 0.00 17.75 Q 0.00 13.75 3.47 11.76 Z"
+            fill={hex}
+          />
+        </svg>
+      ))}
     </div>
   </div>
 
@@ -146,19 +162,19 @@ import { Meta } from "@storybook/addon-docs/blocks";
   <div className="cp-section">
     <div className="cp-palette-row">
       {[
-        { shade: "900", hex: "#431407" },
-        { shade: "800", hex: "#7A2D0F" },
-        { shade: "700", hex: "#B45309" },
-        { shade: "600", hex: "#D97706" },
-        { shade: "500", hex: "#F59E0B" },
-        { shade: "400", hex: "#FBBF24" },
-        { shade: "300", hex: "#FCD34D" },
-        { shade: "200", hex: "#FDE68A" },
-        { shade: "100", hex: "#FEF3C7" },
-        { shade: "50",  hex: "#FFFBEB" },
-      ].map(({ shade, hex }) => (
+        { shade: "900", hex: "#934A01" },
+        { shade: "800", hex: "#B76302" },
+        { shade: "700", hex: "#DB8003" },
+        { shade: "600", hex: "#FF9F05", base: true },
+        { shade: "500", hex: "#FFB237" },
+        { shade: "400", hex: "#FFC569" },
+        { shade: "300", hex: "#FFD99B" },
+        { shade: "200", hex: "#FFECCD" },
+        { shade: "100", hex: "#FFF6E6" },
+        { shade: "50",  hex: "#FFFAF2" },
+      ].map(({ shade, hex, base }) => (
         <div key={shade} className="cp-swatch-wrap">
-          <div className="cp-swatch" style={{ background: hex }}>
+          <div className="cp-swatch" style={{ background: hex, outline: base ? "2px solid #FF9F05" : "none", outlineOffset: "2px" }}>
             <button className="cp-copy-btn" onClick={(e) => { navigator.clipboard.writeText(hex); const b = e.currentTarget; b.classList.add('cp-copy-btn--copied'); setTimeout(() => b.classList.remove('cp-copy-btn--copied'), 1500); }} title={`Copy ${hex}`}>
               <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
               <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -175,19 +191,19 @@ import { Meta } from "@storybook/addon-docs/blocks";
   <div className="cp-section">
     <div className="cp-palette-row">
       {[
-        { shade: "900", hex: "#450A0A" },
-        { shade: "800", hex: "#7F1D1D" },
-        { shade: "700", hex: "#991B1B" },
-        { shade: "600", hex: "#DC2626" },
-        { shade: "500", hex: "#EF4444" },
-        { shade: "400", hex: "#F87171" },
-        { shade: "300", hex: "#FCA5A5" },
-        { shade: "200", hex: "#FECACA" },
-        { shade: "100", hex: "#FEE2E2" },
-        { shade: "50",  hex: "#FFF5F5" },
-      ].map(({ shade, hex }) => (
+        { shade: "900", hex: "#790F3A" },
+        { shade: "800", hex: "#96183F" },
+        { shade: "700", hex: "#B32343" },
+        { shade: "600", hex: "#D13145", base: true },
+        { shade: "500", hex: "#DA5A6A" },
+        { shade: "400", hex: "#E3838F" },
+        { shade: "300", hex: "#EDADB5" },
+        { shade: "200", hex: "#F6D6DA" },
+        { shade: "100", hex: "#FBEBED" },
+        { shade: "50",  hex: "#FCF4F5" },
+      ].map(({ shade, hex, base }) => (
         <div key={shade} className="cp-swatch-wrap">
-          <div className="cp-swatch" style={{ background: hex }}>
+          <div className="cp-swatch" style={{ background: hex, outline: base ? "2px solid #D13145" : "none", outlineOffset: "2px" }}>
             <button className="cp-copy-btn" onClick={(e) => { navigator.clipboard.writeText(hex); const b = e.currentTarget; b.classList.add('cp-copy-btn--copied'); setTimeout(() => b.classList.remove('cp-copy-btn--copied'), 1500); }} title={`Copy ${hex}`}>
               <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
               <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -281,8 +297,8 @@ import { Meta } from "@storybook/addon-docs/blocks";
         { token: "--color-border-default",  value: "#E2E8F0",  label: "Border / Default",        dark: false },
         { token: "--color-border-strong",   value: "#94A3B8",  label: "Border / Strong",         dark: false },
         { token: "--color-success",         value: "#2D9C93",  label: "Semantic / Success",      dark: true  },
-        { token: "--color-warning",         value: "#F59E0B",  label: "Semantic / Warning",      dark: false },
-        { token: "--color-error",           value: "#EF4444",  label: "Semantic / Error",        dark: true  },
+        { token: "--color-warning",         value: "#FF9F05",  label: "Semantic / Warning",      dark: false },
+        { token: "--color-error",           value: "#D13145",  label: "Semantic / Error",        dark: true  },
       ].map(({ token, value, label, dark }) => (
         <div key={token} className="cp-token-row">
           <div className="cp-token-swatch" style={{ background: value, border: dark ? "none" : "1px solid #E5E7EB" }} />
@@ -365,8 +381,9 @@ import { Meta } from "@storybook/addon-docs/blocks";
   .cp-hexagon {
     width: 40px;
     height: 46px;
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: block;
     flex-shrink: 0;
+    overflow: visible;
   }
 
   .cp-hex-label {
@@ -391,6 +408,12 @@ import { Meta } from "@storybook/addon-docs/blocks";
     flex-direction: column;
     justify-content: flex-end;
     border: 1px solid rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cp-brand-large-card:hover .cp-copy-btn {
+    opacity: 1;
   }
 
   .cp-brand-large-name {
@@ -481,7 +504,7 @@ import { Meta } from "@storybook/addon-docs/blocks";
     font-size: 9px;
     font-weight: 600;
     color: #4169E1;
-    background: #E8EEFB;
+    background: #ECF0FC;
     padding: 1px 4px;
     border-radius: 3px;
     width: fit-content;
@@ -497,7 +520,8 @@ import { Meta } from "@storybook/addon-docs/blocks";
   .cp-semantic-hex {
     width: 48px;
     height: 55px;
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: block;
+    flex-shrink: 0;
   }
 
   /* ── Dark surfaces ── */

@@ -38,21 +38,21 @@ import { Meta } from "@storybook/addon-docs/blocks";
   {/* ─── Color Blindness Simulator ────────────────────────────────── */}
   <div className="ac-section">
     <h2>Color Blindness Simulator</h2>
-    <p className="ac-description">A good rule of thumb with color: don't use color as the only differentiator of information. You can visually see how our brand colors might actually look and feel to someone with a different vision.</p>
+    <p className="ac-description">A quick color blindness test was taken using an online tool to see what the visually impaired actually see our color as. Some suggestions are mentioned below.</p>
 
     <div className="ac-cb-table">
       {/* Header row */}
       <div className="ac-cb-row ac-cb-header-row">
         <div className="ac-cb-label-cell" />
-        {["Blue", "Teal", "Cyan", "Navy"].map(label => (
+        {["Blue", "Green", "Teal", "Navy"].map(label => (
           <div key={label} className="ac-cb-header-cell">{label}</div>
         ))}
       </div>
 
-      {/* Normal */}
+      {/* Source / Normal — Brand Blue, Green 600, Teal 600, Dark Navy */}
       <div className="ac-cb-row">
-        <div className="ac-cb-label-cell"><span>Normal</span></div>
-        {["#4169E1", "#2D9C93", "#0EA5E9", "#0D1B2A"].map(hex => (
+        <div className="ac-cb-label-cell" />
+        {["#4169E1", "#519E8A", "#97EFE9", "#0D1B2A"].map(hex => (
           <div key={hex} className="ac-cb-color-cell">
             <div className="ac-cb-swatch" style={{ background: hex }} />
           </div>
@@ -61,8 +61,11 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
       {/* Protanopia */}
       <div className="ac-cb-row">
-        <div className="ac-cb-label-cell"><span>Protanopia</span></div>
-        {["#3B72D1", "#80806B", "#89C0E5", "#0D1B2A"].map(hex => (
+        <div className="ac-cb-label-cell">
+          <span className="ac-cb-watermark" aria-hidden="true">PRO</span>
+          <span>Protanopia</span>
+        </div>
+        {["#0879E5", "#999689", "#E6E6E9", "#151C2B"].map(hex => (
           <div key={hex} className="ac-cb-color-cell">
             <div className="ac-cb-swatch" style={{ background: hex }} />
           </div>
@@ -71,8 +74,11 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
       {/* Deuteranopia */}
       <div className="ac-cb-row">
-        <div className="ac-cb-label-cell"><span>Deuteranopia</span></div>
-        {["#4B6FC8", "#7A8469", "#84B7E3", "#121A27"].map(hex => (
+        <div className="ac-cb-label-cell">
+          <span className="ac-cb-watermark" aria-hidden="true">DEU</span>
+          <span>Deuteranopia</span>
+        </div>
+        {["#0073E4", "#8D8E89", "#D6DDE9", "#111A2A"].map(hex => (
           <div key={hex} className="ac-cb-color-cell">
             <div className="ac-cb-swatch" style={{ background: hex }} />
           </div>
@@ -81,8 +87,11 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
       {/* Tritanopia */}
       <div className="ac-cb-row">
-        <div className="ac-cb-label-cell"><span>Tritanopia</span></div>
-        {["#3D8580", "#2D9C9C", "#12BABA", "#0D2020"].map(hex => (
+        <div className="ac-cb-label-cell">
+          <span className="ac-cb-watermark" aria-hidden="true">TRI</span>
+          <span>Tritanopia</span>
+        </div>
+        {["#00869B", "#32A098", "#75F3ED", "#001E20"].map(hex => (
           <div key={hex} className="ac-cb-color-cell">
             <div className="ac-cb-swatch" style={{ background: hex }} />
           </div>
@@ -99,141 +108,93 @@ import { Meta } from "@storybook/addon-docs/blocks";
   {/* ─── Color Contrast Check ─────────────────────────────────────── */}
   <div className="ac-section">
     <h2>Color Contrast Check</h2>
-    <p className="ac-description">Using sufficient contrast between foreground and background makes text easier to read for all users, including those with low vision. The following results show how our brand colors perform against WCAG contrast standards.</p>
+    <p className="ac-description">Using color contrast tools, we can check if our brand colors meet the standards for accessible colors or not.</p>
 
     <div className="ac-contrast-grid">
 
-      {/* Card 1: White on Blue */}
+      {/* Card 1: White on Brand Blue 600 */}
       <div className="ac-contrast-card">
         <div className="ac-contrast-preview" style={{ background: "#4169E1" }}>
-          <span className="ac-contrast-sample-text" style={{ color: "#FFFFFF" }}>Label / Text</span>
+          <span className="ac-contrast-sample-text" style={{ color: "#FFFFFF" }}>whiteText</span>
         </div>
         <div className="ac-contrast-detail">
           <span className="ac-contrast-ratio">4.84:1</span>
           <div className="ac-contrast-table">
             <div className="ac-ct-col">
               <span className="ac-ct-header">NORMAL TEXT</span>
-              <div className="ac-ct-row">
-                <span className="ac-ct-label">AA 4.5+</span>
-                <span className="ac-ct-pass">✓</span>
-              </div>
-              <div className="ac-ct-row">
-                <span className="ac-ct-label">AAA 7+</span>
-                <span className="ac-ct-fail">✗</span>
-              </div>
+              <span className="ac-ct-pass">AA - 4.5:1</span>
+              <span className="ac-ct-fail">AAA - 7:1</span>
             </div>
             <div className="ac-ct-col">
               <span className="ac-ct-header">LARGE TEXT</span>
-              <div className="ac-ct-row">
-                <span className="ac-ct-label">AA 3+</span>
-                <span className="ac-ct-pass">✓</span>
-              </div>
-              <div className="ac-ct-row">
-                <span className="ac-ct-label">AAA 4.5+</span>
-                <span className="ac-ct-pass">✓</span>
-              </div>
+              <span className="ac-ct-pass">AA - 3:1</span>
+              <span className="ac-ct-pass">AAA - 4.5:1</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Card 2: White on Teal */}
+      {/* Card 2: White on Green 600 */}
       <div className="ac-contrast-card">
-        <div className="ac-contrast-preview" style={{ background: "#2D9C93" }}>
-          <span className="ac-contrast-sample-text" style={{ color: "#FFFFFF" }}>Label / Text</span>
+        <div className="ac-contrast-preview" style={{ background: "#519E8A" }}>
+          <span className="ac-contrast-sample-text" style={{ color: "#FFFFFF" }}>whiteText</span>
         </div>
         <div className="ac-contrast-detail">
-          <span className="ac-contrast-ratio">3.37:1</span>
+          <span className="ac-contrast-ratio">3.17:1</span>
           <div className="ac-contrast-table">
             <div className="ac-ct-col">
               <span className="ac-ct-header">NORMAL TEXT</span>
-              <div className="ac-ct-row">
-                <span className="ac-ct-label">AA 4.5+</span>
-                <span className="ac-ct-fail">✗</span>
-              </div>
-              <div className="ac-ct-row">
-                <span className="ac-ct-label">AAA 7+</span>
-                <span className="ac-ct-fail">✗</span>
-              </div>
+              <span className="ac-ct-fail">AA - 4.5:1</span>
+              <span className="ac-ct-fail">AAA - 7:1</span>
             </div>
             <div className="ac-ct-col">
               <span className="ac-ct-header">LARGE TEXT</span>
-              <div className="ac-ct-row">
-                <span className="ac-ct-label">AA 3+</span>
-                <span className="ac-ct-pass">✓</span>
-              </div>
-              <div className="ac-ct-row">
-                <span className="ac-ct-label">AAA 4.5+</span>
-                <span className="ac-ct-fail">✗</span>
-              </div>
+              <span className="ac-ct-pass">AA - 3:1</span>
+              <span className="ac-ct-fail">AAA - 4.5:1</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Card 3: Dark on Cyan */}
+      {/* Card 3: Dark on Teal 600 */}
       <div className="ac-contrast-card">
-        <div className="ac-contrast-preview" style={{ background: "#0EA5E9" }}>
-          <span className="ac-contrast-sample-text" style={{ color: "#0D1B2A" }}>Label / Text</span>
+        <div className="ac-contrast-preview" style={{ background: "#97EFE9" }}>
+          <span className="ac-contrast-sample-text" style={{ color: "#000000" }}>darkText</span>
         </div>
         <div className="ac-contrast-detail">
-          <span className="ac-contrast-ratio">13.03:1</span>
+          <span className="ac-contrast-ratio">15.83:1</span>
           <div className="ac-contrast-table">
             <div className="ac-ct-col">
               <span className="ac-ct-header">NORMAL TEXT</span>
-              <div className="ac-ct-row">
-                <span className="ac-ct-label">AA 4.5+</span>
-                <span className="ac-ct-pass">✓</span>
-              </div>
-              <div className="ac-ct-row">
-                <span className="ac-ct-label">AAA 7+</span>
-                <span className="ac-ct-pass">✓</span>
-              </div>
+              <span className="ac-ct-pass">AA - 4.5:1</span>
+              <span className="ac-ct-pass">AAA - 7:1</span>
             </div>
             <div className="ac-ct-col">
               <span className="ac-ct-header">LARGE TEXT</span>
-              <div className="ac-ct-row">
-                <span className="ac-ct-label">AA 3+</span>
-                <span className="ac-ct-pass">✓</span>
-              </div>
-              <div className="ac-ct-row">
-                <span className="ac-ct-label">AAA 4.5+</span>
-                <span className="ac-ct-pass">✓</span>
-              </div>
+              <span className="ac-ct-pass">AA - 3:1</span>
+              <span className="ac-ct-pass">AAA - 4.5:1</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Card 4: White on Navy */}
+      {/* Card 4: White on Dark Navy */}
       <div className="ac-contrast-card">
         <div className="ac-contrast-preview" style={{ background: "#0D1B2A" }}>
-          <span className="ac-contrast-sample-text" style={{ color: "#FFFFFF" }}>Label / Text</span>
+          <span className="ac-contrast-sample-text" style={{ color: "#FFFFFF" }}>whiteText</span>
         </div>
         <div className="ac-contrast-detail">
           <span className="ac-contrast-ratio">16.08:1</span>
           <div className="ac-contrast-table">
             <div className="ac-ct-col">
               <span className="ac-ct-header">NORMAL TEXT</span>
-              <div className="ac-ct-row">
-                <span className="ac-ct-label">AA 4.5+</span>
-                <span className="ac-ct-pass">✓</span>
-              </div>
-              <div className="ac-ct-row">
-                <span className="ac-ct-label">AAA 7+</span>
-                <span className="ac-ct-pass">✓</span>
-              </div>
+              <span className="ac-ct-pass">AA - 4.5:1</span>
+              <span className="ac-ct-pass">AAA - 7:1</span>
             </div>
             <div className="ac-ct-col">
               <span className="ac-ct-header">LARGE TEXT</span>
-              <div className="ac-ct-row">
-                <span className="ac-ct-label">AA 3+</span>
-                <span className="ac-ct-pass">✓</span>
-              </div>
-              <div className="ac-ct-row">
-                <span className="ac-ct-label">AAA 4.5+</span>
-                <span className="ac-ct-pass">✓</span>
-              </div>
+              <span className="ac-ct-pass">AA - 3:1</span>
+              <span className="ac-ct-pass">AAA - 4.5:1</span>
             </div>
           </div>
         </div>
@@ -367,12 +328,31 @@ import { Meta } from "@storybook/addon-docs/blocks";
     display: flex;
     align-items: center;
     border-right: 1px solid #F3F4F6;
+    position: relative;
+    overflow: hidden;
   }
 
   .ac-cb-label-cell span {
     font-size: 13px;
     font-weight: 500;
     color: #374151;
+    position: relative;
+    z-index: 1;
+  }
+
+  .ac-cb-watermark {
+    position: absolute !important;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 42px !important;
+    font-weight: 700 !important;
+    color: #F3F4F6 !important;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    pointer-events: none;
+    z-index: 0 !important;
+    user-select: none;
   }
 
   .ac-cb-header-cell {
@@ -491,35 +471,16 @@ import { Meta } from "@storybook/addon-docs/blocks";
     display: block;
   }
 
-  .ac-ct-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-  }
-
-  .ac-ct-label {
-    font-size: 11px;
-    color: #6B7280;
-    font-weight: 500;
-  }
-
   .ac-ct-pass {
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 600;
     color: #057A55;
-    background: #ECFDF5;
-    padding: 1px 5px;
-    border-radius: 3px;
   }
 
   .ac-ct-fail {
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 600;
     color: #C81E1E;
-    background: #FEF2F2;
-    padding: 1px 5px;
-    border-radius: 3px;
   }
 
   /* ── Related pages ── */

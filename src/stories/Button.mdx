@@ -137,30 +137,29 @@ export const ButtonConfigurator = () => {
     <h2>Semantic Buttons</h2>
     <p className="bd-desc">Semantic colour variants communicate meaning — use these for confirmations, warnings, destructive actions, and neutral interactions. Each intent supports all four variants.</p>
 
-    {[
-      { intent: "success", label: "Confirm"  },
-      { intent: "primary", label: "Continue" },
-      { intent: "warning", label: "Caution"  },
-      { intent: "error",   label: "Delete"   },
-      { intent: "neutral", label: "Cancel"   },
-    ].map(({ intent, label }) => (
-      <div key={intent} className="bd-semantic-row">
-        <span className="bd-intent-label">{intent}</span>
-        <div className="bd-semantic-cells">
+    <div className="bd-semantic-table">
+      {[
+        { intent: "success", label: "Confirm"  },
+        { intent: "primary", label: "Continue" },
+        { intent: "warning", label: "Caution"  },
+        { intent: "error",   label: "Delete"   },
+        { intent: "neutral", label: "Cancel"   },
+      ].map(({ intent, label }) => (
+        <div key={intent} className="bd-semantic-row">
+          <span className="bd-intent-label">{intent}</span>
           <Button variant="filled"   intent={intent} size="md" label={label} />
           <Button variant="outlined" intent={intent} size="md" label={label} />
           <Button variant="tonal"    intent={intent} size="md" label={label} />
           <Button variant="ghost"    intent={intent} size="md" label={label} />
           <Button variant="filled"   intent={intent} size="md" label={label} disabled />
         </div>
-      </div>
-    ))}
-
-    <div className="bd-col-headers">
-      <span style={{ width: "76px" }} />
-      {["Filled", "Outlined", "Tonal", "Ghost", "Disabled"].map(l => (
-        <span key={l} className="bd-col-label">{l}</span>
       ))}
+      <div className="bd-col-headers">
+        <span className="bd-intent-label" aria-hidden="true" />
+        {["Filled", "Outlined", "Tonal", "Ghost", "Disabled"].map(l => (
+          <span key={l} className="bd-col-label">{l}</span>
+        ))}
+      </div>
     </div>
   </div>
 
@@ -415,39 +414,30 @@ export const ButtonConfigurator = () => {
     flex-wrap: wrap;
     margin-bottom: 12px;
   }
-  .bd-semantic-row {
-    display: flex;
+  .bd-semantic-table {
+    display: grid;
+    grid-template-columns: 80px repeat(5, max-content);
+    column-gap: 20px;
+    row-gap: 16px;
     align-items: center;
-    gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px solid #F3F4F6;
+    width: fit-content;
+    max-width: 100%;
+  }
+  .bd-semantic-row,
+  .bd-col-headers {
+    display: contents;
   }
   .bd-intent-label {
-    width: 76px;
     font-size: 10px;
     font-weight: 700;
     color: #9CA3AF;
     text-transform: uppercase;
     letter-spacing: 0.07em;
-    flex-shrink: 0;
-  }
-  .bd-semantic-cells {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .bd-col-headers {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 8px;
   }
   .bd-col-label {
     font-size: 10px;
     color: #9CA3AF;
     font-weight: 600;
-    width: 100px;
     text-align: center;
   }
   .bd-hero {
