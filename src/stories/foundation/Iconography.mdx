@@ -1,6 +1,100 @@
 import { Meta } from "@storybook/addon-docs/blocks";
+import {
+  Add,
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  Bag,
+  Bell,
+  Bookmark,
+  Box,
+  Bug,
+  Bulb,
+  Calendar,
+  Camera,
+  Cloud,
+  Copy,
+  Cross,
+  Cursor,
+  Dashboard,
+  Database,
+  Delete,
+  Diamond,
+  Discount,
+  Door,
+  Download,
+  Drawer,
+  Edit,
+  File,
+  Flag,
+  Folder,
+  Hashtag,
+  Headphone,
+  Heart,
+  Image,
+  Key,
+  Laptop,
+  Link,
+  Lock,
+  Mail,
+  Map,
+  Message,
+  Mic,
+  Monitor,
+  Moon,
+  Notification,
+  Phone,
+  Pie,
+  Pin,
+  Play,
+  Printer,
+  Save,
+  Scan,
+  Search,
+  Shield,
+  Speaker,
+  Star,
+  Target,
+  Terminal,
+  Tv,
+  Upload,
+  User,
+  Wallet,
+  Warning,
+  Webcam,
+  Airpods,
+  Alarm,
+  AlignCenter,
+  AlignLeft,
+  Atom,
+  Award,
+  Beaker,
+  Bed,
+  Board,
+  Bookmarks,
+  Branch,
+  Bread,
+  BringBack,
+  Burger,
+  Button,
+  Cake,
+  Calculator,
+  Coin,
+} from "@meistericons/react";
 
 <Meta title="Foundation/Iconography" />
+
+export const SHOWCASE_ICONS = [
+  Search, User, Heart, Star, Bell, Mail, Calendar, Camera, Download, Upload,
+  Edit, Cross, Add, ArrowLeft, ArrowRight, ArrowDown, Play, Lock, Copy, Folder,
+  File, Image, Link, Map, Phone, Message, Bookmark, Cloud, Printer, Save,
+  Shield, Bug, Bulb, Bag, Box, Cursor, Dashboard, Database, Delete, Diamond,
+  Discount, Door, Drawer, Flag, Hashtag, Headphone, Key, Laptop, Mic, Monitor,
+  Moon, Notification, Pie, Pin, Scan, Speaker, Target, Terminal, Tv, Wallet,
+  Warning, Webcam, Airpods, Alarm, AlignCenter, AlignLeft, Atom, Award,
+  Beaker, Bed, Board, Bookmarks, Branch, Bread, BringBack, Burger, Button,
+  Cake, Calculator, Coin,
+];
 
 <div className="sb-container">
   <div className="sb-section-title">
@@ -11,45 +105,49 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
   <div style={{ marginBottom: '40px' }}>
     <h3>Icon Library</h3>
-    <p>The supplai Design System uses a consistent icon set to maintain visual harmony. Icons should be used purposefully to support — not replace — text labels.</p>
+    <p>
+      The supplai Design System uses <strong>MeisterIcons</strong> — an open-source line icon set —
+      to keep stroke weight and silhouette consistent across product UI. Prefer line icons; avoid mixing filled variants in the same view.
+    </p>
+  </div>
+
+  {/* ── MeisterIcons showcase ── */}
+  <div className="ic-meister" style={{ marginBottom: '48px' }}>
+    <p className="ic-meister-count">(1500+ Icons)</p>
+    <h3 className="ic-meister-title">MeisterIcons</h3>
+    <p className="ic-meister-desc">
+      MeisterIcons is an open-source icon library with over 1500 icons that are free for personal and commercial use.
+      Below is a sample of line icons used across the design system.
+    </p>
+    <div className="ic-grid" role="list" aria-label="MeisterIcons line icon sample">
+      {SHOWCASE_ICONS.map((Icon, i) => (
+        <div key={i} className="ic-cell" role="listitem">
+          <Icon size={22} aria-hidden="true" />
+        </div>
+      ))}
+    </div>
   </div>
 
   <div style={{ marginBottom: '40px' }}>
     <h3>Sizing</h3>
     <div style={{ display: 'flex', gap: '32px', alignItems: 'flex-end', marginTop: '16px' }}>
       <div style={{ textAlign: 'center' }}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="12" y1="8" x2="12" y2="12"/>
-          <line x1="12" y1="16" x2="12.01" y2="16"/>
-        </svg>
+        <Search size={16} aria-hidden="true" />
         <p style={{ margin: '8px 0 0', fontSize: '12px', color: '#6B7280' }}>16px</p>
         <p style={{ margin: '2px 0 0', fontSize: '11px', color: '#9CA3AF' }}>Small</p>
       </div>
       <div style={{ textAlign: 'center' }}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="12" y1="8" x2="12" y2="12"/>
-          <line x1="12" y1="16" x2="12.01" y2="16"/>
-        </svg>
+        <Search size={20} aria-hidden="true" />
         <p style={{ margin: '8px 0 0', fontSize: '12px', color: '#6B7280' }}>20px</p>
         <p style={{ margin: '2px 0 0', fontSize: '11px', color: '#9CA3AF' }}>Medium</p>
       </div>
       <div style={{ textAlign: 'center' }}>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="12" y1="8" x2="12" y2="12"/>
-          <line x1="12" y1="16" x2="12.01" y2="16"/>
-        </svg>
+        <Search size={24} aria-hidden="true" />
         <p style={{ margin: '8px 0 0', fontSize: '12px', color: '#6B7280' }}>24px</p>
         <p style={{ margin: '2px 0 0', fontSize: '11px', color: '#9CA3AF' }}>Default</p>
       </div>
       <div style={{ textAlign: 'center' }}>
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="12" y1="8" x2="12" y2="12"/>
-          <line x1="12" y1="16" x2="12.01" y2="16"/>
-        </svg>
+        <Search size={32} aria-hidden="true" />
         <p style={{ margin: '8px 0 0', fontSize: '12px', color: '#6B7280' }}>32px</p>
         <p style={{ margin: '2px 0 0', fontSize: '11px', color: '#9CA3AF' }}>Large</p>
       </div>
@@ -69,17 +167,102 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
   <div>
     <h3>Coming Soon</h3>
-    <p>The full icon library with search and copy-to-code functionality will be available here.</p>
+    <p>Search, filtering, and copy-to-code for the full MeisterIcons set will be available here.</p>
   </div>
 </div>
 
-<style>
-  {`
+<style>{`
   .sb-container {
     margin-bottom: 48px;
+    max-width: 960px;
   }
+
   .sb-section-title {
     margin-bottom: 32px;
   }
-  `}
-</style>
+
+  .ic-meister-count {
+    margin: 0 0 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #94A3B8;
+  }
+
+  .ic-meister-title {
+    margin: 0 0 8px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #0F172A;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #0F172A;
+  }
+
+  .ic-meister-desc {
+    margin: 0 0 20px;
+    max-width: 560px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #64748B;
+  }
+
+  .ic-grid {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #FFFFFF;
+  }
+
+  .ic-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1E293B;
+    border-right: 1px solid #E2E8F0;
+    border-bottom: 1px solid #E2E8F0;
+    background: #FFFFFF;
+    min-height: 56px;
+  }
+
+  /* Remove outer double borders where cells meet the grid edge */
+  .ic-cell:nth-child(10n) {
+    border-right: none;
+  }
+
+  .ic-cell:nth-last-child(-n + 10) {
+    border-bottom: none;
+  }
+
+  .ic-cell svg {
+    display: block;
+    color: #1E293B;
+    stroke: currentColor;
+  }
+
+  .ic-cell:hover {
+    background: #F8FAFC;
+  }
+
+  @media (max-width: 800px) {
+    .ic-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .ic-cell:nth-child(10n) {
+      border-right: 1px solid #E2E8F0;
+    }
+    .ic-cell:nth-child(5n) {
+      border-right: none;
+    }
+    .ic-cell:nth-last-child(-n + 10) {
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .ic-cell:nth-last-child(-n + 5) {
+      border-bottom: none;
+    }
+  }
+`}</style>

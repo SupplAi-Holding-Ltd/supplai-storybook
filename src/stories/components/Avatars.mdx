@@ -1,84 +1,842 @@
 import { Meta } from "@storybook/addon-docs/blocks";
+import React from "react";
+import { User } from "@meistericons/react";
+import { CodePanel } from "./CodePanel";
 
 <Meta title="Components/Avatars" />
 
-<div className="sb-container">
-  <div className="sb-section-title">
-    # Avatars
+export const AVATAR_CODE = `// Avatar · supplai Design System
+import React, { useState } from 'react';
 
-    Avatars represent users or entities in the interface. They can display a profile photo, initials, or a fallback icon when no image is available.
-  </div>
+const SIZES = {
+  16: { px: 16, font: 8,  status: 6,  badge: 10 },
+  20: { px: 20, font: 9,  status: 6,  badge: 12 },
+  24: { px: 24, font: 10, status: 7,  badge: 12 },
+  32: { px: 32, font: 12, status: 8,  badge: 14 },
+  40: { px: 40, font: 14, status: 10, badge: 16 },
+  48: { px: 48, font: 16, status: 12, badge: 18 },
+  56: { px: 56, font: 18, status: 14, badge: 20 },
+  64: { px: 64, font: 20, status: 14, badge: 22 },
+  80: { px: 80, font: 24, status: 16, badge: 24 },
+};
 
-  <div style={{ marginBottom: '40px' }}>
-    <h3>Sizes</h3>
-    <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-end', marginTop: '16px', flexWrap: 'wrap' }}>
-      {[
-        { size: 24, label: 'XS' },
-        { size: 32, label: 'SM' },
-        { size: 40, label: 'MD' },
-        { size: 48, label: 'LG' },
-        { size: 64, label: 'XL' },
-      ].map(({ size, label }) => (
-        <div key={label} style={{ textAlign: 'center' }}>
-          <div style={{
-            width: `${size}px`, height: `${size}px`,
-            borderRadius: '50%', background: '#1A56DB',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: '#FFFFFF', fontWeight: 600,
-            fontSize: `${Math.max(10, size * 0.35)}px`,
-          }}>
-            AJ
+const STATUS = {
+  online:  '#519E8A',
+  offline: '#94A3B8',
+  busy:    '#D13145',
+  away:    '#FF9F05',
+};
+
+function Avatar({
+  size = 40,
+  rounded = 'circle',
+  src,
+  alt = '',
+  fallback = '?',
+  status,
+  badge,
+  ring = false,
+}) {
+  const [failed, setFailed] = useState(false);
+  const s = SIZES[size] || SIZES[40];
+  const radius = rounded === 'square' ? Math.max(4, s.px * 0.2) : '50%';
+  const showImage = src && !failed;
+
+  return (
+    <span
+      className="av-root"
+      style={{
+        width: s.px,
+        height: s.px,
+        borderRadius: radius,
+        boxShadow: ring ? '0 0 0 2px #fff, 0 0 0 4px #4169E1' : undefined,
+      }}
+    >
+      {showImage ? (
+        <img src={src} alt={alt} onError={() => setFailed(true)} />
+      ) : (
+        <span className="av-fallback" style={{ fontSize: s.font }}>
+          {fallback}
+        </span>
+      )}
+      {status && (
+        <span
+          className="av-status"
+          style={{
+            width: s.status,
+            height: s.status,
+            background: STATUS[status],
+          }}
+        />
+      )}
+      {badge != null && (
+        <span className="av-badge" style={{ minWidth: s.badge, height: s.badge, fontSize: Math.max(9, s.badge * 0.55) }}>
+          {badge}
+        </span>
+      )}
+    </span>
+  );
+}
+
+function AvatarGroup({ children, size = 40, max }) {
+  const items = React.Children.toArray(children);
+  const visible = max != null ? items.slice(0, max) : items;
+  const overflow = max != null ? Math.max(0, items.length - max) : 0;
+  return (
+    <div className="av-group">
+      {visible}
+      {overflow > 0 && (
+        <Avatar size={size} fallback={\`+\${overflow}\`} />
+      )}
+    </div>
+  );
+}
+`;
+
+export const SIZES = {
+  16: { px: 16, font: 8, status: 6, badge: 10 },
+  20: { px: 20, font: 9, status: 6, badge: 12 },
+  24: { px: 24, font: 10, status: 7, badge: 12 },
+  32: { px: 32, font: 12, status: 8, badge: 14 },
+  40: { px: 40, font: 14, status: 10, badge: 16 },
+  48: { px: 48, font: 16, status: 12, badge: 18 },
+  56: { px: 56, font: 18, status: 14, badge: 20 },
+  64: { px: 64, font: 20, status: 14, badge: 22 },
+  80: { px: 80, font: 24, status: 16, badge: 24 },
+};
+
+export const STATUS_COLORS = {
+  online: "#519E8A",
+  offline: "#94A3B8",
+  busy: "#D13145",
+  away: "#FF9F05",
+};
+
+export const DEMO_IMAGES = [
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160&h=160&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&h=160&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=160&h=160&fit=crop&crop=faces",
+  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=160&h=160&fit=crop&crop=faces",
+];
+
+export const Avatar = ({
+  size = 40,
+  rounded = "circle",
+  src,
+  alt = "",
+  fallback = "?",
+  fallbackIcon = false,
+  status,
+  badge,
+  ring = false,
+  bg = "#4169E1",
+}) => {
+  const [failed, setFailed] = React.useState(false);
+  const s = SIZES[size] || SIZES[40];
+  const radius = rounded === "square" ? Math.max(4, Math.round(s.px * 0.2)) : "50%";
+  const showImage = Boolean(src) && !failed;
+
+  return (
+    <span
+      className={`av-root${ring ? " av-root--ring" : ""}`}
+      style={{
+        width: s.px,
+        height: s.px,
+        borderRadius: radius,
+        background: showImage ? "#E2E8F0" : bg,
+      }}
+      role="img"
+      aria-label={alt || (typeof fallback === "string" ? fallback : "Avatar")}
+    >
+      {showImage ? (
+        <img src={src} alt="" onError={() => setFailed(true)} />
+      ) : fallbackIcon ? (
+        <span className="av-fallback av-fallback--icon">
+          <User size={Math.max(12, Math.round(s.px * 0.45))} />
+        </span>
+      ) : (
+        <span className="av-fallback" style={{ fontSize: s.font }}>
+          {fallback}
+        </span>
+      )}
+      {status && (
+        <span
+          className="av-status"
+          style={{
+            width: s.status,
+            height: s.status,
+            background: STATUS_COLORS[status] || STATUS_COLORS.online,
+            borderRadius: "50%",
+          }}
+          title={status}
+        />
+      )}
+      {badge != null && badge !== "" && (
+        <span
+          className="av-badge"
+          style={{
+            minWidth: s.badge,
+            height: s.badge,
+            fontSize: Math.max(9, Math.round(s.badge * 0.55)),
+            borderRadius: 999,
+          }}
+        >
+          {badge}
+        </span>
+      )}
+    </span>
+  );
+};
+
+export const AvatarPlayground = () => {
+  const [size, setSize] = React.useState(48);
+  const [rounded, setRounded] = React.useState("circle");
+  const [mode, setMode] = React.useState("image");
+  const [status, setStatus] = React.useState("online");
+  const [ring, setRing] = React.useState(false);
+  const [badge, setBadge] = React.useState(false);
+
+  return (
+    <div className="avp-wrap">
+      <div className="avp-preview">
+        <Avatar
+          size={size}
+          rounded={rounded}
+          src={mode === "image" ? DEMO_IMAGES[0] : undefined}
+          fallback={mode === "initials" ? "AJ" : undefined}
+          fallbackIcon={mode === "icon"}
+          bg={mode === "icon" ? "#E2E8F0" : "#4169E1"}
+          status={status === "none" ? undefined : status}
+          badge={badge ? "3" : undefined}
+          ring={ring}
+          alt="Alex Johnson"
+        />
+      </div>
+      <div className="avp-controls">
+        <div className="avp-ctrl-group">
+          <span className="avp-ctrl-label">Size</span>
+          <div className="avp-chips">
+            {[24, 32, 40, 48, 56, 64].map((n) => (
+              <button
+                key={n}
+                type="button"
+                className={`avp-chip ${size === n ? "avp-chip--on" : ""}`}
+                onClick={() => setSize(n)}
+              >
+                {n}
+              </button>
+            ))}
           </div>
-          <p style={{ margin: '6px 0 0', fontSize: '11px', color: '#6B7280' }}>{label}</p>
-          <p style={{ margin: '2px 0 0', fontSize: '11px', color: '#9CA3AF' }}>{size}px</p>
         </div>
-      ))}
+        <div className="avp-ctrl-group">
+          <span className="avp-ctrl-label">Shape</span>
+          <div className="avp-chips">
+            {["circle", "square"].map((r) => (
+              <button
+                key={r}
+                type="button"
+                className={`avp-chip ${rounded === r ? "avp-chip--on" : ""}`}
+                onClick={() => setRounded(r)}
+              >
+                {r}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="avp-ctrl-group">
+          <span className="avp-ctrl-label">Content</span>
+          <div className="avp-chips">
+            {[
+              ["image", "Image"],
+              ["initials", "Initials"],
+              ["icon", "Fallback"],
+            ].map(([id, label]) => (
+              <button
+                key={id}
+                type="button"
+                className={`avp-chip ${mode === id ? "avp-chip--on" : ""}`}
+                onClick={() => setMode(id)}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="avp-ctrl-group">
+          <span className="avp-ctrl-label">Status</span>
+          <div className="avp-chips">
+            {["none", "online", "offline", "busy", "away"].map((s) => (
+              <button
+                key={s}
+                type="button"
+                className={`avp-chip ${status === s ? "avp-chip--on" : ""}`}
+                onClick={() => setStatus(s)}
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="avp-ctrl-group">
+          <span className="avp-ctrl-label">Options</span>
+          <div className="avp-chips">
+            <button
+              type="button"
+              className={`avp-chip ${ring ? "avp-chip--on" : ""}`}
+              onClick={() => setRing((v) => !v)}
+            >
+              Ring
+            </button>
+            <button
+              type="button"
+              className={`avp-chip ${badge ? "avp-chip--on" : ""}`}
+              onClick={() => setBadge((v) => !v)}
+            >
+              Badge
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  );
+};
 
-  <div style={{ marginBottom: '40px' }}>
-    <h3>Variants</h3>
-    <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginTop: '16px', flexWrap: 'wrap' }}>
-      <div style={{ textAlign: 'center' }}>
-        <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#1A56DB', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFFFFF', fontWeight: 600, fontSize: '16px' }}>AJ</div>
-        <p style={{ margin: '6px 0 0', fontSize: '11px', color: '#6B7280' }}>Initials</p>
-      </div>
-      <div style={{ textAlign: 'center' }}>
-        <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#E5E7EB', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>👤</div>
-        <p style={{ margin: '6px 0 0', fontSize: '11px', color: '#6B7280' }}>Fallback</p>
-      </div>
-      <div style={{ textAlign: 'center' }}>
-        <div style={{ position: 'relative', display: 'inline-block' }}>
-          <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#1A56DB', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFFFFF', fontWeight: 600, fontSize: '16px' }}>AJ</div>
-          <div style={{ position: 'absolute', bottom: '1px', right: '1px', width: '12px', height: '12px', borderRadius: '50%', background: '#057A55', border: '2px solid #FFFFFF' }} />
-        </div>
-        <p style={{ margin: '6px 0 0', fontSize: '11px', color: '#6B7280' }}>With Status</p>
-      </div>
-      <div style={{ textAlign: 'center' }}>
-        <div style={{ display: 'flex' }}>
-          {['#1A56DB', '#057A55', '#C27803', '#C81E1E'].map((color, i) => (
-            <div key={color} style={{ width: '36px', height: '36px', borderRadius: '50%', background: color, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFFFFF', fontWeight: 600, fontSize: '12px', marginLeft: i > 0 ? '-8px' : 0, border: '2px solid #FFFFFF', zIndex: 4 - i }} >
-              {String.fromCharCode(65 + i)}
-            </div>
-          ))}
-        </div>
-        <p style={{ margin: '6px 0 0', fontSize: '11px', color: '#6B7280' }}>Group</p>
-      </div>
-    </div>
+export const DemoRow = ({ children, label }) => (
+  <div className="av-demo">
+    <div className="av-demo-row">{children}</div>
+    {label && <span className="av-demo-label">{label}</span>}
   </div>
+);
 
-  <div>
-    <h3>Status</h3>
-    <p style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FEF3C7', color: '#92400E', padding: '6px 12px', borderRadius: '99px', fontSize: '13px', fontWeight: 500 }}>
-      🚧 In Development
+<div className="av-page">
+
+  <div className="av-header">
+    <h1>Avatar</h1>
+    <p>
+      Display user profile pictures or initials with clean fallbacks when an image is missing or fails to load —
+      aligned with variants from{" "}
+      <a href="https://radianui.com/docs/components/avatar" target="_blank" rel="noreferrer">
+        Radian UI Avatar
+      </a>
+      .
     </p>
-    <p>Interactive stories and full documentation will be added when the component is finalized.</p>
   </div>
+
+  {/* ── Playground ── */}
+  <div className="av-section">
+    <h2>Live Playground</h2>
+    <p className="av-desc">
+      Explore size, shape, content, status, ring, and badge. Switch to Code for a copyable implementation sketch.
+    </p>
+    <CodePanel code={AVATAR_CODE} filename="Avatar.tsx" language="tsx">
+      <AvatarPlayground />
+    </CodePanel>
+  </div>
+
+  {/* ── Size ── */}
+  <div className="av-section">
+    <h2>Size</h2>
+    <p className="av-desc">
+      Supported sizes match common product UI scales: 16–80px (default 40).
+    </p>
+    <div className="av-panel">
+      <div className="av-demo-row av-demo-row--sizes">
+        {[16, 20, 24, 32, 40, 48, 56, 64, 80].map((n) => (
+          <div key={n} className="av-size-item">
+            <Avatar size={n} fallback="AJ" />
+            <span className="av-size-label">{n}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {/* ── Fallback ── */}
+  <div className="av-section">
+    <h2>Fallback</h2>
+    <p className="av-desc">
+      When no image is available, show initials or a neutral icon fallback.
+    </p>
+    <div className="av-panel">
+      <div className="av-demo-row">
+        <DemoRow label="Initials">
+          <Avatar size={48} fallback="AJ" />
+          <Avatar size={48} fallback="RS" bg="#2F50C1" />
+          <Avatar size={48} fallback="MK" bg="#519E8A" />
+        </DemoRow>
+        <DemoRow label="Icon">
+          <Avatar size={48} fallbackIcon bg="#E2E8F0" />
+          <Avatar size={40} fallbackIcon bg="#F1F5F9" />
+          <Avatar size={32} fallbackIcon bg="#E2E8F0" />
+        </DemoRow>
+        <DemoRow label="Broken image → initials">
+          <Avatar size={48} src="https://invalid.supplai.local/missing.jpg" fallback="AJ" />
+        </DemoRow>
+      </div>
+    </div>
+  </div>
+
+  {/* ── Status ── */}
+  <div className="av-section">
+    <h2>Status</h2>
+    <p className="av-desc">
+      Presence indicator anchored to the bottom-right: online, offline, busy, away.
+    </p>
+    <div className="av-panel">
+      <div className="av-demo-row">
+        {[
+          ["online", "Online"],
+          ["offline", "Offline"],
+          ["busy", "Busy"],
+          ["away", "Away"],
+        ].map(([id, label]) => (
+          <DemoRow key={id} label={label}>
+            <Avatar size={48} src={DEMO_IMAGES[1]} status={id} alt={label} />
+          </DemoRow>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {/* ── Custom w/ Status ── */}
+  <div className="av-section">
+    <h2>Custom Avatar — with Status</h2>
+    <p className="av-desc">Image or initials paired with a live status dot.</p>
+    <div className="av-panel">
+      <div className="av-demo-row">
+        <Avatar size={48} src={DEMO_IMAGES[0]} status="online" alt="Online user" />
+        <Avatar size={48} fallback="KT" status="away" />
+        <Avatar size={48} src={DEMO_IMAGES[2]} status="busy" alt="Busy user" />
+        <Avatar size={48} fallback="CH" bg="#0D1B2A" status="offline" />
+      </div>
+    </div>
+  </div>
+
+  {/* ── Custom w/ Badge ── */}
+  <div className="av-section">
+    <h2>Custom Avatar — with Badge</h2>
+    <p className="av-desc">Notification or count badge overlapping the top-right corner.</p>
+    <div className="av-panel">
+      <div className="av-demo-row">
+        <Avatar size={48} src={DEMO_IMAGES[3]} badge="3" alt="User with notifications" />
+        <Avatar size={48} fallback="AJ" badge="12" />
+        <Avatar size={56} src={DEMO_IMAGES[0]} badge="9+" alt="User" />
+        <Avatar size={40} fallbackIcon bg="#E2E8F0" badge="1" />
+      </div>
+    </div>
+  </div>
+
+  {/* ── Custom w/ Ring ── */}
+  <div className="av-section">
+    <h2>Custom Avatar — with Ring</h2>
+    <p className="av-desc">Brand ring for selected, active, or story-style emphasis.</p>
+    <div className="av-panel">
+      <div className="av-demo-row">
+        <Avatar size={48} src={DEMO_IMAGES[1]} ring alt="Selected" />
+        <Avatar size={48} fallback="RS" ring />
+        <Avatar size={64} src={DEMO_IMAGES[2]} ring status="online" alt="Active" />
+      </div>
+    </div>
+  </div>
+
+  {/* ── Rounded square ── */}
+  <div className="av-section">
+    <h2>Rounded — Square</h2>
+    <p className="av-desc">
+      Use <code>rounded=&quot;square&quot;</code> for softer product tiles and workspace marks.
+    </p>
+    <div className="av-panel">
+      <div className="av-demo-row">
+        <Avatar size={48} rounded="square" src={DEMO_IMAGES[0]} alt="Square avatar" />
+        <Avatar size={48} rounded="square" fallback="SP" />
+        <Avatar size={48} rounded="square" fallbackIcon bg="#E2E8F0" />
+        <Avatar size={48} rounded="square" src={DEMO_IMAGES[3]} status="online" alt="Square online" />
+        <Avatar size={48} rounded="square" fallback="AI" ring />
+      </div>
+    </div>
+  </div>
+
+  {/* ── Group ── */}
+  <div className="av-section">
+    <h2>Avatar Group</h2>
+    <p className="av-desc">Stacked faces for collaborators, with optional overflow count.</p>
+    <div className="av-panel">
+      <div className="av-stack-block">
+        <div className="av-group">
+          <Avatar size={40} src={DEMO_IMAGES[0]} alt="A" />
+          <Avatar size={40} src={DEMO_IMAGES[1]} alt="B" />
+          <Avatar size={40} src={DEMO_IMAGES[2]} alt="C" />
+          <Avatar size={40} src={DEMO_IMAGES[3]} alt="D" />
+        </div>
+        <div className="av-group">
+          <Avatar size={40} fallback="AJ" />
+          <Avatar size={40} fallback="KT" bg="#2F50C1" />
+          <Avatar size={40} fallback="MK" bg="#519E8A" />
+          <Avatar size={40} fallback="CH" bg="#0D1B2A" />
+          <Avatar size={40} fallback="+5" bg="#64748B" />
+        </div>
+        <div className="av-group">
+          <Avatar size={32} rounded="square" src={DEMO_IMAGES[0]} alt="A" />
+          <Avatar size={32} rounded="square" src={DEMO_IMAGES[1]} alt="B" />
+          <Avatar size={32} rounded="square" src={DEMO_IMAGES[2]} alt="C" />
+          <Avatar size={32} rounded="square" fallback="+8" bg="#475569" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* ── Specs ── */}
+  <div className="av-section">
+    <h2>Specifications</h2>
+    <div className="av-specs-grid">
+      <div className="av-spec-card">
+        <span className="av-spec-label">Sizes</span>
+        <span className="av-spec-value">16–80px</span>
+      </div>
+      <div className="av-spec-card">
+        <span className="av-spec-label">Default size</span>
+        <span className="av-spec-value">40px</span>
+      </div>
+      <div className="av-spec-card">
+        <span className="av-spec-label">Shape</span>
+        <span className="av-spec-value">circle · square</span>
+      </div>
+      <div className="av-spec-card">
+        <span className="av-spec-label">Status</span>
+        <span className="av-spec-value">online · offline · busy · away</span>
+      </div>
+      <div className="av-spec-card">
+        <span className="av-spec-label">Fallback</span>
+        <span className="av-spec-value">Initials · icon</span>
+      </div>
+      <div className="av-spec-card">
+        <span className="av-spec-label">Extras</span>
+        <span className="av-spec-value">Ring · badge · group</span>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<style>
-  {`
-  .sb-container { margin-bottom: 48px; }
-  .sb-section-title { margin-bottom: 32px; }
-  `}
-</style>
+<style>{`
+  .av-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 0 64px;
+    font-family: inherit;
+  }
+
+  .av-header {
+    margin-bottom: 40px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #E2E8F0;
+  }
+
+  .av-header h1 {
+    margin: 0 0 10px;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #0F172A;
+  }
+
+  .av-header p {
+    margin: 0;
+    max-width: 640px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #64748B;
+  }
+
+  .av-header a {
+    color: #4169E1;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .av-header a:hover {
+    text-decoration: underline;
+  }
+
+  .av-section {
+    margin-bottom: 48px;
+  }
+
+  .av-section h2 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0F172A;
+  }
+
+  .av-desc {
+    margin: 0 0 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #64748B;
+  }
+
+  .av-desc code {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: #ECF0FC;
+    color: #2F50C1;
+  }
+
+  .av-panel {
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    background: #FFFFFF;
+    padding: 28px 24px;
+  }
+
+  .av-demo-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 28px;
+  }
+
+  .av-demo-row--sizes {
+    gap: 18px;
+    align-items: flex-end;
+  }
+
+  .av-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .av-demo-row > .av-demo {
+    align-items: flex-start;
+  }
+
+  .av-demo .av-demo-row {
+    gap: 12px;
+  }
+
+  .av-demo-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #94A3B8;
+  }
+
+  .av-size-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .av-size-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748B;
+    font-family: ui-monospace, monospace;
+  }
+
+  /* Avatar atom */
+  .av-root {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: visible;
+    vertical-align: middle;
+    user-select: none;
+  }
+
+  .av-root img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+    display: block;
+  }
+
+  .av-root--ring {
+    box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #4169E1;
+  }
+
+  .av-fallback {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    color: #FFFFFF;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .av-fallback--icon {
+    color: #64748B;
+  }
+
+  .av-status {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border: 2px solid #FFFFFF;
+    box-sizing: border-box;
+    z-index: 2;
+  }
+
+  .av-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    background: #D13145;
+    color: #FFFFFF;
+    font-weight: 700;
+    line-height: 1;
+    border: 2px solid #FFFFFF;
+    box-sizing: border-box;
+    z-index: 2;
+  }
+
+  .av-group {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .av-group .av-root {
+    margin-left: -10px;
+    box-shadow: 0 0 0 2px #FFFFFF;
+  }
+
+  .av-group .av-root:first-child {
+    margin-left: 0;
+  }
+
+  .av-stack-block {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Playground */
+  .avp-wrap {
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #FFFFFF;
+  }
+
+  .avp-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+    padding: 36px;
+    border-bottom: 1px solid #E5E7EB;
+    background: #FFFFFF;
+  }
+
+  .avp-controls {
+    padding: 18px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .avp-ctrl-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .avp-ctrl-label {
+    width: 72px;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #94A3B8;
+  }
+
+  .avp-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .avp-chip {
+    padding: 4px 12px;
+    border-radius: 99px;
+    border: 1px solid #E2E8F0;
+    background: #F8FAFC;
+    font-family: Manrope, system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+    transition: all 0.12s ease;
+  }
+
+  .avp-chip:hover {
+    border-color: #4169E1;
+    background: #ECF0FC;
+    color: #2F50C1;
+  }
+
+  .avp-chip--on {
+    background: #4169E1;
+    border-color: #4169E1;
+    color: #FFFFFF;
+  }
+
+  .av-specs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .av-spec-card {
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 14px 16px;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .av-spec-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #94A3B8;
+  }
+
+  .av-spec-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0F172A;
+  }
+
+  @media (max-width: 700px) {
+    .av-specs-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .av-demo-row--sizes {
+      gap: 12px;
+    }
+  }
+`}</style>

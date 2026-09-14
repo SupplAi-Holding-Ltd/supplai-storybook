@@ -138,7 +138,7 @@ export const TextInputPlayground = () => {
         )}
         {derivedState === "success" && (
           <span className="tip-helper tip-helper--success">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#2D9C93" strokeWidth="1.5"/><path d="M5 8.5l2 2 4-4" stroke="#2D9C93" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#519E8A" strokeWidth="1.5"/><path d="M5 8.5l2 2 4-4" stroke="#519E8A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
             Looks good!
           </span>
         )}
@@ -188,7 +188,7 @@ export const TextInputPlayground = () => {
   <div className="ti-section">
     <h2>Live Playground</h2>
     <p className="ti-desc">Type in the field below or force a state using the controls. Switch to the Code tab to copy the component implementation.</p>
-    <CodePanel code={TEXT_INPUT_CODE}>
+    <CodePanel code={TEXT_INPUT_CODE} filename="TextInput.tsx" language="tsx">
       <TextInputPlayground />
     </CodePanel>
   </div>
@@ -257,7 +257,7 @@ export const TextInputPlayground = () => {
           <label className="ti-label">Label</label>
           <input className="ti-input ti-input--success" type="text" placeholder="This is a success message" readOnly />
           <span className="ti-helper ti-helper--success">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#2D9C93" strokeWidth="1.5"/><path d="M5 8.5l2 2 4-4" stroke="#2D9C93" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#519E8A" strokeWidth="1.5"/><path d="M5 8.5l2 2 4-4" stroke="#519E8A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
             Success Message
           </span>
         </div>
@@ -366,7 +366,7 @@ export const TextInputPlayground = () => {
     margin-top: 6px;
   }
   .tip-helper--error   { color: #D13145; }
-  .tip-helper--success { color: #2D9C93; }
+  .tip-helper--success { color: #519E8A; }
   .tip-controls {
     padding: 18px 24px;
     display: flex;
@@ -401,7 +401,7 @@ export const TextInputPlayground = () => {
     cursor: pointer;
     transition: all 0.12s;
   }
-  .tip-chip:hover { border-color: #4169E1; background: #E8EEFB; color: #2B44BF; }
+  .tip-chip:hover { border-color: #4169E1; background: #ECF0FC; color: #2F50C1; }
   .tip-chip--on { background: #4169E1; border-color: #4169E1; color: #FFFFFF; }
   .tip-state-display {
     font-size: 12px;
@@ -497,7 +497,7 @@ export const TextInputPlayground = () => {
     margin-top: 5px;
   }
   .ti-helper--error   { color: #D13145; }
-  .ti-helper--success { color: #2D9C93; }
+  .ti-helper--success { color: #519E8A; }
 
   /* ── With icon ── */
   .ti-input-icon-wrap {

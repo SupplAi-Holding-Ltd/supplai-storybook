@@ -1,0 +1,77 @@
+<style>
+  /* Critical: hide default DocumentIcon next to custom Hugeicons (manager CSS may load later) */
+  a[data-nodetype='document']:has(.sb-nav-label) > svg,
+  a[data-nodetype='document']:has(.sb-nav-label) > *:not(.sb-nav-label),
+  button[data-nodetype='document']:has(.sb-nav-label) > svg,
+  button[data-nodetype='document']:has(.sb-nav-label) > *:not(.sb-nav-label),
+  .sidebar-item[data-nodetype='document']:has(.sb-nav-label) > a > svg,
+  .sidebar-item[data-nodetype='document']:has(.sb-nav-label) > a > *:not(.sb-nav-label),
+  a[data-nodetype='document']:has(.sb-nav-label) svg:not(.sb-nav-icon),
+  .sidebar-item[data-nodetype='document']:has(.sb-nav-label) svg:not(.sb-nav-icon) {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+</style>
+<script>
+  (function () {
+    function stripDefaultDocIcons(root) {
+      var scope = root || document;
+      scope.querySelectorAll('.sb-nav-label').forEach(function (label) {
+        var item =
+          label.closest('[data-nodetype="document"]') ||
+          label.closest('a.sidebar-item, button.sidebar-item, .sidebar-item');
+        if (!item) return;
+        // Only strip on docs leaves (orange DocumentIcon)
+        var nodeType = item.getAttribute('data-nodetype');
+        if (nodeType && nodeType !== 'document') return;
+
+        item.querySelectorAll('svg').forEach(function (svg) {
+          if (label.contains(svg)) return;
+          if (svg.classList && svg.classList.contains('sb-nav-icon')) return;
+          svg.setAttribute('hidden', 'true');
+          svg.style.setProperty('display', 'none', 'important');
+          svg.style.setProperty('visibility', 'hidden', 'important');
+          svg.style.setProperty('width', '0', 'important');
+          svg.style.setProperty('height', '0', 'important');
+          var wrap = svg.parentElement;
+          if (
+            wrap &&
+            wrap !== item &&
+            !wrap.querySelector('.sb-nav-label') &&
+            wrap.children.length <= 2
+          ) {
+            wrap.style.setProperty('display', 'none', 'important');
+          }
+        });
+      });
+    }
+
+    function start() {
+      stripDefaultDocIcons(document);
+      var menu = document.getElementById('storybook-explorer-menu');
+      if (!menu) return;
+      if (menu.dataset.sbIconStrip === '1') {
+        stripDefaultDocIcons(menu);
+        return;
+      }
+      menu.dataset.sbIconStrip = '1';
+      new MutationObserver(function () {
+        stripDefaultDocIcons(menu);
+      }).observe(menu, { childList: true, subtree: true });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', start);
+    } else {
+      start();
+    }
+    [100, 300, 800, 2000, 4000].forEach(function (ms) {
+      setTimeout(start, ms);
+    });
+  })();
+</script>

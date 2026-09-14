@@ -1,0 +1,46 @@
+/**
+ * supplai design tokens — keep in sync with Foundation/Colors
+ * Brand Blue 600, Green 600 (success), Teal 800 (brand teal), Warning/Error 600
+ */
+:root {
+  /* Brand / primary */
+  --color-brand: #4169E1;
+  --color-brand-dark: #2F50C1;
+  --color-brand-light: #ECF0FC;
+  --color-brand-mid: rgba(65, 105, 225, 0.1);
+  --color-brand-border: rgba(65, 105, 225, 0.35);
+
+  /* Signature */
+  --color-navy: #0D1B2A;
+  --color-teal: #4CA1AC;
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+
+  /* Semantic — success uses Green 600 */
+  --color-success: #519E8A;
+  --color-success-dark: #3B877B;
+  --color-success-light: #EEF6F4;
+  --color-success-mid: rgba(81, 158, 138, 0.1);
+  --color-success-border: rgba(81, 158, 138, 0.35);
+
+  /* Semantic — warning Amber 600 */
+  --color-warning: #FF9F05;
+  --color-warning-dark: #DB8003;
+  --color-warning-light: #FFF6E6;
+  --color-warning-mid: rgba(255, 159, 5, 0.1);
+  --color-warning-border: rgba(255, 159, 5, 0.35);
+  --color-warning-ink: #934A01;
+
+  /* Semantic — error Red 600 */
+  --color-error: #D13145;
+  --color-error-dark: #B32343;
+  --color-error-light: #FBEBED;
+  --color-error-mid: rgba(209, 49, 69, 0.1);
+  --color-error-border: rgba(209, 49, 69, 0.35);
+  --color-error-ink: #790F3A;
+
+  /* Neutral */
+  --color-neutral: #6B7280;
+  --color-neutral-dark: #374151;
+  --color-neutral-light: #F3F4F6;
+}

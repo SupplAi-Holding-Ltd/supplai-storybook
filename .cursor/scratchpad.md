@@ -1,23 +1,27 @@
-# Scratchpad — Colors Page Hex Tweaks
+# Scratchpad — Radian-inspired DS upgrades
 
 ## Background and Motivation
-Colors + Accessibility updates, then Button docs Semantic section layout: neat aligned table without row divider lines.
+Light Storybook sidebar (Radian-like) with Hugeicons for Foundation + Introduction; keep search/settings.
 
 ## High-level Task Breakdown
-1–11. [done] Colors / Accessibility updates.
-12. [done — awaiting user verify] Semantic Buttons as borderless CSS grid table (aligned columns).
-   - Success: no horizontal rules; Filled/Outlined/Tonal/Ghost/Disabled columns line up; labels at bottom.
+1–4. [done] Intro, tokens, CodePanel, Intro terminal.
+5. [done — awaiting user verify] Light manager theme + Hugeicons sidebar labels for Foundation/Intro.
 
 ## Project Status Board
-- [x] Tasks 1–11 — prior updates
-- [x] Task 12 — Semantic buttons table layout *(awaiting manual verify)*
+- [x] Tasks 1–4
+- [x] Task 5 — Light sidebar + Hugeicons *(awaiting manual verify)*
 
 ## Current Status / Progress Tracking
-Executor — Task 12 done in `Button.mdx`: single `bd-semantic-table` grid with `display: contents` rows; removed `border-bottom`.
+Executor — Banner:
+- Added `src/stories/components/Banners.mdx` (Components/Banner)
+- Radian-aligned: variants, colors, primary/success/error, floating, promo
+- Supplai tokens; CodePanel playground; linked from Introduction
 
 ## Executor's Feedback or Assistance Requests
-Please verify Storybook → Button → Semantic Buttons.
+Refresh Components → Banner and compare with https://radianui.com/docs/components/banner
 
 ## Lessons
-- Semantic button matrix: use one CSS grid + `display: contents` on rows so columns share widths; avoid per-row flex + borders.
-- After palette hex changes, update Contrast Check and Color Blindness Simulator hardcoded colors.
+- Storybook has no official per-item icon API; use `sidebar.renderLabel` + hide default SVG with `:has(.sb-nav-label)` / `svg:not(.sb-nav-icon)`.
+- Prefer dark manager theme with original `supplailogo.svg`; light wordmark only if sidebar is light.
+- Double icons = default docs glyph still visible — hide every SVG except `.sb-nav-icon`.
+- In SB 10, `data-nodetype` lives on the LeafNode `<a>`, while `.sidebar-item` is the outer `LeafNodeStyleWrapper` div — selectors must target `a[data-nodetype='document']`, not `.sidebar-item[data-nodetype='document'] > a`.

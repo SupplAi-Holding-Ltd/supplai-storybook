@@ -1,29 +1,210 @@
 import { Meta } from "@storybook/addon-docs/blocks";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { PaletteIcon } from "@hugeicons/core-free-icons";
 
 <Meta title="Foundation/Colors" />
+
+export const CopyBtn = ({ hex }) => (
+  <button
+    className="cp-copy-btn"
+    type="button"
+    onClick={(e) => {
+      navigator.clipboard.writeText(hex);
+      const b = e.currentTarget;
+      b.classList.add("cp-copy-btn--copied");
+      setTimeout(() => b.classList.remove("cp-copy-btn--copied"), 1500);
+    }}
+    title={`Copy ${hex}`}
+    aria-label={`Copy ${hex}`}
+  >
+    <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+    <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  </button>
+);
+
+export const PaletteRow = ({ shades, tag = "Base", columns }) => (
+  <div
+    className="cp-palette-row"
+    style={columns ? { gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` } : undefined}
+  >
+    {shades.map(({ shade, hex, brand, base }) => {
+      const isBase = Boolean(brand || base || shade === "600");
+      const label = brand ? "Brand" : tag;
+      return (
+        <div
+          key={shade}
+          className={`cp-swatch-wrap${isBase ? " cp-swatch-wrap--base" : ""}`}
+          style={isBase ? { "--cp-base": hex } : undefined}
+        >
+          <div className="cp-swatch" style={{ background: hex }}>
+            <CopyBtn hex={hex} />
+          </div>
+          <span className="cp-swatch-shade">{shade}</span>
+          <span className="cp-swatch-hex">{hex}</span>
+          {isBase && <span className="cp-swatch-tag">{label}</span>}
+        </div>
+      );
+    })}
+  </div>
+);
+
+export const TokenTable = ({ title, description, rows }) => (
+  <div className="cp-radian">
+    {title && <h3 className="cp-radian-title">{title}</h3>}
+    {description && <p className="cp-radian-desc">{description}</p>}
+    <div className="cp-radian-table-wrap">
+      <table className="cp-radian-table">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Hex Value</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map(({ token, hex, usage }) => (
+            <tr key={token}>
+              <td>
+                <span className="cp-token-pill">
+                  <HugeiconsIcon
+                    icon={PaletteIcon}
+                    size={14}
+                    strokeWidth={1.75}
+                    color="#94A3B8"
+                    aria-hidden="true"
+                  />
+                  {token}
+                </span>
+              </td>
+              <td>
+                <span className="cp-hex-cell">
+                  <span
+                    className="cp-hex-chip"
+                    style={{
+                      background: hex,
+                      borderColor: hex.toLowerCase() === "#ffffff" ? "#E2E8F0" : "transparent",
+                    }}
+                  />
+                  {hex}
+                </span>
+              </td>
+              <td className="cp-usage-cell">{usage}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+);
+
+export const BLUE = [
+  { shade: "900", hex: "#142782" },
+  { shade: "800", hex: "#203AA2" },
+  { shade: "700", hex: "#2F50C1" },
+  { shade: "600", hex: "#4169E1", brand: true },
+  { shade: "500", hex: "#6787E7" },
+  { shade: "400", hex: "#8DA5ED" },
+  { shade: "300", hex: "#B3C3F3" },
+  { shade: "200", hex: "#D9E1F9" },
+  { shade: "100", hex: "#ECF0FC" },
+  { shade: "50", hex: "#F5F7FD" },
+];
+
+export const GREEN = [
+  { shade: "900", hex: "#19595B" },
+  { shade: "800", hex: "#28716C" },
+  { shade: "700", hex: "#3B877B" },
+  { shade: "600", hex: "#519E8A", base: true },
+  { shade: "500", hex: "#74B1A1" },
+  { shade: "400", hex: "#97C5B9" },
+  { shade: "300", hex: "#B9D8D0" },
+  { shade: "200", hex: "#DCECE8" },
+  { shade: "100", hex: "#EEF6F4" },
+  { shade: "50", hex: "#F6FAF9" },
+];
+
+export const TEAL = [
+  { shade: "900", hex: "#30788A" },
+  { shade: "800", hex: "#4CA1AC" },
+  { shade: "700", hex: "#6ECBCD" },
+  { shade: "600", hex: "#97EFE9", base: true },
+  { shade: "500", hex: "#ACF2ED" },
+  { shade: "400", hex: "#C1F5F2" },
+  { shade: "300", hex: "#D5F9F6" },
+  { shade: "200", hex: "#EAFCFB" },
+];
+
+export const AMBER = [
+  { shade: "900", hex: "#934A01" },
+  { shade: "800", hex: "#B76302" },
+  { shade: "700", hex: "#DB8003" },
+  { shade: "600", hex: "#FF9F05", base: true },
+  { shade: "500", hex: "#FFB237" },
+  { shade: "400", hex: "#FFC569" },
+  { shade: "300", hex: "#FFD99B" },
+  { shade: "200", hex: "#FFECCD" },
+  { shade: "100", hex: "#FFF6E6" },
+  { shade: "50", hex: "#FFFAF2" },
+];
+
+export const RED = [
+  { shade: "900", hex: "#790F3A" },
+  { shade: "800", hex: "#96183F" },
+  { shade: "700", hex: "#B32343" },
+  { shade: "600", hex: "#D13145", base: true },
+  { shade: "500", hex: "#DA5A6A" },
+  { shade: "400", hex: "#E3838F" },
+  { shade: "300", hex: "#EDADB5" },
+  { shade: "200", hex: "#F6D6DA" },
+  { shade: "100", hex: "#FBEBED" },
+  { shade: "50", hex: "#FCF4F5" },
+];
+
+export const GREY = [
+  { shade: "900", hex: "#0F172A" },
+  { shade: "800", hex: "#1E293B" },
+  { shade: "700", hex: "#334155" },
+  { shade: "600", hex: "#475569", base: true },
+  { shade: "500", hex: "#64748B" },
+  { shade: "400", hex: "#94A3B8" },
+  { shade: "300", hex: "#CBD5E1" },
+  { shade: "200", hex: "#E2E8F0" },
+  { shade: "100", hex: "#F1F5F9" },
+  { shade: "50", hex: "#F8FAFC" },
+];
 
 <div className="cp-page">
 
   <div className="cp-header">
     <h1>Colors</h1>
-    <p>The supplai color system is built for clarity, accessibility, and adaptability. It supports both light and dark surfaces, communicates semantic meaning through consistent hue choices, and scales across products and contexts. All colors are tokenized for systematic use in design and code.</p>
+    <p>
+      The supplai color system is built for clarity, accessibility, and adaptability. It supports both light and dark
+      surfaces, communicates semantic meaning through consistent hue choices, and scales across products and contexts.
+      Shade <strong>600</strong> is the base for each family — tints and shades are derived from it.
+    </p>
   </div>
 
-  {/* ─── Brand Colors ─────────────────────────────────────────────── */}
   <div className="cp-section">
     <h2>Brand Colors</h2>
-    <p className="cp-description">The following colors make up the primary thinking for the brand identity. These should be considered as the signature colors across all supplai products.</p>
+    <p className="cp-description">
+      The following colors make up the primary thinking for the brand identity. These should be considered as the
+      signature colors across all supplai products.
+    </p>
 
     <div className="cp-brand-hex-row">
       {[
         { hex: "#4169E1", label: "Brand Blue" },
         { hex: "#0D1B2A", label: "Dark Navy" },
-        { hex: "#2D9C93", label: "Teal" },
+        { hex: "#4CA1AC", label: "Teal" },
         { hex: "#000000", label: "Black" },
         { hex: "#FFFFFF", label: "White", outline: true },
       ].map(({ hex, label, outline }) => (
         <div key={hex} className="cp-hex-wrap">
-          {/* Rounded hex (~4px); SVG so corners + stroke render (clip-path clips borders) */}
           <svg className="cp-hexagon" width="40" height="46" viewBox="-1.5 -1.5 43 49" aria-hidden="true">
             <path
               d="M 16.53 1.99 Q 20.00 0.00 23.47 1.99 L 36.53 9.51 Q 40.00 11.50 40.00 15.50 L 40.00 30.50 Q 40.00 34.50 36.53 36.49 L 23.47 44.01 Q 20.00 46.00 16.53 44.01 L 3.47 36.49 Q 0.00 34.50 0.00 30.50 L 0.00 15.50 Q 0.00 11.50 3.47 9.51 Z"
@@ -36,116 +217,51 @@ import { Meta } from "@storybook/addon-docs/blocks";
         </div>
       ))}
     </div>
-
-    <div className="cp-brand-large-row">
-      {[
-        { hex: "#000000", label: "Black", sub: "#000000" },
-        { hex: "#0D1B2A", label: "MidNight", sub: "#0D1B2A" },
-        { hex: "#F4F6FE", label: "White Blue", sub: "#F4F6FE", dark: true },
-      ].map(({ hex, label, sub, dark }) => (
-        <div key={hex} className="cp-brand-large-card" style={{ background: hex }}>
-          <button className="cp-copy-btn" onClick={(e) => { navigator.clipboard.writeText(hex); const b = e.currentTarget; b.classList.add('cp-copy-btn--copied'); setTimeout(() => b.classList.remove('cp-copy-btn--copied'), 1500); }} title={`Copy ${hex}`}>
-            <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-            <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-          </button>
-          <span className="cp-brand-large-name" style={{ color: dark ? "#111827" : "#FFFFFF" }}>{label}</span>
-          <span className="cp-brand-large-hex" style={{ color: dark ? "#6B7280" : "rgba(255,255,255,0.6)" }}>{sub}</span>
-        </div>
-      ))}
-    </div>
   </div>
 
-  {/* ─── Blue Palette ─────────────────────────────────────────────── */}
-  <div className="cp-section">
-    <div className="cp-palette-row">
-      {[
-        { shade: "900", hex: "#142782" },
-        { shade: "800", hex: "#203AA2" },
-        { shade: "700", hex: "#2F50C1" },
-        { shade: "600", hex: "#4169E1", brand: true },
-        { shade: "500", hex: "#6787E7" },
-        { shade: "400", hex: "#8DA5ED" },
-        { shade: "300", hex: "#B3C3F3" },
-        { shade: "200", hex: "#D9E1F9" },
-        { shade: "100", hex: "#ECF0FC" },
-        { shade: "50",  hex: "#F5F7FD" },
-      ].map(({ shade, hex, brand }) => (
-        <div key={shade} className="cp-swatch-wrap">
-          <div className="cp-swatch" style={{ background: hex, outline: brand ? "2px solid #4169E1" : "none", outlineOffset: "2px" }}>
-            <button className="cp-copy-btn" onClick={(e) => { navigator.clipboard.writeText(hex); const b = e.currentTarget; b.classList.add('cp-copy-btn--copied'); setTimeout(() => b.classList.remove('cp-copy-btn--copied'), 1500); }} title={`Copy ${hex}`}>
-              <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-              <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </button>
+  {/* Brand Blue — first / featured palette */}
+  <div className="cp-section cp-section--brand-blue">
+    <div className="cp-brand-blue-panel">
+      <div className="cp-brand-blue-hero">
+        <div className="cp-brand-blue-hero-swatch">
+          <CopyBtn hex="#4169E1" />
+          <div className="cp-brand-blue-hero-meta">
+            <span className="cp-brand-blue-kicker">Primary · 600</span>
+            <span className="cp-brand-blue-name">Brand Blue</span>
+            <span className="cp-brand-blue-hex">#4169E1</span>
           </div>
-          <span className="cp-swatch-shade">{shade}</span>
-          <span className="cp-swatch-hex">{hex}</span>
-          {brand && <span className="cp-swatch-tag">Brand</span>}
         </div>
-      ))}
+        <p className="cp-brand-blue-lede">
+          The source color for the blue scale. Shades (700–900) and tints (500–50) are derived from this base.
+        </p>
+      </div>
+
+      <div className="cp-brand-blue-scale">
+        <h2>Blue</h2>
+        <p className="cp-description">Primary brand scale. Start here for product UI, links, and emphasis.</p>
+        <PaletteRow shades={BLUE} tag="Brand" />
+      </div>
     </div>
   </div>
 
-  {/* ─── Green Palette ────────────────────────────────────────────── */}
   <div className="cp-section">
-    <div className="cp-palette-row">
-      {[
-        { shade: "900", hex: "#19595B" },
-        { shade: "800", hex: "#28716C" },
-        { shade: "700", hex: "#3B877B" },
-        { shade: "600", hex: "#519E8A" },
-        { shade: "500", hex: "#74B1A1" },
-        { shade: "400", hex: "#97C5B9" },
-        { shade: "300", hex: "#B9D8D0" },
-        { shade: "200", hex: "#DCECE8" },
-        { shade: "100", hex: "#EEF6F4" },
-        { shade: "50",  hex: "#F6FAF9" },
-      ].map(({ shade, hex }) => (
-        <div key={shade} className="cp-swatch-wrap">
-          <div className="cp-swatch" style={{ background: hex }}>
-            <button className="cp-copy-btn" onClick={(e) => { navigator.clipboard.writeText(hex); const b = e.currentTarget; b.classList.add('cp-copy-btn--copied'); setTimeout(() => b.classList.remove('cp-copy-btn--copied'), 1500); }} title={`Copy ${hex}`}>
-              <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-              <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </button>
-          </div>
-          <span className="cp-swatch-shade">{shade}</span>
-          <span className="cp-swatch-hex">{hex}</span>
-        </div>
-      ))}
-    </div>
+    <h2>Green</h2>
+    <p className="cp-description">Success and positive feedback. Derived from <strong>600</strong>.</p>
+    <PaletteRow shades={GREEN} tag="Base" />
   </div>
 
-  {/* ─── Teal Palette ─────────────────────────────────────────────── */}
   <div className="cp-section">
-    <div className="cp-palette-row">
-      {[
-        { shade: "900", hex: "#30788A" },
-        { shade: "800", hex: "#4CA1AC" },
-        { shade: "700", hex: "#6ECBCD" },
-        { shade: "600", hex: "#97EFE9" },
-        { shade: "500", hex: "#ACF2ED" },
-        { shade: "400", hex: "#C1F5F2" },
-        { shade: "300", hex: "#D5F9F6" },
-        { shade: "200", hex: "#EAFCFB" },
-      ].map(({ shade, hex }) => (
-        <div key={shade} className="cp-swatch-wrap">
-          <div className="cp-swatch" style={{ background: hex }}>
-            <button className="cp-copy-btn" onClick={(e) => { navigator.clipboard.writeText(hex); const b = e.currentTarget; b.classList.add('cp-copy-btn--copied'); setTimeout(() => b.classList.remove('cp-copy-btn--copied'), 1500); }} title={`Copy ${hex}`}>
-              <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-              <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </button>
-          </div>
-          <span className="cp-swatch-shade">{shade}</span>
-          <span className="cp-swatch-hex">{hex}</span>
-        </div>
-      ))}
-    </div>
+    <h2>Teal</h2>
+    <p className="cp-description">Secondary brand accent. Derived from <strong>600</strong>.</p>
+    <PaletteRow shades={TEAL} tag="Base" columns={8} />
   </div>
 
-  {/* ─── Semantic Colors ──────────────────────────────────────────── */}
   <div className="cp-section">
     <h2>Semantic Colors</h2>
-    <p className="cp-description">These colors communicate meaning and status throughout the interface. They should be used for feedback, alerts, and state indication — not for decoration.</p>
-
+    <p className="cp-description">
+      These colors communicate meaning and status throughout the interface. They should be used for feedback, alerts,
+      and state indication — not for decoration.
+    </p>
     <div className="cp-semantic-icons">
       {["#FF9F05", "#D13145"].map((hex) => (
         <svg key={hex} className="cp-semantic-hex" width="48" height="55" viewBox="0 0 48 55" aria-hidden="true">
@@ -158,99 +274,57 @@ import { Meta } from "@storybook/addon-docs/blocks";
     </div>
   </div>
 
-  {/* ─── Amber / Orange Palette ───────────────────────────────────── */}
   <div className="cp-section">
-    <div className="cp-palette-row">
-      {[
-        { shade: "900", hex: "#934A01" },
-        { shade: "800", hex: "#B76302" },
-        { shade: "700", hex: "#DB8003" },
-        { shade: "600", hex: "#FF9F05", base: true },
-        { shade: "500", hex: "#FFB237" },
-        { shade: "400", hex: "#FFC569" },
-        { shade: "300", hex: "#FFD99B" },
-        { shade: "200", hex: "#FFECCD" },
-        { shade: "100", hex: "#FFF6E6" },
-        { shade: "50",  hex: "#FFFAF2" },
-      ].map(({ shade, hex, base }) => (
-        <div key={shade} className="cp-swatch-wrap">
-          <div className="cp-swatch" style={{ background: hex, outline: base ? "2px solid #FF9F05" : "none", outlineOffset: "2px" }}>
-            <button className="cp-copy-btn" onClick={(e) => { navigator.clipboard.writeText(hex); const b = e.currentTarget; b.classList.add('cp-copy-btn--copied'); setTimeout(() => b.classList.remove('cp-copy-btn--copied'), 1500); }} title={`Copy ${hex}`}>
-              <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-              <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </button>
-          </div>
-          <span className="cp-swatch-shade">{shade}</span>
-          <span className="cp-swatch-hex">{hex}</span>
-        </div>
-      ))}
-    </div>
+    <h2>Warning</h2>
+    <p className="cp-description">Caution and attention states. Derived from <strong>600</strong>.</p>
+    <PaletteRow shades={AMBER} tag="Base" />
   </div>
 
-  {/* ─── Red / Error Palette ──────────────────────────────────────── */}
   <div className="cp-section">
-    <div className="cp-palette-row">
-      {[
-        { shade: "900", hex: "#790F3A" },
-        { shade: "800", hex: "#96183F" },
-        { shade: "700", hex: "#B32343" },
-        { shade: "600", hex: "#D13145", base: true },
-        { shade: "500", hex: "#DA5A6A" },
-        { shade: "400", hex: "#E3838F" },
-        { shade: "300", hex: "#EDADB5" },
-        { shade: "200", hex: "#F6D6DA" },
-        { shade: "100", hex: "#FBEBED" },
-        { shade: "50",  hex: "#FCF4F5" },
-      ].map(({ shade, hex, base }) => (
-        <div key={shade} className="cp-swatch-wrap">
-          <div className="cp-swatch" style={{ background: hex, outline: base ? "2px solid #D13145" : "none", outlineOffset: "2px" }}>
-            <button className="cp-copy-btn" onClick={(e) => { navigator.clipboard.writeText(hex); const b = e.currentTarget; b.classList.add('cp-copy-btn--copied'); setTimeout(() => b.classList.remove('cp-copy-btn--copied'), 1500); }} title={`Copy ${hex}`}>
-              <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-              <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </button>
-          </div>
-          <span className="cp-swatch-shade">{shade}</span>
-          <span className="cp-swatch-hex">{hex}</span>
-        </div>
-      ))}
-    </div>
+    <h2>Error</h2>
+    <p className="cp-description">Destructive and critical states. Derived from <strong>600</strong>.</p>
+    <PaletteRow shades={RED} tag="Base" />
   </div>
 
-  {/* ─── Grey Palette ─────────────────────────────────────────────── */}
   <div className="cp-section">
     <h2>Grey Palette</h2>
-    <p className="cp-description">A cool blue-tinted grey scale used for surfaces, borders, text, and backgrounds. These greys are designed to pair naturally with the brand blue.</p>
-    <div className="cp-palette-row">
+    <p className="cp-description">
+      A cool blue-tinted grey scale used for surfaces, borders, text, and backgrounds. <strong>600</strong> is the
+      mid-tone base for the scale.
+    </p>
+    <PaletteRow shades={GREY} tag="Base" />
+  </div>
+
+  <div className="cp-section">
+    <h2>Neutrals</h2>
+    <p className="cp-description">
+      Absolute black, midnight navy, and pure white for high-contrast surfaces and text.
+    </p>
+    <div className="cp-brand-large-row">
       {[
-        { shade: "900", hex: "#0F172A" },
-        { shade: "800", hex: "#1E293B" },
-        { shade: "700", hex: "#334155" },
-        { shade: "600", hex: "#475569" },
-        { shade: "500", hex: "#64748B" },
-        { shade: "400", hex: "#94A3B8" },
-        { shade: "300", hex: "#CBD5E1" },
-        { shade: "200", hex: "#E2E8F0" },
-        { shade: "100", hex: "#F1F5F9" },
-        { shade: "50",  hex: "#F8FAFC" },
-      ].map(({ shade, hex }) => (
-        <div key={shade} className="cp-swatch-wrap">
-          <div className="cp-swatch" style={{ background: hex }}>
-            <button className="cp-copy-btn" onClick={(e) => { navigator.clipboard.writeText(hex); const b = e.currentTarget; b.classList.add('cp-copy-btn--copied'); setTimeout(() => b.classList.remove('cp-copy-btn--copied'), 1500); }} title={`Copy ${hex}`}>
-              <svg className="cp-copy-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M3 11V3a1 1 0 0 1 1-1h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
-              <svg className="cp-check-icon" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </button>
-          </div>
-          <span className="cp-swatch-shade">{shade}</span>
-          <span className="cp-swatch-hex">{hex}</span>
+        { hex: "#000000", label: "Black", sub: "#000000" },
+        { hex: "#0D1B2A", label: "Midnight", sub: "#0D1B2A" },
+        { hex: "#FFFFFF", label: "White", sub: "#FFFFFF", dark: true },
+      ].map(({ hex, label, sub, dark }) => (
+        <div
+          key={hex}
+          className={`cp-brand-large-card${dark ? " cp-brand-large-card--light" : ""}`}
+          style={{ background: hex }}
+        >
+          <CopyBtn hex={hex} />
+          <span className="cp-brand-large-name" style={{ color: dark ? "#0F172A" : "#FFFFFF" }}>{label}</span>
+          <span className="cp-brand-large-hex" style={{ color: dark ? "#64748B" : "rgba(255,255,255,0.65)" }}>{sub}</span>
         </div>
       ))}
     </div>
   </div>
 
-  {/* ─── Dark Surface Colors ──────────────────────────────────────── */}
   <div className="cp-section">
     <h2>Dark Surface Colors</h2>
-    <p className="cp-description">These are the designated surface colors for dark mode interfaces. They create depth through subtle layering without relying on pure black.</p>
+    <p className="cp-description">
+      These are the designated surface colors for dark mode interfaces. They create depth through subtle layering
+      without relying on pure black.
+    </p>
     <div className="cp-dark-surfaces">
       <div className="cp-dark-card" style={{ background: "#0D0F13", flex: 2 }}>
         <div className="cp-dark-label-group">
@@ -281,41 +355,94 @@ import { Meta } from "@storybook/addon-docs/blocks";
     </div>
   </div>
 
-  {/* ─── Color Tokens ─────────────────────────────────────────────── */}
-  <div className="cp-section">
+  <div className="cp-section cp-section--tokens">
     <h2>Color Tokens</h2>
-    <p className="cp-description">Colors are used in the design system through semantic tokens — not raw hex values. Tokens map to specific roles (background, text, border, etc.) and adapt automatically between light and dark modes.</p>
-    <div className="cp-tokens-grid">
-      {[
-        { token: "--color-bg-primary",      value: "#FFFFFF",  label: "Background / Primary",   dark: false },
-        { token: "--color-bg-secondary",    value: "#F4F6FE",  label: "Background / Secondary",  dark: false },
-        { token: "--color-bg-inverse",      value: "#0D0F13",  label: "Background / Inverse",    dark: true  },
-        { token: "--color-text-primary",    value: "#0F172A",  label: "Text / Primary",          dark: false },
-        { token: "--color-text-secondary",  value: "#64748B",  label: "Text / Secondary",        dark: false },
-        { token: "--color-text-inverse",    value: "#FFFFFF",  label: "Text / Inverse",          dark: true  },
-        { token: "--color-brand",           value: "#4169E1",  label: "Brand / Default",         dark: true  },
-        { token: "--color-border-default",  value: "#E2E8F0",  label: "Border / Default",        dark: false },
-        { token: "--color-border-strong",   value: "#94A3B8",  label: "Border / Strong",         dark: false },
-        { token: "--color-success",         value: "#2D9C93",  label: "Semantic / Success",      dark: true  },
-        { token: "--color-warning",         value: "#FF9F05",  label: "Semantic / Warning",      dark: false },
-        { token: "--color-error",           value: "#D13145",  label: "Semantic / Error",        dark: true  },
-      ].map(({ token, value, label, dark }) => (
-        <div key={token} className="cp-token-row">
-          <div className="cp-token-swatch" style={{ background: value, border: dark ? "none" : "1px solid #E5E7EB" }} />
-          <div className="cp-token-info">
-            <span className="cp-token-label">{label}</span>
-            <code className="cp-token-name">{token}</code>
-          </div>
-          <span className="cp-token-value">{value}</span>
-        </div>
-      ))}
-    </div>
+    <p className="cp-description">
+      Semantic roles derived from each family’s <strong>600</strong> base. Prefer tokens over raw hex in product UI.
+    </p>
+
+    <TokenTable
+      title="Blue"
+      description="Primary brand interactions, links, and emphasis."
+      rows={[
+        { token: "key", hex: "#4169E1", usage: "Brand color" },
+        { token: "accent", hex: "#ECF0FC", usage: "Pastel version of brand color used for backgrounds" },
+        { token: "focus", hex: "#D9E1F9", usage: "Used to highlight pastel background elements" },
+        { token: "border", hex: "#8DA5ED", usage: "Border color for primary elements" },
+        { token: "hover", hex: "#6787E7", usage: "Used when hover interactions are present" },
+        { token: "text", hex: "#2F50C1", usage: "Text color for primary emphasis on light surfaces" },
+      ]}
+    />
+
+    <TokenTable
+      title="Green"
+      description="Success, confirmation, and positive status."
+      rows={[
+        { token: "key", hex: "#519E8A", usage: "Success / positive brand color" },
+        { token: "accent", hex: "#EEF6F4", usage: "Pastel backgrounds for success states" },
+        { token: "focus", hex: "#DCECE8", usage: "Soft highlight behind success content" },
+        { token: "border", hex: "#97C5B9", usage: "Borders for success elements" },
+        { token: "hover", hex: "#74B1A1", usage: "Hover state for success actions" },
+        { token: "text", hex: "#3B877B", usage: "Readable success text on light surfaces" },
+      ]}
+    />
+
+    <TokenTable
+      title="Teal"
+      description="Secondary accent and supportive highlights."
+      rows={[
+        { token: "key", hex: "#97EFE9", usage: "Teal base / accent color" },
+        { token: "accent", hex: "#EAFCFB", usage: "Pastel teal for soft backgrounds" },
+        { token: "focus", hex: "#D5F9F6", usage: "Highlight for teal-tinted surfaces" },
+        { token: "border", hex: "#6ECBCD", usage: "Border color for teal elements" },
+        { token: "hover", hex: "#ACF2ED", usage: "Hover interactions on teal controls" },
+        { token: "text", hex: "#4CA1AC", usage: "Text color paired with teal accents" },
+      ]}
+    />
+
+    <TokenTable
+      title="Warning"
+      description="Caution, pending, and attention states."
+      rows={[
+        { token: "key", hex: "#FF9F05", usage: "Warning brand color" },
+        { token: "accent", hex: "#FFF6E6", usage: "Pastel backgrounds for warning banners" },
+        { token: "focus", hex: "#FFECCD", usage: "Soft highlight behind warning content" },
+        { token: "border", hex: "#FFC569", usage: "Borders for warning elements" },
+        { token: "hover", hex: "#FFB237", usage: "Hover state for warning actions" },
+        { token: "text", hex: "#DB8003", usage: "Warning text on light surfaces" },
+      ]}
+    />
+
+    <TokenTable
+      title="Error"
+      description="Destructive actions and critical errors."
+      rows={[
+        { token: "key", hex: "#D13145", usage: "Error / destructive brand color" },
+        { token: "accent", hex: "#FBEBED", usage: "Pastel backgrounds for error states" },
+        { token: "focus", hex: "#F6D6DA", usage: "Soft highlight behind error content" },
+        { token: "border", hex: "#E3838F", usage: "Borders for error elements" },
+        { token: "hover", hex: "#DA5A6A", usage: "Hover state for destructive actions" },
+        { token: "text", hex: "#B32343", usage: "Error text on light surfaces" },
+      ]}
+    />
+
+    <TokenTable
+      title="Grey"
+      description="Neutral surfaces, borders, and body text."
+      rows={[
+        { token: "key", hex: "#475569", usage: "Mid grey base for the scale" },
+        { token: "accent", hex: "#F8FAFC", usage: "Page and card background surfaces" },
+        { token: "focus", hex: "#F1F5F9", usage: "Subtle secondary surface fill" },
+        { token: "border", hex: "#E2E8F0", usage: "Default borders and dividers" },
+        { token: "hover", hex: "#94A3B8", usage: "Muted icons and hover chrome" },
+        { token: "text", hex: "#0F172A", usage: "Primary body text" },
+      ]}
+    />
   </div>
 
 </div>
 
-<style>
-  {`
+<style>{`
   .cp-page {
     max-width: 960px;
     margin: 0 auto;
@@ -344,8 +471,17 @@ import { Meta } from "@storybook/addon-docs/blocks";
     margin: 0;
   }
 
+  .cp-header strong {
+    color: #334155;
+    font-weight: 600;
+  }
+
   .cp-section {
-    margin-bottom: 40px;
+    margin-bottom: 48px;
+  }
+
+  .cp-section--tokens {
+    margin-top: 8px;
   }
 
   .cp-section h2 {
@@ -363,7 +499,11 @@ import { Meta } from "@storybook/addon-docs/blocks";
     max-width: 680px;
   }
 
-  /* ── Brand hex row ── */
+  .cp-description strong {
+    color: #475569;
+    font-weight: 600;
+  }
+
   .cp-brand-hex-row {
     display: flex;
     gap: 16px;
@@ -393,7 +533,6 @@ import { Meta } from "@storybook/addon-docs/blocks";
     white-space: nowrap;
   }
 
-  /* ── Brand large cards ── */
   .cp-brand-large-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -412,8 +551,13 @@ import { Meta } from "@storybook/addon-docs/blocks";
     overflow: hidden;
   }
 
+  .cp-brand-large-card--light {
+    border: 1px solid #E2E8F0;
+  }
+
   .cp-brand-large-card:hover .cp-copy-btn {
     opacity: 1;
+    visibility: visible;
   }
 
   .cp-brand-large-name {
@@ -423,30 +567,141 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
   .cp-brand-large-hex {
     font-size: 11px;
-    font-family: monospace;
+    font-family: ui-monospace, monospace;
   }
 
-  /* ── Palette row ── */
+  /* ── Featured Brand Blue panel ── */
+  .cp-section--brand-blue {
+    margin-bottom: 56px;
+  }
+
+  .cp-brand-blue-panel {
+    border: 1px solid #D9E1F9;
+    border-radius: 16px;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 80% at 0% 0%, rgba(65, 105, 225, 0.14) 0%, transparent 55%),
+      linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 48%);
+    box-shadow: 0 12px 32px rgba(65, 105, 225, 0.08);
+  }
+
+  .cp-brand-blue-hero {
+    display: grid;
+    grid-template-columns: minmax(200px, 280px) 1fr;
+    gap: 24px;
+    align-items: end;
+    padding: 24px 24px 8px;
+  }
+
+  .cp-brand-blue-hero-swatch {
+    position: relative;
+    height: 160px;
+    border-radius: 14px;
+    background: #4169E1;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 3px #FFFFFF,
+      0 0 0 6px #4169E1,
+      0 16px 40px rgba(47, 80, 193, 0.35);
+  }
+
+  .cp-brand-blue-hero-swatch .cp-copy-btn {
+    border-radius: 14px;
+  }
+
+  .cp-brand-blue-hero-swatch:hover .cp-copy-btn {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .cp-brand-blue-hero-meta {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .cp-brand-blue-kicker {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .cp-brand-blue-name {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+  }
+
+  .cp-brand-blue-hex {
+    font-size: 13px;
+    font-family: ui-monospace, "JetBrains Mono", monospace;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .cp-brand-blue-lede {
+    margin: 0 0 12px;
+    max-width: 420px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #475569;
+  }
+
+  .cp-brand-blue-scale {
+    padding: 8px 24px 24px;
+  }
+
+  .cp-brand-blue-scale h2 {
+    margin: 0 0 6px;
+  }
+
   .cp-palette-row {
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    gap: 6px;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    gap: 8px;
+    align-items: start;
+    padding: 4px 2px 8px;
   }
 
   .cp-swatch-wrap {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    min-width: 0;
   }
 
   .cp-swatch {
     width: 100%;
-    aspect-ratio: 1 / 1.4;
+    aspect-ratio: 1 / 1.35;
     border-radius: 8px;
-    border: 1px solid rgba(0,0,0,0.04);
+    border: 1px solid rgba(15, 23, 42, 0.06);
     min-height: 56px;
     position: relative;
     overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .cp-swatch-wrap--base {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cp-swatch-wrap--base .cp-swatch {
+    border-radius: 10px;
+    border: 2px solid #FFFFFF;
+    box-shadow:
+      0 0 0 2px var(--cp-base, #4169E1),
+      0 8px 20px rgba(15, 23, 42, 0.12);
+    transform: translateY(-2px) scale(1.04);
+    min-height: 64px;
   }
 
   .cp-copy-btn {
@@ -457,22 +712,25 @@ import { Meta } from "@storybook/addon-docs/blocks";
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.22);
+    background: rgba(15, 23, 42, 0.28);
     border: none;
     cursor: pointer;
     opacity: 0;
-    transition: opacity 0.15s ease;
+    visibility: hidden;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
     color: #ffffff;
     padding: 0;
     border-radius: 0;
   }
 
-  .cp-swatch-wrap:hover .cp-copy-btn {
+  .cp-swatch-wrap:hover .cp-copy-btn,
+  .cp-copy-btn:focus-visible {
     opacity: 1;
+    visibility: visible;
   }
 
   .cp-copy-btn:active {
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(15, 23, 42, 0.4);
   }
 
   .cp-check-icon {
@@ -488,33 +746,39 @@ import { Meta } from "@storybook/addon-docs/blocks";
   }
 
   .cp-swatch-shade {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     color: #374151;
   }
 
+  .cp-swatch-wrap--base .cp-swatch-shade {
+    color: var(--cp-base, #4169E1);
+    font-weight: 700;
+  }
+
   .cp-swatch-hex {
     font-size: 9px;
-    color: #9CA3AF;
-    font-family: monospace;
+    color: #94A3B8;
+    font-family: ui-monospace, monospace;
     word-break: break-all;
   }
 
   .cp-swatch-tag {
     font-size: 9px;
-    font-weight: 600;
-    color: #4169E1;
-    background: #ECF0FC;
-    padding: 1px 4px;
-    border-radius: 3px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--cp-base, #4169E1);
+    background: color-mix(in srgb, var(--cp-base, #4169E1) 14%, #FFFFFF);
+    padding: 2px 6px;
+    border-radius: 999px;
     width: fit-content;
+    margin-top: 2px;
   }
 
-  /* ── Semantic icons ── */
   .cp-semantic-icons {
     display: flex;
     gap: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
   }
 
   .cp-semantic-hex {
@@ -524,7 +788,6 @@ import { Meta } from "@storybook/addon-docs/blocks";
     flex-shrink: 0;
   }
 
-  /* ── Dark surfaces ── */
   .cp-dark-surfaces {
     display: flex;
     gap: 12px;
@@ -553,78 +816,121 @@ import { Meta } from "@storybook/addon-docs/blocks";
   .cp-dark-hex {
     font-size: 10px;
     color: rgba(255,255,255,0.45);
-    font-family: monospace;
+    font-family: ui-monospace, monospace;
   }
 
-  /* ── Tokens ── */
-  .cp-tokens-grid {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #E5E7EB;
-    border-radius: 10px;
+  .cp-radian {
+    margin-bottom: 28px;
+  }
+
+  .cp-radian-title {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #0F172A;
+  }
+
+  .cp-radian-desc {
+    margin: 0 0 12px;
+    font-size: 13px;
+    color: #64748B;
+    line-height: 1.5;
+  }
+
+  .cp-radian-table-wrap {
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
     overflow: hidden;
-  }
-
-  .cp-token-row {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 10px 16px;
-    border-bottom: 1px solid #F3F4F6;
     background: #FFFFFF;
   }
 
-  .cp-token-row:last-child {
+  .cp-radian-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  .cp-radian-table th,
+  .cp-radian-table td {
+    padding: 14px 16px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #F1F5F9;
+  }
+
+  .cp-radian-table tr:last-child td {
     border-bottom: none;
   }
 
-  .cp-token-row:nth-child(even) {
-    background: #FAFAFA;
+  .cp-radian-table th {
+    background: #F8FAFC;
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748B;
   }
 
-  .cp-token-swatch {
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    flex-shrink: 0;
+  .cp-radian-table th:nth-child(1),
+  .cp-radian-table td:nth-child(1) {
+    width: 22%;
   }
 
-  .cp-token-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+  .cp-radian-table th:nth-child(2),
+  .cp-radian-table td:nth-child(2) {
+    width: 26%;
   }
 
-  .cp-token-label {
+  .cp-token-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px 6px 10px;
+    border-radius: 999px;
+    border: 1px solid #E2E8F0;
+    background: #F8FAFC;
+    color: #334155;
     font-size: 13px;
     font-weight: 500;
-    color: #111827;
+    font-family: ui-monospace, "JetBrains Mono", monospace;
+    letter-spacing: -0.01em;
   }
 
-  .cp-token-name {
-    font-size: 11px;
-    color: #6B7280;
-    font-family: monospace;
-    background: #F3F4F6;
-    padding: 1px 5px;
-    border-radius: 3px;
-    width: fit-content;
+  .cp-hex-cell {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #64748B;
+    font-family: ui-monospace, "JetBrains Mono", monospace;
   }
 
-  .cp-token-value {
-    font-size: 11px;
-    color: #9CA3AF;
-    font-family: monospace;
+  .cp-hex-chip {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1px solid rgba(15, 23, 42, 0.08);
     flex-shrink: 0;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  }
+
+  .cp-usage-cell {
+    font-size: 13px;
+    line-height: 1.45;
+    color: #64748B;
   }
 
   @media (max-width: 700px) {
     .cp-palette-row {
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
     }
     .cp-brand-large-row {
       grid-template-columns: 1fr;
+    }
+    .cp-brand-blue-hero {
+      grid-template-columns: 1fr;
+    }
+    .cp-brand-blue-hero-swatch {
+      height: 140px;
     }
     .cp-dark-surfaces {
       flex-direction: column;
@@ -633,6 +939,15 @@ import { Meta } from "@storybook/addon-docs/blocks";
     .cp-dark-card {
       min-height: 80px;
     }
+    .cp-radian-table th:nth-child(3),
+    .cp-radian-table td:nth-child(3) {
+      display: none;
+    }
+    .cp-radian-table th:nth-child(1),
+    .cp-radian-table td:nth-child(1),
+    .cp-radian-table th:nth-child(2),
+    .cp-radian-table td:nth-child(2) {
+      width: 50%;
+    }
   }
-  `}
-</style>
+`}</style>

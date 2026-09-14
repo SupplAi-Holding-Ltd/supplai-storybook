@@ -119,15 +119,15 @@ import { Meta } from "@storybook/addon-docs/blocks";
             </div>
             {/* Table rows */}
             {[
-              { id: "0681-01", route: "Eldoret → Nairobi", schedule: "Weekly (Mo, Tu, Fr)", status: "Ongoing", statusColor: "#2D9C93" },
-              { id: "0681-02", route: "Embu → Gori", schedule: "Weekly (Mo, Tu, Fr)", status: "Ongoing", statusColor: "#2D9C93" },
-              { id: "7858-4a", route: "Dagoretti → Telt", schedule: "02/01/25 - 09/01/25", status: "Ongoing", statusColor: "#2D9C93" },
+              { id: "0681-01", route: "Eldoret → Nairobi", schedule: "Weekly (Mo, Tu, Fr)", status: "Ongoing", statusColor: "#519E8A" },
+              { id: "0681-02", route: "Embu → Gori", schedule: "Weekly (Mo, Tu, Fr)", status: "Ongoing", statusColor: "#519E8A" },
+              { id: "7858-4a", route: "Dagoretti → Telt", schedule: "02/01/25 - 09/01/25", status: "Ongoing", statusColor: "#519E8A" },
               { id: "0681-06", route: "Dagoretti → Telt", schedule: "02/01/25 - 09/01/25", status: "Cancelled", statusColor: "#D13145" },
-              { id: "0681-08", route: "Dagoretti → Telt", schedule: "02/01/25 - Monday", status: "Ongoing", statusColor: "#2D9C93" },
+              { id: "0681-08", route: "Dagoretti → Telt", schedule: "02/01/25 - Monday", status: "Ongoing", statusColor: "#519E8A" },
               { id: "0681-10", route: "Tult → Dagoretti", schedule: "02/01/25 - Monday", status: "Completed", statusColor: "#6B7280" },
-              { id: "0681-11", route: "Dagoretti → Telt", schedule: "02/01/25 - Monday", status: "Ongoing", statusColor: "#2D9C93" },
+              { id: "0681-11", route: "Dagoretti → Telt", schedule: "02/01/25 - Monday", status: "Ongoing", statusColor: "#519E8A" },
               { id: "0681-12", route: "Tult → Dagoretti", schedule: "02/01/25 - Monday", status: "Completed", statusColor: "#6B7280" },
-              { id: "0681-13", route: "Dagoretti → Telt", schedule: "02/01/25 - Monday", status: "Ongoing", statusColor: "#2D9C93" },
+              { id: "0681-13", route: "Dagoretti → Telt", schedule: "02/01/25 - Monday", status: "Ongoing", statusColor: "#519E8A" },
             ].map((row) => (
               <div key={row.id} className="tn-table-row">
                 <span className="tn-cell tn-cell-id">{row.id}</span>
@@ -302,7 +302,7 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
   /* ── Variants ── */
   .tn-toast--default  { --tn-color: #4169E1; }   /* brand blue  */
-  .tn-toast--success  { --tn-color: #2D9C93; }   /* teal        */
+  .tn-toast--success  { --tn-color: #519E8A; }   /* teal        */
   .tn-toast--warning  { --tn-color: #FF9F05; }   /* amber       */
   .tn-toast--error    { --tn-color: #D13145; }   /* red         */
 
@@ -556,7 +556,7 @@ import { Meta } from "@storybook/addon-docs/blocks";
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #2D9C93;
+    background: #519E8A;
   }
 
   .tn-status-badge {
@@ -577,7 +577,7 @@ import { Meta } from "@storybook/addon-docs/blocks";
     gap: 6px;
     padding: 10px 16px 10px 20px;
     border-radius: 8px;
-    border: 1px solid var(--tn-live-color, #2D9C93);
+    border: 1px solid var(--tn-live-color, #519E8A);
     background: #FFFFFF;
     box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.18);
     font-family: 'Manrope', sans-serif;
@@ -597,11 +597,11 @@ import { Meta } from "@storybook/addon-docs/blocks";
     top: 0;
     bottom: 0;
     width: 8px;
-    background: var(--tn-live-color, #2D9C93);
+    background: var(--tn-live-color, #519E8A);
     border-radius: 7px 0 0 7px;
   }
 
-  .tn-live-toast--success { --tn-live-color: #2D9C93; }
+  .tn-live-toast--success { --tn-live-color: #519E8A; }
   .tn-live-toast--default { --tn-live-color: #4169E1; }
   .tn-live-toast--warning { --tn-live-color: #FF9F05; }
   .tn-live-toast--error   { --tn-live-color: #D13145; }

@@ -467,12 +467,22 @@ import darkLockup from "./assets/logo/group-1317.svg";
     min-height: auto;
     width: 100%;
     max-width: 200px;
+    flex-direction: column;
+    gap: 16px;
+    overflow: visible;
   }
 
   .lb-arabic-panel .lb-arabic-logo-item img {
     max-height: 220px;
     max-width: 100%;
     object-fit: contain;
+  }
+
+  /* Keep Download under the mark — absolute overlay sits on top of Arabic logos */
+  .lb-arabic-panel .lb-arabic-logo-item .lb-download-btn {
+    position: static;
+    top: auto;
+    right: auto;
   }
 
   .lb-arabic-notice {

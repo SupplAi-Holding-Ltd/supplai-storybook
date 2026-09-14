@@ -74,7 +74,7 @@ export const InteractiveTabs = () => {
   const tabs = ["All Trips", "Allocated", "In Transit", "Cancelled", "Completed"];
   const content = {
     0: { count: 142, color: "#4169E1" },
-    1: { count: 38,  color: "#2D9C93" },
+    1: { count: 38,  color: "#519E8A" },
     2: { count: 21,  color: "#FF9F05" },
     3: { count: 7,   color: "#D13145" },
     4: { count: 76,  color: "#6B7280" },
@@ -126,7 +126,7 @@ export const InteractiveTabs = () => {
   <div className="tb-section">
     <h2>Interactive Demo</h2>
     <p className="tb-desc">Click any tab below to switch views. Switch to the Code tab to copy the component implementation.</p>
-    <CodePanel code={TAB_BAR_CODE}>
+    <CodePanel code={TAB_BAR_CODE} filename="TabBar.tsx" language="tsx">
       <InteractiveTabs />
     </CodePanel>
   </div>
@@ -250,7 +250,7 @@ export const InteractiveTabs = () => {
     box-shadow: 0 2px 6px rgba(0,0,0,0.10), 0 1px 2px rgba(0,0,0,0.06);
   }
   .tb-tab--inactive { background: transparent; border-color: transparent; color: #9CA3AF; }
-  .tb-tab--hover    { background: #E8EEFB; border-color: transparent; color: #2B44BF; }
+  .tb-tab--hover    { background: #ECF0FC; border-color: transparent; color: #2F50C1; }
   .tb-tab--focused  { background: #EEF2FF; border-color: #4169E1; color: #4169E1; font-weight: 600; box-shadow: 0 0 0 3px rgba(65,105,225,0.18); }
 
   /* ── Tab bar container ── */

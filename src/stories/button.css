@@ -94,37 +94,37 @@
   width: 100%;
 }
 
-/* ── Intent colour tokens ──────────────────────────────────────── */
+/* ── Intent colour tokens (src/stories/tokens.css) ─────────────── */
 [data-intent="primary"] {
-  --c:     #4169E1;
-  --c-dk:  #2B44BF;
-  --c-lt:  #E8EEFB;
-  --c-mid: rgba(65, 105, 225, 0.10);
-  --c-bdr: rgba(65, 105, 225, 0.35);
+  --c:     var(--color-brand);
+  --c-dk:  var(--color-brand-dark);
+  --c-lt:  var(--color-brand-light);
+  --c-mid: var(--color-brand-mid);
+  --c-bdr: var(--color-brand-border);
 }
 
 [data-intent="success"] {
-  --c:     #2D9C93;
-  --c-dk:  #1E6F69;
-  --c-lt:  #E0F5F4;
-  --c-mid: rgba(45, 156, 147, 0.10);
-  --c-bdr: rgba(45, 156, 147, 0.35);
+  --c:     var(--color-success);
+  --c-dk:  var(--color-success-dark);
+  --c-lt:  var(--color-success-light);
+  --c-mid: var(--color-success-mid);
+  --c-bdr: var(--color-success-border);
 }
 
 [data-intent="warning"] {
-  --c:     #D97706;
-  --c-dk:  #B45309;
-  --c-lt:  #FEF3C7;
-  --c-mid: rgba(217, 119, 6, 0.10);
-  --c-bdr: rgba(217, 119, 6, 0.35);
+  --c:     var(--color-warning);
+  --c-dk:  var(--color-warning-dark);
+  --c-lt:  var(--color-warning-light);
+  --c-mid: var(--color-warning-mid);
+  --c-bdr: var(--color-warning-border);
 }
 
 [data-intent="error"] {
-  --c:     #EF4444;
-  --c-dk:  #DC2626;
-  --c-lt:  #FEE2E2;
-  --c-mid: rgba(239, 68, 68, 0.10);
-  --c-bdr: rgba(239, 68, 68, 0.35);
+  --c:     var(--color-error);
+  --c-dk:  var(--color-error-dark);
+  --c-lt:  var(--color-error-light);
+  --c-mid: var(--color-error-mid);
+  --c-bdr: var(--color-error-border);
 }
 
 [data-intent="neutral"] {

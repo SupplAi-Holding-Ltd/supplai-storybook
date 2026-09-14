@@ -1,9 +1,28 @@
 import { Meta } from "@storybook/addon-docs/blocks";
 import * as ButtonStories from "./Button.stories";
 import { Button, PlusIcon, ArrowRightIcon, DownloadIcon, StarIcon, GridIcon, TrashIcon } from "./Button";
+import { CodePanel } from "./components/CodePanel";
 import React from "react";
 
 <Meta of={ButtonStories} />
+
+export const BUTTON_CODE = `import { Button } from '@/components/ui/button';
+
+export function Example() {
+  return (
+    <Button
+      variant="filled"
+      intent="primary"
+      size="md"
+      label="Continue"
+    />
+  );
+}
+
+// Variants: filled | outlined | tonal | ghost
+// Intents:  primary | success | warning | error | neutral
+// Sizes:    xs | sm | md | lg | xl
+`;
 
 export const ButtonConfigurator = () => {
   const [variant, setVariant] = React.useState("filled");
@@ -18,7 +37,7 @@ export const ButtonConfigurator = () => {
   const sizes    = ["xs", "sm", "md", "lg", "xl"];
 
   const intentColors = {
-    primary: "#4169E1", success: "#2D9C93", warning: "#FF9F05",
+    primary: "#4169E1", success: "#519E8A", warning: "#FF9F05",
     error: "#D13145", neutral: "#6B7280",
   };
 
@@ -95,8 +114,10 @@ export const ButtonConfigurator = () => {
   {/* ─── Live Configurator ──────────────────────────────────────── */}
   <div className="bd-section">
     <h2>Live Configurator</h2>
-    <p className="bd-desc">Toggle variant, intent, size, and options to see the button update in real time.</p>
-    <ButtonConfigurator />
+    <p className="bd-desc">Toggle variant, intent, size, and options to see the button update in real time. Switch to the Code tab for a copyable example.</p>
+    <CodePanel code={BUTTON_CODE} filename="Button.tsx" language="tsx">
+      <ButtonConfigurator />
+    </CodePanel>
   </div>
 
   {/* ─── Primary Button ─────────────────────────────────────────── */}
@@ -305,7 +326,7 @@ export const ButtonConfigurator = () => {
     align-items: center;
     justify-content: center;
     min-height: 140px;
-    background: #F4F6FE;
+    background: #F5F7FD;
     border-bottom: 1px solid #E5E7EB;
     padding: 32px;
   }
@@ -488,7 +509,7 @@ export const ButtonConfigurator = () => {
   }
   .bd-size-meta code {
     font-size: 11px;
-    background: #E8EEFB;
+    background: #ECF0FC;
     color: #4169E1;
     padding: 1px 6px;
     border-radius: 3px;

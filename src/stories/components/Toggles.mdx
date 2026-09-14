@@ -95,7 +95,7 @@ export const TogglePlayground = () => {
     <div className="tgp-wrap">
       {/* Preview */}
       <div className="tgp-preview">
-        <label
+        <div
           className="tgp-toggle-label"
           style={{ opacity: disabled ? 0.45 : 1, cursor: disabled ? "not-allowed" : "pointer" }}
         >
@@ -118,7 +118,7 @@ export const TogglePlayground = () => {
               {checked ? "On" : "Off"}
             </span>
           )}
-        </label>
+        </div>
       </div>
 
       {/* Controls */}
@@ -168,7 +168,7 @@ export const TogglePlayground = () => {
   <div className="tg-section">
     <h2>Live Playground</h2>
     <p className="tg-desc">Click the toggle or use the controls below to explore all states. Switch to the Code tab to copy the component implementation.</p>
-    <CodePanel code={TOGGLE_CODE}>
+    <CodePanel code={TOGGLE_CODE} filename="Toggle.tsx" language="tsx">
       <TogglePlayground />
     </CodePanel>
   </div>
@@ -180,38 +180,38 @@ export const TogglePlayground = () => {
     <div className="tg-states-row">
 
       <div className="tg-state-group">
-        <label className="tg-toggle-label">
+        <div className="tg-toggle-label">
           <span className="tg-track tg-track--off">
             <span className="tg-thumb tg-thumb--off" />
           </span>
-        </label>
+        </div>
         <span className="tg-state-tag">OFF</span>
       </div>
 
       <div className="tg-state-group">
-        <label className="tg-toggle-label">
+        <div className="tg-toggle-label">
           <span className="tg-track tg-track--on">
             <span className="tg-thumb tg-thumb--on" />
           </span>
-        </label>
+        </div>
         <span className="tg-state-tag">ON</span>
       </div>
 
       <div className="tg-state-group">
-        <label className="tg-toggle-label" style={{ opacity: 0.45, cursor: "not-allowed" }}>
+        <div className="tg-toggle-label" style={{ opacity: 0.45, cursor: "not-allowed" }}>
           <span className="tg-track tg-track--off">
             <span className="tg-thumb tg-thumb--off" />
           </span>
-        </label>
+        </div>
         <span className="tg-state-tag">DISABLED OFF</span>
       </div>
 
       <div className="tg-state-group">
-        <label className="tg-toggle-label" style={{ opacity: 0.45, cursor: "not-allowed" }}>
+        <div className="tg-toggle-label" style={{ opacity: 0.45, cursor: "not-allowed" }}>
           <span className="tg-track tg-track--on">
             <span className="tg-thumb tg-thumb--on" />
           </span>
-        </label>
+        </div>
         <span className="tg-state-tag">DISABLED ON</span>
       </div>
 
@@ -225,17 +225,17 @@ export const TogglePlayground = () => {
 
     <div className="tg-states-row">
       <div className="tg-state-group">
-        <label className="tg-toggle-label">
+        <div className="tg-toggle-label">
           <span className="tg-track tg-track--off"><span className="tg-thumb tg-thumb--off" /></span>
           <span className="tg-label-text tg-label-text--off">Off</span>
-        </label>
+        </div>
         <span className="tg-state-tag">OFF</span>
       </div>
       <div className="tg-state-group">
-        <label className="tg-toggle-label">
+        <div className="tg-toggle-label">
           <span className="tg-track tg-track--on"><span className="tg-thumb tg-thumb--on" /></span>
           <span className="tg-label-text tg-label-text--on">On</span>
-        </label>
+        </div>
         <span className="tg-state-tag">ON</span>
       </div>
     </div>
@@ -310,6 +310,7 @@ export const TogglePlayground = () => {
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    user-select: none;
   }
 
   .tg-label-text {
@@ -326,6 +327,7 @@ export const TogglePlayground = () => {
     gap: 40px;
     align-items: flex-start;
     margin-bottom: 4px;
+    user-select: none;
   }
 
   .tg-state-group {
@@ -366,6 +368,7 @@ export const TogglePlayground = () => {
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    user-select: none;
   }
 
   .tgp-track {
@@ -424,7 +427,7 @@ export const TogglePlayground = () => {
     cursor: pointer;
     transition: all 0.12s;
   }
-  .tgp-chip:hover { border-color: #4169E1; background: #E8EEFB; color: #2B44BF; }
+  .tgp-chip:hover { border-color: #4169E1; background: #ECF0FC; color: #2F50C1; }
   .tgp-chip--on   { background: #4169E1; border-color: #4169E1; color: #FFFFFF; }
   .tgp-state-display { font-size: 12px; color: #9CA3AF; padding-top: 4px; }
   .tgp-state-display strong { color: #374151; }

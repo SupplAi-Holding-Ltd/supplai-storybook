@@ -1,7 +1,8 @@
 /**
- * supplai grey scale (foundation/Colors.mdx) — sidebar brand logo (0.6 = 20% up from 0.5).
- * Brand link uses `brandTitle` as its accessible title in Storybook’s manager UI.
+ * Dark sidebar + Hugeicons nav labels.
+ * Search + settings remain Storybook defaults (theme-driven).
  */
+
 a[title='supplai'] {
   display: inline-flex;
   align-items: center;
@@ -10,4 +11,91 @@ a[title='supplai'] {
 a[title='supplai'] img {
   transform: scale(0.6);
   transform-origin: left center;
+}
+
+/* Custom label + icon row */
+.sb-nav-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.sb-nav-icon {
+  flex-shrink: 0;
+  color: #94A3B8;
+}
+
+.sb-nav-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*
+ * Hide Storybook's default type icon (DocumentIcon) when we render a Hugeicon.
+ * data-nodetype lives on the <a>/<button>, not a parent wrapper.
+ */
+a[data-nodetype='document']:has(.sb-nav-label) > svg,
+a[data-nodetype='document']:has(.sb-nav-label) > *:not(.sb-nav-label),
+button[data-nodetype='document']:has(.sb-nav-label) > svg,
+button[data-nodetype='document']:has(.sb-nav-label) > *:not(.sb-nav-label),
+.sidebar-item[data-nodetype='document']:has(.sb-nav-label) > a > svg,
+.sidebar-item[data-nodetype='document']:has(.sb-nav-label) > a > *:not(.sb-nav-label) {
+  display: none !important;
+}
+
+/* Fallback: any leftover default SVG outside our label */
+a[data-nodetype='document']:has(.sb-nav-label) svg:not(.sb-nav-icon),
+.sidebar-item[data-nodetype='document']:has(.sb-nav-label) svg:not(.sb-nav-icon) {
+  display: none !important;
+}
+
+/* Selected / hover icon color */
+.sidebar-item[data-selected='true'] .sb-nav-icon,
+[data-selected='true'] .sb-nav-icon,
+a[data-selected='true'] .sb-nav-icon {
+  color: #89B4FA;
+}
+
+.sidebar-item:hover .sb-nav-icon,
+a.sidebar-item:hover .sb-nav-icon {
+  color: #E2E8F0;
+}
+
+.sidebar-item[data-selected='true']:hover .sb-nav-icon,
+a[data-selected='true']:hover .sb-nav-icon {
+  color: #B4C6FC;
+}
+
+/* Soft spacing between root groups */
+#storybook-explorer-menu [data-nodetype='root'] {
+  margin-top: 8px;
+  padding-top: 4px;
+}
+
+#storybook-explorer-menu [data-nodetype='root']:first-child {
+  margin-top: 0;
+}
+
+#storybook-explorer-menu button[data-nodetype='root'] {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+#storybook-explorer-menu .sidebar-item {
+  border-radius: 8px;
+  margin-inline: 4px;
+}
+
+#storybook-explorer-menu .sidebar-item[data-selected='true'],
+#storybook-explorer-menu a.sidebar-item[data-selected='true'] {
+  background: rgba(65, 105, 225, 0.18) !important;
+  color: #F8FAFC !important;
+  font-weight: 600;
+}
+
+#storybook-explorer-menu .sidebar-item:hover:not([data-selected='true']),
+#storybook-explorer-menu a.sidebar-item:hover:not([data-selected='true']) {
+  background: rgba(148, 163, 184, 0.1) !important;
 }
