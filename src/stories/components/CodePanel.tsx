@@ -13,6 +13,9 @@ type CodePanelProps = {
 };
 
 const CODE_FONT = '"JetBrains Mono", ui-monospace, monospace';
+/** Applied to pre, gutters, and every token — keep in sync with global.css */
+const CODE_FONT_SIZE = '12px';
+const CODE_LINE_HEIGHT = '19px';
 
 const LIGATURE_STYLE: React.CSSProperties = {
   fontVariantLigatures: 'common-ligatures contextual',
@@ -27,8 +30,8 @@ const editorTheme = {
     backgroundColor: '#1E1E2E',
     color: '#CDD6F4',
     fontFamily: CODE_FONT,
-    fontSize: '12px',
-    lineHeight: '20px',
+    fontSize: CODE_FONT_SIZE,
+    lineHeight: CODE_LINE_HEIGHT,
   },
   styles: [
     ...themes.vsDark.styles,
@@ -173,19 +176,44 @@ export function CodePanel({
                   margin: 0,
                   background: '#1E1E2E',
                   fontFamily: CODE_FONT,
+                  fontSize: CODE_FONT_SIZE,
+                  lineHeight: CODE_LINE_HEIGHT,
                 }}
               >
-                <code className="cpanel__code-root">
+                <code
+                  className="cpanel__code-root"
+                  style={{
+                    fontFamily: CODE_FONT,
+                    fontSize: CODE_FONT_SIZE,
+                    lineHeight: CODE_LINE_HEIGHT,
+                  }}
+                >
                   {tokens.map((line, i) => (
                     <div
                       key={i}
                       {...getLineProps({ line })}
                       className="cpanel__line"
+                      style={{ fontSize: CODE_FONT_SIZE, lineHeight: CODE_LINE_HEIGHT }}
                     >
-                      <span className="cpanel__gutter" aria-hidden="true">
+                      <span
+                        className="cpanel__gutter"
+                        aria-hidden="true"
+                        style={{
+                          fontFamily: CODE_FONT,
+                          fontSize: CODE_FONT_SIZE,
+                          lineHeight: CODE_LINE_HEIGHT,
+                        }}
+                      >
                         {i + 1}
                       </span>
-                      <span className="cpanel__line-content">
+                      <span
+                        className="cpanel__line-content"
+                        style={{
+                          fontFamily: CODE_FONT,
+                          fontSize: CODE_FONT_SIZE,
+                          lineHeight: CODE_LINE_HEIGHT,
+                        }}
+                      >
                         {line.map((token, key) => {
                           const props = getTokenProps({ token });
                           return (
@@ -196,6 +224,8 @@ export function CodePanel({
                                 ...props.style,
                                 ...LIGATURE_STYLE,
                                 fontFamily: CODE_FONT,
+                                fontSize: CODE_FONT_SIZE,
+                                lineHeight: CODE_LINE_HEIGHT,
                               }}
                             />
                           );

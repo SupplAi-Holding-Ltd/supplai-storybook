@@ -1,0 +1,1118 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import React from "react";
+import {
+  Bell,
+  Folder,
+  Lock,
+  Mail,
+  Shield,
+} from "@meistericons/react";
+import { CodePanel } from "./CodePanel";
+
+<Meta title="Components/Accordion" />
+
+export const ACCORDION_CODE = `// Accordion · supplai Design System
+import React, { useState } from 'react';
+
+// variant:   box | table | open
+// indicator: chevron | plus-minus
+// type:      single | multiple
+
+function Accordion({
+  type = 'single',
+  collapsible = true,
+  variant = 'box',
+  indicator = 'chevron',
+  defaultValue,
+  children,
+}) {
+  const [open, setOpen] = useState(() => {
+    if (defaultValue == null) return type === 'multiple' ? [] : null;
+    return type === 'multiple'
+      ? (Array.isArray(defaultValue) ? defaultValue : [defaultValue])
+      : defaultValue;
+  });
+
+  const isOpen = (value) =>
+    type === 'multiple' ? open.includes(value) : open === value;
+
+  const toggle = (value) => {
+    if (type === 'multiple') {
+      setOpen((prev) =>
+        prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
+      );
+      return;
+    }
+    setOpen((prev) => (prev === value && collapsible ? null : value));
+  };
+
+  return (
+    <div className={\`ac ac--\${variant}\`} data-orientation="vertical">
+      {React.Children.map(children, (child) =>
+        React.isValidElement(child)
+          ? React.cloneElement(child, {
+              open: isOpen(child.props.value),
+              onToggle: () => toggle(child.props.value),
+              indicator,
+              variant,
+            })
+          : child
+      )}
+    </div>
+  );
+}
+
+function AccordionItem({ value, disabled, open, onToggle, indicator, variant, children }) {
+  return (
+    <div
+      className={\`ac-item\${open ? ' ac-item--open' : ''}\${disabled ? ' ac-item--disabled' : ''}\`}
+      data-state={open ? 'open' : 'closed'}
+    >
+      {React.Children.map(children, (child) =>
+        React.isValidElement(child)
+          ? React.cloneElement(child, { open, onToggle, disabled, indicator, variant })
+          : child
+      )}
+    </div>
+  );
+}
+
+function AccordionTrigger({ children, open, onToggle, disabled, indicator, leading }) {
+  return (
+    <button
+      type="button"
+      className="ac-trigger"
+      aria-expanded={!!open}
+      disabled={disabled}
+      onClick={() => !disabled && onToggle?.()}
+    >
+      {leading}
+      <span className="ac-trigger-label">{children}</span>
+      <span className={\`ac-indicator ac-indicator--\${indicator}\${open ? ' ac-indicator--open' : ''}\`} aria-hidden="true" />
+    </button>
+  );
+}
+
+function AccordionContent({ children, open }) {
+  return (
+    <div className={\`ac-content\${open ? ' ac-content--open' : ''}\`} aria-hidden={!open}>
+      <div className="ac-content-inner">{children}</div>
+    </div>
+  );
+}
+`;
+
+export const ChevronIcon = ({ open = false, size = 16 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 16 16"
+    fill="none"
+    aria-hidden="true"
+    style={{
+      display: "block",
+      transition: "transform 0.2s ease",
+      transform: open ? "rotate(180deg)" : "rotate(0deg)",
+    }}
+  >
+    <path
+      d="M4 6l4 4 4-4"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const PlusMinusIcon = ({ open = false, size = 16 }) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M3.5 8h9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    {!open && (
+      <path d="M8 3.5v9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    )}
+  </svg>
+);
+
+export const Accordion = ({
+  type = "single",
+  collapsible = true,
+  variant = "box",
+  indicator = "chevron",
+  defaultValue,
+  value: controlledValue,
+  onValueChange,
+  children,
+  className = "",
+}) => {
+  const [uncontrolled, setUncontrolled] = React.useState(() => {
+    if (defaultValue == null) return type === "multiple" ? [] : null;
+    return type === "multiple"
+      ? Array.isArray(defaultValue)
+        ? defaultValue
+        : [defaultValue]
+      : defaultValue;
+  });
+
+  const openState = controlledValue !== undefined ? controlledValue : uncontrolled;
+
+  const isOpen = (value) =>
+    type === "multiple"
+      ? Array.isArray(openState) && openState.includes(value)
+      : openState === value;
+
+  const toggle = (value) => {
+    let next;
+    if (type === "multiple") {
+      const prev = Array.isArray(openState) ? openState : [];
+      next = prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value];
+    } else {
+      next = openState === value && collapsible ? null : value;
+    }
+    if (controlledValue === undefined) setUncontrolled(next);
+    onValueChange?.(next);
+  };
+
+  return (
+    <div
+      className={`ac ac--${variant}${className ? ` ${className}` : ""}`}
+      data-orientation="vertical"
+    >
+      {React.Children.map(children, (child) =>
+        React.isValidElement(child)
+          ? React.cloneElement(child, {
+              open: isOpen(child.props.value),
+              onToggle: () => toggle(child.props.value),
+              indicator,
+              variant,
+            })
+          : child
+      )}
+    </div>
+  );
+};
+
+export const AccordionItem = ({
+  value,
+  disabled = false,
+  open,
+  onToggle,
+  indicator,
+  variant,
+  children,
+  className = "",
+}) => (
+  <div
+    className={`ac-item${open ? " ac-item--open" : ""}${disabled ? " ac-item--disabled" : ""}${className ? ` ${className}` : ""}`}
+    data-state={open ? "open" : "closed"}
+  >
+    {React.Children.map(children, (child) =>
+      React.isValidElement(child)
+        ? React.cloneElement(child, { open, onToggle, disabled, indicator, variant })
+        : child
+    )}
+  </div>
+);
+
+export const AccordionTrigger = ({
+  children,
+  open,
+  onToggle,
+  disabled,
+  indicator = "chevron",
+  leading,
+  trailing,
+  chevronSide = "right",
+  className = "",
+}) => {
+  const indicatorNode =
+    indicator === "plus-minus" ? (
+      <PlusMinusIcon open={!!open} />
+    ) : (
+      <ChevronIcon open={!!open} />
+    );
+
+  return (
+    <button
+      type="button"
+      className={`ac-trigger ac-trigger--chevron-${chevronSide}${className ? ` ${className}` : ""}`}
+      aria-expanded={!!open}
+      disabled={disabled}
+      onClick={() => !disabled && onToggle?.()}
+    >
+      {chevronSide === "left" && (
+        <span className="ac-indicator" aria-hidden="true">
+          {indicatorNode}
+        </span>
+      )}
+      {leading && <span className="ac-leading">{leading}</span>}
+      <span className="ac-trigger-body">{children}</span>
+      {trailing && <span className="ac-trailing">{trailing}</span>}
+      {chevronSide === "right" && (
+        <span className="ac-indicator" aria-hidden="true">
+          {indicatorNode}
+        </span>
+      )}
+    </button>
+  );
+};
+
+export const AccordionContent = ({ children, open, className = "" }) => (
+  <div
+    className={`ac-content${open ? " ac-content--open" : ""}${className ? ` ${className}` : ""}`}
+    role="region"
+    aria-hidden={!open}
+  >
+    <div className="ac-content-inner">{children}</div>
+  </div>
+);
+
+export const SAMPLE_ITEMS = [
+  {
+    value: "item-1",
+    title: "What is an accordion?",
+    body: "A set of vertically stacked headings that each reveal a section of content when clicked — ideal for FAQs and dense settings.",
+  },
+  {
+    value: "item-2",
+    title: "When should I use it?",
+    body: "Use accordions to organize large amounts of related information without overwhelming the page. Prefer tabs when sections are peers scanned horizontally.",
+  },
+  {
+    value: "item-3",
+    title: "Accessibility",
+    body: "Triggers expose aria-expanded. Keep one clear heading per item, and ensure keyboard users can move focus and activate with Enter or Space.",
+  },
+];
+
+export const AccordionPlayground = () => {
+  const [variant, setVariant] = React.useState("box");
+  const [indicator, setIndicator] = React.useState("chevron");
+  const [type, setType] = React.useState("single");
+
+  return (
+    <div className="acp-wrap">
+      <div className="acp-preview">
+        <Accordion
+          key={`${variant}-${indicator}-${type}`}
+          type={type}
+          collapsible
+          variant={variant}
+          indicator={indicator}
+          defaultValue={type === "multiple" ? ["item-1"] : "item-1"}
+        >
+          {SAMPLE_ITEMS.map((item) => (
+            <AccordionItem key={item.value} value={item.value}>
+              <AccordionTrigger>{item.title}</AccordionTrigger>
+              <AccordionContent>
+                <p>{item.body}</p>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+      <div className="acp-controls">
+        <div className="acp-ctrl-group">
+          <span className="acp-ctrl-label">Variant</span>
+          <div className="acp-chips">
+            {["box", "table", "open"].map((v) => (
+              <button
+                key={v}
+                type="button"
+                className={`acp-chip ${variant === v ? "acp-chip--on" : ""}`}
+                onClick={() => setVariant(v)}
+              >
+                {v}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="acp-ctrl-group">
+          <span className="acp-ctrl-label">Indicator</span>
+          <div className="acp-chips">
+            {["chevron", "plus-minus"].map((v) => (
+              <button
+                key={v}
+                type="button"
+                className={`acp-chip ${indicator === v ? "acp-chip--on" : ""}`}
+                onClick={() => setIndicator(v)}
+              >
+                {v}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="acp-ctrl-group">
+          <span className="acp-ctrl-label">Type</span>
+          <div className="acp-chips">
+            {["single", "multiple"].map((v) => (
+              <button
+                key={v}
+                type="button"
+                className={`acp-chip ${type === v ? "acp-chip--on" : ""}`}
+                onClick={() => setType(v)}
+              >
+                {v}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const DemoList = ({ variant = "box", indicator = "chevron", defaultValue = "item-1", disabledValues = [], type = "single" }) => (
+  <Accordion type={type} variant={variant} indicator={indicator} defaultValue={defaultValue} collapsible>
+    {SAMPLE_ITEMS.map((item) => (
+      <AccordionItem key={item.value} value={item.value} disabled={disabledValues.includes(item.value)}>
+        <AccordionTrigger>{item.title}</AccordionTrigger>
+        <AccordionContent>
+          <p>{item.body}</p>
+        </AccordionContent>
+      </AccordionItem>
+    ))}
+  </Accordion>
+);
+
+<div className="ac-page">
+
+  <div className="ac-header">
+    <h1>Accordion</h1>
+    <p>
+      Clean, stacked panels that expand and collapse to organize large amounts of information —
+      patterned after{" "}
+      <a href="https://radianui.com/docs/components/accordion" target="_blank" rel="noreferrer">
+        Radian UI Accordion
+      </a>
+      , using supplai color tokens.
+    </p>
+  </div>
+
+  <div className="ac-section">
+    <h2>Live Playground</h2>
+    <p className="ac-lede">
+      Switch variant, indicator, and single vs multiple open. Open the Code tab for an implementation sketch.
+    </p>
+    <CodePanel code={ACCORDION_CODE} filename="Accordion.tsx" language="tsx">
+      <AccordionPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="ac-section">
+    <h2>Variants</h2>
+    <p className="ac-lede">
+      <code>box</code> (default), <code>table</code>, and <code>open</code> control chrome weight.
+    </p>
+    <div className="ac-demo-grid">
+      <div className="ac-demo">
+        <span className="ac-demo-label">Box</span>
+        <DemoList variant="box" defaultValue="item-1" />
+      </div>
+      <div className="ac-demo">
+        <span className="ac-demo-label">Table</span>
+        <DemoList variant="table" defaultValue="item-1" />
+      </div>
+      <div className="ac-demo">
+        <span className="ac-demo-label">Open</span>
+        <DemoList variant="open" defaultValue="item-1" />
+      </div>
+    </div>
+  </div>
+
+  <div className="ac-section">
+    <h2>Disabled state</h2>
+    <p className="ac-lede">Disable individual items when a section is unavailable.</p>
+    <div className="ac-demo">
+      <DemoList variant="box" defaultValue="item-1" disabledValues={["item-2"]} />
+    </div>
+  </div>
+
+  <div className="ac-section">
+    <h2>Plus / minus indicator</h2>
+    <p className="ac-lede">
+      Set <code>indicator="plus-minus"</code> instead of the default chevron.
+    </p>
+    <div className="ac-demo">
+      <DemoList variant="box" indicator="plus-minus" defaultValue="item-1" />
+    </div>
+  </div>
+
+  <div className="ac-section">
+    <h2>With icons</h2>
+    <p className="ac-lede">Lead each trigger with an icon for quicker scanning.</p>
+    <div className="ac-demo">
+      <Accordion variant="box" defaultValue="mail" collapsible>
+        <AccordionItem value="mail">
+          <AccordionTrigger leading={<Mail size={18} />}>Email preferences</AccordionTrigger>
+          <AccordionContent>
+            <p>Choose which product emails you receive — digests, alerts, and marketing.</p>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="notify">
+          <AccordionTrigger leading={<Bell size={18} />}>Notifications</AccordionTrigger>
+          <AccordionContent>
+            <p>Push and in-app notification settings for your workspace.</p>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="security">
+          <AccordionTrigger leading={<Shield size={18} />}>Security</AccordionTrigger>
+          <AccordionContent>
+            <p>Two-factor authentication, sessions, and connected devices.</p>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  </div>
+
+  <div className="ac-section">
+    <h2>Nested accordion</h2>
+    <p className="ac-lede">Nest an accordion inside content for hierarchical topics.</p>
+    <div className="ac-demo">
+      <Accordion variant="box" defaultValue="parent-1" collapsible>
+        <AccordionItem value="parent-1">
+          <AccordionTrigger>Marketing campaigns</AccordionTrigger>
+          <AccordionContent>
+            <Accordion variant="open" indicator="plus-minus" defaultValue="child-1" collapsible className="ac--nested">
+              <AccordionItem value="child-1">
+                <AccordionTrigger>Email campaign</AccordionTrigger>
+                <AccordionContent>
+                  <p>Segment lists, schedule sends, and track open rates.</p>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="child-2">
+                <AccordionTrigger>Social media ads</AccordionTrigger>
+                <AccordionContent>
+                  <ol className="ac-steps">
+                    <li>Choose platform matching your audience.</li>
+                    <li>Set a daily budget and campaign duration.</li>
+                    <li>Upload creative assets and write ad copy.</li>
+                    <li>Monitor click-through rates and adjust.</li>
+                  </ol>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="parent-2">
+          <AccordionTrigger>Customer research</AccordionTrigger>
+          <AccordionContent>
+            <p>Interview notes, surveys, and persona insights live here.</p>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  </div>
+
+  <div className="ac-section">
+    <h2>Chevron on left</h2>
+    <p className="ac-lede">Flip the indicator with <code>chevronSide="left"</code>.</p>
+    <div className="ac-demo">
+      <Accordion variant="box" defaultValue="item-1" collapsible>
+        {SAMPLE_ITEMS.map((item) => (
+          <AccordionItem key={item.value} value={item.value}>
+            <AccordionTrigger chevronSide="left">{item.title}</AccordionTrigger>
+            <AccordionContent>
+              <p>{item.body}</p>
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </div>
+  </div>
+
+  <div className="ac-section">
+    <h2>With avatar</h2>
+    <p className="ac-lede">Pair people or roles with expandable profiles.</p>
+    <div className="ac-demo">
+      <Accordion variant="box" defaultValue="jasper" collapsible>
+        <AccordionItem value="willow">
+          <AccordionTrigger
+            leading={
+              <span className="ac-avatar" style={{ background: "#ECF0FC", color: "#2F50C1" }}>
+                W
+              </span>
+            }
+          >
+            <span className="ac-title-stack">
+              <span className="ac-title">Willow Rodriguez</span>
+              <span className="ac-sub">File Owner</span>
+            </span>
+          </AccordionTrigger>
+          <AccordionContent>
+            <p>Owns document permissions and sharing policies for this workspace.</p>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="jasper">
+          <AccordionTrigger
+            leading={
+              <span className="ac-avatar" style={{ background: "#EEF6F4", color: "#28716C" }}>
+                J
+              </span>
+            }
+          >
+            <span className="ac-title-stack">
+              <span className="ac-title">Jasper Moreau</span>
+              <span className="ac-sub">Admin</span>
+            </span>
+          </AccordionTrigger>
+          <AccordionContent>
+            <p>
+              Jasper manages infrastructure, network security, and data integrity of the platform.
+            </p>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="luna">
+          <AccordionTrigger
+            leading={
+              <span className="ac-avatar" style={{ background: "#F1F5F9", color: "#475569" }}>
+                L
+              </span>
+            }
+          >
+            <span className="ac-title-stack">
+              <span className="ac-title">Luna Ramirez</span>
+              <span className="ac-sub">Viewer</span>
+            </span>
+          </AccordionTrigger>
+          <AccordionContent>
+            <p>Read-only access to shared folders and published reports.</p>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  </div>
+
+  <div className="ac-section">
+    <h2>Dotted connector</h2>
+    <p className="ac-lede">Use a dotted guide for sequential or nested steps.</p>
+    <div className="ac-demo">
+      <Accordion variant="open" defaultValue="step-1" collapsible className="ac--dotted">
+        <AccordionItem value="step-1">
+          <AccordionTrigger leading={<span className="ac-dot" />}>
+            Choose platform matching your audience
+          </AccordionTrigger>
+          <AccordionContent>
+            <p>Match channel to where your buyers already spend time.</p>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="step-2">
+          <AccordionTrigger leading={<span className="ac-dot" />}>
+            Set budget and duration
+          </AccordionTrigger>
+          <AccordionContent>
+            <p>Lock a daily cap and end date before creative goes live.</p>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="step-3">
+          <AccordionTrigger leading={<span className="ac-dot" />}>
+            Upload assets and copy
+          </AccordionTrigger>
+          <AccordionContent>
+            <p>Ship brand-safe creatives with clear CTAs.</p>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  </div>
+
+  <div className="ac-section">
+    <h2>Icon, sub-header, and chevron</h2>
+    <p className="ac-lede">Settings-style rows with icon, title, description, and indicator.</p>
+    <div className="ac-demo">
+      <Accordion variant="table" defaultValue="accounts" collapsible>
+        <AccordionItem value="accounts">
+          <AccordionTrigger leading={<Folder size={18} />}>
+            <span className="ac-title-stack">
+              <span className="ac-title">Connected accounts</span>
+              <span className="ac-sub">Manage your linked social and work accounts</span>
+            </span>
+          </AccordionTrigger>
+          <AccordionContent>
+            <p>Connect Google, Slack, or Microsoft to sync profiles and calendars.</p>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="notifications">
+          <AccordionTrigger leading={<Bell size={18} />}>
+            <span className="ac-title-stack">
+              <span className="ac-title">Notifications</span>
+              <span className="ac-sub">Customize your notification preferences</span>
+            </span>
+          </AccordionTrigger>
+          <AccordionContent>
+            <p>Pick email, push, or in-app channels per event type.</p>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="2fa">
+          <AccordionTrigger leading={<Lock size={18} />}>
+            <span className="ac-title-stack">
+              <span className="ac-title">2-step verification</span>
+              <span className="ac-sub">Add an extra layer of security to your account</span>
+            </span>
+          </AccordionTrigger>
+          <AccordionContent>
+            <p>
+              Protect your account with authenticator apps, SMS codes, or security keys. Prefer an
+              authenticator app for the strongest protection.
+            </p>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  </div>
+
+  <div className="ac-section">
+    <h2>Specs</h2>
+    <div className="ac-specs-grid">
+      <div className="ac-spec-card">
+        <span className="ac-spec-label">Variants</span>
+        <span className="ac-spec-value">box · table · open</span>
+      </div>
+      <div className="ac-spec-card">
+        <span className="ac-spec-label">Indicator</span>
+        <span className="ac-spec-value">chevron · plus-minus</span>
+      </div>
+      <div className="ac-spec-card">
+        <span className="ac-spec-label">Type</span>
+        <span className="ac-spec-value">single · multiple</span>
+      </div>
+      <div className="ac-spec-card">
+        <span className="ac-spec-label">Trigger</span>
+        <span className="ac-spec-value">14px / 600 · Brand Blue focus</span>
+      </div>
+      <div className="ac-spec-card">
+        <span className="ac-spec-label">Radius</span>
+        <span className="ac-spec-value">10px (box) · flush (table)</span>
+      </div>
+      <div className="ac-spec-card">
+        <span className="ac-spec-label">Tokens</span>
+        <span className="ac-spec-value">#4169E1 · #E2E8F0 · #0F172A</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  {`
+  .ac-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 0 64px;
+    font-family: inherit;
+  }
+
+  .ac-header {
+    margin-bottom: 40px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #E2E8F0;
+  }
+
+  .ac-header h1 {
+    margin: 0 0 10px;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #0F172A;
+  }
+
+  .ac-header p {
+    margin: 0;
+    max-width: 640px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #64748B;
+  }
+
+  .ac-header a {
+    color: #4169E1;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .ac-header a:hover {
+    text-decoration: underline;
+  }
+
+  .ac-section {
+    margin-bottom: 48px;
+  }
+
+  .ac-section h2 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0F172A;
+  }
+
+  .ac-lede {
+    margin: 0 0 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #64748B;
+  }
+
+  .ac-lede code {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: #ECF0FC;
+    color: #2F50C1;
+  }
+
+  .ac-demo-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .ac-demo {
+    padding: 20px;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    background: #FFFFFF;
+  }
+
+  .ac-demo-label {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #94A3B8;
+  }
+
+  /* Accordion atom */
+  .ac {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .ac--box .ac-item {
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    background: #FFFFFF;
+    overflow: hidden;
+  }
+
+  .ac--box .ac-item + .ac-item {
+    margin-top: 8px;
+  }
+
+  .ac--table {
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #FFFFFF;
+  }
+
+  .ac--table .ac-item + .ac-item {
+    border-top: 1px solid #E2E8F0;
+  }
+
+  .ac--open .ac-item + .ac-item {
+    border-top: 1px solid #E2E8F0;
+  }
+
+  .ac--nested {
+    margin-top: 4px;
+  }
+
+  .ac-item--disabled {
+    opacity: 0.45;
+  }
+
+  .ac-trigger {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 14px 16px;
+    border: none;
+    background: transparent;
+    font-family: Manrope, system-ui, sans-serif;
+    text-align: left;
+    cursor: pointer;
+    color: #0F172A;
+  }
+
+  .ac-trigger:hover:not(:disabled) {
+    background: #F8FAFC;
+  }
+
+  .ac-trigger:focus-visible {
+    outline: 2px solid #4169E1;
+    outline-offset: -2px;
+  }
+
+  .ac-trigger:disabled {
+    cursor: not-allowed;
+  }
+
+  .ac-trigger-body {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #0F172A;
+  }
+
+  .ac-leading {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #4169E1;
+  }
+
+  .ac-indicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #64748B;
+  }
+
+  .ac-item--open > .ac-trigger .ac-indicator {
+    color: #4169E1;
+  }
+
+  .ac-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.28s ease-in-out;
+  }
+
+  .ac-content--open {
+    grid-template-rows: 1fr;
+  }
+
+  .ac-content-inner {
+    overflow: hidden;
+    min-height: 0;
+    padding: 0 16px 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #64748B;
+    opacity: 0;
+    transition: opacity 0.22s ease-in-out, padding 0.28s ease-in-out;
+  }
+
+  .ac-content--open .ac-content-inner {
+    padding: 0 16px 16px;
+    opacity: 1;
+  }
+
+  .ac-content-inner p {
+    margin: 0;
+  }
+
+  .ac--table .ac-content-inner,
+  .ac--box .ac-content-inner {
+    padding-top: 0;
+  }
+
+  .ac-title-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .ac-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0F172A;
+  }
+
+  .ac-sub {
+    font-size: 12px;
+    font-weight: 500;
+    color: #64748B;
+  }
+
+  .ac-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .ac-steps {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  .ac-steps li {
+    margin-bottom: 6px;
+  }
+
+  .ac-steps li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Dotted connector — line centered on the 10px rail dots */
+  .ac--dotted {
+    --ac-dot-size: 10px;
+    --ac-trigger-pad-x: 16px;
+    --ac-trigger-pad-y: 14px;
+  }
+
+  .ac--dotted .ac-item {
+    position: relative;
+    padding-left: 0;
+  }
+
+  .ac--dotted .ac-leading {
+    width: var(--ac-dot-size);
+    height: var(--ac-dot-size);
+    flex-shrink: 0;
+  }
+
+  .ac--dotted .ac-item:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    /* Horizontal: pad-x + half of fixed 10px leading column */
+    left: calc(var(--ac-trigger-pad-x) + (var(--ac-dot-size) / 2));
+    /* Vertical: pad-y + half of trigger text line (leading is flex-centered with body) */
+    top: calc(var(--ac-trigger-pad-y) + (14px * 1.4 / 2));
+    bottom: calc(-1 * (var(--ac-trigger-pad-y) + (14px * 1.4 / 2)));
+    width: 0;
+    border-left: 2px dotted #CBD5E1;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .ac--dotted .ac-trigger,
+  .ac--dotted .ac-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .ac-dot {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #4169E1;
+    box-shadow: 0 0 0 3px #ECF0FC;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Playground */
+  .acp-wrap {
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #FFFFFF;
+  }
+
+  .acp-preview {
+    min-height: 160px;
+    padding: 24px;
+    border-bottom: 1px solid #E5E7EB;
+    background: #FFFFFF;
+  }
+
+  .acp-controls {
+    padding: 18px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .acp-ctrl-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .acp-ctrl-label {
+    width: 72px;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #94A3B8;
+  }
+
+  .acp-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .acp-chip {
+    padding: 4px 12px;
+    border-radius: 99px;
+    border: 1px solid #E2E8F0;
+    background: #F8FAFC;
+    font-family: Manrope, system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+  }
+
+  .acp-chip:hover {
+    border-color: #4169E1;
+    background: #ECF0FC;
+    color: #2F50C1;
+  }
+
+  .acp-chip--on {
+    background: #4169E1;
+    border-color: #4169E1;
+    color: #FFFFFF;
+  }
+
+  .ac-specs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .ac-spec-card {
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 14px 16px;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .ac-spec-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #94A3B8;
+  }
+
+  .ac-spec-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0F172A;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 700px) {
+    .ac-specs-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  `}
+</style>

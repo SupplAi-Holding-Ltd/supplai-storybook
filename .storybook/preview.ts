@@ -24,6 +24,8 @@ const preview: Preview = {
 
     options: {
       storySort: {
+        // Top-level + Foundation stay curated; Components (and nested) sort A–Z so new pages land in place
+        method: 'alphabetical',
         order: [
           'Introduction',
           'Foundation',
@@ -36,24 +38,6 @@ const preview: Preview = {
             'Grid and Layout',
           ],
           'Components',
-          [
-            'Button',
-            'Toggle',
-            'Tab Bars',
-            'Form Methods',
-            [
-              'Text Input',
-              'Password Input',
-              'Radio Buttons',
-              'Checkbox',
-            ],
-            'Toastr Notifications',
-            'Tooltips',
-            'Tables',
-            'Modals',
-            'Sidebar',
-            'Avatars',
-          ],
         ],
       },
     },

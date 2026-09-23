@@ -15,8 +15,10 @@
   },
   "dependencies": {
     "@fontsource/jetbrains-mono": "^5.2.8",
+    "date-fns": "^4.4.0",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.2.0",
+    "react-day-picker": "^10.0.1",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {

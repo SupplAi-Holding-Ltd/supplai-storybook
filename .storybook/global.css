@@ -63,6 +63,14 @@ h1, h2, h3, h4, h5, h6 {
   cursor: text;
 }
 
+/* Color token tables — prevent Storybook default table borders doubling edges */
+.sbdocs-content .cp-radian-table-wrap table,
+.sbdocs-content .cp-radian-table-wrap th,
+.sbdocs-content .cp-radian-table-wrap td {
+  border: 0 !important;
+  margin: 0 !important;
+}
+
 /* ── Code Panel — IDE-style Preview / Code playground ── */
 .cpanel {
   border: 1px solid #1E293B;
@@ -238,27 +246,68 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
+/* Force one size on the whole editor (pre + every Prism token span) */
+.cpanel__pre,
+.cpanel__pre code,
+.cpanel__pre .cpanel__line,
+.cpanel__pre .cpanel__gutter,
+.cpanel__pre .cpanel__line-content,
+.cpanel__pre .cpanel__line-content span,
+.cpanel__editor pre,
+.cpanel__editor code,
+.cpanel__editor .token,
+.cpanel__editor span {
+  font-family: "JetBrains Mono", ui-monospace, monospace !important;
+  font-size: 12px !important;
+  line-height: 19px !important;
+  letter-spacing: 0 !important;
+}
+
 .cpanel__pre {
   margin: 0 !important;
   padding: 0 !important;
   overflow: auto;
   max-height: 420px;
-  font-family: "JetBrains Mono", ui-monospace, monospace !important;
-  font-size: 12px !important;
-  line-height: 20px !important;
-  letter-spacing: 0 !important;
   tab-size: 2;
+  scrollbar-width: thin;
+  scrollbar-color: #45475A #181825;
+}
+
+.cpanel__pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.cpanel__pre::-webkit-scrollbar-track {
+  background: #181825;
+  border-left: 1px solid #313244;
+}
+
+.cpanel__pre::-webkit-scrollbar-thumb {
+  background: #45475A;
+  border-radius: 999px;
+  border: 2px solid #181825;
+  background-clip: padding-box;
+}
+
+.cpanel__pre::-webkit-scrollbar-thumb:hover {
+  background: #585B70;
+  border: 2px solid #181825;
+  background-clip: padding-box;
+}
+
+.cpanel__pre::-webkit-scrollbar-corner {
+  background: #181825;
 }
 
 .cpanel__code-root {
   display: block;
   min-width: max-content;
-  font-family: inherit !important;
 }
 
 .cpanel__line {
   display: flex;
-  min-height: 20px;
+  min-height: 19px;
 }
 
 .cpanel__line:hover {
@@ -267,15 +316,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .cpanel__gutter {
   display: inline-block;
-  width: 48px;
+  width: 40px;
   flex-shrink: 0;
   padding: 0 10px 0 0;
   text-align: right;
   user-select: none;
   color: #585B70;
-  font-family: "JetBrains Mono", ui-monospace, monospace !important;
-  font-size: 11px !important;
-  line-height: 20px !important;
   font-variant-ligatures: none !important;
   border-right: 1px solid #313244;
   background: #181825;
@@ -285,9 +331,6 @@ h1, h2, h3, h4, h5, h6 {
   flex: 1;
   padding: 0 18px 0 14px;
   white-space: pre;
-  font-family: "JetBrains Mono", ui-monospace, monospace !important;
-  font-size: 12px !important;
-  line-height: 20px !important;
   font-feature-settings: "liga" 1, "calt" 1 !important;
   font-variant-ligatures: common-ligatures contextual !important;
 }
@@ -310,10 +353,4 @@ h1, h2, h3, h4, h5, h6 {
   color: #A6ADC8;
 }
 
-.cpanel__editor pre,
-.cpanel__editor code,
-.cpanel__editor span {
-  font-family: "JetBrains Mono", ui-monospace, monospace !important;
-  letter-spacing: 0 !important;
-}
 

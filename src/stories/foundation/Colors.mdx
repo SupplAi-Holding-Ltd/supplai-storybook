@@ -33,7 +33,7 @@ export const PaletteRow = ({ shades, tag = "Base", columns }) => (
     style={columns ? { gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` } : undefined}
   >
     {shades.map(({ shade, hex, brand, base }) => {
-      const isBase = Boolean(brand || base || shade === "600");
+      const isBase = Boolean(brand || base);
       const label = brand ? "Brand" : tag;
       return (
         <div
@@ -55,9 +55,13 @@ export const PaletteRow = ({ shades, tag = "Base", columns }) => (
 
 export const TokenTable = ({ title, description, rows }) => (
   <div className="cp-radian">
-    {title && <h3 className="cp-radian-title">{title}</h3>}
-    {description && <p className="cp-radian-desc">{description}</p>}
     <div className="cp-radian-table-wrap">
+      {(title || description) && (
+        <div className="cp-radian-head">
+          {title && <h3 className="cp-radian-title">{title}</h3>}
+          {description && <p className="cp-radian-desc">{description}</p>}
+        </div>
+      )}
       <table className="cp-radian-table">
         <thead>
           <tr>
@@ -169,7 +173,7 @@ export const GREY = [
   { shade: "900", hex: "#0F172A" },
   { shade: "800", hex: "#1E293B" },
   { shade: "700", hex: "#334155" },
-  { shade: "600", hex: "#475569", base: true },
+  { shade: "600", hex: "#475569" },
   { shade: "500", hex: "#64748B" },
   { shade: "400", hex: "#94A3B8" },
   { shade: "300", hex: "#CBD5E1" },
@@ -289,10 +293,10 @@ export const GREY = [
   <div className="cp-section">
     <h2>Grey Palette</h2>
     <p className="cp-description">
-      A cool blue-tinted grey scale used for surfaces, borders, text, and backgrounds. <strong>600</strong> is the
-      mid-tone base for the scale.
+      A cool blue-tinted grey scale used for surfaces, borders, text, and backgrounds. Greys have no single base —
+      pick the shade that fits the role.
     </p>
-    <PaletteRow shades={GREY} tag="Base" />
+    <PaletteRow shades={GREY} />
   </div>
 
   <div className="cp-section">
@@ -325,30 +329,33 @@ export const GREY = [
       These are the designated surface colors for dark mode interfaces. They create depth through subtle layering
       without relying on pure black.
     </p>
-    <div className="cp-dark-surfaces">
-      <div className="cp-dark-card" style={{ background: "#0D0F13", flex: 2 }}>
+    <div className="cp-dark-surfaces" style={{ display: "flex", alignItems: "stretch", gap: 12, height: 252 }}>
+      <div
+        className="cp-dark-card cp-dark-card--surface"
+        style={{ background: "#0D0F13", flex: "2 1 0", alignSelf: "stretch", height: "100%", minHeight: "100%", boxSizing: "border-box" }}
+      >
         <div className="cp-dark-label-group">
           <span className="cp-dark-name">Surface</span>
           <span className="cp-dark-hex">#0D0F13</span>
         </div>
       </div>
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
-        <div className="cp-dark-card" style={{ background: "#1C2136", flex: 1 }}>
+      <div className="cp-dark-stack" style={{ flex: "1 1 0", display: "flex", flexDirection: "column", gap: 8, height: "100%", minHeight: 0 }}>
+        <div className="cp-dark-card" style={{ background: "#1C2136", flex: "1 1 0", minHeight: 0 }}>
           <div className="cp-dark-label-group">
             <span className="cp-dark-name">Surface 02</span>
             <span className="cp-dark-hex">#1C2136</span>
           </div>
         </div>
-        <div className="cp-dark-card" style={{ background: "rgba(65,105,225,0.35)", flex: 1, border: "1px solid rgba(65,105,225,0.4)" }}>
+        <div className="cp-dark-card" style={{ background: "rgba(65,105,225,0.35)", border: "1px solid rgba(65,105,225,0.4)", flex: "1 1 0", minHeight: 0 }}>
           <div className="cp-dark-label-group">
-            <span className="cp-dark-name">Accent 35%</span>
-            <span className="cp-dark-hex">#4169E1 · 35%</span>
+            <span className="cp-dark-name" style={{ color: "#1E293B" }}>Accent 35%</span>
+            <span className="cp-dark-hex" style={{ color: "#1E293B" }}>#4169E1 · 35%</span>
           </div>
         </div>
-        <div className="cp-dark-card" style={{ background: "rgba(65,105,225,0.15)", flex: 1, border: "1px solid rgba(65,105,225,0.25)" }}>
+        <div className="cp-dark-card" style={{ background: "rgba(65,105,225,0.15)", border: "1px solid rgba(65,105,225,0.25)", flex: "1 1 0", minHeight: 0 }}>
           <div className="cp-dark-label-group">
-            <span className="cp-dark-name">Accent 15%</span>
-            <span className="cp-dark-hex">#4169E1 · 15%</span>
+            <span className="cp-dark-name" style={{ color: "#1E293B" }}>Accent 15%</span>
+            <span className="cp-dark-hex" style={{ color: "#1E293B" }}>#4169E1 · 15%</span>
           </div>
         </div>
       </div>
@@ -790,8 +797,18 @@ export const GREY = [
 
   .cp-dark-surfaces {
     display: flex;
+    align-items: stretch;
     gap: 12px;
-    height: 180px;
+    height: 252px;
+  }
+
+  .cp-dark-stack {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 100%;
+    min-height: 0;
   }
 
   .cp-dark-card {
@@ -799,6 +816,19 @@ export const GREY = [
     padding: 16px;
     display: flex;
     align-items: flex-end;
+    box-sizing: border-box;
+  }
+
+  .cp-dark-stack .cp-dark-card {
+    flex: 1 1 0;
+    min-height: 0;
+  }
+
+  .cp-dark-card--surface {
+    flex: 2 1 0;
+    height: 100%;
+    min-height: 100%;
+    align-self: stretch;
   }
 
   .cp-dark-label-group {
@@ -823,47 +853,79 @@ export const GREY = [
     margin-bottom: 28px;
   }
 
+  .cp-radian-table-wrap {
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #FFFFFF;
+    padding: 0;
+  }
+
+  .cp-radian-head {
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid #E2E8F0;
+    background: #FFFFFF;
+  }
+
   .cp-radian-title {
-    margin: 0 0 4px;
+    margin: 0;
     font-size: 15px;
     font-weight: 700;
     color: #0F172A;
   }
 
   .cp-radian-desc {
-    margin: 0 0 12px;
+    margin: 4px 0 0;
     font-size: 13px;
     color: #64748B;
     line-height: 1.5;
   }
 
-  .cp-radian-table-wrap {
-    border: 1px solid #E2E8F0;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #FFFFFF;
+  /* Reset Storybook default table borders that cause thick/double edges */
+  .cp-radian-table-wrap table,
+  .cp-radian-table-wrap thead,
+  .cp-radian-table-wrap tbody,
+  .cp-radian-table-wrap tr,
+  .cp-radian-table-wrap th,
+  .cp-radian-table-wrap td {
+    border: 0 !important;
+    outline: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
   }
 
   .cp-radian-table {
     width: 100%;
     border-collapse: collapse;
+    border-spacing: 0;
     table-layout: fixed;
+    background: #FFFFFF;
   }
 
   .cp-radian-table th,
   .cp-radian-table td {
-    padding: 14px 16px;
+    padding: 14px 16px !important;
     text-align: left;
     vertical-align: middle;
-    border-bottom: 1px solid #F1F5F9;
+    /* Thin internal grid only — avoids doubling with the outer wrap border */
+    box-shadow: inset -1px 0 0 #E2E8F0, inset 0 -1px 0 #E2E8F0 !important;
   }
 
-  .cp-radian-table tr:last-child td {
-    border-bottom: none;
+  .cp-radian-table th:last-child,
+  .cp-radian-table td:last-child {
+    box-shadow: inset 0 -1px 0 #E2E8F0 !important;
+  }
+
+  .cp-radian-table tbody tr:last-child td {
+    box-shadow: inset -1px 0 0 #E2E8F0 !important;
+  }
+
+  .cp-radian-table tbody tr:last-child td:last-child {
+    box-shadow: none !important;
   }
 
   .cp-radian-table th {
-    background: #F8FAFC;
+    background: #F8FAFC !important;
     font-size: 13px;
     font-weight: 600;
     color: #64748B;
@@ -936,8 +998,15 @@ export const GREY = [
       flex-direction: column;
       height: auto;
     }
-    .cp-dark-card {
-      min-height: 80px;
+    .cp-dark-stack {
+      min-height: 200px;
+    }
+    .cp-dark-card--surface {
+      min-height: 120px;
+      height: 120px;
+    }
+    .cp-dark-stack .cp-dark-card {
+      min-height: 64px;
     }
     .cp-radian-table th:nth-child(3),
     .cp-radian-table td:nth-child(3) {

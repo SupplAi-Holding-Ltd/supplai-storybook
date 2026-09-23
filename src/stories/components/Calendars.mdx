@@ -1,0 +1,138 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  CALENDAR_CODE,
+  CalendarPlayground,
+  SingleCalendar,
+  RangeCalendar,
+  PresetsCalendar,
+  TimePickerCalendar,
+  DoubleCalendar,
+  FooterCalendar,
+  DropdownCalendar,
+  ManualTimeCalendar,
+  AvailabilityCalendar,
+} from "./Calendars";
+
+<Meta title="Components/Calendar" />
+
+<div className="cld-page">
+
+  <div className="cld-header">
+    <h1>Calendar</h1>
+    <p>
+      An easy-to-use visual calendar for picking dates, scheduling, and managing simple time frames — patterned after <a href="https://radianui.com/docs/components/calendar" target="_blank" rel="noreferrer">Radian UI Calendar</a>, using supplai color tokens.
+    </p>
+  </div>
+
+  <div className="cld-section">
+    <h2>Live Playground</h2>
+    <p className="cld-lede">
+      Toggle single vs range selection. Open the Code tab for an implementation sketch.
+    </p>
+    <CodePanel code={CALENDAR_CODE} filename="Calendar.tsx" language="tsx">
+      <CalendarPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="cld-section">
+    <h2>Single date</h2>
+    <div className="cld-demo">
+      <SingleCalendar />
+    </div>
+  </div>
+
+  <div className="cld-section">
+    <h2>Date range</h2>
+    <div className="cld-demo">
+      <RangeCalendar />
+    </div>
+  </div>
+
+  <div className="cld-section">
+    <h2>With quickview presets</h2>
+    <p className="cld-lede">Common ranges beside the calendar for analytics and filters.</p>
+    <div className="cld-demo">
+      <PresetsCalendar />
+    </div>
+  </div>
+
+  <div className="cld-section">
+    <h2>With time picker</h2>
+    <p className="cld-lede">Always-expanded list of selectable slots beside the calendar.</p>
+    <div className="cld-demo">
+      <TimePickerCalendar />
+    </div>
+  </div>
+
+  <div className="cld-section">
+    <h2>Double calendar</h2>
+    <p className="cld-lede">Two months for longer range selection.</p>
+    <div className="cld-demo cld-demo--scroll">
+      <DoubleCalendar />
+    </div>
+  </div>
+
+  <div className="cld-section">
+    <h2>With footer</h2>
+    <p className="cld-lede">Cancel / Apply commits the draft selection.</p>
+    <div className="cld-demo">
+      <FooterCalendar />
+    </div>
+  </div>
+
+  <div className="cld-section">
+    <h2>Year and month selector</h2>
+    <p className="cld-lede">Dropdown captions for jumping across years.</p>
+    <div className="cld-demo">
+      <DropdownCalendar />
+    </div>
+  </div>
+
+  <div className="cld-section">
+    <h2>Manual time input</h2>
+    <p className="cld-lede">Closed by default — click the clock to open a Brand Blue time dropdown.</p>
+    <div className="cld-demo">
+      <ManualTimeCalendar />
+    </div>
+  </div>
+
+  <div className="cld-section">
+    <h2>Scrollable time &amp; availability</h2>
+    <p className="cld-lede">Busy slots are disabled; open slots remain selectable.</p>
+    <div className="cld-demo">
+      <AvailabilityCalendar />
+    </div>
+  </div>
+
+  <div className="cld-section">
+    <h2>Specs</h2>
+    <div className="cld-specs-grid">
+      <div className="cld-spec-card">
+        <span className="cld-spec-label">Library</span>
+        <span className="cld-spec-value">react-day-picker</span>
+      </div>
+      <div className="cld-spec-card">
+        <span className="cld-spec-label">Modes</span>
+        <span className="cld-spec-value">single · range · multiple</span>
+      </div>
+      <div className="cld-spec-card">
+        <span className="cld-spec-label">Accent</span>
+        <span className="cld-spec-value">Brand Blue #4169E1</span>
+      </div>
+      <div className="cld-spec-card">
+        <span className="cld-spec-label">Day cell</span>
+        <span className="cld-spec-value">24×24 · radius 6px</span>
+      </div>
+      <div className="cld-spec-card">
+        <span className="cld-spec-label">Presets</span>
+        <span className="cld-spec-value">Today · 7d · 30d · 3/6/12 mo</span>
+      </div>
+      <div className="cld-spec-card">
+        <span className="cld-spec-label">A11y</span>
+        <span className="cld-spec-value">Keyboard nav via DayPicker</span>
+      </div>
+    </div>
+  </div>
+
+</div>

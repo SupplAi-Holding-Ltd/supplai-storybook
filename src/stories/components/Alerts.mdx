@@ -1,0 +1,977 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import React from "react";
+import {
+  Bell,
+  Bulb,
+  Cross,
+  Download,
+  Flag,
+  InfoCircle,
+  Shield,
+  Warning,
+} from "@meistericons/react";
+import { CodePanel } from "./CodePanel";
+
+<Meta title="Components/Alert" />
+
+export const ALERT_CODE = `// Alert · supplai Design System
+import React from 'react';
+
+// variant: soft | soft-outline | outline | strong
+// color:   primary | neutral | info | success | warning | error
+
+function Alert({
+  variant = 'soft',
+  color = 'primary',
+  children,
+  onClose,
+}) {
+  return (
+    <div
+      role={color === 'error' || color === 'warning' ? 'alert' : 'status'}
+      className={\`al al--\${variant} al--\${color}\`}
+    >
+      <div className="al-body">{children}</div>
+      {onClose && (
+        <button type="button" className="al-close" onClick={onClose} aria-label="Dismiss">
+          ×
+        </button>
+      )}
+    </div>
+  );
+}
+
+function AlertIcon({ children }) {
+  return <span className="al-icon">{children}</span>;
+}
+
+function AlertContent({ children }) {
+  return <div className="al-content">{children}</div>;
+}
+
+function AlertTitle({ children }) {
+  return <p className="al-title">{children}</p>;
+}
+
+function AlertDescription({ children }) {
+  return <p className="al-desc">{children}</p>;
+}
+
+function AlertToolbar({ children }) {
+  return <div className="al-toolbar">{children}</div>;
+}
+`;
+
+export const COLORS = {
+  primary: {
+    strongBg: "#4169E1",
+    strongFg: "#FFFFFF",
+    softBg: "#ECF0FC",
+    softFg: "#2F50C1",
+    softMuted: "#4169E1",
+    border: "#8DA5ED",
+  },
+  neutral: {
+    strongBg: "#334155",
+    strongFg: "#FFFFFF",
+    softBg: "#F1F5F9",
+    softFg: "#0F172A",
+    softMuted: "#475569",
+    border: "#CBD5E1",
+  },
+  success: {
+    strongBg: "#519E8A",
+    strongFg: "#FFFFFF",
+    softBg: "#EEF6F4",
+    softFg: "#28716C",
+    softMuted: "#519E8A",
+    border: "#97C5B9",
+  },
+  warning: {
+    strongBg: "#FF9F05",
+    strongFg: "#0F172A",
+    softBg: "#FFF6E6",
+    softFg: "#934A01",
+    softMuted: "#DB8003",
+    border: "#FFC569",
+  },
+  error: {
+    strongBg: "#D13145",
+    strongFg: "#FFFFFF",
+    softBg: "#FBEBED",
+    softFg: "#96183F",
+    softMuted: "#D13145",
+    border: "#E3838F",
+  },
+  info: {
+    strongBg: "#4CA1AC",
+    strongFg: "#FFFFFF",
+    softBg: "#EAFCFB",
+    softFg: "#30788A",
+    softMuted: "#4CA1AC",
+    border: "#6ECBCD",
+  },
+};
+
+export const Alert = ({
+  variant = "soft",
+  color = "primary",
+  children,
+  onClose,
+  className = "",
+}) => {
+  const c = COLORS[color] || COLORS.primary;
+  const isStrong = variant === "strong";
+  const isOutline = variant === "outline" || variant === "soft-outline";
+  const softOutline = variant === "soft-outline";
+
+  let background = "transparent";
+  let foreground = c.softFg;
+  let muted = c.softMuted;
+  let borderColor = "transparent";
+
+  if (isStrong) {
+    background = c.strongBg;
+    foreground = c.strongFg;
+    muted = c.strongFg;
+    borderColor = c.strongBg;
+  } else if (variant === "soft") {
+    background = c.softBg;
+    foreground = c.softFg;
+    muted = c.softMuted;
+    borderColor = c.softBg;
+  } else if (variant === "outline") {
+    background = "#FFFFFF";
+    foreground = c.softFg;
+    muted = c.softMuted;
+    borderColor = c.border;
+  } else if (softOutline) {
+    background = c.softBg;
+    foreground = c.softFg;
+    muted = c.softMuted;
+    borderColor = c.border;
+  }
+
+  return (
+    <div
+      role={color === "error" || color === "warning" ? "alert" : "status"}
+      className={`al al--${variant}${className ? ` ${className}` : ""}`}
+      style={{
+        background,
+        color: foreground,
+        borderColor,
+        borderStyle: "solid",
+        borderWidth: isOutline || softOutline ? 1 : 0,
+        ["--al-fg"]: foreground,
+        ["--al-muted"]: muted,
+      }}
+    >
+      <div className="al-body">{children}</div>
+      {onClose && (
+        <button
+          type="button"
+          className="al-close"
+          onClick={onClose}
+          aria-label="Dismiss alert"
+          style={{ color: isStrong ? foreground : muted }}
+        >
+          <Cross size={16} />
+        </button>
+      )}
+    </div>
+  );
+};
+
+export const AlertIcon = ({ children }) => (
+  <span className="al-icon">{children}</span>
+);
+
+export const AlertContent = ({ children }) => (
+  <div className="al-content">{children}</div>
+);
+
+export const AlertTitle = ({ children }) => (
+  <p className="al-title">{children}</p>
+);
+
+export const AlertDescription = ({ children }) => (
+  <p className="al-desc">{children}</p>
+);
+
+export const AlertToolbar = ({ children }) => (
+  <div className="al-toolbar">{children}</div>
+);
+
+export const AlButton = ({ children, strong = false, color = "primary", onClick, ghost = false }) => {
+  const c = COLORS[color] || COLORS.primary;
+  if (ghost) {
+    return (
+      <button type="button" className="al-btn al-btn--ghost" onClick={onClick}>
+        {children}
+      </button>
+    );
+  }
+  return (
+    <button
+      type="button"
+      className="al-btn"
+      onClick={onClick}
+      style={
+        strong
+          ? { background: "#FFFFFF", color: c.strongBg, borderColor: "#FFFFFF" }
+          : { background: "transparent", color: "inherit", borderColor: "currentColor" }
+      }
+    >
+      {children}
+    </button>
+  );
+};
+
+export const AlertPlayground = () => {
+  const [variant, setVariant] = React.useState("soft");
+  const [color, setColor] = React.useState("primary");
+  const [dismissible, setDismissible] = React.useState(true);
+  const [visible, setVisible] = React.useState(true);
+  const [withIcon, setWithIcon] = React.useState(true);
+  const [withAction, setWithAction] = React.useState(true);
+
+  const icons = {
+    primary: <Bulb size={18} />,
+    neutral: <Bell size={18} />,
+    success: <Shield size={18} />,
+    warning: <Warning size={18} />,
+    error: <Flag size={18} />,
+    info: <InfoCircle size={18} />,
+  };
+
+  return (
+    <div className="alp-wrap">
+      <div className="alp-preview">
+        {visible ? (
+          <Alert
+            variant={variant}
+            color={color}
+            onClose={dismissible ? () => setVisible(false) : undefined}
+          >
+            {withIcon && <AlertIcon>{icons[color]}</AlertIcon>}
+            <AlertContent>
+              <AlertTitle>Alert Title</AlertTitle>
+              <AlertDescription>This is alert description.</AlertDescription>
+            </AlertContent>
+            {withAction && (
+              <AlertToolbar>
+                <AlButton strong={variant === "strong"} color={color}>
+                  Action
+                </AlButton>
+              </AlertToolbar>
+            )}
+          </Alert>
+        ) : (
+          <button type="button" className="alp-restore" onClick={() => setVisible(true)}>
+            Show alert again
+          </button>
+        )}
+      </div>
+      <div className="alp-controls">
+        <div className="alp-ctrl-group">
+          <span className="alp-ctrl-label">Variant</span>
+          <div className="alp-chips">
+            {["soft", "soft-outline", "outline", "strong"].map((v) => (
+              <button
+                key={v}
+                type="button"
+                className={`alp-chip ${variant === v ? "alp-chip--on" : ""}`}
+                onClick={() => setVariant(v)}
+              >
+                {v}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="alp-ctrl-group">
+          <span className="alp-ctrl-label">Color</span>
+          <div className="alp-chips">
+            {["primary", "neutral", "info", "success", "warning", "error"].map((c) => (
+              <button
+                key={c}
+                type="button"
+                className={`alp-chip ${color === c ? "alp-chip--on" : ""}`}
+                onClick={() => setColor(c)}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="alp-ctrl-group">
+          <span className="alp-ctrl-label">Options</span>
+          <div className="alp-chips">
+            <button
+              type="button"
+              className={`alp-chip ${withIcon ? "alp-chip--on" : ""}`}
+              onClick={() => setWithIcon((v) => !v)}
+            >
+              Icon
+            </button>
+            <button
+              type="button"
+              className={`alp-chip ${withAction ? "alp-chip--on" : ""}`}
+              onClick={() => setWithAction((v) => !v)}
+            >
+              Action
+            </button>
+            <button
+              type="button"
+              className={`alp-chip ${dismissible ? "alp-chip--on" : ""}`}
+              onClick={() => {
+                setDismissible((v) => !v);
+                setVisible(true);
+              }}
+            >
+              Dismiss
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const CloseDemo = () => {
+  const [visible, setVisible] = React.useState(true);
+  if (!visible) {
+    return (
+      <button type="button" className="alp-restore" onClick={() => setVisible(true)}>
+        Show alert again
+      </button>
+    );
+  }
+  return (
+    <Alert variant="soft" color="primary" onClose={() => setVisible(false)}>
+      <AlertIcon>
+        <Bell size={18} />
+      </AlertIcon>
+      <AlertContent>
+        <AlertTitle>Dismissible alert</AlertTitle>
+        <AlertDescription>Click the close control to dismiss this message.</AlertDescription>
+      </AlertContent>
+    </Alert>
+  );
+};
+
+<div className="al-page">
+
+  <div className="al-header">
+    <h1>Alert</h1>
+    <p>
+      Important in-flow notifications for success, warnings, errors, and helpful updates —
+      patterned after{" "}
+      <a href="https://radianui.com/docs/components/alert" target="_blank" rel="noreferrer">
+        Radian UI Alert
+      </a>
+      , using supplai color tokens.
+    </p>
+  </div>
+
+  <div className="al-section">
+    <h2>Live Playground</h2>
+    <p className="al-lede">
+      Switch variant and semantic color, toggle icon / action / dismiss. Open the Code tab for an implementation sketch.
+    </p>
+    <CodePanel code={ALERT_CODE} filename="Alert.tsx" language="tsx">
+      <AlertPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="al-section">
+    <h2>Variants</h2>
+    <p className="al-lede">
+      <code>soft</code>, <code>soft-outline</code>, <code>outline</code>, and <code>strong</code> control fill weight.
+    </p>
+    <div className="al-stack">
+      <Alert variant="soft" color="primary">
+        <AlertIcon><Bulb size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Soft alert</AlertTitle>
+          <AlertDescription>This is a variation of alert</AlertDescription>
+        </AlertContent>
+      </Alert>
+      <Alert variant="soft-outline" color="primary">
+        <AlertIcon><Bulb size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Soft outline alert</AlertTitle>
+          <AlertDescription>This is a variation of alert</AlertDescription>
+        </AlertContent>
+      </Alert>
+      <Alert variant="outline" color="primary">
+        <AlertIcon><Bulb size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Outline alert</AlertTitle>
+          <AlertDescription>This is a variation of alert</AlertDescription>
+        </AlertContent>
+      </Alert>
+      <Alert variant="strong" color="primary">
+        <AlertIcon><Bulb size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Strong alert</AlertTitle>
+          <AlertDescription>This is a variation of alert</AlertDescription>
+        </AlertContent>
+      </Alert>
+    </div>
+  </div>
+
+  <div className="al-section">
+    <h2>Colors</h2>
+    <p className="al-lede">
+      Semantic colors: primary, neutral, info, success, warning, and error.
+    </p>
+    <div className="al-stack">
+      <Alert variant="soft" color="primary">
+        <AlertIcon><Bulb size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Primary alert</AlertTitle>
+          <AlertDescription>This alert is used to highlight information</AlertDescription>
+        </AlertContent>
+      </Alert>
+      <Alert variant="soft" color="neutral">
+        <AlertIcon><Bell size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Neutral alert</AlertTitle>
+          <AlertDescription>This alert is used to highlight information</AlertDescription>
+        </AlertContent>
+      </Alert>
+      <Alert variant="soft" color="info">
+        <AlertIcon><InfoCircle size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Info alert</AlertTitle>
+          <AlertDescription>This alert is used to highlight information</AlertDescription>
+        </AlertContent>
+      </Alert>
+      <Alert variant="soft" color="success">
+        <AlertIcon><Shield size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Success alert</AlertTitle>
+          <AlertDescription>This alert is used to highlight information</AlertDescription>
+        </AlertContent>
+      </Alert>
+      <Alert variant="soft" color="warning">
+        <AlertIcon><Warning size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Warning alert</AlertTitle>
+          <AlertDescription>This alert is used to highlight information</AlertDescription>
+        </AlertContent>
+      </Alert>
+      <Alert variant="soft" color="error">
+        <AlertIcon><Flag size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Error alert</AlertTitle>
+          <AlertDescription>This alert is used to highlight information</AlertDescription>
+        </AlertContent>
+      </Alert>
+    </div>
+  </div>
+
+  <div className="al-section">
+    <h2>On close</h2>
+    <p className="al-lede">Pass <code>onClose</code> to show a dismiss control.</p>
+    <div className="al-demo">
+      <CloseDemo />
+    </div>
+  </div>
+
+  <div className="al-section">
+    <h2>Success examples</h2>
+    <p className="al-lede">Confirmations after payments, profile updates, and purchases.</p>
+    <div className="al-stack">
+      <Alert variant="soft" color="success">
+        <AlertIcon><Shield size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Payment Successful</AlertTitle>
+          <AlertDescription>Your payment has been successfully transferred.</AlertDescription>
+        </AlertContent>
+        <AlertToolbar>
+          <AlButton color="success">Statement</AlButton>
+          <AlButton color="success">Transaction</AlButton>
+        </AlertToolbar>
+      </Alert>
+      <Alert variant="soft-outline" color="success" onClose={() => {}}>
+        <AlertIcon><Shield size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Payment Received</AlertTitle>
+          <AlertDescription>
+            Your payment of $79.99 to Stripe has been successfully processed on card ending in XXXX
+            XXXX XXX 4242.
+          </AlertDescription>
+        </AlertContent>
+        <AlertToolbar>
+          <AlButton color="success">View Statement</AlButton>
+          <AlButton ghost>Dismiss</AlButton>
+        </AlertToolbar>
+      </Alert>
+      <Alert variant="strong" color="success">
+        <AlertIcon><Shield size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Profile Updated Successfully</AlertTitle>
+          <AlertDescription>Your changes have been saved</AlertDescription>
+        </AlertContent>
+        <AlertToolbar>
+          <AlButton strong color="success">Done</AlButton>
+        </AlertToolbar>
+      </Alert>
+      <Alert variant="outline" color="success">
+        <AlertIcon><Shield size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Credit Purchased Successfully</AlertTitle>
+          <AlertDescription>
+            You have successfully added credits to your account. Start creating more with supplai.
+          </AlertDescription>
+        </AlertContent>
+        <AlertToolbar>
+          <AlButton color="success">View Credit Balance</AlButton>
+        </AlertToolbar>
+      </Alert>
+    </div>
+  </div>
+
+  <div className="al-section">
+    <h2>Error examples</h2>
+    <p className="al-lede">Failures that need a clear next step.</p>
+    <div className="al-stack">
+      <Alert variant="soft" color="error">
+        <AlertIcon><Flag size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>An error occurred while uploading your file.</AlertTitle>
+          <AlertDescription>Please ensure it is under 10MB and try again</AlertDescription>
+        </AlertContent>
+        <AlertToolbar>
+          <AlButton color="error">Try again</AlButton>
+          <AlButton ghost>File Requirements</AlButton>
+        </AlertToolbar>
+      </Alert>
+      <Alert variant="strong" color="error" onClose={() => {}}>
+        <AlertIcon><Flag size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Connection Error</AlertTitle>
+          <AlertDescription>Unable to connect to the server. Please try again later</AlertDescription>
+        </AlertContent>
+        <AlertToolbar>
+          <AlButton strong color="error">Retry</AlButton>
+        </AlertToolbar>
+      </Alert>
+    </div>
+  </div>
+
+  <div className="al-section">
+    <h2>Info examples</h2>
+    <p className="al-lede">Product updates and lightweight confirmations.</p>
+    <div className="al-stack">
+      <Alert variant="soft" color="info">
+        <AlertIcon><InfoCircle size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>New Version Available</AlertTitle>
+          <AlertDescription>Version 2.1 is now live. Refresh to update</AlertDescription>
+        </AlertContent>
+        <AlertToolbar>
+          <AlButton ghost>Later</AlButton>
+          <AlButton color="info">Update</AlButton>
+        </AlertToolbar>
+      </Alert>
+      <Alert variant="outline" color="info" onClose={() => {}}>
+        <AlertIcon><Download size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>136 Contacts Imported</AlertTitle>
+        </AlertContent>
+        <AlertToolbar>
+          <AlButton color="info">Undo</AlButton>
+        </AlertToolbar>
+      </Alert>
+    </div>
+  </div>
+
+  <div className="al-section">
+    <h2>Warning examples</h2>
+    <p className="al-lede">Prevent disruption before limits are hit.</p>
+    <div className="al-stack">
+      <Alert variant="soft" color="warning">
+        <AlertIcon><Warning size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Low Balance</AlertTitle>
+          <AlertDescription>
+            Your credit balance is low. Add more credits to avoid disruption
+          </AlertDescription>
+        </AlertContent>
+        <AlertToolbar>
+          <AlButton color="warning">Add Credit</AlButton>
+        </AlertToolbar>
+      </Alert>
+      <Alert variant="soft-outline" color="warning" onClose={() => {}}>
+        <AlertIcon><Warning size={18} /></AlertIcon>
+        <AlertContent>
+          <AlertTitle>Storage Almost Full</AlertTitle>
+          <AlertDescription>
+            You've used 95% of your available storage space. Upgrade to get more storage
+          </AlertDescription>
+        </AlertContent>
+        <AlertToolbar>
+          <AlButton color="warning">Upgrade Plan</AlButton>
+        </AlertToolbar>
+      </Alert>
+    </div>
+  </div>
+
+  <div className="al-section">
+    <h2>Specs</h2>
+    <div className="al-specs-grid">
+      <div className="al-spec-card">
+        <span className="al-spec-label">Variants</span>
+        <span className="al-spec-value">soft · soft-outline · outline · strong</span>
+      </div>
+      <div className="al-spec-card">
+        <span className="al-spec-label">Colors</span>
+        <span className="al-spec-value">primary · neutral · info · success · warning · error</span>
+      </div>
+      <div className="al-spec-card">
+        <span className="al-spec-label">Parts</span>
+        <span className="al-spec-value">Icon · Content · Title · Description · Toolbar</span>
+      </div>
+      <div className="al-spec-card">
+        <span className="al-spec-label">Role</span>
+        <span className="al-spec-value">alert (error/warning) · status (else)</span>
+      </div>
+      <div className="al-spec-card">
+        <span className="al-spec-label">Radius</span>
+        <span className="al-spec-value">10px</span>
+      </div>
+      <div className="al-spec-card">
+        <span className="al-spec-label">Tokens</span>
+        <span className="al-spec-value">#4169E1 · #519E8A · #D13145 · #FF9F05</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  {`
+  .al-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 0 64px;
+    font-family: inherit;
+  }
+
+  .al-header {
+    margin-bottom: 40px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #E2E8F0;
+  }
+
+  .al-header h1 {
+    margin: 0 0 10px;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #0F172A;
+  }
+
+  .al-header p {
+    margin: 0;
+    max-width: 640px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #64748B;
+  }
+
+  .al-header a {
+    color: #4169E1;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .al-header a:hover {
+    text-decoration: underline;
+  }
+
+  .al-section {
+    margin-bottom: 48px;
+  }
+
+  .al-section h2 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0F172A;
+  }
+
+  .al-lede {
+    margin: 0 0 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #64748B;
+  }
+
+  .al-lede code {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: #ECF0FC;
+    color: #2F50C1;
+  }
+
+  .al-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .al-demo {
+    padding: 20px;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    background: #FFFFFF;
+  }
+
+  /* Alert atom */
+  .al {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+
+  .al-body {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+
+  .al-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: var(--al-muted);
+  }
+
+  .al--strong .al-icon {
+    color: var(--al-fg);
+  }
+
+  .al--strong .al-desc {
+    opacity: 0.9;
+  }
+
+  .al-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1 1 180px;
+  }
+
+  .al-title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--al-fg);
+  }
+
+  .al-desc {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--al-muted);
+    opacity: 0.95;
+  }
+
+  .al-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+
+  .al-btn {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: 1px solid;
+    font-family: Manrope, system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .al-btn--ghost {
+    background: transparent;
+    border-color: transparent;
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    opacity: 0.85;
+  }
+
+  .al-btn--ghost:hover {
+    opacity: 1;
+  }
+
+  .al-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    margin: -4px -4px 0 0;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+    opacity: 0.75;
+  }
+
+  .al-close:hover {
+    opacity: 1;
+    background: rgba(15, 23, 42, 0.06);
+  }
+
+  /* Playground */
+  .alp-wrap {
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #FFFFFF;
+  }
+
+  .alp-preview {
+    min-height: 120px;
+    padding: 28px 24px;
+    border-bottom: 1px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+  }
+
+  .alp-restore {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #CBD5E1;
+    background: #F8FAFC;
+    font-family: Manrope, system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    cursor: pointer;
+  }
+
+  .alp-controls {
+    padding: 18px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .alp-ctrl-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .alp-ctrl-label {
+    width: 72px;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #94A3B8;
+  }
+
+  .alp-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .alp-chip {
+    padding: 4px 12px;
+    border-radius: 99px;
+    border: 1px solid #E2E8F0;
+    background: #F8FAFC;
+    font-family: Manrope, system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+  }
+
+  .alp-chip:hover {
+    border-color: #4169E1;
+    background: #ECF0FC;
+    color: #2F50C1;
+  }
+
+  .alp-chip--on {
+    background: #4169E1;
+    border-color: #4169E1;
+    color: #FFFFFF;
+  }
+
+  .al-specs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .al-spec-card {
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 14px 16px;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .al-spec-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #94A3B8;
+  }
+
+  .al-spec-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0F172A;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 700px) {
+    .al-specs-grid {
+      grid-template-columns: 1fr;
+    }
+    .al-toolbar {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+  `}
+</style>

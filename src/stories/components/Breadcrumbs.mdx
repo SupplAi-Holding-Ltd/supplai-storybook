@@ -1,0 +1,808 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import React from "react";
+import {
+  Door,
+  File,
+  Folder,
+} from "@meistericons/react";
+import { CodePanel } from "./CodePanel";
+
+<Meta title="Components/Breadcrumb" />
+
+export const BREADCRUMB_CODE = `// Breadcrumb · supplai Design System
+import React from 'react';
+
+function Breadcrumb({ children }) {
+  return <nav aria-label="Breadcrumb">{children}</nav>;
+}
+
+function BreadcrumbList({ children }) {
+  return <ol className="bc-list">{children}</ol>;
+}
+
+function BreadcrumbItem({ children }) {
+  return <li className="bc-item">{children}</li>;
+}
+
+function BreadcrumbLink({ href = '#', children }) {
+  return <a className="bc-link" href={href}>{children}</a>;
+}
+
+function BreadcrumbPage({ children }) {
+  return <span className="bc-current" aria-current="page">{children}</span>;
+}
+
+function BreadcrumbSeparator({ children }) {
+  return (
+    <li className="bc-sep" aria-hidden="true">
+      {children ?? <span className="bc-chevron" />}
+    </li>
+  );
+}
+
+function BreadcrumbEllipsis() {
+  return <span className="bc-ellipsis" aria-label="More">⋯</span>;
+}
+`;
+
+export const Chevron = () => (
+  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path
+      d="M6 4l4 4-4 4"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const Breadcrumb = ({ children, className = "" }) => (
+  <nav aria-label="Breadcrumb" className={`bc${className ? ` ${className}` : ""}`}>
+    {children}
+  </nav>
+);
+
+export const BreadcrumbList = ({ children, className = "" }) => (
+  <ol className={`bc-list${className ? ` ${className}` : ""}`}>{children}</ol>
+);
+
+export const BreadcrumbItem = ({ children, className = "" }) => (
+  <li className={`bc-item${className ? ` ${className}` : ""}`}>{children}</li>
+);
+
+export const BreadcrumbLink = ({ href = "#", children, className = "", onClick }) => (
+  <a
+    className={`bc-link${className ? ` ${className}` : ""}`}
+    href={href}
+    onClick={(e) => {
+      e.preventDefault();
+      onClick?.(e);
+    }}
+  >
+    {children}
+  </a>
+);
+
+export const BreadcrumbPage = ({ children, className = "" }) => (
+  <span className={`bc-current${className ? ` ${className}` : ""}`} aria-current="page">
+    {children}
+  </span>
+);
+
+export const BreadcrumbSeparator = ({ children, className = "" }) => (
+  <li className={`bc-sep${className ? ` ${className}` : ""}`} aria-hidden="true" role="presentation">
+    {children ?? <Chevron />}
+  </li>
+);
+
+export const BreadcrumbEllipsis = ({ className = "" }) => (
+  <span className={`bc-ellipsis${className ? ` ${className}` : ""}`} aria-label="More pages">
+    ···
+  </span>
+);
+
+export const BreadcrumbPlayground = () => {
+  const [separator, setSeparator] = React.useState("chevron");
+  const [withIcons, setWithIcons] = React.useState(false);
+  const [collapsed, setCollapsed] = React.useState(true);
+  const [card, setCard] = React.useState(false);
+
+  const Sep = () => {
+    if (separator === "slash") return <BreadcrumbSeparator>/</BreadcrumbSeparator>;
+    if (separator === "dot") return <BreadcrumbSeparator><span className="bc-dot-sep" /></BreadcrumbSeparator>;
+    return <BreadcrumbSeparator />;
+  };
+
+  return (
+    <div className="bcp-wrap">
+      <div className="bcp-preview">
+        <Breadcrumb className={card ? "bc--card" : ""}>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">
+                {withIcons && <Door size={14} />}
+                Home
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <Sep />
+            {collapsed ? (
+              <>
+                <BreadcrumbItem>
+                  <BreadcrumbEllipsis />
+                </BreadcrumbItem>
+                <Sep />
+              </>
+            ) : (
+              <>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/docs">
+                    {withIcons && <Folder size={14} />}
+                    Docs
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <Sep />
+              </>
+            )}
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/docs/components">
+                {withIcons && <Folder size={14} />}
+                Components
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <Sep />
+            <BreadcrumbItem>
+              <BreadcrumbPage>
+                {withIcons && <File size={14} />}
+                Breadcrumb
+              </BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
+      <div className="bcp-controls">
+        <div className="bcp-ctrl-group">
+          <span className="bcp-ctrl-label">Separator</span>
+          <div className="bcp-chips">
+            {["chevron", "slash", "dot"].map((v) => (
+              <button
+                key={v}
+                type="button"
+                className={`bcp-chip ${separator === v ? "bcp-chip--on" : ""}`}
+                onClick={() => setSeparator(v)}
+              >
+                {v}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="bcp-ctrl-group">
+          <span className="bcp-ctrl-label">Options</span>
+          <div className="bcp-chips">
+            <button
+              type="button"
+              className={`bcp-chip ${withIcons ? "bcp-chip--on" : ""}`}
+              onClick={() => setWithIcons((v) => !v)}
+            >
+              Icons
+            </button>
+            <button
+              type="button"
+              className={`bcp-chip ${collapsed ? "bcp-chip--on" : ""}`}
+              onClick={() => setCollapsed((v) => !v)}
+            >
+              Ellipsis
+            </button>
+            <button
+              type="button"
+              className={`bcp-chip ${card ? "bcp-chip--on" : ""}`}
+              onClick={() => setCard((v) => !v)}
+            >
+              Card
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const DropdownBreadcrumb = () => {
+  const [open, setOpen] = React.useState(false);
+  const ref = React.useRef(null);
+
+  React.useEffect(() => {
+    const onDoc = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, []);
+
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <div className="bc-dd" ref={ref}>
+            <button
+              type="button"
+              className="bc-dd-trigger"
+              aria-expanded={open}
+              aria-haspopup="menu"
+              onClick={() => setOpen((v) => !v)}
+            >
+              <BreadcrumbEllipsis />
+            </button>
+            {open && (
+              <ul className="bc-dd-menu" role="menu">
+                {["Getting Started", "Installation", "Fundamentals"].map((label) => (
+                  <li key={label} role="none">
+                    <button
+                      type="button"
+                      role="menuitem"
+                      className="bc-dd-item"
+                      onClick={() => setOpen(false)}
+                    >
+                      {label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>Toast</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+};
+
+<div className="bc-page">
+
+  <div className="bc-header">
+    <h1>Breadcrumb</h1>
+    <p>
+      A trail of links that shows users where they are in the page hierarchy —
+      patterned after{" "}
+      <a href="https://radianui.com/docs/components/breadcrumb" target="_blank" rel="noreferrer">
+        Radian UI Breadcrumb
+      </a>
+      , using supplai color tokens.
+    </p>
+  </div>
+
+  <div className="bc-section">
+    <h2>Live Playground</h2>
+    <p className="bc-lede">
+      Switch separator style, icons, ellipsis collapse, and card chrome. Open the Code tab for an implementation sketch.
+    </p>
+    <CodePanel code={BREADCRUMB_CODE} filename="Breadcrumb.tsx" language="tsx">
+      <BreadcrumbPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="bc-section">
+    <h2>Default</h2>
+    <p className="bc-lede">Chevron separators with an ellipsis for a truncated middle path.</p>
+    <div className="bc-demo">
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbEllipsis />
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>DropdownMenu</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
+  </div>
+
+  <div className="bc-section">
+    <h2>With icons</h2>
+    <div className="bc-demo">
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">
+              <Door size={14} />
+              Components
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>
+              <Folder size={14} />
+              Breadcrumb
+            </BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
+  </div>
+
+  <div className="bc-section">
+    <h2>Card design</h2>
+    <p className="bc-lede">Wrap the trail in a soft bordered surface for denser layouts.</p>
+    <div className="bc-demo">
+      <Breadcrumb className="bc--card">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbEllipsis />
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/docs">Installation</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Components</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
+  </div>
+
+  <div className="bc-section">
+    <h2>With dropdown</h2>
+    <p className="bc-lede">Use the ellipsis as a menu trigger for hidden ancestors.</p>
+    <div className="bc-demo">
+      <DropdownBreadcrumb />
+    </div>
+  </div>
+
+  <div className="bc-section">
+    <h2>With dot</h2>
+    <div className="bc-demo">
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator>
+            <span className="bc-dot-sep" />
+          </BreadcrumbSeparator>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/installation">Installation</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator>
+            <span className="bc-dot-sep" />
+          </BreadcrumbSeparator>
+          <BreadcrumbItem>
+            <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
+  </div>
+
+  <div className="bc-section">
+    <h2>With slash</h2>
+    <div className="bc-demo">
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator>/</BreadcrumbSeparator>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator>/</BreadcrumbSeparator>
+          <BreadcrumbItem>
+            <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
+  </div>
+
+  <div className="bc-section">
+    <h2>Full path</h2>
+    <p className="bc-lede">No collapse — every level visible.</p>
+    <div className="bc-demo">
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/docs/components">Components</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
+  </div>
+
+  <div className="bc-section">
+    <h2>Specs</h2>
+    <div className="bc-specs-grid">
+      <div className="bc-spec-card">
+        <span className="bc-spec-label">Parts</span>
+        <span className="bc-spec-value">List · Item · Link · Page · Separator · Ellipsis</span>
+      </div>
+      <div className="bc-spec-card">
+        <span className="bc-spec-label">Separators</span>
+        <span className="bc-spec-value">chevron · slash · dot</span>
+      </div>
+      <div className="bc-spec-card">
+        <span className="bc-spec-label">Semantics</span>
+        <span className="bc-spec-value">nav + ol · aria-current on page</span>
+      </div>
+      <div className="bc-spec-card">
+        <span className="bc-spec-label">Link</span>
+        <span className="bc-spec-value">13px / 500 · #64748B hover Brand Blue</span>
+      </div>
+      <div className="bc-spec-card">
+        <span className="bc-spec-label">Current page</span>
+        <span className="bc-spec-value">13px / 600 · #0F172A</span>
+      </div>
+      <div className="bc-spec-card">
+        <span className="bc-spec-label">Tokens</span>
+        <span className="bc-spec-value">#4169E1 · #64748B · #E2E8F0</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  {`
+  .bc-page {
+    display: block;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 0 64px;
+    font-family: inherit;
+  }
+
+  .bc-header {
+    display: block;
+    margin-bottom: 40px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #E2E8F0;
+  }
+
+  .bc-header h1 {
+    margin: 0 0 10px;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #0F172A;
+  }
+
+  .bc-header p {
+    margin: 0;
+    max-width: 640px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #64748B;
+  }
+
+  .bc-header a {
+    color: #4169E1;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .bc-header a:hover {
+    text-decoration: underline;
+  }
+
+  .bc-section {
+    display: block;
+    width: 100%;
+    margin-bottom: 48px;
+  }
+
+  .bc-section h2 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0F172A;
+  }
+
+  .bc-lede {
+    margin: 0 0 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #64748B;
+  }
+
+  .bc-demo {
+    padding: 20px;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    background: #FFFFFF;
+  }
+
+  /* Breadcrumb atom */
+  .bc-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .bc-item {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .bc-link,
+  .bc-current {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: Manrope, system-ui, sans-serif;
+    font-size: 13px;
+    line-height: 1.3;
+    text-decoration: none;
+    border-radius: 6px;
+    padding: 2px 4px;
+  }
+
+  .bc-link {
+    font-weight: 500;
+    color: #64748B;
+  }
+
+  .bc-link:hover {
+    color: #4169E1;
+    background: #ECF0FC;
+  }
+
+  .bc-link:focus-visible {
+    outline: 2px solid #4169E1;
+    outline-offset: 1px;
+  }
+
+  .bc-current {
+    font-weight: 600;
+    color: #0F172A;
+  }
+
+  .bc-sep {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #94A3B8;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 0 2px;
+    user-select: none;
+  }
+
+  .bc-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 24px;
+    padding: 0 6px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #64748B;
+  }
+
+  .bc-dot-sep {
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #94A3B8;
+  }
+
+  .bc--card {
+    display: inline-flex;
+    padding: 8px 12px;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    background: #F8FAFC;
+  }
+
+  /* Dropdown */
+  .bc-dd {
+    position: relative;
+  }
+
+  .bc-dd-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+
+  .bc-dd-trigger:hover .bc-ellipsis {
+    background: #ECF0FC;
+    color: #2F50C1;
+  }
+
+  .bc-dd-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 20;
+    min-width: 160px;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    background: #FFFFFF;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+  }
+
+  .bc-dd-item {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    text-align: left;
+    font-family: Manrope, system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+  }
+
+  .bc-dd-item:hover {
+    background: #ECF0FC;
+    color: #2F50C1;
+  }
+
+  /* Playground */
+  .bcp-wrap {
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #FFFFFF;
+  }
+
+  .bcp-preview {
+    min-height: 100px;
+    padding: 28px 24px;
+    border-bottom: 1px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+  }
+
+  .bcp-controls {
+    padding: 18px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .bcp-ctrl-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .bcp-ctrl-label {
+    width: 72px;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #94A3B8;
+  }
+
+  .bcp-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .bcp-chip {
+    padding: 4px 12px;
+    border-radius: 99px;
+    border: 1px solid #E2E8F0;
+    background: #F8FAFC;
+    font-family: Manrope, system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+  }
+
+  .bcp-chip:hover {
+    border-color: #4169E1;
+    background: #ECF0FC;
+    color: #2F50C1;
+  }
+
+  .bcp-chip--on {
+    background: #4169E1;
+    border-color: #4169E1;
+    color: #FFFFFF;
+  }
+
+  .bc-specs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .bc-spec-card {
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 14px 16px;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .bc-spec-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #94A3B8;
+  }
+
+  .bc-spec-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0F172A;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 700px) {
+    .bc-specs-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  `}
+</style>

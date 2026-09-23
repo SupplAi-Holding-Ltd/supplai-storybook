@@ -1,21 +1,124 @@
 import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  CHECKBOX_CODE,
+  CheckboxPlayground,
+  SizeDemo,
+  CheckedDemo,
+  DisabledDemo,
+  IndeterminateDemo,
+  GroupDemo,
+  CustomCardDemo,
+  SetupDemo,
+  MenuDemo,
+  FormDemo,
+} from "./Checkboxes";
 
-<Meta title="Components/Form Methods/Checkbox" />
+<Meta title="Components/Checkbox" />
 
-<div className="stub-page">
-  <div className="stub-header">
+<div className="cb-page">
+
+  <div className="cb-header">
     <h1>Checkbox</h1>
-    <p>Multi-select toggle controls for independent options. Unlike radio buttons, checkboxes allow any number of selections simultaneously.</p>
+    <p>
+      A simple box for selecting one or multiple options in forms, lists, and setting preferences — patterned after{" "}
+      <a href="https://radianui.com/docs/components/checkbox" target="_blank" rel="noreferrer">
+        Radian UI Checkbox
+      </a>
+      , using supplai Brand Blue.
+    </p>
   </div>
-  <span className="stub-badge">🚧 Coming Soon</span>
-  <p className="stub-note">Full documentation and interactive examples will be added once the component is finalized.</p>
-</div>
 
-<style>{`
-  .stub-page { max-width: 900px; margin: 0 auto; padding: 0 0 64px; font-family: 'Manrope', sans-serif; }
-  .stub-header { margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid #E5E7EB; }
-  .stub-header h1 { font-size: 32px; font-weight: 700; color: #111625; margin: 0 0 12px; }
-  .stub-header p { font-size: 15px; color: #6B7280; line-height: 1.7; max-width: 520px; margin: 0; }
-  .stub-badge { display: inline-flex; align-items: center; gap: 6px; background: #FFF6E6; color: #934A01; padding: 5px 14px; border-radius: 99px; font-size: 13px; font-weight: 600; }
-  .stub-note { margin: 12px 0 0; font-size: 14px; color: #6B7280; }
-`}</style>
+  <div className="cb-section">
+    <h2>Live Playground</h2>
+    <p className="cb-lede">Toggle size and state. Open the Code tab for an implementation sketch.</p>
+    <CodePanel code={CHECKBOX_CODE} filename="Checkbox.tsx" language="tsx">
+      <CheckboxPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="cb-section">
+    <h2>Size</h2>
+    <p className="cb-lede">Small, medium, and large control sizes.</p>
+    <SizeDemo />
+  </div>
+
+  <div className="cb-section">
+    <h2>Checked</h2>
+    <p className="cb-lede">Controlled checked and unchecked states.</p>
+    <CheckedDemo />
+  </div>
+
+  <div className="cb-section">
+    <h2>Disabled</h2>
+    <p className="cb-lede">Non-interactive checked and unchecked variants.</p>
+    <DisabledDemo />
+  </div>
+
+  <div className="cb-section">
+    <h2>Indeterminate</h2>
+    <p className="cb-lede">Partial selection for parent “select all” controls.</p>
+    <IndeterminateDemo />
+  </div>
+
+  <div className="cb-section">
+    <h2>Checkbox group</h2>
+    <p className="cb-lede">Independent multi-select list with clear / submit actions.</p>
+    <GroupDemo />
+  </div>
+
+  <div className="cb-section">
+    <h2>Custom checkbox</h2>
+    <p className="cb-lede">Card-style row with title and supporting description.</p>
+    <CustomCardDemo />
+  </div>
+
+  <div className="cb-section">
+    <h2>Checkbox — Setup</h2>
+    <p className="cb-lede">Preference list for settings screens.</p>
+    <SetupDemo />
+  </div>
+
+  <div className="cb-section">
+    <h2>Checkbox — Dropdown menu</h2>
+    <p className="cb-lede">Multi-select items inside a compact menu panel.</p>
+    <MenuDemo />
+  </div>
+
+  <div className="cb-section">
+    <h2>Form</h2>
+    <p className="cb-lede">Grouped options with select-all, terms, and submit.</p>
+    <FormDemo />
+  </div>
+
+  <div className="cb-section">
+    <h2>Specs</h2>
+    <div className="cb-specs-grid">
+      <div className="cb-spec-card">
+        <span className="cb-spec-label">Sizes</span>
+        <span className="cb-spec-value">sm 14 · md 16 · lg 20</span>
+      </div>
+      <div className="cb-spec-card">
+        <span className="cb-spec-label">Radius</span>
+        <span className="cb-spec-value">4–6px</span>
+      </div>
+      <div className="cb-spec-card">
+        <span className="cb-spec-label">Accent</span>
+        <span className="cb-spec-value">Brand Blue #4169E1</span>
+      </div>
+      <div className="cb-spec-card">
+        <span className="cb-spec-label">States</span>
+        <span className="cb-spec-value">unchecked · checked · indeterminate · disabled</span>
+      </div>
+      <div className="cb-spec-card">
+        <span className="cb-spec-label">Input</span>
+        <span className="cb-spec-value">Native checkbox + custom mark</span>
+      </div>
+      <div className="cb-spec-card">
+        <span className="cb-spec-label">A11y</span>
+        <span className="cb-spec-value">Label association · focus ring · Space toggle</span>
+      </div>
+    </div>
+  </div>
+
+</div>
