@@ -1,0 +1,282 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  OTP_FIELD_CODE,
+  OTPPlayground,
+  DefaultDemo,
+  SizesDemo,
+  NumericDemo,
+  AlphaDemo,
+  AlphanumericDemo,
+  LengthDemo,
+  PrefilledDemo,
+  ControlledDemo,
+  MaskedDemo,
+  GroupedDemo,
+  DisabledDemo,
+  ReadOnlyDemo,
+  ValidationDemo,
+  AutoSubmitDemo,
+  ResendDemo,
+  SpecsDemo,
+} from "./OTPFields";
+
+<Meta title="Components/Form Methods/OTP Field" />
+
+<div className="otp-page">
+
+  <div className="otp-header">
+    <h1>OTP Field</h1>
+    <p>
+      Split-slot input for one-time passwords, PINs, and verification codes. Manages focus, paste,
+      validation type, and mobile <code>one-time-code</code> autofill — styled like Text Input.
+    </p>
+  </div>
+
+  <div className="otp-section">
+    <h2>Live Playground</h2>
+    <p className="otp-lede">
+      Change length, size, validation, and states. Open the Code tab for a composition sketch.
+    </p>
+    <CodePanel code={OTP_FIELD_CODE} filename="OTPField.tsx" language="tsx">
+      <OTPPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="otp-section">
+    <h2>Default</h2>
+    <p className="otp-lede">Six-digit numeric verification code with label and helper text.</p>
+    <DefaultDemo />
+  </div>
+
+  <div className="otp-section">
+    <h2>Sizes</h2>
+    <p className="otp-lede">28–48px slots (plus 56 via API). Typography scales with slot size.</p>
+    <SizesDemo />
+  </div>
+
+  <div className="otp-section">
+    <h2>Numeric</h2>
+    <p className="otp-lede">Digits only — keyboard, paste, and programmatic values.</p>
+    <NumericDemo />
+  </div>
+
+  <div className="otp-section">
+    <h2>Alphabetic</h2>
+    <p className="otp-lede">Letters only; casing is preserved.</p>
+    <AlphaDemo />
+  </div>
+
+  <div className="otp-section">
+    <h2>Alphanumeric</h2>
+    <p className="otp-lede">Letters and numbers.</p>
+    <AlphanumericDemo />
+  </div>
+
+  <div className="otp-section">
+    <h2>Code length</h2>
+    <p className="otp-lede">4-, 6-, and 8-character fields — slot count matches <code>length</code>.</p>
+    <LengthDemo />
+  </div>
+
+  <div className="otp-section">
+    <h2>Prefilled</h2>
+    <p className="otp-lede">Dummy initial value that remains editable.</p>
+    <PrefilledDemo />
+  </div>
+
+  <div className="otp-section">
+    <h2>Controlled</h2>
+    <p className="otp-lede">React state with Clear / set actions.</p>
+    <ControlledDemo />
+  </div>
+
+  <div className="otp-section">
+    <h2>Masked</h2>
+    <p className="otp-lede">Password-style slots via <code>type=&quot;password&quot;</code>.</p>
+    <MaskedDemo />
+  </div>
+
+  <div className="otp-section">
+    <h2>Grouped slots</h2>
+    <p className="otp-lede">Visual gap between groups without breaking focus or the combined value.</p>
+    <GroupedDemo />
+  </div>
+
+  <div className="otp-section">
+    <h2>Disabled</h2>
+    <DisabledDemo />
+  </div>
+
+  <div className="otp-section">
+    <h2>Read-only</h2>
+    <ReadOnlyDemo />
+  </div>
+
+  <div className="otp-section">
+    <h2>Form validation</h2>
+    <p className="otp-lede">Empty, incomplete, invalid, and valid — mock code only.</p>
+    <ValidationDemo />
+  </div>
+
+  <div className="otp-section">
+    <h2>Auto-submit on complete</h2>
+    <p className="otp-lede">
+      <code>onComplete</code> runs once per distinct full value; simulated verify state.
+    </p>
+    <AutoSubmitDemo />
+  </div>
+
+  <div className="otp-section">
+    <h2>Resend code</h2>
+    <p className="otp-lede">Verify + resend countdown — no real SMS/email.</p>
+    <ResendDemo />
+  </div>
+
+  <div className="otp-section">
+    <h2>Installation and usage</h2>
+    <pre style={{
+      margin: 0,
+      padding: "14px 16px",
+      borderRadius: 10,
+      border: "1px solid #E2E8F0",
+      background: "#0F172A",
+      color: "#E2E8F0",
+      fontSize: 12,
+      fontFamily: "JetBrains Mono, ui-monospace, monospace",
+      overflow: "auto",
+    }}>{`import { OTPField } from './OTPField';
+
+<OTPField
+  length={6}
+  size={40}
+  validationType="numeric"
+  name="otp"
+  onComplete={(code) => { /* verify with your auth API */ }}
+/>`}</pre>
+  </div>
+
+  <div className="otp-section">
+    <h2>Component anatomy</h2>
+    <p className="otp-lede">
+      <strong>OTPField</strong> — root (value, validation, size, length).<br />
+      <strong>OTPInput</strong> — one character slot.<br />
+      <strong>OTPHiddenInput</strong> — combined value for form submit and assistive tech.
+    </p>
+  </div>
+
+  <div className="otp-section">
+    <h2>Component API</h2>
+    <div className="otp-demo" style={{ overflowX: "auto" }}>
+      <table className="otp-api">
+        <thead>
+          <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>length</code></td>
+            <td>number</td>
+            <td>6</td>
+            <td>Number of character slots</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td>28 | 32 | 36 | 40 | 44 | 48 | 56</td>
+            <td>40</td>
+            <td>Slot width/height in px</td>
+          </tr>
+          <tr>
+            <td><code>validationType</code></td>
+            <td>numeric | alpha | alphanumeric | none</td>
+            <td>numeric</td>
+            <td>Allowed characters</td>
+          </tr>
+          <tr>
+            <td><code>value / defaultValue</code></td>
+            <td>string</td>
+            <td>—</td>
+            <td>Controlled / initial string value</td>
+          </tr>
+          <tr>
+            <td><code>onValueChange</code></td>
+            <td>(value: string) =&gt; void</td>
+            <td>—</td>
+            <td>Fires on every change</td>
+          </tr>
+          <tr>
+            <td><code>onComplete</code></td>
+            <td>(value: string) =&gt; void</td>
+            <td>—</td>
+            <td>Fires when length is filled (deduped)</td>
+          </tr>
+          <tr>
+            <td><code>type</code></td>
+            <td>text | password</td>
+            <td>text</td>
+            <td>Mask characters when password</td>
+          </tr>
+          <tr>
+            <td><code>disabled / readOnly</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Interaction locks</td>
+          </tr>
+          <tr>
+            <td><code>groups</code></td>
+            <td>number[]</td>
+            <td>—</td>
+            <td>Visual grouping, e.g. [3, 3]</td>
+          </tr>
+          <tr>
+            <td><code>name / form</code></td>
+            <td>string</td>
+            <td>—</td>
+            <td>Hidden input form association</td>
+          </tr>
+          <tr>
+            <td><code>autoComplete</code></td>
+            <td>one-time-code | off</td>
+            <td>one-time-code</td>
+            <td>Mobile SMS autofill hint</td>
+          </tr>
+          <tr>
+            <td><code>error</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Error chrome on slots</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div className="otp-section">
+    <h2>Usage guidelines</h2>
+    <p className="otp-lede">
+      • Use for short fixed-length codes — not free-form passwords (use Password Input).<br />
+      • Prefer numeric for SMS codes; alphanumeric when your backend issues mixed codes.<br />
+      • Keep codes as strings so leading zeros are preserved.<br />
+      • Validation, expiry, and rate limits belong in your auth service — not this UI.
+    </p>
+  </div>
+
+  <div className="otp-section">
+    <h2>Accessibility</h2>
+    <p className="otp-lede">
+      Provide a visible label, announce errors with <code>role=&quot;alert&quot;</code>, and rely on the hidden
+      input for the combined value. Arrow keys move between slots; paste fills multiple slots.
+      Focus rings match Text Input. Respects <code>prefers-reduced-motion</code>.
+    </p>
+  </div>
+
+  <div className="otp-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+</div>

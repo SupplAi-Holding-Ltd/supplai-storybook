@@ -1,0 +1,106 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  COLLAPSIBLE_CODE,
+  CollapsiblePlayground,
+  TextDemo,
+  ListDemo,
+  BillingDemo,
+  AccordionStyleDemo,
+  RadioDemo,
+  DropdownDemo,
+  MenuDemo,
+} from "./Collapsibles";
+
+<Meta title="Components/Collapsible" />
+
+<div className="col-page">
+
+  <div className="col-header">
+    <h1>Collapsible</h1>
+    <p>
+      Easily hide or show extra sections of content with a single click — using supplai Brand Blue.
+    </p>
+  </div>
+
+  <div className="col-section">
+    <h2>Live Playground</h2>
+    <p className="col-lede">Toggle default open state. Open the Code tab for an implementation sketch.</p>
+    <CodePanel code={COLLAPSIBLE_CODE} filename="Collapsible.tsx" language="tsx">
+      <CollapsiblePlayground />
+    </CodePanel>
+  </div>
+
+  <div className="col-section">
+    <h2>Collapsible text</h2>
+    <p className="col-lede">Clamp long copy and expand with Show more / Show less.</p>
+    <TextDemo />
+  </div>
+
+  <div className="col-section">
+    <h2>Collapsible list</h2>
+    <p className="col-lede">Preview a few items, then reveal the rest of the list.</p>
+    <ListDemo />
+  </div>
+
+  <div className="col-section">
+    <h2>Collapsible billing card</h2>
+    <p className="col-lede">Usage summary with expandable line-item details.</p>
+    <BillingDemo />
+  </div>
+
+  <div className="col-section">
+    <h2>Collapsible accordion</h2>
+    <p className="col-lede">Stacked sections where only one panel is open at a time.</p>
+    <AccordionStyleDemo />
+  </div>
+
+  <div className="col-section">
+    <h2>Collapsible radio</h2>
+    <p className="col-lede">Selecting an option expands its supporting details.</p>
+    <RadioDemo />
+  </div>
+
+  <div className="col-section">
+    <h2>Collapsible dropdown menu</h2>
+    <p className="col-lede">Menu with a nested collapsible Workspace group.</p>
+    <DropdownDemo />
+  </div>
+
+  <div className="col-section">
+    <h2>Collapsible menu</h2>
+    <p className="col-lede">Side navigation with expandable groups and active sub-items.</p>
+    <MenuDemo />
+  </div>
+
+  <div className="col-section">
+    <h2>Specs</h2>
+    <div className="col-specs-grid">
+      <div className="col-spec-card">
+        <span className="col-spec-label">Parts</span>
+        <span className="col-spec-value">Root · Trigger · Content</span>
+      </div>
+      <div className="col-spec-card">
+        <span className="col-spec-label">State</span>
+        <span className="col-spec-value">controlled · uncontrolled</span>
+      </div>
+      <div className="col-spec-card">
+        <span className="col-spec-label">Accent</span>
+        <span className="col-spec-value">Brand Blue #4169E1</span>
+      </div>
+      <div className="col-spec-card">
+        <span className="col-spec-label">Motion</span>
+        <span className="col-spec-value">grid-template-rows 0.25s</span>
+      </div>
+      <div className="col-spec-card">
+        <span className="col-spec-label">A11y</span>
+        <span className="col-spec-value">aria-expanded · keyboard</span>
+      </div>
+      <div className="col-spec-card">
+        <span className="col-spec-label">Related</span>
+        <span className="col-spec-value">Accordion · Dropdown</span>
+      </div>
+    </div>
+  </div>
+
+</div>

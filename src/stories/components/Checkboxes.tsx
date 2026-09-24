@@ -355,16 +355,37 @@ export function GroupDemo() {
 }
 
 export function CustomCardDemo() {
-  const [on, setOn] = React.useState(true);
+  const cards = [
+    {
+      id: 'edit',
+      title: 'Allow edit access',
+      desc: 'Enable public edit access on all your docs.',
+    },
+    {
+      id: 'share',
+      title: 'Allow link sharing',
+      desc: 'Anyone with the link can view this workspace.',
+    },
+  ];
+  const [on, setOn] = React.useState<Record<string, boolean>>({
+    edit: true,
+    share: false,
+  });
+
   return (
     <div className="cb-demo cb-demo--stack">
-      <label className={`cb-card ${on ? 'cb-card--on' : ''}`}>
-        <Checkbox checked={on} onCheckedChange={setOn} />
-        <span>
-          <p className="cb-card-title">Allow edit access</p>
-          <p className="cb-card-desc">Enable public edit access on all your docs.</p>
-        </span>
-      </label>
+      {cards.map((card) => (
+        <label key={card.id} className={`cb-card ${on[card.id] ? 'cb-card--on' : ''}`}>
+          <Checkbox
+            checked={!!on[card.id]}
+            onCheckedChange={(v) => setOn((prev) => ({ ...prev, [card.id]: v }))}
+          />
+          <span>
+            <p className="cb-card-title">{card.title}</p>
+            <p className="cb-card-desc">{card.desc}</p>
+          </span>
+        </label>
+      ))}
     </div>
   );
 }
@@ -423,39 +444,121 @@ export function SetupDemo() {
 }
 
 export function MenuDemo() {
-  const techs = ['Node.js', 'Svelte', 'Figma'];
+  const techs = ['Node.js', 'Svelte', 'Figma', 'React', 'Vue'];
   const [selected, setSelected] = React.useState<string[]>(['Node.js', 'Figma']);
+  const [open, setOpen] = React.useState(false);
+  const rootRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!open) return;
+    const onDoc = (e: MouseEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('mousedown', onDoc);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDoc);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+
+  const summary =
+    selected.length === 0
+      ? 'Choose the technologies…'
+      : selected.length <= 2
+        ? selected.join(', ')
+        : `${selected.slice(0, 2).join(', ')} +${selected.length - 2}`;
 
   return (
     <div className="cb-demo">
-      <div className="cb-menu" role="menu" aria-label="Tech stack">
-        <div style={{ padding: '6px 10px 4px', fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#94A3B8' }}>
-          Tech stack
-        </div>
-        {techs.map((name) => {
-          const active = selected.includes(name);
-          return (
-            <button
-              key={name}
-              type="button"
-              role="menuitemcheckbox"
-              aria-checked={active}
-              className={`cb-menu-item ${active ? 'cb-menu-item--on' : ''}`}
-              onClick={() =>
-                setSelected((prev) =>
-                  active ? prev.filter((x) => x !== name) : [...prev, name],
-                )
-              }
-            >
-              <Checkbox checked={active} decorative />
-              {name}
-            </button>
-          );
-        })}
-        <div className="cb-menu-sep" />
-        <button type="button" className="cb-menu-item" onClick={() => setSelected([])}>
-          Clear selection
+      <div className="cb-dropdown" ref={rootRef}>
+        <button
+          type="button"
+          className={`cb-dropdown-trigger ${open ? 'cb-dropdown-trigger--open' : ''}`}
+          aria-haspopup="menu"
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span className="cb-dropdown-trigger-text">{summary}</span>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path
+              d="M4 6l4 4 4-4"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
+        {open && (
+          <div className="cb-menu cb-menu--dropdown" role="menu" aria-label="Tech stack">
+            <div className="cb-menu-heading">Tech stack</div>
+            {techs.map((name) => {
+              const active = selected.includes(name);
+              return (
+                <button
+                  key={name}
+                  type="button"
+                  role="menuitemcheckbox"
+                  aria-checked={active}
+                  className={`cb-menu-item ${active ? 'cb-menu-item--on' : ''}`}
+                  onClick={() =>
+                    setSelected((prev) =>
+                      active ? prev.filter((x) => x !== name) : [...prev, name],
+                    )
+                  }
+                >
+                  <Checkbox checked={active} decorative />
+                  {name}
+                </button>
+              );
+            })}
+            <div className="cb-menu-sep" />
+            <button
+              type="button"
+              className="cb-menu-item"
+              onClick={() => {
+                setSelected([]);
+              }}
+            >
+              Clear selection
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function DialogCheckboxDemo() {
+  const [dontShow, setDontShow] = React.useState(false);
+
+  return (
+    <div className="cb-demo">
+      <div className="cb-dialog" role="dialog" aria-labelledby="cb-dialog-title">
+        <p className="cb-dialog-title" id="cb-dialog-title">
+          Server maintenance
+        </p>
+        <p className="cb-dialog-body">
+          We are performing a scheduled system update to improve stability and performance. The
+          workspace will be back online shortly.
+        </p>
+        <Checkbox
+          checked={dontShow}
+          onCheckedChange={setDontShow}
+          label="Don't show it again"
+        />
+        <div className="cb-form-actions">
+          <button type="button" className="cb-btn cb-btn--ghost">
+            Cancel
+          </button>
+          <button type="button" className="cb-btn cb-btn--primary">
+            Continue
+          </button>
+        </div>
       </div>
     </div>
   );

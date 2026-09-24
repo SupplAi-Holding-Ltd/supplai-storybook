@@ -11,6 +11,7 @@ import {
   CustomCardDemo,
   SetupDemo,
   MenuDemo,
+  DialogCheckboxDemo,
   FormDemo,
 } from "./Checkboxes";
 
@@ -21,11 +22,8 @@ import {
   <div className="cb-header">
     <h1>Checkbox</h1>
     <p>
-      A simple box for selecting one or multiple options in forms, lists, and setting preferences — patterned after{" "}
-      <a href="https://radianui.com/docs/components/checkbox" target="_blank" rel="noreferrer">
-        Radian UI Checkbox
-      </a>
-      , using supplai Brand Blue.
+      A simple box for selecting one or multiple options in forms, lists, and setting preferences —
+      using supplai Brand Blue.
     </p>
   </div>
 
@@ -69,7 +67,7 @@ import {
 
   <div className="cb-section">
     <h2>Custom checkbox</h2>
-    <p className="cb-lede">Card-style row with title and supporting description.</p>
+    <p className="cb-lede">Selectable cards with title and supporting description.</p>
     <CustomCardDemo />
   </div>
 
@@ -81,8 +79,16 @@ import {
 
   <div className="cb-section">
     <h2>Checkbox — Dropdown menu</h2>
-    <p className="cb-lede">Multi-select items inside a compact menu panel.</p>
+    <p className="cb-lede">
+      Click the trigger to open a multi-select menu (Tech stack).
+    </p>
     <MenuDemo />
+  </div>
+
+  <div className="cb-section">
+    <h2>Checkbox — Dialog</h2>
+    <p className="cb-lede">Confirmation dialog with a “Don’t show it again” option.</p>
+    <DialogCheckboxDemo />
   </div>
 
   <div className="cb-section">

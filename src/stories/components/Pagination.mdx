@@ -1,0 +1,265 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  PAGINATION_CODE,
+  PaginationPlayground,
+  DefaultDemo,
+  NumberedDemo,
+  PrevNextDemo,
+  FirstLastDemo,
+  EllipsisDemo,
+  DynamicRangeDemo,
+  SizesDemo,
+  BoundaryStatesDemo,
+  ResponsiveDemo,
+  PageInfoDemo,
+  RowsPerPageDemo,
+  DataTableDemo,
+  ControlledDemo,
+  RoutingDemo,
+  EmptySingleDemo,
+  CardVariantDemo,
+  SpecsDemo,
+} from "./Paginations";
+
+<Meta title="Components/Pagination" />
+
+<div className="pg-page">
+
+  <div className="pg-header">
+    <h1>Pagination</h1>
+    <p>
+      Navigate large lists and tables by page. Numbered controls, Previous/Next, First/Last, and
+      ellipsis for long ranges — styled like Button with Brand Blue for the active page.
+    </p>
+  </div>
+
+  <div className="pg-section">
+    <h2>Live Playground</h2>
+    <p className="pg-lede">Tune total pages, size, siblings, and navigation chrome.</p>
+    <CodePanel code={PAGINATION_CODE} filename="Pagination.tsx" language="tsx">
+      <PaginationPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="pg-section">
+    <h2>Default</h2>
+    <DefaultDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Numbered</h2>
+    <p className="pg-lede">Page numbers only (1–5).</p>
+    <NumberedDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Previous and Next</h2>
+    <PrevNextDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>First and Last</h2>
+    <FirstLastDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Ellipsis</h2>
+    <p className="pg-lede">Large ranges collapse with non-interactive ellipsis.</p>
+    <EllipsisDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Dynamic page range</h2>
+    <DynamicRangeDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Sizes</h2>
+    <p className="pg-lede">sm / md / lg aligned with Button heights.</p>
+    <SizesDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Boundary and disabled</h2>
+    <BoundaryStatesDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Responsive</h2>
+    <ResponsiveDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Page information</h2>
+    <PageInfoDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Rows per page</h2>
+    <p className="pg-lede">Changing page size recalculates pages and keeps a valid current page.</p>
+    <RowsPerPageDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Data table</h2>
+    <p className="pg-lede">Pagination drives which rows are shown — not just the active indicator.</p>
+    <DataTableDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Controlled</h2>
+    <ControlledDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Routing pattern</h2>
+    <p className="pg-lede">
+      Reference-style Link hrefs via <code>getHref</code>; Storybook syncs local state instead of a
+      real router.
+    </p>
+    <RoutingDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Empty and single page</h2>
+    <EmptySingleDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>As card</h2>
+    <p className="pg-lede">Additional DS example — controls inside a padded card surface.</p>
+    <CardVariantDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Installation and usage</h2>
+    <pre style={{
+      margin: 0,
+      padding: "14px 16px",
+      borderRadius: 10,
+      border: "1px solid #E2E8F0",
+      background: "#0F172A",
+      color: "#E2E8F0",
+      fontSize: 12,
+      fontFamily: "JetBrains Mono, ui-monospace, monospace",
+      overflow: "auto",
+    }}>{`import { PaginationBar } from './Pagination';
+
+<PaginationBar
+  page={page}
+  totalPages={20}
+  onPageChange={setPage}
+  showFirstLast
+/>`}</pre>
+  </div>
+
+  <div className="pg-section">
+    <h2>Component anatomy</h2>
+    <p className="pg-lede">
+      <strong>Pagination</strong> — <code>nav</code> landmark.<br />
+      <strong>PaginationContent</strong> — list of items.<br />
+      <strong>PaginationItem</strong> — wraps a control.<br />
+      <strong>PaginationLink / Previous / Next / First / Last</strong> — buttons or links.<br />
+      <strong>PaginationEllipsis</strong> — skipped range indicator.<br />
+      <strong>PaginationBar</strong> — convenience composition with range logic.
+    </p>
+  </div>
+
+  <div className="pg-section">
+    <h2>Component API</h2>
+    <div className="pg-demo" style={{ overflowX: "auto" }}>
+      <table className="pg-api">
+        <thead>
+          <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>page</code></td>
+            <td>number</td>
+            <td>—</td>
+            <td>Current page (1-based)</td>
+          </tr>
+          <tr>
+            <td><code>totalPages</code></td>
+            <td>number</td>
+            <td>—</td>
+            <td>Total page count</td>
+          </tr>
+          <tr>
+            <td><code>onPageChange</code></td>
+            <td>(page) =&gt; void</td>
+            <td>—</td>
+            <td>Fired when navigation changes page</td>
+          </tr>
+          <tr>
+            <td><code>siblingCount</code></td>
+            <td>number</td>
+            <td>1</td>
+            <td>Pages adjacent to current</td>
+          </tr>
+          <tr>
+            <td><code>boundaryCount</code></td>
+            <td>number</td>
+            <td>1</td>
+            <td>Pages fixed at start/end</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td>sm | md | lg</td>
+            <td>md</td>
+            <td>Control height</td>
+          </tr>
+          <tr>
+            <td><code>showFirstLast</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>First / Last controls</td>
+          </tr>
+          <tr>
+            <td><code>disabled</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Disable all navigation</td>
+          </tr>
+          <tr>
+            <td><code>getHref</code></td>
+            <td>(page) =&gt; string</td>
+            <td>—</td>
+            <td>Optional link URLs for routing</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div className="pg-section">
+    <h2>Usage guidelines</h2>
+    <p className="pg-lede">
+      • Place below tables and lists; keep Prev/Next always available on small screens.<br />
+      • Hide pagination when there is zero or one page, if that matches product UX.<br />
+      • Keep data fetching in the app — Pagination only reports page / page-size changes.<br />
+      • Prefer 1-based pages in the UI API.
+    </p>
+  </div>
+
+  <div className="pg-section">
+    <h2>Accessibility</h2>
+    <p className="pg-lede">
+      Uses a labelled <code>nav</code>, <code>aria-current=&quot;page&quot;</code> on the active control,
+      named Previous/Next/First/Last, and a screen-reader label for ellipsis. Disabled controls use
+      native <code>disabled</code>. Colour is not the only current-page cue (filled Brand Blue + aria).
+    </p>
+  </div>
+
+  <div className="pg-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+</div>

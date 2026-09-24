@@ -381,11 +381,7 @@ export const DemoList = ({ variant = "box", indicator = "chevron", defaultValue 
     <h1>Accordion</h1>
     <p>
       Clean, stacked panels that expand and collapse to organize large amounts of information —
-      patterned after{" "}
-      <a href="https://radianui.com/docs/components/accordion" target="_blank" rel="noreferrer">
-        Radian UI Accordion
-      </a>
-      , using supplai color tokens.
+      using supplai color tokens.
     </p>
   </div>
 
@@ -473,7 +469,7 @@ export const DemoList = ({ variant = "box", indicator = "chevron", defaultValue 
         <AccordionItem value="parent-1">
           <AccordionTrigger>Marketing campaigns</AccordionTrigger>
           <AccordionContent>
-            <Accordion variant="open" indicator="plus-minus" defaultValue="child-1" collapsible className="ac--nested">
+            <Accordion variant="open" indicator="plus-minus" collapsible className="ac--nested">
               <AccordionItem value="child-1">
                 <AccordionTrigger>Email campaign</AccordionTrigger>
                 <AccordionContent>
@@ -791,14 +787,14 @@ export const DemoList = ({ variant = "box", indicator = "chevron", defaultValue 
     width: 100%;
   }
 
-  .ac--box .ac-item {
+  .ac--box > .ac-item {
     border: 1px solid #E2E8F0;
     border-radius: 10px;
     background: #FFFFFF;
     overflow: hidden;
   }
 
-  .ac--box .ac-item + .ac-item {
+  .ac--box > .ac-item + .ac-item {
     margin-top: 8px;
   }
 
@@ -809,16 +805,36 @@ export const DemoList = ({ variant = "box", indicator = "chevron", defaultValue 
     background: #FFFFFF;
   }
 
-  .ac--table .ac-item + .ac-item {
+  .ac--table > .ac-item + .ac-item {
     border-top: 1px solid #E2E8F0;
   }
 
-  .ac--open .ac-item + .ac-item {
+  .ac--open > .ac-item + .ac-item {
     border-top: 1px solid #E2E8F0;
+  }
+
+  .ac--dotted.ac--open > .ac-item + .ac-item,
+  .ac--dotted > .ac-item + .ac-item {
+    border-top: none;
   }
 
   .ac--nested {
-    margin-top: 4px;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ac--nested > .ac-item {
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    background: #FFFFFF;
+    overflow: hidden;
+  }
+
+  .ac--nested > .ac-item + .ac-item {
+    border-top: 1px solid #E2E8F0;
+    margin-top: 0;
   }
 
   .ac-item--disabled {
@@ -884,6 +900,7 @@ export const DemoList = ({ variant = "box", indicator = "chevron", defaultValue 
   .ac-content {
     display: grid;
     grid-template-rows: 0fr;
+    overflow: hidden;
     transition: grid-template-rows 0.28s ease-in-out;
   }
 
@@ -894,26 +911,46 @@ export const DemoList = ({ variant = "box", indicator = "chevron", defaultValue 
   .ac-content-inner {
     overflow: hidden;
     min-height: 0;
-    padding: 0 16px 0;
+    padding: 0;
     font-size: 13px;
     line-height: 1.6;
     color: #64748B;
     opacity: 0;
-    transition: opacity 0.22s ease-in-out, padding 0.28s ease-in-out;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out, padding 0.28s ease-in-out, visibility 0.2s ease-in-out;
   }
 
-  .ac-content--open .ac-content-inner {
+  .ac-content--open > .ac-content-inner {
     padding: 0 16px 16px;
     opacity: 1;
+    visibility: visible;
   }
 
   .ac-content-inner p {
     margin: 0;
   }
 
-  .ac--table .ac-content-inner,
-  .ac--box .ac-content-inner {
+  .ac--table > .ac-item > .ac-content--open > .ac-content-inner,
+  .ac--box > .ac-item > .ac-content--open > .ac-content-inner {
     padding-top: 0;
+  }
+
+  /* Indent answer to align with title when a leading icon/dot is present */
+  .ac-item:has(> .ac-trigger .ac-leading) > .ac-content.ac-content--open > .ac-content-inner {
+    padding-left: calc(16px + 18px + 12px);
+  }
+
+  .ac-item:has(> .ac-trigger .ac-leading .ac-avatar) > .ac-content.ac-content--open > .ac-content-inner {
+    padding-left: calc(16px + 32px + 12px);
+  }
+
+  .ac:not(.ac--dotted) .ac-leading:not(:has(.ac-avatar)) {
+    width: 18px;
+  }
+
+  .ac-leading:has(.ac-avatar) {
+    width: 32px;
+    height: 32px;
   }
 
   .ac-title-stack {
@@ -941,9 +978,15 @@ export const DemoList = ({ variant = "box", indicator = "chevron", defaultValue 
     justify-content: center;
     width: 32px;
     height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
+    flex-shrink: 0;
     font-size: 12px;
     font-weight: 700;
+    line-height: 1;
+    overflow: hidden;
   }
 
   .ac-steps {
@@ -996,6 +1039,11 @@ export const DemoList = ({ variant = "box", indicator = "chevron", defaultValue 
   .ac--dotted .ac-content {
     position: relative;
     z-index: 1;
+  }
+
+  /* Answer aligns with title text — clears the dotted rail */
+  .ac--dotted .ac-item:has(> .ac-trigger .ac-leading) > .ac-content.ac-content--open > .ac-content-inner {
+    padding-left: calc(var(--ac-trigger-pad-x) + var(--ac-dot-size) + 12px);
   }
 
   .ac-dot {

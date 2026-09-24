@@ -15,11 +15,15 @@
   },
   "dependencies": {
     "@fontsource/jetbrains-mono": "^5.2.8",
+    "@radix-ui/react-hover-card": "^1.1.23",
+    "@radix-ui/react-one-time-password-field": "^0.1.16",
     "date-fns": "^4.4.0",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.2.0",
     "react-day-picker": "^10.0.1",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "react-international-phone": "^4.8.0",
+    "vaul": "^1.1.2"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.0.1",

@@ -1,0 +1,292 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  FILE_UPLOAD_CODE,
+  FileUploadPlayground,
+  NativeInputDemo,
+  AreaDemo,
+  CardDemo,
+  MultipleDemo,
+  ListAddMoreDemo,
+  ActionsDemo,
+  AvatarUploadDemo,
+  ImagePreviewDemo,
+  AcceptTypesDemo,
+  MaxSizeDemo,
+  MaxFilesDemo,
+  ProgressDemo,
+  SuccessErrorDemo,
+  DisabledDemo,
+  DragStatesDemo,
+  ControlledDemo,
+  CombinedDemo,
+  SpecsDemo,
+} from "./FileUploads";
+
+<Meta title="Components/File Upload" />
+
+<div className="fu-page">
+
+  <div className="fu-header">
+    <h1>File Upload</h1>
+    <p>
+      Let users attach documents and images through browse or drag-and-drop. Use a native file input
+      for simple forms, a dropzone for richer flows, and an avatar uploader for profile photos —
+      with validation, previews, and simulated progress for demos.
+    </p>
+  </div>
+
+  <div className="fu-section">
+    <h2>Live Playground</h2>
+    <p className="fu-lede">
+      Toggle accept rules, multiple selection, and disabled. Open the Code tab for a composition sketch.
+    </p>
+    <CodePanel code={FILE_UPLOAD_CODE} filename="FileUpload.tsx" language="tsx">
+      <FileUploadPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="fu-section">
+    <h2>Default file input</h2>
+    <p className="fu-lede">
+      Native <code>type=&quot;file&quot;</code> with Text Input picker chrome — best for simple single-file forms.
+    </p>
+    <NativeInputDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>Area upload</h2>
+    <p className="fu-lede">Large drag-and-drop region with icon, instructions, and format hints.</p>
+    <AreaDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>Card upload</h2>
+    <p className="fu-lede">Compact solid-border card for forms, dashboards, and settings.</p>
+    <CardDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>Multiple files</h2>
+    <p className="fu-lede">Append via picker or drop; duplicates are rejected.</p>
+    <MultipleDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>File list with Add more</h2>
+    <p className="fu-lede">Heading count, per-file remove, and Add more action.</p>
+    <ListAddMoreDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>Upload with actions</h2>
+    <p className="fu-lede">
+      Panel with Cancel (clears) and Upload (runs a clearly labelled simulated upload).
+    </p>
+    <ActionsDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>Avatar upload</h2>
+    <p className="fu-lede">Circular preview with replace / remove — click to browse (no drag required).</p>
+    <AvatarUploadDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>Image preview</h2>
+    <p className="fu-lede">Larger contain-fit preview with metadata and replace.</p>
+    <ImagePreviewDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>Accepted file types</h2>
+    <p className="fu-lede">
+      Images, PDF, PDF/PNG/DOCX, and all types — picker <code>accept</code> plus runtime validation.
+    </p>
+    <AcceptTypesDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>File size limit</h2>
+    <p className="fu-lede">Max 10 MB — oversized files rejected with a clear message.</p>
+    <MaxSizeDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>Maximum file count</h2>
+    <p className="fu-lede">Cap of five files for both picker and drag-and-drop.</p>
+    <MaxFilesDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>Upload progress</h2>
+    <p className="fu-lede">
+      Pending → uploading → success/error per file. Storybook uses a simulated timer — not a real API.
+    </p>
+    <ProgressDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>Success and error</h2>
+    <p className="fu-lede">One failure does not clear other files; retry or remove individually.</p>
+    <SuccessErrorDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>Disabled</h2>
+    <p className="fu-lede">Picker and dropzone are inactive.</p>
+    <DisabledDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>Drag states</h2>
+    <p className="fu-lede">Live default, drag-over, and reject feedback from real drag events.</p>
+    <DragStatesDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>Controlled</h2>
+    <p className="fu-lede">Parent owns <code>value</code> / <code>onValueChange</code>.</p>
+    <ControlledDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>Combined example</h2>
+    <p className="fu-lede">
+      Dropzone, multi-file, accept, size/count limits, list, Add more, and simulated upload together.
+    </p>
+    <CombinedDemo />
+  </div>
+
+  <div className="fu-section">
+    <h2>Installation and usage</h2>
+    <pre style={{
+      margin: 0,
+      padding: "14px 16px",
+      borderRadius: 10,
+      border: "1px solid #E2E8F0",
+      background: "#0F172A",
+      color: "#E2E8F0",
+      fontSize: 12,
+      fontFamily: "JetBrains Mono, ui-monospace, monospace",
+      overflow: "auto",
+    }}>{`import {
+  FileUpload,
+  FileUploadDropzone,
+  FileUploadList,
+  FileUploadErrors,
+} from './FileUpload';
+
+<FileUpload multiple accept="image/*,.pdf" maxSize={10 * 1024 * 1024} maxFiles={5}
+  onValueChange={(files) => {/* wire to your upload API */}}>
+  <FileUploadDropzone />
+  <FileUploadErrors />
+  <FileUploadList />
+</FileUpload>`}</pre>
+  </div>
+
+  <div className="fu-section">
+    <h2>Component anatomy</h2>
+    <p className="fu-lede">
+      <strong>FileUpload</strong> — root context (accept, limits, value).<br />
+      <strong>FileUploadDropzone</strong> — click + drag target (includes hidden input).<br />
+      <strong>FileUploadInput</strong> — native file input when building custom triggers.<br />
+      <strong>FileUploadList / Item</strong> — selected files with preview, size, progress, delete.<br />
+      <strong>FileUploadErrors</strong> — accessible rejection messages.
+    </p>
+  </div>
+
+  <div className="fu-section">
+    <h2>Component API</h2>
+    <div className="fu-demo" style={{ overflowX: "auto" }}>
+      <table className="fu-api">
+        <thead>
+          <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>accept</code></td>
+            <td>string</td>
+            <td>—</td>
+            <td>MIME / extension list for picker + validation</td>
+          </tr>
+          <tr>
+            <td><code>maxSize</code></td>
+            <td>number</td>
+            <td>—</td>
+            <td>Max bytes per file</td>
+          </tr>
+          <tr>
+            <td><code>maxFiles</code></td>
+            <td>number</td>
+            <td>—</td>
+            <td>Max files in the selection</td>
+          </tr>
+          <tr>
+            <td><code>multiple</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Allow more than one file</td>
+          </tr>
+          <tr>
+            <td><code>disabled</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Block picker and drop</td>
+          </tr>
+          <tr>
+            <td><code>value / onValueChange</code></td>
+            <td>File[] / fn</td>
+            <td>—</td>
+            <td>Controlled selection</td>
+          </tr>
+          <tr>
+            <td><code>onFileReject</code></td>
+            <td>(rejects) =&gt; void</td>
+            <td>—</td>
+            <td>Type, size, maxFiles, duplicate rejects</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div className="fu-section">
+    <h2>Usage guidelines</h2>
+    <p className="fu-lede">
+      • Native input for one-off simple fields.<br />
+      • Area dropzone for primary document intake.<br />
+      • Card for dense forms and settings.<br />
+      • Avatar / image preview for profile and media.<br />
+      • Keep selection UI separate from your real upload API; use progress callbacks in the app.
+    </p>
+  </div>
+
+  <div className="fu-section">
+    <h2>Validation and errors</h2>
+    <p className="fu-lede">
+      Valid files in a mixed batch are kept; rejected files surface via <code>FileUploadErrors</code> and{" "}
+      <code>onFileReject</code>. Messages name the file and the reason (type, size, count, duplicate).
+    </p>
+  </div>
+
+  <div className="fu-section">
+    <h2>Accessibility</h2>
+    <p className="fu-lede">
+      Dropzone is keyboard-activatable (Enter/Space), uses a real file input, exposes list labels,
+      progressbars, remove buttons with names, and <code>role=&quot;alert&quot;</code> for errors. Drag-and-drop
+      is never the only path.
+    </p>
+  </div>
+
+  <div className="fu-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+</div>

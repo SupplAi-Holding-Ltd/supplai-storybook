@@ -1,0 +1,261 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  HOVER_CARD_CODE,
+  HoverCardPlayground,
+  DefaultDemo,
+  ProfileDemo,
+  AvatarTriggerDemo,
+  LinkPreviewDemo,
+  RichContentDemo,
+  ClickableLinksDemo,
+  PlacementDemo,
+  AlignmentDemo,
+  OpenDelayDemo,
+  CloseDelayDemo,
+  CustomWidthDemo,
+  ControlledDemo,
+  DisabledDemo,
+  ScrollContainerDemo,
+  CompareDemo,
+  SpecsDemo,
+} from "./HoverCards";
+
+<Meta title="Components/Hover Card" />
+
+<div className="hc-page">
+
+  <div className="hc-header">
+    <h1>Hover Card</h1>
+    <p>
+      A floating preview that appears when users hover or focus a trigger — ideal for profile chips,
+      link previews, and short contextual details that need more room than a Tooltip but less
+      persistence than a Popover.
+    </p>
+  </div>
+
+  <div className="hc-section">
+    <h2>Live Playground</h2>
+    <p className="hc-lede">
+      Adjust side, align, delays, width, and disabled. Open the Code tab for a composition sketch.
+    </p>
+    <CodePanel code={HOVER_CARD_CODE} filename="HoverCard.tsx" language="tsx">
+      <HoverCardPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="hc-section">
+    <h2>Default</h2>
+    <p className="hc-lede">Basic trigger + title + description with default delays.</p>
+    <DefaultDemo />
+  </div>
+
+  <div className="hc-section">
+    <h2>Profile preview</h2>
+    <p className="hc-lede">Username trigger with avatar, bio, and metadata.</p>
+    <ProfileDemo />
+  </div>
+
+  <div className="hc-section">
+    <h2>Avatar trigger</h2>
+    <p className="hc-lede">Accessible avatar button opens a compact profile card.</p>
+    <AvatarTriggerDemo />
+  </div>
+
+  <div className="hc-section">
+    <h2>Link preview</h2>
+    <p className="hc-lede">Inline link with thumbnail and summary — navigation still belongs to the link.</p>
+    <LinkPreviewDemo />
+  </div>
+
+  <div className="hc-section">
+    <h2>Rich content</h2>
+    <p className="hc-lede">Shipment-style preview with metadata and secondary actions.</p>
+    <RichContentDemo />
+  </div>
+
+  <div className="hc-section">
+    <h2>Clickable links</h2>
+    <p className="hc-lede">
+      Cards stay open while moving into content so users can activate links. Use Popover for forms.
+    </p>
+    <ClickableLinksDemo />
+  </div>
+
+  <div className="hc-section">
+    <h2>Placement</h2>
+    <p className="hc-lede">Top, right, bottom, and left — with collision flipping when needed.</p>
+    <PlacementDemo />
+  </div>
+
+  <div className="hc-section">
+    <h2>Alignment</h2>
+    <p className="hc-lede">Start, center, and end relative to the trigger.</p>
+    <AlignmentDemo />
+  </div>
+
+  <div className="hc-section">
+    <h2>Opening delay</h2>
+    <p className="hc-lede">0ms, 200ms, and 700ms — real <code>openDelay</code> timing.</p>
+    <OpenDelayDemo />
+  </div>
+
+  <div className="hc-section">
+    <h2>Closing delay</h2>
+    <p className="hc-lede">Gives users time to move from trigger into the card.</p>
+    <CloseDelayDemo />
+  </div>
+
+  <div className="hc-section">
+    <h2>Custom width</h2>
+    <p className="hc-lede">Token-friendly width via CSS variable with viewport clamping.</p>
+    <CustomWidthDemo />
+  </div>
+
+  <div className="hc-section">
+    <h2>Controlled</h2>
+    <p className="hc-lede">Parent state via <code>open</code> / <code>onOpenChange</code>.</p>
+    <ControlledDemo />
+  </div>
+
+  <div className="hc-section">
+    <h2>Disabled trigger</h2>
+    <p className="hc-lede">Non-interactive trigger cannot open the card.</p>
+    <DisabledDemo />
+  </div>
+
+  <div className="hc-section">
+    <h2>Scrollable container</h2>
+    <p className="hc-lede">Portal avoids overflow clipping; reposition near edges while scrolling.</p>
+    <ScrollContainerDemo />
+  </div>
+
+  <div className="hc-section">
+    <h2>Hover Card vs Tooltip vs Popover</h2>
+    <CompareDemo />
+  </div>
+
+  <div className="hc-section">
+    <h2>Installation and usage</h2>
+    <pre style={{
+      margin: 0,
+      padding: "14px 16px",
+      borderRadius: 10,
+      border: "1px solid #E2E8F0",
+      background: "#0F172A",
+      color: "#E2E8F0",
+      fontSize: 12,
+      fontFamily: "JetBrains Mono, ui-monospace, monospace",
+      overflow: "auto",
+    }}>{`import { HoverCard, HoverCardTrigger, HoverCardContent } from './HoverCard';
+
+<HoverCard openDelay={200} closeDelay={200}>
+  <HoverCardTrigger asChild>
+    <a href="#profile">@alex</a>
+  </HoverCardTrigger>
+  <HoverCardContent side="bottom" align="center">
+    …
+  </HoverCardContent>
+</HoverCard>`}</pre>
+  </div>
+
+  <div className="hc-section">
+    <h2>Component anatomy</h2>
+    <p className="hc-lede">
+      <strong>HoverCard</strong> — root (delays, open state).<br />
+      <strong>HoverCardTrigger</strong> — hover/focus target (<code>asChild</code> recommended).<br />
+      <strong>HoverCardContent</strong> — portaled panel (side, align, width, arrow).
+    </p>
+  </div>
+
+  <div className="hc-section">
+    <h2>Component API</h2>
+    <div className="hc-demo" style={{ overflowX: "auto", display: "block" }}>
+      <table className="hc-api">
+        <thead>
+          <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>openDelay</code></td>
+            <td>number</td>
+            <td>200</td>
+            <td>Ms before open on hover/focus</td>
+          </tr>
+          <tr>
+            <td><code>closeDelay</code></td>
+            <td>number</td>
+            <td>200</td>
+            <td>Ms before close after leave</td>
+          </tr>
+          <tr>
+            <td><code>open / onOpenChange</code></td>
+            <td>boolean / fn</td>
+            <td>—</td>
+            <td>Controlled state</td>
+          </tr>
+          <tr>
+            <td><code>side</code></td>
+            <td>top | right | bottom | left</td>
+            <td>bottom</td>
+            <td>Preferred placement</td>
+          </tr>
+          <tr>
+            <td><code>align</code></td>
+            <td>start | center | end</td>
+            <td>center</td>
+            <td>Alignment along the side</td>
+          </tr>
+          <tr>
+            <td><code>sideOffset</code></td>
+            <td>number</td>
+            <td>8</td>
+            <td>Gap from trigger</td>
+          </tr>
+          <tr>
+            <td><code>collisionPadding</code></td>
+            <td>number</td>
+            <td>8</td>
+            <td>Viewport collision padding</td>
+          </tr>
+          <tr>
+            <td><code>width</code></td>
+            <td>number | string</td>
+            <td>280</td>
+            <td>Content width (--hc-width)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div className="hc-section">
+    <h2>Usage guidelines</h2>
+    <p className="hc-lede">
+      • Use for non-essential previews — never the only path to critical information.<br />
+      • Prefer Tooltip for one-line hints; Popover for click-activated interactive UI.<br />
+      • Keep content scannable; avoid forms or long scrolling bodies.<br />
+      • On touch devices, ensure the same info is reachable via a page or Popover.
+    </p>
+  </div>
+
+  <div className="hc-section">
+    <h2>Accessibility</h2>
+    <p className="hc-lede">
+      Triggers should be focusable (links/buttons). Radix opens on focus as well as hover. Provide
+      accessible names for avatar triggers. Links inside the card are keyboard-reachable after the
+      card is open. Animations respect <code>prefers-reduced-motion</code>.
+    </p>
+  </div>
+
+  <div className="hc-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+</div>

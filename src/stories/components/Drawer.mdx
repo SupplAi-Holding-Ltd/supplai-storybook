@@ -1,0 +1,280 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  DRAWER_CODE,
+  DrawerPlayground,
+  DefaultDemo,
+  VariantsDemo,
+  PlacementDemo,
+  BackdropDemo,
+  HandleDemo,
+  SwipeDemo,
+  NonDraggableDemo,
+  SnapPointsDemo,
+  BackgroundScaleDemo,
+  ScrollableDemo,
+  FormDemo,
+  ControlledDemo,
+  ResponsiveDemo,
+  SpecsDemo,
+} from "./Drawers";
+
+<Meta title="Components/Drawer" />
+
+<div className="drw-page">
+
+  <div className="drw-header">
+    <h1>Drawer</h1>
+    <p>
+      A panel that slides in from the edge of the screen for filters, settings, detail views, and
+      mobile flows — without leaving the current page. Prefer a Dialog for short confirmations and a
+      persistent Sidebar for primary navigation.
+    </p>
+  </div>
+
+  <div className="drw-section">
+    <h2>Live Playground</h2>
+    <p className="drw-lede">
+      Change variant, direction, backdrop, and drag options. Open the Code tab for a composition sketch.
+    </p>
+    <CodePanel code={DRAWER_CODE} filename="Drawer.tsx" language="tsx">
+      <DrawerPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="drw-section">
+    <h2>Default</h2>
+    <p className="drw-lede">Trigger, header, body, footer actions, and dismiss control.</p>
+    <DefaultDemo />
+  </div>
+
+  <div className="drw-section">
+    <h2>Variants</h2>
+    <p className="drw-lede">
+      Default (flush), Floating (inset), and Rounded (stronger exposed corners) — all using supplai
+      surfaces and radius tokens.
+    </p>
+    <VariantsDemo />
+  </div>
+
+  <div className="drw-section">
+    <h2>Placement</h2>
+    <p className="drw-lede">Left, right, top, and bottom entry directions.</p>
+    <PlacementDemo />
+  </div>
+
+  <div className="drw-section">
+    <h2>Backdrop</h2>
+    <p className="drw-lede">Overlay, blur, or none.</p>
+    <BackdropDemo />
+  </div>
+
+  <div className="drw-section">
+    <h2>Drag handle</h2>
+    <p className="drw-lede">Visible handle that participates in drag-to-dismiss.</p>
+    <HandleDemo />
+  </div>
+
+  <div className="drw-section">
+    <h2>Swipe to close</h2>
+    <p className="drw-lede">Drag the panel to dismiss; scrolling content should not close accidentally.</p>
+    <SwipeDemo />
+  </div>
+
+  <div className="drw-section">
+    <h2>Non-draggable</h2>
+    <p className="drw-lede">
+      <code>dismissible=false</code> — close via button or Escape only.
+    </p>
+    <NonDraggableDemo />
+  </div>
+
+  <div className="drw-section">
+    <h2>Snap points</h2>
+    <p className="drw-lede">Bottom drawer resting at 30%, 55%, and full height.</p>
+    <SnapPointsDemo />
+  </div>
+
+  <div className="drw-section">
+    <h2>Background scaling</h2>
+    <p className="drw-lede">
+      Wrap app content in <code>[data-vaul-drawer-wrapper]</code> and set{" "}
+      <code>shouldScaleBackground</code>. Demo is isolated so Storybook chrome is unaffected.
+    </p>
+    <BackgroundScaleDemo />
+  </div>
+
+  <div className="drw-section">
+    <h2>Scrollable</h2>
+    <p className="drw-lede">Fixed header/footer with a scrolling body; background scroll locked while open.</p>
+    <ScrollableDemo />
+  </div>
+
+  <div className="drw-section">
+    <h2>Form</h2>
+    <p className="drw-lede">Inputs and select using Text Input chrome, with footer actions.</p>
+    <FormDemo />
+  </div>
+
+  <div className="drw-section">
+    <h2>Controlled</h2>
+    <p className="drw-lede">Open and close through React state.</p>
+    <ControlledDemo />
+  </div>
+
+  <div className="drw-section">
+    <h2>Responsive</h2>
+    <p className="drw-lede">Side drawer on desktop; bottom sheet at max-width 767px.</p>
+    <ResponsiveDemo />
+  </div>
+
+  <div className="drw-section">
+    <h2>Installation and usage</h2>
+    <p className="drw-lede">Import the compound parts from the design system:</p>
+    <pre style={{
+      margin: 0,
+      padding: "14px 16px",
+      borderRadius: 10,
+      border: "1px solid #E2E8F0",
+      background: "#0F172A",
+      color: "#E2E8F0",
+      fontSize: 12,
+      fontFamily: "JetBrains Mono, ui-monospace, monospace",
+      overflow: "auto",
+    }}>{`import {
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerDescription,
+  DrawerBody,
+  DrawerFooter,
+  DrawerClose,
+} from './Drawer';
+
+<Drawer direction="right" backdrop="overlay">
+  <DrawerTrigger>Open</DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Title</DrawerTitle>
+      <DrawerDescription>Description</DrawerDescription>
+    </DrawerHeader>
+    <DrawerBody>…</DrawerBody>
+    <DrawerFooter>
+      <DrawerClose>Close</DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>`}</pre>
+  </div>
+
+  <div className="drw-section">
+    <h2>Component anatomy</h2>
+    <p className="drw-lede">
+      <strong>Drawer</strong> — root (state, direction, variant, backdrop, snap points).<br />
+      <strong>DrawerTrigger</strong> — opens the panel.<br />
+      <strong>DrawerContent</strong> — portal, overlay, and panel surface.<br />
+      <strong>DrawerHeader / Title / Description</strong> — labelled region for assistive tech.<br />
+      <strong>DrawerBody</strong> — scrollable main content.<br />
+      <strong>DrawerFooter</strong> — sticky actions.<br />
+      <strong>DrawerClose</strong> — dismiss control (or wrap a button with <code>asChild</code>).
+    </p>
+  </div>
+
+  <div className="drw-section">
+    <h2>Component API</h2>
+    <div className="drw-demo" style={{ overflowX: "auto" }}>
+      <table className="drw-api">
+        <thead>
+          <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>variant</code></td>
+            <td>default | float | rounded</td>
+            <td>default</td>
+            <td>Edge flush, inset floating, or stronger radius</td>
+          </tr>
+          <tr>
+            <td><code>direction</code></td>
+            <td>top | bottom | left | right</td>
+            <td>right</td>
+            <td>Entry edge</td>
+          </tr>
+          <tr>
+            <td><code>backdrop</code></td>
+            <td>overlay | blur | none</td>
+            <td>overlay</td>
+            <td>Scrim appearance</td>
+          </tr>
+          <tr>
+            <td><code>handle</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Show drag handle</td>
+          </tr>
+          <tr>
+            <td><code>dismissible</code></td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>Allow drag / outside dismiss</td>
+          </tr>
+          <tr>
+            <td><code>snapPoints</code></td>
+            <td>(number | string)[]</td>
+            <td>—</td>
+            <td>Rest heights (e.g. 0.3, 0.55, 1)</td>
+          </tr>
+          <tr>
+            <td><code>shouldScaleBackground</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Scale <code>[data-vaul-drawer-wrapper]</code></td>
+          </tr>
+          <tr>
+            <td><code>open / onOpenChange</code></td>
+            <td>boolean / fn</td>
+            <td>—</td>
+            <td>Controlled state</td>
+          </tr>
+          <tr>
+            <td><code>modal</code></td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>Focus trap and inert background</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div className="drw-section">
+    <h2>Usage guidelines</h2>
+    <p className="drw-lede">
+      • Use for secondary tasks that stay in context (filters, editors, mobile menus).<br />
+      • Prefer Dialog for short confirmations; Sidebar for always-visible app navigation.<br />
+      • Keep footers for primary actions; avoid burying Save behind scroll.<br />
+      • Bottom + handle works best on touch; side panels suit dense desktop forms.
+    </p>
+  </div>
+
+  <div className="drw-section">
+    <h2>Accessibility</h2>
+    <p className="drw-lede">
+      Modal drawers use dialog semantics from vaul, trap focus, restore focus on close, support Escape,
+      and expose Title/Description. Drag gestures are additive — keyboard and close controls always work.
+      Respects <code>prefers-reduced-motion</code>.
+    </p>
+  </div>
+
+  <div className="drw-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+</div>

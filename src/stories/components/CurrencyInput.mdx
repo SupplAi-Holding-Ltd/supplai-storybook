@@ -1,0 +1,313 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  CURRENCY_INPUT_CODE,
+  CurrencyPlayground,
+  DefaultDemo,
+  CurrenciesDemo,
+  GroupSeparatorsDemo,
+  DecimalSeparatorsDemo,
+  DecimalPrecisionDemo,
+  StepDemo,
+  MinMaxDemo,
+  PrefixSymbolsDemo,
+  SuffixCodesDemo,
+  ExternalSymbolsDemo,
+  CurrencySelectDemo,
+  DisabledReadonlyDemo,
+  ValidationDemo,
+  ControlledDemo,
+  CombinedDemo,
+  SpecsDemo,
+} from "./CurrencyInputs";
+
+<Meta title="Components/Form Methods/Currency Input" />
+
+<div className="ci-page">
+
+  <div className="ci-header">
+    <h1>Currency Input</h1>
+    <p>
+      A specialised text field for monetary amounts. It formats currency symbols, grouping, and
+      decimals for display while keeping an unformatted decimal string for forms and APIs — using
+      the same chrome as Text Input.
+    </p>
+  </div>
+
+  <div className="ci-section">
+    <h2>Overview</h2>
+    <p className="ci-lede">
+      Use Currency Input when users enter prices, budgets, or payment amounts. Prefer a standard
+      Number or Text Input for unitless quantities, IDs, or values that should not show currency
+      formatting. Display value (e.g. $1,234.50) stays separate from the submitted value (1234.50).
+    </p>
+  </div>
+
+  <div className="ci-section">
+    <h2>Live Playground</h2>
+    <p className="ci-lede">
+      Try currencies, precision, and states. Open the Code tab for an implementation sketch.
+    </p>
+    <CodePanel code={CURRENCY_INPUT_CODE} filename="CurrencyInput.tsx" language="tsx">
+      <CurrencyPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="ci-section">
+    <h2>Default</h2>
+    <p className="ci-lede">Placeholder, symbol prefix, and automatic formatting on blur.</p>
+    <DefaultDemo />
+  </div>
+
+  <div className="ci-section">
+    <h2>Different currencies</h2>
+    <p className="ci-lede">
+      USD, EUR, GBP, INR, JPY, and CNY with locale-aware symbols and decimals. JPY uses zero decimal
+      places. Changing currency updates formatting only — it does not convert amounts.
+    </p>
+    <CurrenciesDemo />
+  </div>
+
+  <div className="ci-section">
+    <h2>Group separators</h2>
+    <p className="ci-lede">Comma, period, or disabled thousands grouping.</p>
+    <GroupSeparatorsDemo />
+  </div>
+
+  <div className="ci-section">
+    <h2>Decimal separators</h2>
+    <p className="ci-lede">
+      Period or comma decimals — always paired with a compatible group separator so values stay unambiguous.
+    </p>
+    <DecimalSeparatorsDemo />
+  </div>
+
+  <div className="ci-section">
+    <h2>Decimal precision</h2>
+    <p className="ci-lede">
+      Cap how many fraction digits can be entered. Values are not rounded while typing; padding applies on blur.
+    </p>
+    <DecimalPrecisionDemo />
+  </div>
+
+  <div className="ci-section">
+    <h2>Keyboard increment</h2>
+    <p className="ci-lede">
+      Arrow Up / Down adjust by <code>step</code>, respecting min and max. Ordinary editing and selection still work.
+    </p>
+    <StepDemo />
+  </div>
+
+  <div className="ci-section">
+    <h2>Minimum and maximum</h2>
+    <p className="ci-lede">
+      Max 9,999 with min 0. Out-of-range values use the same error styling as Text Input; blur clamps to the range.
+    </p>
+    <MinMaxDemo />
+  </div>
+
+  <div className="ci-section">
+    <h2>Currency symbols (prefix)</h2>
+    <p className="ci-lede">Symbols sit in the input prefix slot so they never overlap the value.</p>
+    <PrefixSymbolsDemo />
+  </div>
+
+  <div className="ci-section">
+    <h2>Currency codes (suffix)</h2>
+    <p className="ci-lede">Symbol before the amount and ISO code after — e.g. $ 250.00 USD.</p>
+    <SuffixCodesDemo />
+  </div>
+
+  <div className="ci-section">
+    <h2>External symbols and codes</h2>
+    <p className="ci-lede">
+      Symbol or code outside the field, still labelled and associated for assistive tech.
+    </p>
+    <ExternalSymbolsDemo />
+  </div>
+
+  <div className="ci-section">
+    <h2>Currency selection</h2>
+    <p className="ci-lede">
+      Native select + Currency Input. Switching currency updates symbol, code, and formatting; the numeric amount is preserved.
+    </p>
+    <CurrencySelectDemo />
+  </div>
+
+  <div className="ci-section">
+    <h2>Disabled and read-only</h2>
+    <p className="ci-lede">
+      Disabled blocks interaction. Read-only prevents edits but stays focusable for selection.
+    </p>
+    <DisabledReadonlyDemo />
+  </div>
+
+  <div className="ci-section">
+    <h2>Validation</h2>
+    <p className="ci-lede">Required field and max-value errors with accessible messaging.</p>
+    <ValidationDemo />
+  </div>
+
+  <div className="ci-section">
+    <h2>Controlled input</h2>
+    <p className="ci-lede">React state owns the unformatted value; formatted display updates as you type and blur.</p>
+    <ControlledDemo />
+  </div>
+
+  <div className="ci-section">
+    <h2>Combined example</h2>
+    <p className="ci-lede">
+      Currency select, precision, suffix code, min/max, step keys, validation, and controlled state together.
+    </p>
+    <CombinedDemo />
+  </div>
+
+  <div className="ci-section">
+    <h2>Installation and usage</h2>
+    <p className="ci-lede">
+      Import from the design system stories package (or your published component path):
+    </p>
+    <pre style={{
+      margin: 0,
+      padding: "14px 16px",
+      borderRadius: 10,
+      border: "1px solid #E2E8F0",
+      background: "#0F172A",
+      color: "#E2E8F0",
+      fontSize: 12,
+      fontFamily: "JetBrains Mono, ui-monospace, monospace",
+      overflow: "auto",
+    }}>{`import { CurrencyInput } from './CurrencyInput';
+
+<CurrencyInput
+  label="Amount"
+  currency="USD"
+  showSymbol
+  value={raw}
+  onValueChange={setRaw}
+/>`}</pre>
+  </div>
+
+  <div className="ci-section">
+    <h2>Component API</h2>
+    <div className="ci-demo" style={{ overflowX: "auto" }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+        <thead>
+          <tr style={{ textAlign: "left", borderBottom: "1px solid #E2E8F0" }}>
+            <th style={{ padding: "8px 10px" }}>Prop</th>
+            <th style={{ padding: "8px 10px" }}>Type</th>
+            <th style={{ padding: "8px 10px" }}>Default</th>
+            <th style={{ padding: "8px 10px" }}>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style={{ borderBottom: "1px solid #F1F5F9" }}>
+            <td style={{ padding: "8px 10px", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>value</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>string</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>—</td>
+            <td style={{ padding: "8px 10px" }}>Controlled unformatted amount (e.g. &quot;1234.56&quot;)</td>
+          </tr>
+          <tr style={{ borderBottom: "1px solid #F1F5F9" }}>
+            <td style={{ padding: "8px 10px", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>defaultValue</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>string</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>&quot;&quot;</td>
+            <td style={{ padding: "8px 10px" }}>Uncontrolled initial raw value</td>
+          </tr>
+          <tr style={{ borderBottom: "1px solid #F1F5F9" }}>
+            <td style={{ padding: "8px 10px", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>onValueChange</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>(raw, meta) =&gt; void</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>—</td>
+            <td style={{ padding: "8px 10px" }}>Fires with raw string, float, and formatted display</td>
+          </tr>
+          <tr style={{ borderBottom: "1px solid #F1F5F9" }}>
+            <td style={{ padding: "8px 10px", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>currency</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>USD | EUR | GBP | INR | JPY | CNY</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>USD</td>
+            <td style={{ padding: "8px 10px" }}>Preset symbol, locale, decimals</td>
+          </tr>
+          <tr style={{ borderBottom: "1px solid #F1F5F9" }}>
+            <td style={{ padding: "8px 10px", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>locale</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>string</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>from currency</td>
+            <td style={{ padding: "8px 10px" }}>Overrides Intl locale</td>
+          </tr>
+          <tr style={{ borderBottom: "1px solid #F1F5F9" }}>
+            <td style={{ padding: "8px 10px", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>decimals</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>number</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>from currency</td>
+            <td style={{ padding: "8px 10px" }}>Max fraction digits; pad on blur</td>
+          </tr>
+          <tr style={{ borderBottom: "1px solid #F1F5F9" }}>
+            <td style={{ padding: "8px 10px", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>groupSeparator</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>&quot;,&quot; | &quot;.&quot; | false</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>locale</td>
+            <td style={{ padding: "8px 10px" }}>Thousands grouping</td>
+          </tr>
+          <tr style={{ borderBottom: "1px solid #F1F5F9" }}>
+            <td style={{ padding: "8px 10px", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>decimalSeparator</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>&quot;.&quot; | &quot;,&quot;</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>locale</td>
+            <td style={{ padding: "8px 10px" }}>Decimal character</td>
+          </tr>
+          <tr style={{ borderBottom: "1px solid #F1F5F9" }}>
+            <td style={{ padding: "8px 10px", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>showSymbol / showCode</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>boolean</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>false</td>
+            <td style={{ padding: "8px 10px" }}>Prefix symbol / suffix ISO code</td>
+          </tr>
+          <tr style={{ borderBottom: "1px solid #F1F5F9" }}>
+            <td style={{ padding: "8px 10px", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>min / max / step</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>number</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>step 1</td>
+            <td style={{ padding: "8px 10px" }}>Clamp on blur; arrow-key increment</td>
+          </tr>
+          <tr style={{ borderBottom: "1px solid #F1F5F9" }}>
+            <td style={{ padding: "8px 10px", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>disabled / readOnly</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>boolean</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>false</td>
+            <td style={{ padding: "8px 10px" }}>Non-interactive / focusable but not editable</td>
+          </tr>
+          <tr style={{ borderBottom: "1px solid #F1F5F9" }}>
+            <td style={{ padding: "8px 10px", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>error / errorMessage</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>boolean / string</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>—</td>
+            <td style={{ padding: "8px 10px" }}>Invalid styling + alert text</td>
+          </tr>
+          <tr style={{ borderBottom: "1px solid #F1F5F9" }}>
+            <td style={{ padding: "8px 10px", fontFamily: "JetBrains Mono, monospace", fontSize: 12 }}>bare</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>boolean</td>
+            <td style={{ padding: "8px 10px", color: "#64748B" }}>false</td>
+            <td style={{ padding: "8px 10px" }}>Input only (for select / external chrome)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div className="ci-section">
+    <h2>Usage guidelines</h2>
+    <p className="ci-lede">
+      • Use for money; keep the submitted value unformatted.<br />
+      • Pair group and decimal separators so both are never the same character.<br />
+      • Prefer ISO codes next to ambiguous symbols (CNY / JPY both use ¥).<br />
+      • Do not run live FX conversion when the user only changes denomination.<br />
+      • For plain counts or percentages, use Text Input instead.
+    </p>
+  </div>
+
+  <div className="ci-section">
+    <h2>Accessibility</h2>
+    <p className="ci-lede">
+      Visible labels via <code>htmlFor</code>, <code>aria-invalid</code> and <code>role=&quot;alert&quot;</code> for errors,
+      helper text linked with <code>aria-describedby</code>, and a screen-reader-only currency name so symbols
+      are not double-announced. Uses <code>inputMode=&quot;decimal&quot;</code> (or numeric for zero-decimal currencies).
+      Focus ring matches Text Input (Brand Blue).
+    </p>
+  </div>
+
+  <div className="ci-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+</div>

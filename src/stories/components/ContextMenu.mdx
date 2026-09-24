@@ -1,0 +1,151 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  CONTEXT_MENU_CODE,
+  ContextMenuPlayground,
+  DefaultDemo,
+  IconsDemo,
+  ShortcutsDemo,
+  SubmenusDemo,
+  CheckboxDemo,
+  RadioDemo,
+  DisabledDemo,
+  DestructiveDemo,
+  GroupedDemo,
+  DialogDemo,
+  CombinedDemo,
+} from "./ContextMenus";
+
+<Meta title="Components/Context Menu" />
+
+<div className="cxm-page">
+
+  <div className="cxm-header">
+    <h1>Context Menu</h1>
+    <p>
+      A custom, accessible menu that appears when a user right-clicks a region — using supplai Brand
+      Blue and floating-menu chrome. Prefer a Context Menu for contextual actions on an object; use a
+      Dropdown Menu when the trigger is an explicit button or control.
+    </p>
+  </div>
+
+  <div className="cxm-section">
+    <h2>Live Playground</h2>
+    <p className="cxm-lede">
+      Right-click the surface for a combined menu. Open the Code tab for an implementation sketch.
+    </p>
+    <CodePanel code={CONTEXT_MENU_CODE} filename="ContextMenu.tsx" language="tsx">
+      <ContextMenuPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="cxm-section">
+    <h2>Default</h2>
+    <p className="cxm-lede">Basic actions with groups, separators, shortcuts, and a disabled item.</p>
+    <DefaultDemo />
+  </div>
+
+  <div className="cxm-section">
+    <h2>With icons</h2>
+    <p className="cxm-lede">Actions paired with Meistericons for quicker scanning.</p>
+    <IconsDemo />
+  </div>
+
+  <div className="cxm-section">
+    <h2>With keyboard shortcuts</h2>
+    <p className="cxm-lede">Shortcut hints aligned to the trailing edge of each item.</p>
+    <ShortcutsDemo />
+  </div>
+
+  <div className="cxm-section">
+    <h2>With submenus</h2>
+    <p className="cxm-lede">Nested menus open on hover or click, with collision-aware placement.</p>
+    <SubmenusDemo />
+  </div>
+
+  <div className="cxm-section">
+    <h2>Checkbox items</h2>
+    <p className="cxm-lede">Independently toggled options with Brand Blue checked chrome.</p>
+    <CheckboxDemo />
+  </div>
+
+  <div className="cxm-section">
+    <h2>Radio group</h2>
+    <p className="cxm-lede">Mutually exclusive choices within a labelled group.</p>
+    <RadioDemo />
+  </div>
+
+  <div className="cxm-section">
+    <h2>Disabled items</h2>
+    <p className="cxm-lede">Unavailable actions use reduced opacity and cannot be activated.</p>
+    <DisabledDemo />
+  </div>
+
+  <div className="cxm-section">
+    <h2>Destructive actions</h2>
+    <p className="cxm-lede">Error semantic colour for irreversible actions like Delete.</p>
+    <DestructiveDemo />
+  </div>
+
+  <div className="cxm-section">
+    <h2>Grouped items and separators</h2>
+    <p className="cxm-lede">Labels, groups, and dividers organise related actions.</p>
+    <GroupedDemo />
+  </div>
+
+  <div className="cxm-section">
+    <h2>Inside a dialog</h2>
+    <p className="cxm-lede">
+      Context menus portal to the document body so they stack correctly above modal surfaces.
+    </p>
+    <DialogDemo />
+  </div>
+
+  <div className="cxm-section">
+    <h2>Combined example</h2>
+    <p className="cxm-lede">
+      Shortcuts, submenu, checkboxes, radio items, disabled and destructive actions together.
+    </p>
+    <CombinedDemo />
+  </div>
+
+  <div className="cxm-section">
+    <h2>Usage guidance</h2>
+    <p className="cxm-lede">
+      Use for object-specific actions discovered via right-click. Avoid burying primary navigation or
+      actions that should be visible without a context gesture. Always provide keyboard access
+      (Shift+F10 / ContextMenu key) and Escape to dismiss.
+    </p>
+  </div>
+
+  <div className="cxm-section">
+    <h2>Specs</h2>
+    <div className="cxm-specs-grid">
+      <div className="cxm-spec-card">
+        <span className="cxm-spec-label">Open</span>
+        <span className="cxm-spec-value">Right-click · Shift+F10</span>
+      </div>
+      <div className="cxm-spec-card">
+        <span className="cxm-spec-label">Panel</span>
+        <span className="cxm-spec-value">12px radius · portal</span>
+      </div>
+      <div className="cxm-spec-card">
+        <span className="cxm-spec-label">Accent</span>
+        <span className="cxm-spec-value">Brand Blue #4169E1</span>
+      </div>
+      <div className="cxm-spec-card">
+        <span className="cxm-spec-label">Destructive</span>
+        <span className="cxm-spec-value">Error #D13145</span>
+      </div>
+      <div className="cxm-spec-card">
+        <span className="cxm-spec-label">Parts</span>
+        <span className="cxm-spec-value">Item · Checkbox · Radio · Sub</span>
+      </div>
+      <div className="cxm-spec-card">
+        <span className="cxm-spec-label">A11y</span>
+        <span className="cxm-spec-value">menu roles · arrows · Escape</span>
+      </div>
+    </div>
+  </div>
+
+</div>

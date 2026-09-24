@@ -84,7 +84,7 @@
   overflow-x: auto;
 }
 
-/* Calendar shell — Radian-inspired compact chrome, supplai tokens */
+/* Calendar shell — compact chrome, supplai tokens */
 .cld-shell {
   display: inline-block;
   padding: 12px 14px 10px;
@@ -180,7 +180,7 @@
   background: #F1F5F9;
 }
 
-/* Selected: outline square + Brand Blue text (Radian-like) */
+/* Selected: outline square + Brand Blue text */
 .cld-shell .rdp-selected {
   font-weight: 600;
   font-size: inherit;

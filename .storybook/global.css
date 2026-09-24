@@ -353,4 +353,46 @@ h1, h2, h3, h4, h5, h6 {
   color: #A6ADC8;
 }
 
+/* ── Unified docs page title + description ── */
+.sbdocs-content [class$="-header"]:not([class*="table-"]):not([class*="list-"]):not([class*="scale-"]):not([class*="bp-"]):not([class*="ct-"]):not(.storybook-header) {
+  display: block !important;
+  margin-bottom: 40px !important;
+  padding-bottom: 28px !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+}
+
+.sbdocs-content [class$="-header"]:not([class*="table-"]):not([class*="list-"]):not([class*="scale-"]):not([class*="bp-"]):not([class*="ct-"]):not(.storybook-header) > h1 {
+  margin: 0 0 10px !important;
+  padding: 0 !important;
+  border: none !important;
+  font-family: Manrope, system-ui, sans-serif !important;
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.2 !important;
+  color: #0F172A !important;
+}
+
+.sbdocs-content [class$="-header"]:not([class*="table-"]):not([class*="list-"]):not([class*="scale-"]):not([class*="bp-"]):not([class*="ct-"]):not(.storybook-header) > p {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  max-width: 640px !important;
+  font-family: Manrope, system-ui, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+  color: #64748B !important;
+}
+
+.sbdocs-content [class$="-header"]:not([class*="table-"]):not([class*="list-"]):not([class*="scale-"]):not([class*="bp-"]):not([class*="ct-"]):not(.storybook-header) > p a {
+  color: #4169E1 !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+
+.sbdocs-content [class$="-header"]:not([class*="table-"]):not([class*="list-"]):not([class*="scale-"]):not([class*="bp-"]):not([class*="ct-"]):not(.storybook-header) > p a:hover {
+  text-decoration: underline !important;
+}
+
 

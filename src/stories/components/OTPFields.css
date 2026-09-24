@@ -1,0 +1,428 @@
+/* ── OTP Field · supplai Design System ────────────────────────────────── */
+
+.otp-page {
+  display: block;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 0 64px;
+  font-family: Manrope, system-ui, sans-serif;
+}
+
+.otp-page .otp-header {
+  margin-bottom: 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.otp-page .otp-header h1 {
+  margin: 0 0 10px !important;
+  padding: 0 !important;
+  border: none !important;
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.2 !important;
+  color: #0F172A !important;
+}
+
+.otp-page .otp-header p {
+  margin: 0 !important;
+  max-width: 640px;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+  color: #64748B !important;
+}
+
+.otp-page .otp-section {
+  margin: 0 0 48px !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.otp-page .otp-section h2 {
+  margin: 0 0 6px !important;
+  padding: 0 !important;
+  border: none !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #0F172A !important;
+}
+
+.otp-page .otp-lede {
+  margin: 0 0 16px !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  color: #64748B !important;
+}
+
+.otp-demo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  background: #FFFFFF;
+}
+
+.otp-demo--center {
+  align-items: center;
+}
+
+.otp-note {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #94A3B8;
+}
+
+.otp-field-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.otp-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.otp-hint {
+  font-size: 12px;
+  font-weight: 500;
+  color: #9CA3AF;
+}
+
+.otp-hint--error {
+  color: #D13145;
+}
+
+.otp-hint--success {
+  color: #047857;
+}
+
+.otp-hint--meta {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  color: #64748B;
+}
+
+/* Root slot row */
+.otp-root {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--otp-gap, 8px);
+}
+
+.otp-root--grouped {
+  gap: 0;
+}
+
+.otp-group {
+  display: flex;
+  gap: var(--otp-gap, 8px);
+}
+
+.otp-group-sep {
+  width: 10px;
+  flex-shrink: 0;
+}
+
+/* Character slots — Text Input chrome */
+.otp-slot {
+  box-sizing: border-box;
+  width: var(--otp-size, 40px);
+  height: var(--otp-size, 40px);
+  padding: 0;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: #111625;
+  font-family: Manrope, system-ui, sans-serif;
+  font-size: var(--otp-font, 15px);
+  font-weight: 600;
+  text-align: center;
+  outline: none;
+  caret-color: #4169E1;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.otp-slot:hover:not(:disabled):not(:read-only) {
+  border-color: #9CA3AF;
+}
+
+.otp-slot:focus {
+  border-color: #4169E1;
+  box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.12);
+}
+
+.otp-slot--error {
+  border-color: #D13145;
+  background: #FFF5F6;
+  color: #D13145;
+}
+
+.otp-slot--error:focus {
+  border-color: #D13145;
+  box-shadow: 0 0 0 3px rgba(209, 49, 69, 0.1);
+}
+
+.otp-slot:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background: #F9FAFB;
+}
+
+.otp-slot:read-only:not(:disabled) {
+  background: #F9FAFB;
+  color: #374151;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .otp-slot {
+    transition: none;
+  }
+}
+
+/* Buttons */
+.otp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-family: Manrope, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.otp-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.25);
+}
+
+.otp-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.otp-btn--primary {
+  background: #4169E1;
+  color: #FFFFFF;
+}
+
+.otp-btn--primary:hover:not(:disabled) {
+  background: #2F50C1;
+}
+
+.otp-btn--ghost {
+  background: #F3F4F6;
+  color: #374151;
+  border-color: #E5E7EB;
+}
+
+.otp-btn--ghost:hover:not(:disabled) {
+  background: #E5E7EB;
+}
+
+.otp-btn--outline {
+  background: #FFFFFF;
+  color: #374151;
+  border-color: #D1D5DB;
+}
+
+.otp-btn--link {
+  height: auto;
+  padding: 0;
+  background: none;
+  border: none;
+  color: #4169E1;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.otp-btn--link:disabled {
+  color: #94A3B8;
+  text-decoration: none;
+}
+
+.otp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.otp-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  background: #FFFFFF;
+}
+
+.otp-panel-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.otp-panel-desc {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #64748B;
+  line-height: 1.5;
+}
+
+.otp-sizes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.otp-size-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+
+.otp-size-label {
+  min-width: 48px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748B;
+}
+
+/* Playground */
+.otp-play {
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+.otp-play-preview {
+  padding: 28px 24px;
+  border-bottom: 1px solid #E5E7EB;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.otp-play-controls {
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.otp-play-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.otp-play-label {
+  min-width: 88px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748B;
+}
+
+.otp-chip {
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  background: #FFFFFF;
+  font-family: Manrope, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+}
+
+.otp-chip--on {
+  background: #ECF0FC;
+  border-color: #4169E1;
+  color: #2F50C1;
+}
+
+.otp-chip:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.otp-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.otp-spec-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  background: #FFFFFF;
+}
+
+.otp-spec-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #94A3B8;
+}
+
+.otp-spec-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0F172A;
+}
+
+.otp-api {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.otp-api th,
+.otp-api td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.otp-api th {
+  border-bottom: 1px solid #E2E8F0;
+  font-weight: 700;
+}
+
+.otp-api code {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 12px;
+}

@@ -1,0 +1,275 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  PHONE_INPUT_CODE,
+  PhonePlayground,
+  DefaultDemo,
+  CountriesDemo,
+  DefaultCountryDemo,
+  SelectorDemo,
+  SearchableDemo,
+  RestrictedDemo,
+  ExcludedDemo,
+  FormattingDemo,
+  E164Demo,
+  SizesDemo,
+  DisabledDemo,
+  ReadOnlyDemo,
+  ValidationDemo,
+  ErrorStateDemo,
+  ControlledDemo,
+  FormDemo,
+  OtpFlowDemo,
+  NoFormattingDemo,
+  SpecsDemo,
+} from "./PhoneInputs";
+
+<Meta title="Components/Form Methods/Phone Input" />
+
+<div className="ph-page">
+
+  <div className="ph-header">
+    <h1>Phone Input</h1>
+    <p>
+      International telephone entry with a country selector, flags, dialling codes, and automatic
+      formatting. The underlying value is an E.164 string for forms and APIs — styled like Text Input.
+    </p>
+  </div>
+
+  <div className="ph-section">
+    <h2>Live Playground</h2>
+    <p className="ph-lede">Change default country, allowlists, size, and states.</p>
+    <CodePanel code={PHONE_INPUT_CODE} filename="PhoneInput.tsx" language="tsx">
+      <PhonePlayground />
+    </CodePanel>
+  </div>
+
+  <div className="ph-section">
+    <h2>Default</h2>
+    <DefaultDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>Different countries</h2>
+    <p className="ph-lede">US, GB, AU, NZ, NP, IN, JP and more via the selector.</p>
+    <CountriesDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>Default country</h2>
+    <DefaultCountryDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>Country selector</h2>
+    <SelectorDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>Searchable selector</h2>
+    <SearchableDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>Restricted countries</h2>
+    <RestrictedDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>Excluded countries</h2>
+    <ExcludedDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>Formatting</h2>
+    <FormattingDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>International value (E.164)</h2>
+    <E164Demo />
+  </div>
+
+  <div className="ph-section">
+    <h2>No formatting</h2>
+    <p className="ph-lede">Additional option from the reference — digits without visual mask.</p>
+    <NoFormattingDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>Sizes</h2>
+    <p className="ph-lede">sm / md / lg aligned with Text Input heights.</p>
+    <SizesDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>Disabled</h2>
+    <DisabledDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>Read-only</h2>
+    <ReadOnlyDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>Validation</h2>
+    <p className="ph-lede">Empty / incomplete / complete using country masks — not carrier checks.</p>
+    <ValidationDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>Error state</h2>
+    <ErrorStateDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>Controlled</h2>
+    <ControlledDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>Form integration</h2>
+    <FormDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>OTP verification flow</h2>
+    <p className="ph-lede">Phone Input then OTP Field — simulated SMS only.</p>
+    <OtpFlowDemo />
+  </div>
+
+  <div className="ph-section">
+    <h2>Installation and usage</h2>
+    <pre style={{
+      margin: 0,
+      padding: "14px 16px",
+      borderRadius: 10,
+      border: "1px solid #E2E8F0",
+      background: "#0F172A",
+      color: "#E2E8F0",
+      fontSize: 12,
+      fontFamily: "JetBrains Mono, ui-monospace, monospace",
+      overflow: "auto",
+    }}>{`import { PhoneInput } from './PhoneInput';
+
+<PhoneInput
+  label="Phone number"
+  defaultCountry="nz"
+  value={phone}
+  onChange={({ phone }) => setPhone(phone)}
+/>`}</pre>
+  </div>
+
+  <div className="ph-section">
+    <h2>Component anatomy</h2>
+    <p className="ph-lede">
+      <strong>Country button</strong> — flag + dial code, opens searchable list.<br />
+      <strong>Telephone input</strong> — formatted national number with <code>type=&quot;tel&quot;</code>.<br />
+      <strong>Dropdown</strong> — country name, ISO, dial code (flags are not the only cue).
+    </p>
+  </div>
+
+  <div className="ph-section">
+    <h2>Component API</h2>
+    <div className="ph-demo" style={{ overflowX: "auto", maxWidth: "100%" }}>
+      <table className="ph-api">
+        <thead>
+          <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>defaultCountry</code></td>
+            <td>iso2 string</td>
+            <td>us</td>
+            <td>Initial country</td>
+          </tr>
+          <tr>
+            <td><code>value</code></td>
+            <td>string</td>
+            <td>—</td>
+            <td>Controlled E.164 value</td>
+          </tr>
+          <tr>
+            <td><code>onChange</code></td>
+            <td>(&#123; phone, inputValue, country &#125;) =&gt; void</td>
+            <td>—</td>
+            <td>Fires on edit / country change</td>
+          </tr>
+          <tr>
+            <td><code>onlyCountries</code></td>
+            <td>iso2[]</td>
+            <td>—</td>
+            <td>Allowlist</td>
+          </tr>
+          <tr>
+            <td><code>excludeCountries</code></td>
+            <td>iso2[]</td>
+            <td>—</td>
+            <td>Blocklist</td>
+          </tr>
+          <tr>
+            <td><code>preferredCountries</code></td>
+            <td>iso2[]</td>
+            <td>—</td>
+            <td>Pinned to top of list</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td>sm | md | lg</td>
+            <td>md</td>
+            <td>Control height</td>
+          </tr>
+          <tr>
+            <td><code>disabled / readOnly</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Interaction locks</td>
+          </tr>
+          <tr>
+            <td><code>disableFormatting</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Hide mask characters</td>
+          </tr>
+          <tr>
+            <td><code>error / errorMessage</code></td>
+            <td>boolean / string</td>
+            <td>—</td>
+            <td>Validation chrome</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div className="ph-section">
+    <h2>Usage guidelines</h2>
+    <p className="ph-lede">
+      • Prefer Phone Input over a plain Input for international numbers.<br />
+      • Store and submit E.164; show formatted text to users.<br />
+      • Completeness ≠ active line — verify via OTP or your auth service when needed.<br />
+      • Set a sensible defaultCountry for your market; allowlist when you only serve a few regions.
+    </p>
+  </div>
+
+  <div className="ph-section">
+    <h2>Accessibility</h2>
+    <p className="ph-lede">
+      Labelled field, named country button (name + dial code), keyboard list navigation,{" "}
+      <code>aria-invalid</code> + alert messages, <code>tel</code> input with autocomplete. Flags are
+      decorative alongside text.
+    </p>
+  </div>
+
+  <div className="ph-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+</div>
