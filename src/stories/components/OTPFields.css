@@ -222,6 +222,7 @@
 
 .otp-btn--primary:hover:not(:disabled) {
   background: #2F50C1;
+  color: #FFFFFF;
 }
 
 .otp-btn--ghost {

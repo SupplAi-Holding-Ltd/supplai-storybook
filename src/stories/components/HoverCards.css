@@ -341,7 +341,7 @@
   cursor: pointer;
 }
 
-.hc-btn:hover {
+.hc-btn:hover:not(.hc-btn--primary) {
   background: #F9FAFB;
   border-color: #9CA3AF;
 }
@@ -355,6 +355,7 @@
 .hc-btn--primary:hover {
   background: #2F50C1;
   border-color: #2F50C1;
+  color: #FFFFFF;
 }
 
 .hc-btn:focus-visible {

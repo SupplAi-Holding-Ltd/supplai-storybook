@@ -1,21 +1,308 @@
 import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  RADIO_GROUP_CODE,
+  RadioPlayground,
+  DefaultDemo,
+  SizesDemo,
+  LabelledDemo,
+  HintDemo,
+  DisabledGroupDemo,
+  DisabledItemDemo,
+  HorizontalDemo,
+  VerticalDemo,
+  ControlledDemo,
+  UncontrolledDemo,
+  RadioCardDemo,
+  RichCardDemo,
+  MenuRadioDemo,
+  RequiredFormDemo,
+  FormDemo,
+  ErrorDemo,
+  StatesDemo,
+  LongLabelDemo,
+  CompareDemo,
+  SpecsDemo,
+} from "./RadioGroups";
 
-<Meta title="Components/Form Methods/Radio Buttons" />
+<Meta title="Components/Form Methods/Radio Group" />
 
-<div className="stub-page">
-  <div className="stub-header">
-    <h1>Radio Buttons</h1>
-    <p>Single-select controls for choosing one option from a mutually exclusive set. Used when all options need to be visible at once.</p>
+<div className="rg-page">
+
+  <div className="rg-header">
+    <h1>Radio Group</h1>
+    <p>
+      Mutually exclusive choices — users pick exactly one option from a set. Use when all options
+      should stay visible for comparison.
+    </p>
   </div>
-  <span className="stub-badge">🚧 Coming Soon</span>
-  <p className="stub-note">Full documentation and interactive examples will be added once the component is finalized.</p>
-</div>
 
-<style>{`
-  .stub-page { max-width: 900px; margin: 0 auto; padding: 0 0 64px; font-family: 'Manrope', sans-serif; }
-  .stub-header { margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid #E5E7EB; }
-  .stub-header h1 { font-size: 32px; font-weight: 700; color: #111625; margin: 0 0 12px; }
-  .stub-header p { font-size: 15px; color: #6B7280; line-height: 1.7; max-width: 520px; margin: 0; }
-  .stub-badge { display: inline-flex; align-items: center; gap: 6px; background: #FFF6E6; color: #934A01; padding: 5px 14px; border-radius: 99px; font-size: 13px; font-weight: 600; }
-  .stub-note { margin: 12px 0 0; font-size: 14px; color: #6B7280; }
-`}</style>
+  <div className="rg-section">
+    <h2>Live Playground</h2>
+    <p className="rg-lede">Size, orientation, disabled, and required — Controls update the real group.</p>
+    <CodePanel code={RADIO_GROUP_CODE} filename="RadioGroup.tsx" language="tsx">
+      <RadioPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="rg-section">
+    <h2>Default</h2>
+    <DefaultDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Sizes</h2>
+    <p className="rg-lede">sm / md / lg — size inherits from the group root.</p>
+    <SizesDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Labelled</h2>
+    <p className="rg-lede">Clicking the label selects the associated radio.</p>
+    <LabelledDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Hint text</h2>
+    <HintDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Disabled group</h2>
+    <DisabledGroupDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Disabled item</h2>
+    <p className="rg-lede">Out-of-stock option stays unavailable to pointer and keyboard.</p>
+    <DisabledItemDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Horizontal</h2>
+    <HorizontalDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Vertical</h2>
+    <p className="rg-lede">Default orientation.</p>
+    <VerticalDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Controlled</h2>
+    <ControlledDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Default value (uncontrolled)</h2>
+    <UncontrolledDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Radio Card</h2>
+    <p className="rg-lede">Composable cards — still one Radio Group semantically.</p>
+    <RadioCardDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Radio Card — rich content</h2>
+    <RichCardDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Radio in a menu</h2>
+    <p className="rg-lede">
+      Form RadioGroup for pages; Context Menu radio items for menus (same idea as Dropdown Menu radios).
+    </p>
+    <MenuRadioDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Required validation</h2>
+    <RequiredFormDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Form integration</h2>
+    <FormDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Error state</h2>
+    <ErrorDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>States</h2>
+    <StatesDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Long labels</h2>
+    <LongLabelDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Installation and usage</h2>
+    <pre style={{
+      margin: 0,
+      padding: "14px 16px",
+      borderRadius: 10,
+      border: "1px solid #E2E8F0",
+      background: "#0F172A",
+      color: "#E2E8F0",
+      fontSize: 12,
+      fontFamily: "JetBrains Mono, ui-monospace, monospace",
+      overflow: "auto",
+    }}>{`import { RadioGroup, RadioGroupItem } from './RadioGroup';
+
+<RadioGroup defaultValue="email" size="md" orientation="vertical">
+  <RadioGroupItem value="email" label="Email" />
+  <RadioGroupItem value="phone" label="Phone" />
+  <RadioGroupItem value="sms" label="SMS" />
+</RadioGroup>`}</pre>
+  </div>
+
+  <div className="rg-section">
+    <h2>Component anatomy</h2>
+    <p className="rg-lede">
+      <strong>RadioGroup</strong> — root (<code>radiogroup</code>), value, orientation, size.<br />
+      <strong>RadioGroupItem</strong> — option (<code>radio</code>) with optional label and description.<br />
+      Pair with <code>fieldset</code> / <code>legend</code> for form questions.
+    </p>
+  </div>
+
+  <div className="rg-section">
+    <h2>Component API</h2>
+    <div className="rg-demo" style={{ padding: 0, overflowX: "auto" }}>
+      <table className="rg-api">
+        <thead>
+          <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colSpan={4}><strong>RadioGroup</strong></td>
+          </tr>
+          <tr>
+            <td><code>value</code></td>
+            <td>string</td>
+            <td>—</td>
+            <td>Controlled selected value</td>
+          </tr>
+          <tr>
+            <td><code>defaultValue</code></td>
+            <td>string</td>
+            <td>—</td>
+            <td>Uncontrolled initial value</td>
+          </tr>
+          <tr>
+            <td><code>onValueChange</code></td>
+            <td>(value) =&gt; void</td>
+            <td>—</td>
+            <td>Selection change callback</td>
+          </tr>
+          <tr>
+            <td><code>orientation</code></td>
+            <td>vertical | horizontal</td>
+            <td>vertical</td>
+            <td>Layout and arrow-key axis</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td>sm | md | lg</td>
+            <td>md</td>
+            <td>Inherited by items</td>
+          </tr>
+          <tr>
+            <td><code>disabled</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Disables the whole group</td>
+          </tr>
+          <tr>
+            <td><code>required</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Form required attribute</td>
+          </tr>
+          <tr>
+            <td><code>name</code></td>
+            <td>string</td>
+            <td>—</td>
+            <td>Native form name</td>
+          </tr>
+          <tr>
+            <td colSpan={4}><strong>RadioGroupItem</strong></td>
+          </tr>
+          <tr>
+            <td><code>value</code></td>
+            <td>string</td>
+            <td>—</td>
+            <td>Option value (required)</td>
+          </tr>
+          <tr>
+            <td><code>label</code></td>
+            <td>ReactNode</td>
+            <td>—</td>
+            <td>Visible label (clickable)</td>
+          </tr>
+          <tr>
+            <td><code>description</code></td>
+            <td>ReactNode</td>
+            <td>—</td>
+            <td>Supporting hint text</td>
+          </tr>
+          <tr>
+            <td><code>disabled</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Disables this option only</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td>sm | md | lg</td>
+            <td>inherits</td>
+            <td>Optional per-item override</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div className="rg-section">
+    <h2>Radio vs Checkbox vs Select</h2>
+    <CompareDemo />
+  </div>
+
+  <div className="rg-section">
+    <h2>Usage guidelines</h2>
+    <p className="rg-lede">
+      • Use Radio Group for exactly one choice; Checkbox for multi-select; Select for long lists.<br />
+      • Clicking a selected radio does not clear it — provide a separate “None” option if needed.<br />
+      • Prefer Radio Cards for richer comparisons; keep pricing/content compositional.<br />
+      • Use menu radio items inside menus — not form radios.
+    </p>
+  </div>
+
+  <div className="rg-section">
+    <h2>Accessibility</h2>
+    <p className="rg-lede">
+      Radix provides <code>radiogroup</code> / <code>radio</code> roles, arrow-key navigation, and
+      checked state. Label the group with a legend, <code>aria-label</code>, or{" "}
+      <code>aria-labelledby</code>. Associate errors via <code>aria-describedby</code> and{" "}
+      <code>aria-invalid</code>. Disabled items are skipped. Focus ring uses Brand Blue.
+    </p>
+  </div>
+
+  <div className="rg-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+</div>

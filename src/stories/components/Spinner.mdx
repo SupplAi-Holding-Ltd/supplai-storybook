@@ -1,0 +1,252 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  SPINNER_CODE,
+  SpinnerPlayground,
+  DefaultDemo,
+  VariantsDemo,
+  ColorsDemo,
+  SizesDemo,
+  InlineDemo,
+  ButtonDemo,
+  BadgesDemo,
+  InputGroupDemo,
+  ValidationDemo,
+  CardOverlayDemo,
+  SectionLoaderDemo,
+  TransitionDemo,
+  TableRefreshDemo,
+  CompareDemo,
+  SpecsDemo,
+} from "./Spinners";
+
+<Meta title="Components/Spinner" />
+
+<div className="spn-page">
+
+  <div className="spn-header">
+    <h1>Spinner</h1>
+    <p>
+      A lightweight loading indicator for in-progress work when completion percentage is
+      unknown. Compose it inside Buttons, Badges, Inputs, and Cards — keep loading state in
+      the application.
+    </p>
+  </div>
+
+  <div className="spn-section">
+    <h2>Live Playground</h2>
+    <p className="spn-lede">Variant and size.</p>
+    <CodePanel code={SPINNER_CODE} filename="Spinner.tsx" language="tsx">
+      <SpinnerPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="spn-section">
+    <h2>Default</h2>
+    <DefaultDemo />
+  </div>
+
+  <div className="spn-section">
+    <h2>Variants</h2>
+    <p className="spn-lede">
+      default and simple use a rotating arc; activity and wave use soft pulse / bar motion.
+    </p>
+    <VariantsDemo />
+  </div>
+
+  <div className="spn-section">
+    <h2>Colors</h2>
+    <p className="spn-lede">
+      Spinners inherit <code>currentColor</code>. Semantic samples below use design-system
+      tokens for documentation only.
+    </p>
+    <ColorsDemo />
+  </div>
+
+  <div className="spn-section">
+    <h2>Sizes</h2>
+    <p className="spn-lede">
+      Semantic sizes map to 16 / 20 / 24 / 32 / 40px — aligned with icon and control density.
+    </p>
+    <SizesDemo />
+  </div>
+
+  <div className="spn-section">
+    <h2>Inline</h2>
+    <InlineDemo />
+  </div>
+
+  <div className="spn-section">
+    <h2>Spinner in Button</h2>
+    <p className="spn-lede">
+      Loading belongs to the Button. Spinner inherits foreground colour; min-width reduces layout shift.
+    </p>
+    <ButtonDemo />
+  </div>
+
+  <div className="spn-section">
+    <h2>Spinner in Badges</h2>
+    <BadgesDemo />
+  </div>
+
+  <div className="spn-section">
+    <h2>Spinner in Input Groups</h2>
+    <p className="spn-lede">Trailing affix with padded input so text never overlaps the Spinner.</p>
+    <InputGroupDemo />
+  </div>
+
+  <div className="spn-section">
+    <h2>Async field validation</h2>
+    <ValidationDemo />
+  </div>
+
+  <div className="spn-section">
+    <h2>Spinner Card Overlay</h2>
+    <p className="spn-lede">
+      Overlay + Spinner is a Card composition. Toggle loading; the overlay stays inside the card.
+    </p>
+    <CardOverlayDemo />
+  </div>
+
+  <div className="spn-section">
+    <h2>Section loader</h2>
+    <SectionLoaderDemo />
+  </div>
+
+  <div className="spn-section">
+    <h2>Loading to success</h2>
+    <TransitionDemo />
+  </div>
+
+  <div className="spn-section">
+    <h2>Background refresh</h2>
+    <TableRefreshDemo />
+  </div>
+
+  <div className="spn-section">
+    <h2>Installation</h2>
+    <pre
+      className="spn-note"
+      style={{
+        margin: 0,
+        padding: "14px 16px",
+        borderRadius: 10,
+        border: "1px solid #E2E8F0",
+        background: "#F8FAFC",
+        fontFamily: "JetBrains Mono, ui-monospace, monospace",
+        fontSize: 12,
+        color: "#0F172A",
+        overflow: "auto",
+      }}
+    >
+{`import { Spinner } from './Spinner';
+
+<Spinner />
+<Spinner variant="activity" size="lg" aria-label="Syncing" />`}
+    </pre>
+  </div>
+
+  <div className="spn-section">
+    <h2>Component API</h2>
+    <table className="spn-api-table">
+      <thead>
+        <tr>
+          <th>Prop</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>variant</code></td>
+          <td>&quot;default&quot; | &quot;simple&quot; | &quot;activity&quot; | &quot;wave&quot;</td>
+          <td>default</td>
+          <td>Visual treatment</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td>&quot;xs&quot; | &quot;sm&quot; | &quot;md&quot; | &quot;lg&quot; | &quot;xl&quot;</td>
+          <td>md</td>
+          <td>16 · 20 · 24 · 32 · 40 px</td>
+        </tr>
+        <tr>
+          <td><code>aria-label</code></td>
+          <td>string</td>
+          <td>&quot;Loading&quot;</td>
+          <td>Name when Spinner is the sole status cue</td>
+        </tr>
+        <tr>
+          <td><code>announce</code></td>
+          <td>boolean</td>
+          <td>true</td>
+          <td>
+            When false, Spinner is <code>aria-hidden</code> (use when visible text already
+            announces)
+          </td>
+        </tr>
+        <tr>
+          <td><code>className</code></td>
+          <td>string</td>
+          <td>—</td>
+          <td>Extra class on the root</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div className="spn-section">
+    <h2>Spinner vs Progress vs Skeleton</h2>
+    <CompareDemo />
+  </div>
+
+  <div className="spn-section">
+    <h2>Usage guidelines</h2>
+    <div className="spn-guidelines">
+      <div className="spn-guideline spn-guideline--do">
+        <span className="spn-gl-tag spn-gl-tag--do">Do</span>
+        <ul>
+          <li>Use for unknown-duration work and compact action feedback</li>
+          <li>Inherit colour from the parent control</li>
+          <li>Pair with specific verbs (“Saving…”, “Syncing…”)</li>
+          <li>Prefer Skeleton when the final layout is known</li>
+        </ul>
+      </div>
+      <div className="spn-guideline spn-guideline--dont">
+        <span className="spn-gl-tag spn-gl-tag--dont">Don&apos;t</span>
+        <ul>
+          <li>Don&apos;t put overlay / fullscreen into Spinner</li>
+          <li>Don&apos;t make Spinner focusable or clickable</li>
+          <li>Don&apos;t replace measurable Progress with a Spinner</li>
+          <li>Don&apos;t announce twice when adjacent text already says “Loading”</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div className="spn-section">
+    <h2>Accessibility</h2>
+    <ul style={{ margin: 0, paddingLeft: 18, fontSize: 13, lineHeight: 1.6, color: "#475569" }}>
+      <li>
+        Standalone Spinner uses <code>role=&quot;status&quot;</code> and <code>aria-label</code>
+      </li>
+      <li>
+        Set <code>announce=&#123;false&#125;</code> when visible text already communicates loading
+      </li>
+      <li>Spinner is non-interactive (no keyboard focus)</li>
+      <li>
+        <code>prefers-reduced-motion</code> replaces rotation with a gentle opacity pulse — loading
+        remains visible
+      </li>
+      <li>
+        Card overlays should set <code>aria-busy</code> on the region
+      </li>
+    </ul>
+  </div>
+
+  <div className="spn-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+</div>

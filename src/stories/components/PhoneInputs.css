@@ -357,6 +357,7 @@
 
 .ph-btn--primary:hover:not(:disabled) {
   background: #2F50C1;
+  color: #FFFFFF;
 }
 
 .ph-btn--ghost {
@@ -365,10 +366,21 @@
   border-color: #E5E7EB;
 }
 
+.ph-btn--ghost:hover:not(:disabled) {
+  background: #E5E7EB;
+  color: #374151;
+}
+
 .ph-btn--outline {
   background: #FFFFFF;
   color: #374151;
   border-color: #D1D5DB;
+}
+
+.ph-btn--outline:hover:not(:disabled) {
+  background: #F9FAFB;
+  border-color: #9CA3AF;
+  color: #374151;
 }
 
 .ph-actions {

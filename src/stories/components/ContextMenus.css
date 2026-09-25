@@ -376,6 +376,17 @@
   color: #FFFFFF;
 }
 
+.cxm-btn--primary:hover {
+  background: #2F50C1;
+  border-color: #2F50C1;
+  color: #FFFFFF;
+}
+
+.cxm-btn--ghost:hover {
+  background: #F8FAFC;
+  color: #334155;
+}
+
 /* Specs */
 .cxm-specs-grid {
   display: grid;

@@ -1,0 +1,341 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  SELECT_CODE,
+  SelectPlayground,
+  DefaultDemo,
+  PlaceholderDemo,
+  SizesDemo,
+  BadgeDemo,
+  AvatarDemo,
+  CustomIndicatorDemo,
+  IndicatorPositionDemo,
+  DisabledSelectDemo,
+  DisabledOptionDemo,
+  ControlledDemo,
+  UncontrolledDemo,
+  GroupsDemo,
+  SeparatorsDemo,
+  TypeaheadDemo,
+  LongListDemo,
+  PortalScrollDemo,
+  TimePickerDemo,
+  IconDemo,
+  SecondaryTextDemo,
+  FormDemo,
+  ErrorDemo,
+  LongValueDemo,
+  CompareDemo,
+  SpecsDemo,
+} from "./Selects";
+
+<Meta title="Components/Form Methods/Select" />
+
+<div className="sel-page">
+
+  <div className="sel-header">
+    <h1>Select</h1>
+    <p>
+      Choose one value from a predefined list. Use Select for form fields; use a Combobox when search
+      is required, and a Dropdown Menu for actions.
+    </p>
+  </div>
+
+  <div className="sel-section">
+    <h2>Live Playground</h2>
+    <p className="sel-lede">Size, indicator position, custom indicator, and disabled.</p>
+    <CodePanel code={SELECT_CODE} filename="Select.tsx" language="tsx">
+      <SelectPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="sel-section">
+    <h2>Default</h2>
+    <DefaultDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Placeholder</h2>
+    <PlaceholderDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Sizes</h2>
+    <p className="sel-lede">sm / md / lg — heights match Text Input conventions.</p>
+    <SizesDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>With Badge</h2>
+    <BadgeDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>With Avatar</h2>
+    <AvatarDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Custom indicator</h2>
+    <CustomIndicatorDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Indicator position</h2>
+    <IndicatorPositionDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Disabled Select</h2>
+    <DisabledSelectDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Disabled option</h2>
+    <DisabledOptionDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Controlled</h2>
+    <ControlledDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Default value (uncontrolled)</h2>
+    <UncontrolledDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Groups</h2>
+    <GroupsDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Separators</h2>
+    <SeparatorsDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Typeahead</h2>
+    <TypeaheadDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Long list</h2>
+    <p className="sel-lede">Scroll buttons appear when options exceed available height.</p>
+    <LongListDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Portal in overflow container</h2>
+    <PortalScrollDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Time Picker</h2>
+    <p className="sel-lede">Hour / minute / AM·PM composition using Select.</p>
+    <TimePickerDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>With icon</h2>
+    <IconDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Secondary text</h2>
+    <SecondaryTextDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Form integration</h2>
+    <FormDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Error state</h2>
+    <ErrorDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Long selected value</h2>
+    <LongValueDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Installation and usage</h2>
+    <pre style={{
+      margin: 0,
+      padding: "14px 16px",
+      borderRadius: 10,
+      border: "1px solid #E2E8F0",
+      background: "#0F172A",
+      color: "#E2E8F0",
+      fontSize: 12,
+      fontFamily: "JetBrains Mono, ui-monospace, monospace",
+      overflow: "auto",
+    }}>{`import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from './Select';
+
+<Select defaultValue="designer" size="md">
+  <SelectTrigger>
+    <SelectValue placeholder="Select a role" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="designer">Designer</SelectItem>
+    <SelectItem value="developer">Developer</SelectItem>
+  </SelectContent>
+</Select>`}</pre>
+  </div>
+
+  <div className="sel-section">
+    <h2>Component anatomy</h2>
+    <p className="sel-lede">
+      <strong>Select</strong> — root (value, size, indicator).<br />
+      <strong>SelectTrigger</strong> — opens the menu (Text Input chrome).<br />
+      <strong>SelectValue</strong> — selected label or placeholder.<br />
+      <strong>SelectContent</strong> — portaled list (popper).<br />
+      <strong>SelectItem</strong> — option with selection indicator.<br />
+      <strong>SelectGroup / SelectLabel / SelectSeparator</strong> — grouping.<br />
+      <strong>Scroll buttons</strong> — shown for long lists.
+    </p>
+  </div>
+
+  <div className="sel-section">
+    <h2>Component API</h2>
+    <div className="sel-demo" style={{ padding: 0, overflowX: "auto" }}>
+      <table className="sel-api">
+        <thead>
+          <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colSpan={4}><strong>Select</strong></td>
+          </tr>
+          <tr>
+            <td><code>value</code> / <code>defaultValue</code></td>
+            <td>string</td>
+            <td>—</td>
+            <td>Controlled / uncontrolled value</td>
+          </tr>
+          <tr>
+            <td><code>onValueChange</code></td>
+            <td>(value) =&gt; void</td>
+            <td>—</td>
+            <td>Selection callback</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td>sm | md | lg</td>
+            <td>md</td>
+            <td>Trigger height</td>
+          </tr>
+          <tr>
+            <td><code>indicatorPosition</code></td>
+            <td>left | right</td>
+            <td>right</td>
+            <td>Check/dot placement in items</td>
+          </tr>
+          <tr>
+            <td><code>indicator</code></td>
+            <td>ReactNode | null</td>
+            <td>check icon</td>
+            <td>Custom selected marker (<code>null</code> = default check)</td>
+          </tr>
+          <tr>
+            <td><code>disabled</code> / <code>required</code> / <code>error</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Form states</td>
+          </tr>
+          <tr>
+            <td colSpan={4}><strong>SelectValue</strong></td>
+          </tr>
+          <tr>
+            <td><code>placeholder</code></td>
+            <td>string</td>
+            <td>—</td>
+            <td>Shown when empty (not submitted)</td>
+          </tr>
+          <tr>
+            <td colSpan={4}><strong>SelectContent</strong></td>
+          </tr>
+          <tr>
+            <td><code>position</code></td>
+            <td>item-aligned | popper</td>
+            <td>popper</td>
+            <td>Viewport-aware placement</td>
+          </tr>
+          <tr>
+            <td colSpan={4}><strong>SelectItem</strong></td>
+          </tr>
+          <tr>
+            <td><code>value</code></td>
+            <td>string</td>
+            <td>—</td>
+            <td>Option value</td>
+          </tr>
+          <tr>
+            <td><code>disabled</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Non-selectable option</td>
+          </tr>
+          <tr>
+            <td><code>textValue</code></td>
+            <td>string</td>
+            <td>—</td>
+            <td>Typeahead / accessible text for rich items</td>
+          </tr>
+          <tr>
+            <td><code>description</code></td>
+            <td>ReactNode</td>
+            <td>—</td>
+            <td>Menu-only secondary line (not shown in the trigger)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div className="sel-section">
+    <h2>Select vs Menu vs Combobox vs Radio</h2>
+    <CompareDemo />
+  </div>
+
+  <div className="sel-section">
+    <h2>Usage guidelines</h2>
+    <p className="sel-lede">
+      • Use Select for form values; Dropdown Menu for actions; Combobox when search is needed; Radio
+      when few options should stay visible.<br />
+      • Do not submit placeholder text as a value.<br />
+      • Prefer composition for badges, avatars, and time pickers.
+    </p>
+  </div>
+
+  <div className="sel-section">
+    <h2>Accessibility</h2>
+    <p className="sel-lede">
+      Built on Radix Select — typeahead, arrow keys, Home/End, Escape, and proper listbox semantics.
+      Label the trigger; associate errors with <code>aria-describedby</code> / <code>aria-invalid</code>.
+      Selection is marked with an indicator, not colour alone. Decorative icons use{" "}
+      <code>aria-hidden</code>; set <code>textValue</code> for rich items.
+    </p>
+  </div>
+
+  <div className="sel-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+</div>

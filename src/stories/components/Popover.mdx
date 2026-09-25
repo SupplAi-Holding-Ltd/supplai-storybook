@@ -1,0 +1,320 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  POPOVER_CODE,
+  PopoverPlayground,
+  DefaultDemo,
+  PlacementDemo,
+  AlignmentDemo,
+  OffsetDemo,
+  TriggersDemo,
+  RichContentDemo,
+  FormDemo,
+  InteractiveControlsDemo,
+  EmojiLightDemo,
+  EmojiExpandedDemo,
+  CalendarDemo,
+  ControlledDemo,
+  CloseButtonDemo,
+  DismissalDemo,
+  ScrollableDemo,
+  CustomWidthDemo,
+  DialogNestDemo,
+  ScrollContainerDemo,
+  ResponsiveDemo,
+  AnchorDemo,
+  CompareDemo,
+  SpecsDemo,
+} from "./Popovers";
+
+<Meta title="Components/Popover" />
+
+<div className="po-page">
+
+  <div className="po-header">
+    <h1>Popover</h1>
+    <p>
+      A floating panel pinned to a trigger for interactive content — compact forms, pickers,
+      settings, and rich details that need more persistence than a Hover Card or Tooltip.
+    </p>
+  </div>
+
+  <div className="po-section">
+    <h2>Live Playground</h2>
+    <p className="po-lede">
+      Side, align, offset, width, modal, and collision handling. Open the Code tab for a composition sketch.
+    </p>
+    <CodePanel code={POPOVER_CODE} filename="Popover.tsx" language="tsx">
+      <PopoverPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="po-section">
+    <h2>Default</h2>
+    <p className="po-lede">Trigger button with title and supporting text.</p>
+    <DefaultDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Placement</h2>
+    <p className="po-lede">Top, right, bottom, and left — collision flipping when space is tight.</p>
+    <PlacementDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Alignment</h2>
+    <p className="po-lede">Start, center, and end relative to the trigger.</p>
+    <AlignmentDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Custom offset</h2>
+    <p className="po-lede">Real <code>sideOffset</code> spacing from the trigger.</p>
+    <OffsetDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Triggers</h2>
+    <p className="po-lede">Text button, icon button, avatar, and custom focusable elements via <code>asChild</code>.</p>
+    <TriggersDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Rich content</h2>
+    <p className="po-lede">Image, metadata, and actions in one panel.</p>
+    <RichContentDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Form</h2>
+    <p className="po-lede">Inputs stay usable; Cancel closes; Save validates locally.</p>
+    <FormDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Interactive controls</h2>
+    <p className="po-lede">Checkbox, switch, radios, select, and slider without accidental dismiss.</p>
+    <InteractiveControlsDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Emoji picker — lightweight</h2>
+    <p className="po-lede">Core emoji grid with no extra dependency.</p>
+    <EmojiLightDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Emoji picker — expanded</h2>
+    <p className="po-lede">Categories and filter — Storybook demo without emoji-mart.</p>
+    <EmojiExpandedDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Calendar</h2>
+    <p className="po-lede">Existing DayPicker inside a Popover; selection updates the trigger.</p>
+    <CalendarDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Controlled</h2>
+    <p className="po-lede">External open/close stays in sync with the Popover.</p>
+    <ControlledDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Close button</h2>
+    <p className="po-lede">Explicit dismiss with <code>PopoverClose</code>.</p>
+    <CloseButtonDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Dismissal behaviour</h2>
+    <p className="po-lede">Outside click, Escape, and optional outside-click lock with an accessible close.</p>
+    <DismissalDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Scrollable content</h2>
+    <p className="po-lede">Max-height body with overflow scroll inside the panel.</p>
+    <ScrollableDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Custom width</h2>
+    <CustomWidthDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Inside a dialog</h2>
+    <p className="po-lede">Nested overlay stacking — closing the Popover leaves the dialog open.</p>
+    <DialogNestDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Inside a scrollable container</h2>
+    <p className="po-lede">Portal rendering avoids parent overflow clipping.</p>
+    <ScrollContainerDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Responsive</h2>
+    <ResponsiveDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Anchor positioning</h2>
+    <p className="po-lede">Optional <code>PopoverAnchor</code> when the visual target differs from the trigger.</p>
+    <AnchorDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Installation and usage</h2>
+    <pre style={{
+      margin: 0,
+      padding: "14px 16px",
+      borderRadius: 10,
+      border: "1px solid #E2E8F0",
+      background: "#0F172A",
+      color: "#E2E8F0",
+      fontSize: 12,
+      fontFamily: "JetBrains Mono, ui-monospace, monospace",
+      overflow: "auto",
+    }}>{`import { Popover, PopoverTrigger, PopoverContent, PopoverClose } from './Popover';
+
+<Popover>
+  <PopoverTrigger asChild>
+    <button type="button">Open</button>
+  </PopoverTrigger>
+  <PopoverContent side="bottom" align="center" sideOffset={8}>
+    <p>Interactive content</p>
+    <PopoverClose aria-label="Close">×</PopoverClose>
+  </PopoverContent>
+</Popover>`}</pre>
+  </div>
+
+  <div className="po-section">
+    <h2>Component anatomy</h2>
+    <p className="po-lede">
+      <strong>Popover</strong> — root (open state, modal).<br />
+      <strong>PopoverTrigger</strong> — click/keyboard target (<code>asChild</code> recommended).<br />
+      <strong>PopoverContent</strong> — portaled panel (side, align, offset, collisions).<br />
+      <strong>PopoverClose</strong> — dismiss control.<br />
+      <strong>PopoverAnchor</strong> — optional positioning reference separate from the trigger.
+    </p>
+  </div>
+
+  <div className="po-section">
+    <h2>Component API</h2>
+    <div className="po-demo" style={{ overflowX: "auto", maxWidth: "100%", display: "block", padding: 0 }}>
+      <table className="po-api">
+        <thead>
+          <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>open</code></td>
+            <td>boolean</td>
+            <td>—</td>
+            <td>Controlled open state (Root)</td>
+          </tr>
+          <tr>
+            <td><code>defaultOpen</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Uncontrolled initial state</td>
+          </tr>
+          <tr>
+            <td><code>onOpenChange</code></td>
+            <td>(open) =&gt; void</td>
+            <td>—</td>
+            <td>Open-state callback</td>
+          </tr>
+          <tr>
+            <td><code>modal</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Blocks outside interaction when true</td>
+          </tr>
+          <tr>
+            <td><code>side</code></td>
+            <td>top | right | bottom | left</td>
+            <td>bottom</td>
+            <td>Preferred placement (Content)</td>
+          </tr>
+          <tr>
+            <td><code>align</code></td>
+            <td>start | center | end</td>
+            <td>center</td>
+            <td>Alignment along the side</td>
+          </tr>
+          <tr>
+            <td><code>sideOffset</code></td>
+            <td>number</td>
+            <td>8</td>
+            <td>Distance from trigger</td>
+          </tr>
+          <tr>
+            <td><code>alignOffset</code></td>
+            <td>number</td>
+            <td>0</td>
+            <td>Shift along the alignment axis</td>
+          </tr>
+          <tr>
+            <td><code>avoidCollisions</code></td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>Flip/shift near viewport edges</td>
+          </tr>
+          <tr>
+            <td><code>width</code></td>
+            <td>number | string</td>
+            <td>288</td>
+            <td>Panel width helper</td>
+          </tr>
+          <tr>
+            <td><code>showArrow</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Optional Popper arrow</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div className="po-section">
+    <h2>Popover vs Tooltip vs Hover Card vs Menu vs Dialog</h2>
+    <CompareDemo />
+  </div>
+
+  <div className="po-section">
+    <h2>Usage guidelines</h2>
+    <p className="po-lede">
+      • Use Popover for click-activated interactive UI next to a control.<br />
+      • Prefer Tooltip for one-line hints; Hover Card for hover previews; Menu for action lists; Dialog for larger workflows.<br />
+      • Keep forms compact — escalate to Dialog when the task needs more space or focus trapping by default.<br />
+      • Always provide a clear dismiss path (Escape, outside click, or Close).
+    </p>
+  </div>
+
+  <div className="po-section">
+    <h2>Accessibility</h2>
+    <p className="po-lede">
+      Keyboard-focusable triggers, Escape dismissal, focus return on close, labelled close controls,
+      and non-modal behaviour by default so surrounding content stays reachable. Use{" "}
+      <code>modal</code> when nesting inside dialogs or when outside interaction must be blocked.
+      Animations respect <code>prefers-reduced-motion</code>.
+    </p>
+  </div>
+
+  <div className="po-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+</div>

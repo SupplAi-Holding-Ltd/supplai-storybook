@@ -145,6 +145,7 @@
 .btn--filled:hover:not(:disabled) {
   background: var(--c-dk);
   border-color: var(--c-dk);
+  color: #FFFFFF;
 }
 
 .btn--filled:active:not(:disabled) {
@@ -161,6 +162,7 @@
 
 .btn--outlined:hover:not(:disabled) {
   background: var(--c-mid);
+  color: var(--c);
 }
 
 .btn--outlined:active:not(:disabled) {
@@ -176,6 +178,7 @@
 
 .btn--ghost:hover:not(:disabled) {
   background: var(--c-mid);
+  color: var(--c);
 }
 
 .btn--ghost:active:not(:disabled) {
@@ -192,6 +195,7 @@
 .btn--tonal:hover:not(:disabled) {
   background: var(--c-mid);
   border-color: var(--c-bdr);
+  color: var(--c);
 }
 
 /* ── Disabled ──────────────────────────────────────────────────── */

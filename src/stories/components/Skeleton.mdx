@@ -1,0 +1,253 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  SKELETON_CODE,
+  SkeletonPlayground,
+  DefaultDemo,
+  TextDemo,
+  HeadingParagraphDemo,
+  AvatarDemo,
+  AvatarTextDemo,
+  DropdownMenuSkeletonDemo,
+  TableRowSkeletonDemo,
+  MultiColumnTableSkeletonDemo,
+  DividedListSkeletonDemo,
+  ThumbnailListSkeletonDemo,
+  SocialPostSkeletonDemo,
+  GallerySkeletonDemo,
+  CardSkeletonDemo,
+  DashboardSkeletonDemo,
+  ProfileSkeletonDemo,
+  FormSkeletonDemo,
+  ImageSkeletonDemo,
+  ShapesDemo,
+  TransitionDemo,
+  CompareDemo,
+  SpecsDemo,
+} from "./Skeletons";
+
+<Meta title="Components/Skeleton" />
+
+<div className="sk-page">
+
+  <div className="sk-header">
+    <h1>Skeleton</h1>
+    <p>
+      Lightweight loading placeholders that mirror your layout while data loads — reducing layout
+      shift without adding JavaScript animation or fetch logic to the primitive.
+    </p>
+  </div>
+
+  <div className="sk-section">
+    <h2>Live Playground</h2>
+    <p className="sk-lede">Width, height, circle, and animation toggle.</p>
+    <CodePanel code={SKELETON_CODE} filename="Skeleton.tsx" language="tsx">
+      <SkeletonPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="sk-section">
+    <h2>Default</h2>
+    <DefaultDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Text</h2>
+    <TextDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Heading and paragraph</h2>
+    <HeadingParagraphDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Avatar</h2>
+    <AvatarDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Avatar + text</h2>
+    <AvatarTextDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Dropdown Menu Skeleton</h2>
+    <DropdownMenuSkeletonDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Table Row Skeleton</h2>
+    <TableRowSkeletonDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Multi-Column Table Skeleton</h2>
+    <MultiColumnTableSkeletonDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Divided List Skeleton</h2>
+    <DividedListSkeletonDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Thumbnail List Skeleton</h2>
+    <ThumbnailListSkeletonDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Social Post Skeleton</h2>
+    <SocialPostSkeletonDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Gallery Skeleton</h2>
+    <GallerySkeletonDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Card</h2>
+    <CardSkeletonDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Dashboard metric</h2>
+    <DashboardSkeletonDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Profile</h2>
+    <ProfileSkeletonDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Form</h2>
+    <FormSkeletonDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Image aspect ratios</h2>
+    <ImageSkeletonDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Shapes</h2>
+    <ShapesDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Loading to content</h2>
+    <TransitionDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Installation and usage</h2>
+    <pre style={{
+      margin: 0,
+      padding: "14px 16px",
+      borderRadius: 10,
+      border: "1px solid #E2E8F0",
+      background: "#0F172A",
+      color: "#E2E8F0",
+      fontSize: 12,
+      fontFamily: "JetBrains Mono, ui-monospace, monospace",
+      overflow: "auto",
+    }}>{`import { Skeleton } from './Skeleton';
+
+<Skeleton style={{ width: '100%', height: 16 }} />
+<Skeleton circle width={40} height={40} />
+
+{/* Region announcement — hide individual blocks */}
+<div role="status" aria-busy="true" aria-label="Loading profile">
+  <Skeleton circle width={40} height={40} aria-hidden />
+  <Skeleton width="60%" height={14} aria-hidden />
+</div>`}</pre>
+  </div>
+
+  <div className="sk-section">
+    <h2>Component anatomy</h2>
+    <p className="sk-lede">
+      A single structural <code>div</code>. Shape it with width, height, <code>circle</code>,{" "}
+      <code>rounded</code>, and layout wrappers. Complex screens are compositions — not new Skeleton types.
+    </p>
+  </div>
+
+  <div className="sk-section">
+    <h2>Component API</h2>
+    <div className="sk-demo" style={{ padding: 0, overflowX: "auto" }}>
+      <table className="sk-api">
+        <thead>
+          <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>width</code> / <code>height</code></td>
+            <td>number | string</td>
+            <td>—</td>
+            <td>Convenience sizing (also via <code>style</code> / className)</td>
+          </tr>
+          <tr>
+            <td><code>circle</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Fully rounded avatar shape</td>
+          </tr>
+          <tr>
+            <td><code>rounded</code></td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>12px radius for media / cards</td>
+          </tr>
+          <tr>
+            <td><code>animate</code></td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>CSS pulse (off for reduced-motion users via media query)</td>
+          </tr>
+          <tr>
+            <td><code>className</code> / HTML attrs</td>
+            <td>—</td>
+            <td>—</td>
+            <td>Standard element props; default <code>aria-hidden</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div className="sk-section">
+    <h2>Skeleton vs Spinner vs Progress vs Empty</h2>
+    <CompareDemo />
+  </div>
+
+  <div className="sk-section">
+    <h2>Usage guidelines</h2>
+    <p className="sk-lede">
+      • Mirror final layout sizes to avoid shift; skip tiny decorative details.<br />
+      • Prefer Skeleton for known structure; Spinner for compact waits; Progress for measurable tasks.<br />
+      • Replace with Empty State when loading finishes with no data — do not leave Skeleton forever.<br />
+      • Do not use Skeleton to mean disabled — use disabled controls instead.
+    </p>
+  </div>
+
+  <div className="sk-section">
+    <h2>Accessibility</h2>
+    <p className="sk-lede">
+      Individual blocks default to <code>aria-hidden</code>. Announce once on a region with{" "}
+      <code>role=&quot;status&quot;</code>, <code>aria-busy=&quot;true&quot;</code>, and a short label.
+      Blocks are not focusable. Pulse respects <code>prefers-reduced-motion</code>.
+    </p>
+  </div>
+
+  <div className="sk-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+</div>

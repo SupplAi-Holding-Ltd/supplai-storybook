@@ -1,0 +1,340 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  SLIDER_CODE,
+  SliderPlayground,
+  DefaultDemo,
+  StepperDemo,
+  VerticalDemo,
+  DisabledDemo,
+  RangeDemo,
+  PriceRangeInputsDemo,
+  WithInputDemo,
+  WithTooltipDemo,
+  WithMarksDemo,
+  MarksLabelsDemo,
+  MinMaxDemo,
+  StepDemo,
+  ControlledDemo,
+  UncontrolledDemo,
+  SizesDemo,
+  VolumeDemo,
+  FormDemo,
+  CompareDemo,
+  SpecsDemo,
+} from "./Sliders";
+
+<Meta title="Components/Form Methods/Slider" />
+
+<div className="sld-page">
+
+  <div className="sld-header">
+    <h1>Slider</h1>
+    <p>
+      Select a numeric value or range along a bounded scale. Use Slider when relative
+      position matters; pair with an Input when exact entry is also required.
+    </p>
+  </div>
+
+  <div className="sld-section">
+    <h2>Live Playground</h2>
+    <p className="sld-lede">Size, orientation, and disabled.</p>
+    <CodePanel code={SLIDER_CODE} filename="Slider.tsx" language="tsx">
+      <SliderPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="sld-section">
+    <h2>Default</h2>
+    <DefaultDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>With Stepper</h2>
+    <p className="sld-lede">
+      Decrement / increment controls composed around Slider. Buttons disable at min/max.
+    </p>
+    <StepperDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>Vertical</h2>
+    <p className="sld-lede">
+      Set <code>orientation=&quot;vertical&quot;</code>. Give the layout an explicit height so the
+      track does not collapse.
+    </p>
+    <VerticalDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>Disabled</h2>
+    <DisabledDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>Range</h2>
+    <p className="sld-lede">
+      Pass an array value and two thumbs. Label each thumb distinctly for assistive tech.
+    </p>
+    <RangeDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>Price range with inputs</h2>
+    <PriceRangeInputsDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>With Input</h2>
+    <p className="sld-lede">
+      Slider and numeric input stay synchronised. Empty or invalid input reverts on blur.
+    </p>
+    <WithInputDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>With Tooltip</h2>
+    <p className="sld-lede">
+      Value tips use Tooltips visual tokens (navy bubble). The shared Tooltip component is
+      still In Development — tips show on hover, focus, and drag.
+    </p>
+    <WithTooltipDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>With Marks</h2>
+    <p className="sld-lede">
+      Mark positions are calculated from min / max / mark value — not hardcoded margins.
+    </p>
+    <WithMarksDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>Marks with labels</h2>
+    <MarksLabelsDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>Min and max</h2>
+    <MinMaxDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>Step</h2>
+    <StepDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>Controlled</h2>
+    <p className="sld-lede">
+      <code>value</code> + <code>onValueChange</code> keep external state in sync.
+    </p>
+    <ControlledDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>Uncontrolled</h2>
+    <p className="sld-lede">
+      Use <code>defaultValue</code> when you do not need to own the value.
+    </p>
+    <UncontrolledDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>Sizes</h2>
+    <p className="sld-lede">
+      sm / md / lg — track thickness matches Progress (4 / 6 / 8px); thumbs scale with usable hit areas.
+    </p>
+    <SizesDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>Volume</h2>
+    <VolumeDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>Form</h2>
+    <p className="sld-lede">
+      Local submit / reset. Narrow ranges fail validation with a text error (not colour alone).
+    </p>
+    <FormDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>Installation</h2>
+    <pre className="sld-note" style={{
+      margin: 0,
+      padding: "14px 16px",
+      borderRadius: 10,
+      border: "1px solid #E2E8F0",
+      background: "#F8FAFC",
+      fontFamily: "JetBrains Mono, ui-monospace, monospace",
+      fontSize: 12,
+      color: "#0F172A",
+      overflow: "auto",
+    }}>
+{`npm install @radix-ui/react-slider
+
+import { Slider, SliderThumb } from './Slider';`}
+    </pre>
+  </div>
+
+  <div className="sld-section">
+    <h2>Component API</h2>
+    <h3 style={{ fontSize: 14, margin: "0 0 8px", color: "#0F172A" }}>Slider</h3>
+    <table className="sld-api-table">
+      <thead>
+        <tr>
+          <th>Prop</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>value</code></td>
+          <td>number[]</td>
+          <td>—</td>
+          <td>Controlled values (one entry per thumb)</td>
+        </tr>
+        <tr>
+          <td><code>defaultValue</code></td>
+          <td>number[]</td>
+          <td>—</td>
+          <td>Uncontrolled initial values</td>
+        </tr>
+        <tr>
+          <td><code>onValueChange</code></td>
+          <td>(value: number[]) =&gt; void</td>
+          <td>—</td>
+          <td>Fires while dragging / stepping</td>
+        </tr>
+        <tr>
+          <td><code>onValueCommit</code></td>
+          <td>(value: number[]) =&gt; void</td>
+          <td>—</td>
+          <td>Fires when the user commits a value</td>
+        </tr>
+        <tr>
+          <td><code>min</code> / <code>max</code></td>
+          <td>number</td>
+          <td>0 / 100</td>
+          <td>Bounds</td>
+        </tr>
+        <tr>
+          <td><code>step</code></td>
+          <td>number</td>
+          <td>1</td>
+          <td>Increment for pointer and keyboard</td>
+        </tr>
+        <tr>
+          <td><code>disabled</code></td>
+          <td>boolean</td>
+          <td>false</td>
+          <td>Blocks pointer and keyboard changes</td>
+        </tr>
+        <tr>
+          <td><code>orientation</code></td>
+          <td>&quot;horizontal&quot; | &quot;vertical&quot;</td>
+          <td>horizontal</td>
+          <td>Track axis</td>
+        </tr>
+        <tr>
+          <td><code>size</code></td>
+          <td>&quot;sm&quot; | &quot;md&quot; | &quot;lg&quot;</td>
+          <td>md</td>
+          <td>Track / thumb scale</td>
+        </tr>
+        <tr>
+          <td><code>minStepsBetweenThumbs</code></td>
+          <td>number</td>
+          <td>0</td>
+          <td>Minimum step gap between thumbs</td>
+        </tr>
+        <tr>
+          <td><code>name</code></td>
+          <td>string</td>
+          <td>—</td>
+          <td>Form field name when applicable</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style={{ fontSize: 14, margin: "20px 0 8px", color: "#0F172A" }}>SliderThumb</h3>
+    <table className="sld-api-table">
+      <thead>
+        <tr>
+          <th>Prop</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>aria-label</code></td>
+          <td>string</td>
+          <td>—</td>
+          <td>Required when no visible label per thumb (especially ranges)</td>
+        </tr>
+        <tr>
+          <td><code>className</code></td>
+          <td>string</td>
+          <td>—</td>
+          <td>Extra class on the thumb</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div className="sld-section">
+    <h2>Slider vs Input vs Progress vs Stepper</h2>
+    <CompareDemo />
+  </div>
+
+  <div className="sld-section">
+    <h2>Usage guidelines</h2>
+    <div className="sld-guidelines">
+      <div className="sld-guideline sld-guideline--do">
+        <span className="sld-gl-tag sld-gl-tag--do">Do</span>
+        <ul>
+          <li>Label every Slider; give range thumbs distinct names</li>
+          <li>Combine with Input when exact values matter</li>
+          <li>Keep formatting ($, %, units) outside the primitive</li>
+          <li>Use Progress for loading — never a Slider</li>
+        </ul>
+      </div>
+      <div className="sld-guideline sld-guideline--dont">
+        <span className="sld-gl-tag sld-gl-tag--dont">Don&apos;t</span>
+        <ul>
+          <li>Don&apos;t shrink the hit area to match a tiny visual thumb</li>
+          <li>Don&apos;t leave range thumbs unlabeled</li>
+          <li>Don&apos;t invent custom keyboard maths — Radix handles it</li>
+          <li>Don&apos;t use Slider as a loading indicator</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div className="sld-section">
+    <h2>Accessibility</h2>
+    <p className="sld-lede">
+      Built on <code>@radix-ui/react-slider</code> with slider roles and{" "}
+      <code>aria-valuemin</code> / <code>aria-valuemax</code> / <code>aria-valuenow</code>.
+    </p>
+    <ul style={{ margin: 0, paddingLeft: 18, fontSize: 13, lineHeight: 1.6, color: "#475569" }}>
+      <li>Arrow keys step the focused thumb; Home / End jump to bounds</li>
+      <li>Page Up / Page Down use larger steps when supported by the primitive</li>
+      <li>Focus ring uses Brand Blue tokens matching other form controls</li>
+      <li>Disabled sets non-interactive semantics and muted visuals without hiding the value</li>
+    </ul>
+  </div>
+
+  <div className="sld-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+</div>

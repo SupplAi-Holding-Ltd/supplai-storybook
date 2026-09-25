@@ -36,8 +36,8 @@ import { Meta } from "@storybook/addon-docs/blocks";
           <div className="fm-mock-radio">Option B</div>
         </div>
         <div className="fm-index-info">
-          <span className="fm-index-name">Radio Buttons</span>
-          <span className="fm-index-desc">Single-select from a list of options</span>
+          <span className="fm-index-name">Radio Group</span>
+          <span className="fm-index-desc">Single-select from a mutually exclusive set</span>
         </div>
       </div>
       <div className="fm-index-card">
@@ -86,6 +86,32 @@ import { Meta } from "@storybook/addon-docs/blocks";
         <div className="fm-index-info">
           <span className="fm-index-name">Phone Input</span>
           <span className="fm-index-desc">International numbers with country codes</span>
+        </div>
+      </div>
+      <div className="fm-index-card">
+        <div className="fm-index-preview fm-preview--text">
+          <div className="fm-mock-input" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <span style={{ color: "#9CA3AF" }}>Select a role</span>
+            <span style={{ color: "#64748B" }}>▾</span>
+          </div>
+        </div>
+        <div className="fm-index-info">
+          <span className="fm-index-name">Select</span>
+          <span className="fm-index-desc">Single value from a predefined list</span>
+        </div>
+      </div>
+      <div className="fm-index-card">
+        <div className="fm-index-preview fm-preview--text">
+          <div style={{ display: "flex", flexDirection: "column", gap: 10, width: "100%" }}>
+            <div style={{ height: 6, borderRadius: 99, background: "#E2E8F0", position: "relative" }}>
+              <div style={{ position: "absolute", left: 0, width: "55%", height: "100%", borderRadius: 99, background: "#4169E1" }} />
+              <div style={{ position: "absolute", left: "55%", top: "50%", width: 14, height: 14, marginTop: -7, marginLeft: -7, borderRadius: "50%", background: "#FFFFFF", border: "2px solid #4169E1", boxSizing: "border-box" }} />
+            </div>
+          </div>
+        </div>
+        <div className="fm-index-info">
+          <span className="fm-index-name">Slider</span>
+          <span className="fm-index-desc">Numeric value or range on a bounded scale</span>
         </div>
       </div>
     </div>

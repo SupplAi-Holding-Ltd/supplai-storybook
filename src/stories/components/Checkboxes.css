@@ -262,6 +262,7 @@
 
 .cb-btn--ghost:hover {
   background: #F8FAFC;
+  color: #334155;
 }
 
 .cb-btn--primary {
@@ -273,6 +274,7 @@
 .cb-btn--primary:hover {
   background: #2F50C1;
   border-color: #2F50C1;
+  color: #FFFFFF;
 }
 
 /* Custom card checkbox */

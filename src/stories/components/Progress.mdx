@@ -1,0 +1,302 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { CodePanel } from "./CodePanel";
+import {
+  PROGRESS_CODE,
+  ProgressPlayground,
+  BasicDemo,
+  PercentageDemo,
+  LabelDemo,
+  LabelPercentDemo,
+  DownloadingDemo,
+  FileUploadProgressDemo,
+  DeterminateDemo,
+  IndeterminateDemo,
+  SizesDemo,
+  ValuesDemo,
+  CompleteDemo,
+  SemanticDemo,
+  CardDemo,
+  MultipleDemo,
+  ControlledDemo,
+  SimulatedDemo,
+  CustomIndicatorDemo,
+  CustomRangeDemo,
+  RtlDemo,
+  CompareDemo,
+  SpecsDemo,
+} from "./Progress";
+
+<Meta title="Components/Progress" />
+
+<div className="pg-page">
+
+  <div className="pg-header">
+    <h1>Progress</h1>
+    <p>
+      A filling bar that shows how much of a measurable task — download, upload, import, or
+      installation — is complete. Progress is presentational: application state owns the value.
+    </p>
+  </div>
+
+  <div className="pg-section">
+    <h2>Live Playground</h2>
+    <p className="pg-lede">
+      Adjust value, size, semantic variant, and determinate vs indeterminate. Open the Code tab for a sketch.
+    </p>
+    <CodePanel code={PROGRESS_CODE} filename="Progress.tsx" language="tsx">
+      <ProgressPlayground />
+    </CodePanel>
+  </div>
+
+  <div className="pg-section">
+    <h2>Basic Progress</h2>
+    <p className="pg-lede">Interactive value with presets at 0 / 25 / 50 / 75 / 100.</p>
+    <BasicDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>With percentage</h2>
+    <PercentageDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>With label</h2>
+    <LabelDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Label and percentage</h2>
+    <LabelPercentDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Downloading Progress</h2>
+    <p className="pg-lede">
+      Simulated workspace download — files and size stay in sync with the bar. No network request.
+    </p>
+    <DownloadingDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>File Upload Progress</h2>
+    <p className="pg-lede">
+      Waiting, uploading, completed, and failed states using the Progress component. Simulated only.
+    </p>
+    <FileUploadProgressDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Determinate</h2>
+    <p className="pg-lede">Known total work — expose a real value (e.g. 65%).</p>
+    <DeterminateDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Indeterminate</h2>
+    <p className="pg-lede">
+      Active work without a known percentage — pass <code>value=&#123;null&#125;</code>. No fabricated %.
+    </p>
+    <IndeterminateDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Sizes</h2>
+    <p className="pg-lede">sm 4px · md 6px · lg 8px — aligned with File Upload track height.</p>
+    <SizesDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Progress values</h2>
+    <ValuesDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Complete state</h2>
+    <p className="pg-lede">100% with optional success treatment and status text — not automatic for every full bar.</p>
+    <CompleteDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Semantic states</h2>
+    <p className="pg-lede">Default, warning, and error fills from design tokens — pair with status text.</p>
+    <SemanticDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Inside a card</h2>
+    <CardDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Multiple items</h2>
+    <MultipleDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Controlled</h2>
+    <ControlledDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Simulated progress</h2>
+    <p className="pg-lede">Start / pause / resume / reset — timers cleaned up on unmount.</p>
+    <SimulatedDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Custom indicator</h2>
+    <CustomIndicatorDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Custom min / max</h2>
+    <CustomRangeDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>RTL</h2>
+    <RtlDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Installation and usage</h2>
+    <pre style={{
+      margin: 0,
+      padding: "14px 16px",
+      borderRadius: 10,
+      border: "1px solid #E2E8F0",
+      background: "#0F172A",
+      color: "#E2E8F0",
+      fontSize: 12,
+      fontFamily: "JetBrains Mono, ui-monospace, monospace",
+      overflow: "auto",
+    }}>{`import { Progress } from './Progress';
+
+<Progress value={50} />
+
+{/* Indeterminate */}
+<Progress value={null} aria-label="Preparing workspace" />
+
+{/* Composition */}
+<div>
+  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <span>Uploading</span>
+    <span>75%</span>
+  </div>
+  <Progress value={75} aria-label="Uploading, 75 percent" />
+</div>`}</pre>
+  </div>
+
+  <div className="pg-section">
+    <h2>Component anatomy</h2>
+    <p className="pg-lede">
+      <strong>Progress</strong> — root track + indicator. Labels, percentages, and metadata compose
+      around it (not baked into the core API).
+    </p>
+  </div>
+
+  <div className="pg-section">
+    <h2>Component API</h2>
+    <div className="pg-demo" style={{ padding: 0, overflowX: "auto" }}>
+      <table className="pg-api">
+        <thead>
+          <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>value</code></td>
+            <td>number | null</td>
+            <td>—</td>
+            <td>Current value; <code>null</code>/<code>undefined</code> = indeterminate</td>
+          </tr>
+          <tr>
+            <td><code>min</code></td>
+            <td>number</td>
+            <td>0</td>
+            <td>Range start for percentage math</td>
+          </tr>
+          <tr>
+            <td><code>max</code></td>
+            <td>number</td>
+            <td>100</td>
+            <td>Range end</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td>sm | md | lg</td>
+            <td>md</td>
+            <td>Track height</td>
+          </tr>
+          <tr>
+            <td><code>variant</code></td>
+            <td>default | success | warning | error</td>
+            <td>default</td>
+            <td>Semantic fill colour</td>
+          </tr>
+          <tr>
+            <td><code>indicatorClassName</code></td>
+            <td>string</td>
+            <td>—</td>
+            <td>Class on the fill indicator</td>
+          </tr>
+          <tr>
+            <td><code>className</code></td>
+            <td>string</td>
+            <td>—</td>
+            <td>Class on the track root</td>
+          </tr>
+          <tr>
+            <td><code>getValueLabel</code></td>
+            <td>(value, max) =&gt; string</td>
+            <td>percent</td>
+            <td>Accessible value text</td>
+          </tr>
+          <tr>
+            <td><code>aria-label</code> / <code>aria-labelledby</code></td>
+            <td>string</td>
+            <td>—</td>
+            <td>Name the progressing task</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div className="pg-section">
+    <h2>Progress vs Spinner vs Skeleton vs Stepper vs Slider</h2>
+    <CompareDemo />
+  </div>
+
+  <div className="pg-section">
+    <h2>Usage guidelines</h2>
+    <p className="pg-lede">
+      • Use Progress for measurable completion; Spinner for brief unknown waits; Skeleton for content
+      placeholders; Stepper for workflow stages.<br />
+      • Do not use Progress as a Slider — it is not interactive.<br />
+      • Keep timers and upload logic outside Progress; pass values in.<br />
+      • Pair semantic colours with text status — never colour alone.<br />
+      • Related: File Upload (item progress), Alert for failures.
+    </p>
+  </div>
+
+  <div className="pg-section">
+    <h2>Accessibility</h2>
+    <p className="pg-lede">
+      Built on Radix Progress (<code>role=&quot;progressbar&quot;</code>, valuemin / valuemax / valuenow).
+      Provide <code>aria-label</code> or <code>aria-labelledby</code> naming the task. Use{" "}
+      <code>getValueLabel</code> for richer announcements. Indeterminate omits a fake current value.
+      Respects <code>prefers-reduced-motion</code>. Not keyboard-focusable by default.
+    </p>
+  </div>
+
+  <div className="pg-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+</div>

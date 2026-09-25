@@ -454,6 +454,17 @@
   color: #FFFFFF;
 }
 
+.cld-btn--primary:hover {
+  background: #2F50C1;
+  border-color: #2F50C1;
+  color: #FFFFFF;
+}
+
+.cld-btn--ghost:hover {
+  background: #F8FAFC;
+  color: #334155;
+}
+
 .cld-manual {
   padding: 14px 16px;
   border-top: 1px solid #E2E8F0;
