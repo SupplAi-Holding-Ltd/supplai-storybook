@@ -1,0 +1,243 @@
+/* Divider · supplai Design System. 1px Grey / 300. No margin. */
+
+.dvd {
+  flex-shrink: 0;
+  border: 0;
+  background: var(--color-grey-300);
+}
+
+.dvd--horizontal {
+  width: 100%;
+  height: 1px;
+}
+
+.dvd--vertical {
+  width: 1px;
+  height: auto;
+  align-self: stretch;
+}
+
+/* ── Docs page ────────────────────────────────────────────────────────── */
+
+.dvd-page {
+  display: block;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 0 64px;
+  font-family: Manrope, system-ui, sans-serif;
+}
+
+.dvd-page .dvd-intro {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.dvd-page .dvd-intro h1 {
+  margin: 0 0 10px !important;
+  padding: 0 !important;
+  border: none !important;
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.2 !important;
+  color: #0F172A !important;
+}
+
+.dvd-page .dvd-intro p {
+  margin: 0 !important;
+  max-width: 680px;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+  color: #64748B !important;
+}
+
+.dvd-page .dvd-section {
+  margin: 0 0 28px !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.dvd-page .dvd-section h2,
+.dvd-page .dvd-section h3 {
+  margin: 0 0 6px !important;
+  padding: 0 !important;
+  border: none !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #0F172A !important;
+}
+
+.dvd-page .dvd-section h3 {
+  font-size: 15px !important;
+}
+
+.dvd-page .dvd-lede {
+  margin: 0 0 10px !important;
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+  color: #64748B !important;
+}
+
+.dvd-page .dvd-api {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.dvd-page .dvd-api th,
+.dvd-page .dvd-api td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid #E2E8F0;
+  vertical-align: top;
+  color: #334155;
+}
+
+.dvd-page .dvd-api th {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #94A3B8;
+}
+
+.dvd-page .dvd-api code {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 12px;
+  color: #2F50C1;
+}
+
+.dvd-stage {
+  max-width: 480px;
+  padding: 16px;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  background: #FFFFFF;
+}
+
+.dvd-page .cpanel__preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 24px;
+}
+
+.dvd-page .cpanel__preview .dvd-stage {
+  width: 100%;
+}
+
+.dvd-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dvd-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.dvd-meta {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #64748B;
+}
+
+.dvd-row {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.dvd-row span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0F172A;
+  line-height: 1.4;
+}
+
+.dvd-split {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dvd-split .dvd {
+  flex: 1;
+  min-width: 0;
+}
+
+.dvd-split span {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #64748B;
+}
+
+.dvd-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 220px;
+  padding: 6px;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  background: #FFFFFF;
+}
+
+.dvd-menu button {
+  display: flex;
+  width: 100%;
+  height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #0F172A;
+  font-family: Manrope, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dvd-menu button:hover {
+  background: #F8FAFC;
+}
+
+.dvd-menu .dvd {
+  margin: 4px 6px;
+  width: auto;
+}
+
+.dvd-menu-danger {
+  color: #D13145 !important;
+}
+
+.dvd-page .bdg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-family: Manrope, system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.dvd-page .bdg-label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.dvd-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

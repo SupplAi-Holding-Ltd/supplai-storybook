@@ -43,4 +43,7 @@
   --color-neutral: #6B7280;
   --color-neutral-dark: #374151;
   --color-neutral-light: #F3F4F6;
+
+  /* Grey / 300 — structural lines */
+  --color-grey-300: #CBD5E1;
 }

@@ -40,6 +40,16 @@
   flex-shrink: 0;
 }
 
+.btn__icon > svg {
+  width: 16px;
+  height: 16px;
+}
+
+.btn--xs .btn__icon > svg { width: 12px; height: 12px; }
+.btn--sm .btn__icon > svg { width: 14px; height: 14px; }
+.btn--lg .btn__icon > svg { width: 18px; height: 18px; }
+.btn--xl .btn__icon > svg { width: 20px; height: 20px; }
+
 /* ── Sizes ─────────────────────────────────────────────────────── */
 .btn--xs {
   height: 28px;
@@ -153,11 +163,19 @@
   transform: translateY(1px);
 }
 
+/* Docs theme colors anchors blue; keep filled link labels white. */
+a.btn.btn--filled,
+a.btn.btn--filled:hover,
+a.btn.btn--filled:visited,
+a.btn.btn--filled:active {
+  color: #FFFFFF;
+}
+
 /* ── Outlined ──────────────────────────────────────────────────── */
 .btn--outlined {
   background: transparent;
   color: var(--c);
-  border-color: var(--c);
+  border-color: #CBD5E1; /* Grey / 300 */
 }
 
 .btn--outlined:hover:not(:disabled) {
@@ -194,13 +212,51 @@
 
 .btn--tonal:hover:not(:disabled) {
   background: var(--c-mid);
-  border-color: var(--c-bdr);
+  border-color: #CBD5E1; /* Grey / 300 */
   color: var(--c);
 }
 
 /* ── Disabled ──────────────────────────────────────────────────── */
-.btn:disabled {
-  opacity: 0.38;
+.btn:disabled:not(.btn--loading),
+.btn[aria-disabled="true"]:not(.btn--loading) {
+  opacity: 0.55;
   cursor: not-allowed;
   pointer-events: none;
+}
+
+/* Loading stays readable. Width is locked in JS so the spinner does not shift layout. */
+.btn--loading:disabled,
+.btn--loading[aria-disabled="true"] {
+  opacity: 1;
+  cursor: progress;
+  pointer-events: none;
+}
+
+/* ── Joined group (visual only — not a toggle or radio group) ── */
+.btn-group {
+  display: inline-flex;
+  align-items: stretch;
+}
+
+.btn-group .btn {
+  border-radius: 0;
+}
+
+.btn-group .btn:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.btn-group .btn:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.btn-group .btn + .btn {
+  margin-left: -1.5px;
+}
+
+.btn-group .btn:focus-visible {
+  position: relative;
+  z-index: 1;
 }

@@ -1,0 +1,325 @@
+import { Canvas, Controls, Meta } from "@storybook/addon-docs/blocks";
+import * as CommandStories from "./CommandPlayground.stories";
+import { CodePanel } from "./CodePanel";
+import {
+  PALETTE_CODE,
+  PaletteDemo,
+  ContactsDemo,
+  SystemDemo,
+  SearchIntegrationDemo,
+  EmptyDemo,
+  DisabledDemo,
+  BadgeDemo,
+  SecondaryDemo,
+  AvatarDemo,
+  IconDemo,
+  ShortcutBadgeDemo,
+  KeywordsDemo,
+  CustomFilterDemo,
+  LoopDemo,
+  ExternalFilterDemo,
+  AsyncDemo,
+  NestedDemo,
+  CreateDemo,
+  NavigationDemo,
+  LargeDemo,
+  NarrowDemo,
+  ThemeDemo,
+  SpecsDemo,
+} from "./CommandDemos";
+
+<Meta of={CommandStories} name="Docs" />
+
+<div className="cmd-page">
+
+  <div className="cmd-intro">
+    <h1>Command</h1>
+    <p>
+      A keyboard-first menu for searching pages, people, and actions. Use it for a global
+      palette or an inline command list. It is not a form select and not a small action menu.
+    </p>
+  </div>
+
+  <div className="cmd-section">
+    <h2>Overview</h2>
+    <p className="cmd-lede">
+      Type to filter. Arrow keys move the highlight. Enter runs the highlighted command.
+      Use Example in Controls to open another composition. The palette examples include a visible search button.
+    </p>
+    <Canvas of={CommandStories.Playground} layout="centered" />
+    <Controls of={CommandStories.Playground} />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Command palette</h2>
+    <p className="cmd-lede">
+      Open it from the button, or press ⌘K on macOS and Ctrl K on Windows and Linux.
+      The shortcut is registered once for this preview and is removed when you leave the page.
+      Escape closes the dialog and returns focus to the button.
+    </p>
+    <CodePanel code={PALETTE_CODE} filename="CommandDialog.tsx" language="tsx">
+      <PaletteDemo />
+    </CodePanel>
+  </div>
+
+  <div className="cmd-section">
+    <h2>Import</h2>
+    <p className="cmd-lede">
+      Primitives live in <code>src/stories/components/Commands.tsx</code>. Compose them.
+      Do not pass groups, people, and shortcuts as one large prop bag.
+    </p>
+  </div>
+
+  <div className="cmd-section">
+    <h2>Search contacts</h2>
+    <p className="cmd-lede">
+      The whole row is the command. Avatar, role, and email are content. Filtering matches
+      the name, role, and email.
+    </p>
+    <ContactsDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>System commands</h2>
+    <p className="cmd-lede">
+      Theme, sidebar, settings, shortcuts, and sign out update this preview. They are not wired to the app shell.
+    </p>
+    <SystemDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Search integration</h2>
+    <p className="cmd-lede">
+      One query across recent items, people, pages, and commands. Before a query, suggested groups stay visible.
+    </p>
+    <SearchIntegrationDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>With icon</h2>
+    <IconDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>With avatar</h2>
+    <AvatarDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Secondary text</h2>
+    <SecondaryDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Badge</h2>
+    <BadgeDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Shortcut and badge</h2>
+    <p className="cmd-lede">Label, badge, and shortcut stay on one row. Shortcuts sit on the right.</p>
+    <ShortcutBadgeDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Disabled</h2>
+    <p className="cmd-lede">A disabled command does not run from click or keyboard. The reason stays readable.</p>
+    <DisabledDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Empty</h2>
+    <EmptyDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Keywords</h2>
+    <p className="cmd-lede">
+      Hidden keywords are not shown in the row. Typing config finds Preferences.
+    </p>
+    <KeywordsDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Custom filter</h2>
+    <p className="cmd-lede">
+      Pass <code>filter</code> when the default match is not enough. This example also accepts initials,
+      so ds finds Design System. Return 0 to hide a row. Return 1 for a full match.
+    </p>
+    <CustomFilterDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>External filter</h2>
+    <p className="cmd-lede">
+      Set <code>shouldFilter</code> to false when a server or the page already decided the list.
+      The menu renders those rows and does not filter them again. Typing atlas keeps Shipment map
+      because the page treats atlas as an alias.
+    </p>
+    <ExternalFilterDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Async search</h2>
+    <p className="cmd-lede">
+      Debounce and fetching stay in the page. Command only presents the field, the loading row, and the results.
+      This preview waits locally. Type maya, or type error to see the failure and Retry.
+    </p>
+    <AsyncDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Nested pages</h2>
+    <p className="cmd-lede">
+      Pages are local state, not a router inside Command. Enter opens the theme list.
+      Back, Escape, or Backspace on an empty field returns to the previous page.
+    </p>
+    <NestedDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Create</h2>
+    <CreateDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Navigation</h2>
+    <p className="cmd-lede">
+      Storybook has no app router here. Selecting a page sets the current destination in the preview.
+      In the product, render a link only when the row itself is the link — do not nest a button inside it.
+    </p>
+    <NavigationDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Loop</h2>
+    <p className="cmd-lede">
+      Loop is off unless you set it. With <code>loop</code>, Arrow Up on the first row moves to the last row.
+    </p>
+    <LoopDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Long list</h2>
+    <p className="cmd-lede">The list scrolls. The field stays put. Arrow keys keep the highlighted row in view.</p>
+    <LargeDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Narrow</h2>
+    <p className="cmd-lede">Long labels truncate. Row shortcuts hide on the narrow example and under 480px.</p>
+    <NarrowDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>Theme</h2>
+    <p className="cmd-lede">One component. Dark is a class on the menu, not a second implementation.</p>
+    <ThemeDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>When to use</h2>
+    <table className="cmd-api">
+      <thead>
+        <tr><th>Use</th><th>For</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Command</td><td>Global actions, mixed results, keyboard search, a palette.</td></tr>
+        <tr><td>Select</td><td>Choosing one value in a form from a known list.</td></tr>
+        <tr><td>Context menu</td><td>A short action list tied to one object.</td></tr>
+        <tr><td>Text input</td><td>Filtering the page in place, or submitting a search.</td></tr>
+        <tr><td>Dialog</td><td>The modal shell. CommandDialog already includes it. Command itself does not trap focus.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div className="cmd-section">
+    <h2>Accessibility</h2>
+    <p className="cmd-lede">
+      The field is a combobox named by the menu label. Rows are options. The highlighted row is
+      <code> aria-selected</code>. Disabled rows use <code>aria-disabled</code> and are skipped by the arrow keys.
+      Group headings are visual; the group is labelled by that heading. Icons and key hints are hidden from the name
+      so the row is announced as its label. The dialog moves focus to the field when it opens and restores focus when it closes.
+      Loading is a progress bar named Searching. The error block is an alert.
+    </p>
+    <p className="cmd-lede">
+      Keys: Arrow Up, Arrow Down, Home, End, Enter, type to filter. Escape closes the dialog.
+      On a nested page, Escape or Backspace on an empty field goes back. Cmd or Ctrl K toggles the palette
+      from the preview that mounts <code>useCommandHotkey</code>. The listener is shared, so two palettes
+      do not attach two listeners, and it is removed on unmount. It is ignored in contenteditable fields
+      and when Shift or Alt is held. A visible button always opens the palette — the shortcut is not the only way in.
+    </p>
+  </div>
+
+  <div className="cmd-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+  <div className="cmd-section">
+    <h2>API</h2>
+    <table className="cmd-api">
+      <thead>
+        <tr><th>Component</th><th>Props</th><th>Role</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>Command</code></td>
+          <td><code>shouldFilter</code>, <code>filter</code>, <code>loop</code>, <code>value</code>, <code>onValueChange</code>, <code>label</code></td>
+          <td>Root. Filtering and keyboard selection. <code>vimBindings</code> defaults to false so Ctrl K is free for the palette.</td>
+        </tr>
+        <tr>
+          <td><code>CommandDialog</code></td>
+          <td><code>open</code>, <code>onOpenChange</code>, <code>title</code>, <code>description</code>, <code>finalFocusRef</code>, plus the Command props above</td>
+          <td>Modal palette. Dialog owns overlay, focus, and Escape.</td>
+        </tr>
+        <tr>
+          <td><code>CommandInput</code></td>
+          <td><code>value</code>, <code>onValueChange</code>, <code>placeholder</code></td>
+          <td>Search field. Uncontrolled unless you pass <code>value</code>.</td>
+        </tr>
+        <tr>
+          <td><code>CommandList</code></td>
+          <td>children</td>
+          <td>Scrollable results. Max height 320px.</td>
+        </tr>
+        <tr>
+          <td><code>CommandEmpty</code></td>
+          <td>children</td>
+          <td>Shown when the built-in filter has no matches.</td>
+        </tr>
+        <tr>
+          <td><code>CommandGroup</code></td>
+          <td><code>heading</code></td>
+          <td>Labelled group. The heading is not a result.</td>
+        </tr>
+        <tr>
+          <td><code>CommandItem</code></td>
+          <td><code>value</code>, <code>keywords</code>, <code>onSelect</code>, <code>disabled</code>, <code>forceMount</code></td>
+          <td>One command. <code>keywords</code> are searchable and not visible.</td>
+        </tr>
+        <tr>
+          <td><code>CommandSeparator</code></td>
+          <td><code>alwaysRender</code></td>
+          <td>Divider. Hidden while a query is active unless <code>alwaysRender</code> is set. <code>CommandDivider</code> is the same component.</td>
+        </tr>
+        <tr>
+          <td><code>CommandShortcut</code></td>
+          <td>children</td>
+          <td>Key hint. Hidden from the accessible name.</td>
+        </tr>
+        <tr>
+          <td><code>CommandLoading</code></td>
+          <td><code>label</code>, <code>progress</code></td>
+          <td>Compact loading row for async results.</td>
+        </tr>
+        <tr>
+          <td><code>useCommandHotkey</code></td>
+          <td><code>onToggle</code>, <code>enabled</code></td>
+          <td>⌘K / Ctrl K. One listener for all subscribers.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

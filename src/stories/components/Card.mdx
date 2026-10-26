@@ -1,0 +1,239 @@
+import { Canvas, Controls, Meta } from "@storybook/addon-docs/blocks";
+import * as CardStories from "./Card.stories";
+import {
+  AnatomyDemo,
+  FeatureDemo,
+  BillingDemo,
+  PromoDemo,
+  HeaderFooterDemo,
+  ImageDemo,
+  InfoDemo,
+  DashboardDemo,
+  MetricsDemo,
+  FormDemo,
+  SettingsDemo,
+  ProfileDemo,
+  BadgeDemo,
+  MenuDemo,
+  LinkCardDemo,
+  ProgressDemo,
+  SkeletonDemo,
+  EmptyDemo,
+  LogisticsDemo,
+  SpecsDemo,
+} from "./Cards";
+
+<Meta of={CardStories} />
+
+<div className="crd-page">
+
+  <div className="crd-header-block">
+    <h1>Card</h1>
+    <p>
+      A surface that groups related content on the page. Compose the header, body, and footer.
+      The card does not know whether it holds a form, a metric, or an image.
+    </p>
+  </div>
+
+  <div className="crd-section">
+    <h2>Overview</h2>
+    <p className="crd-lede">
+      White surface, 1px Grey border, 12px radius. No shadow. Width comes from the parent.
+      Use Example in Controls to switch compositions. Those are not Card props.
+    </p>
+    <Canvas of={CardStories.Playground} layout="centered" />
+    <Controls of={CardStories.Playground} />
+  </div>
+
+  <div className="crd-section">
+    <h2>Anatomy</h2>
+    <AnatomyDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Feature</h2>
+    <p className="crd-lede">Icon, title, description, and a text link. Not a separate card variant.</p>
+    <FeatureDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Billing</h2>
+    <p className="crd-lede">Progress and actions stay outside the card primitive.</p>
+    <BillingDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Promotional</h2>
+    <p className="crd-lede">A quiet brand tint already used on this system. No gradient or gloss.</p>
+    <PromoDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Header and footer</h2>
+    <p className="crd-lede">A divider is opt-in on the footer. The base card does not insert one.</p>
+    <HeaderFooterDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>With image</h2>
+    <p className="crd-lede">
+      The media block uses a 16:9 ratio and shares the card’s top radius. There is no image-position prop.
+    </p>
+    <ImageDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Info</h2>
+    <InfoDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Dashboard</h2>
+    <DashboardDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Metrics</h2>
+    <p className="crd-lede">The grid belongs to the page, not to Card.</p>
+    <MetricsDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Form</h2>
+    <FormDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Logistics</h2>
+    <p className="crd-lede">Shipment tracking and a customs hold. Same card, denser content.</p>
+    <LogisticsDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Settings</h2>
+    <SettingsDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Profile</h2>
+    <ProfileDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>With badge</h2>
+    <BadgeDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Menu action</h2>
+    <p className="crd-lede">The icon button opens a Popover. The card does not own the menu.</p>
+    <MenuDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Link card</h2>
+    <p className="crd-lede">
+      When the whole card navigates, render it as a link. Do not put buttons inside that link.
+      Hover feedback is only on <code>crd--interactive</code>.
+    </p>
+    <LinkCardDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Progress</h2>
+    <ProgressDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Loading</h2>
+    <p className="crd-lede">Skeleton is composed inside the card. There is no loading prop.</p>
+    <SkeletonDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Empty</h2>
+    <EmptyDemo />
+  </div>
+
+  <div className="crd-section">
+    <h2>Installation</h2>
+    <pre className="crd-lede" style={{ margin: 0, padding: "14px 16px", borderRadius: 10, border: "1px solid #E2E8F0", background: "#F8FAFC", fontFamily: "JetBrains Mono, ui-monospace, monospace", fontSize: 12, color: "#0F172A", overflow: "auto" }}>
+{`import {
+  Card, CardHeader, CardHeading, CardTitle,
+  CardDescription, CardAction, CardContent, CardFooter,
+} from './Card';`}
+    </pre>
+  </div>
+
+  <div className="crd-section">
+    <h2>Usage</h2>
+    <table className="crd-api">
+      <thead>
+        <tr><th>Use</th><th>When</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Card</td><td>Grouped content that stays on the page.</td></tr>
+        <tr><td>Dialog</td><td>A temporary task over the page.</td></tr>
+        <tr><td>Alert</td><td>A status the user must notice.</td></tr>
+        <tr><td>Collapsible</td><td>Content the user opens and closes.</td></tr>
+        <tr><td>List item</td><td>One row in a continuous list. Do not wrap every row in a card.</td></tr>
+      </tbody>
+    </table>
+    <div className="crd-guidelines" style={{ marginTop: 16 }}>
+      <div className="crd-guideline">
+        <span className="crd-gl-tag crd-gl-tag--do">Do</span>
+        <ul>
+          <li>Keep one card surface and compose the contents</li>
+          <li>Let the parent set width</li>
+          <li>Use a real link when the whole card navigates</li>
+          <li>Choose CardTitle’s heading level for the page</li>
+        </ul>
+      </div>
+      <div className="crd-guideline">
+        <span className="crd-gl-tag crd-gl-tag--dont">Don&apos;t</span>
+        <ul>
+          <li>Don&apos;t add hover or elevation to static cards</li>
+          <li>Don&apos;t nest a button inside a card that is itself a link</li>
+          <li>Don&apos;t make a FeatureCard or BillingCard component</li>
+          <li>Don&apos;t use a card as a substitute for Alert or Dialog</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div className="crd-section">
+    <h2>Accessibility</h2>
+    <ul className="crd-lede" style={{ paddingLeft: 18 }}>
+      <li>The default card is a <code>div</code>. Pass <code>as</code> only when the context needs a section, article, or link.</li>
+      <li><code>CardTitle</code> defaults to <code>h3</code>. Set <code>as=&quot;h2&quot;</code> when that card is a page section.</li>
+      <li>Images need an <code>alt</code> that describes the picture.</li>
+      <li>A link card shows a focus ring. Static cards do not look clickable.</li>
+      <li>Selectable choices belong on Radio or Checkbox, not a <code>selected</code> prop on Card.</li>
+    </ul>
+  </div>
+
+  <div className="crd-section">
+    <h2>API</h2>
+    <table className="crd-api">
+      <thead>
+        <tr><th>Component</th><th>Props</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>Card</code></td><td><code>as</code>, <code>href</code>, <code>className</code>, children</td><td><code>as</code> is div, section, article, or a. Default div.</td></tr>
+        <tr><td><code>CardHeader</code></td><td><code>className</code>, children</td><td>Title block plus optional action.</td></tr>
+        <tr><td><code>CardHeading</code></td><td><code>className</code>, children</td><td>Stacks title and description.</td></tr>
+        <tr><td><code>CardTitle</code></td><td><code>as</code>, <code>className</code>, children</td><td>h2, h3, h4, or p. Default h3.</td></tr>
+        <tr><td><code>CardDescription</code></td><td><code>className</code>, children</td><td>Muted supporting text.</td></tr>
+        <tr><td><code>CardAction</code></td><td><code>className</code>, children</td><td>Button, badge, or menu trigger.</td></tr>
+        <tr><td><code>CardContent</code></td><td><code>className</code>, children</td><td>Main body.</td></tr>
+        <tr><td><code>CardFooter</code></td><td><code>className</code>, children</td><td>Actions or metadata. No divider unless you add one.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div className="crd-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+</div>

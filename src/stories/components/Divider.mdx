@@ -1,0 +1,126 @@
+import { Canvas, Controls, Meta } from "@storybook/addon-docs/blocks";
+import * as DividerStories from "./DividerPlayground.stories";
+import {
+  VerticalDemo,
+  PlainTextDemo,
+  BadgeDemo,
+  FormDemo,
+  SectionDemo,
+  CardDemo,
+  MenuDemo,
+  SpecsDemo,
+} from "./DividerDemos";
+
+<Meta of={DividerStories} name="Docs" />
+
+<div className="dvd-page">
+
+  <div className="dvd-intro">
+    <h1>Divider</h1>
+    <p>
+      A 1px line that separates related groups of content. The line is Grey / 300.
+      Spacing stays on the parent, not on the divider.
+    </p>
+  </div>
+
+  <div className="dvd-section">
+    <h2>Overview</h2>
+    <p className="dvd-lede">
+      Horizontal by default. Full width of the parent. No built-in margin.
+      Switch Orientation in Controls.
+    </p>
+    <Canvas of={DividerStories.Playground} layout="centered" />
+    <Controls of={DividerStories.Playground} />
+  </div>
+
+  <div className="dvd-section">
+    <h2>Vertical</h2>
+    <p className="dvd-lede">
+      The line stretches to the height of the row. Keep the parent on <code>align-items: stretch</code> so the line matches the content.
+    </p>
+    <VerticalDemo />
+  </div>
+
+  <div className="dvd-section">
+    <h2>With plain text</h2>
+    <p className="dvd-lede">Put the label between two dividers. The component does not take a text prop.</p>
+    <PlainTextDemo />
+  </div>
+
+  <div className="dvd-section">
+    <h2>With a badge</h2>
+    <p className="dvd-lede">The badge keeps its own styles. The lines stay Grey / 300.</p>
+    <BadgeDemo />
+  </div>
+
+  <div className="dvd-section">
+    <h2>In a form</h2>
+    <FormDemo />
+  </div>
+
+  <div className="dvd-section">
+    <h2>Between sections</h2>
+    <SectionDemo />
+  </div>
+
+  <div className="dvd-section">
+    <h2>In a card</h2>
+    <p className="dvd-lede">The card border is the boundary. The divider only separates what is inside.</p>
+    <CardDemo />
+  </div>
+
+  <div className="dvd-section">
+    <h2>In a menu</h2>
+    <p className="dvd-lede">
+      Context Menu keeps its own separator. This composition uses Divider between action groups.
+    </p>
+    <MenuDemo />
+  </div>
+
+  <div className="dvd-section">
+    <h2>When to use</h2>
+    <p className="dvd-lede">
+      Use a divider when groups need a line to scan: card sections, settings blocks, form steps, menu groups, or a vertical split in a toolbar.
+      If the groups are already clear, use space and skip the line.
+    </p>
+    <table className="dvd-api">
+      <thead>
+        <tr><th></th><th>Use</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Spacing</td><td>Groups are already distinct.</td></tr>
+        <tr><td>Divider</td><td>A line makes the grouping easier to scan.</td></tr>
+        <tr><td>Border</td><td>The edge of a component, such as a card.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div className="dvd-section">
+    <h2>Accessibility</h2>
+    <p className="dvd-lede">
+      Decorative is the default, so the line is not announced. Set <code>decorative</code> to false when the line separates meaningful regions.
+      That sets <code>role=&quot;separator&quot;</code>. A vertical separator also sets <code>aria-orientation=&quot;vertical&quot;</code>.
+      Horizontal is the default and does not repeat the orientation.
+    </p>
+  </div>
+
+  <div className="dvd-section">
+    <h2>Specs</h2>
+    <SpecsDemo />
+  </div>
+
+  <div className="dvd-section">
+    <h2>API</h2>
+    <table className="dvd-api">
+      <thead>
+        <tr><th>Prop</th><th>Type</th><th>Default</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>orientation</code></td><td><code>&quot;horizontal&quot; | &quot;vertical&quot;</code></td><td><code>horizontal</code></td></tr>
+        <tr><td><code>decorative</code></td><td><code>boolean</code></td><td><code>true</code></td></tr>
+        <tr><td><code>className</code></td><td><code>string</code></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

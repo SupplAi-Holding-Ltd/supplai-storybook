@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
-import { Button, PlusIcon, ArrowRightIcon, DownloadIcon, StarIcon, GridIcon, TrashIcon } from './Button';
+import { Button, PlusIcon, ArrowRightIcon, DownloadIcon, StarIcon, GridIcon, TrashIcon, ChevronDownIcon, ButtonGroup } from './Button';
 
 const meta = {
   title: 'Components/Button',
@@ -19,6 +19,11 @@ const meta = {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
     },
+    loading: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    iconOnly: { control: 'boolean' },
+    fullWidth: { control: 'boolean' },
+    href: { control: 'text' },
   },
   args: { onClick: fn() },
 } satisfies Meta<typeof Button>;
@@ -135,4 +140,51 @@ export const FullWidth: Story = {
     label: 'Get Started',
     fullWidth: true,
   },
+};
+
+/* ── Loading ───────────────────────────────────────────────────── */
+export const Loading: Story = {
+  args: {
+    variant: 'filled',
+    intent: 'primary',
+    size: 'md',
+    label: 'Saving…',
+    loading: true,
+  },
+};
+
+/* ── Leading and trailing ──────────────────────────────────────── */
+export const WithBothIcons: Story = {
+  args: {
+    variant: 'outlined',
+    intent: 'primary',
+    size: 'md',
+    label: 'Export',
+    leadingIcon: <DownloadIcon />,
+    trailingIcon: <ChevronDownIcon />,
+  },
+};
+
+/* ── Link styled as a button ───────────────────────────────────── */
+export const AsLink: Story = {
+  args: {
+    variant: 'filled',
+    intent: 'primary',
+    size: 'md',
+    label: 'Open settings',
+    href: '#settings',
+  },
+};
+
+/* ── Joined group ──────────────────────────────────────────────── */
+export const Group: Story = {
+  args: { label: 'Week' },
+  render: () => (
+    <ButtonGroup label="Calendar range">
+      <Button variant="outlined" intent="neutral" label="Day" />
+      <Button variant="filled" intent="primary" label="Week" />
+      <Button variant="outlined" intent="neutral" label="Month" />
+      <Button variant="outlined" intent="neutral" iconOnly label="More" leadingIcon={<GridIcon />} />
+    </ButtonGroup>
+  ),
 };

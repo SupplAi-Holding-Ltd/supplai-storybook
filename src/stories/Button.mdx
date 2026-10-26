@@ -1,6 +1,7 @@
 import { Meta } from "@storybook/addon-docs/blocks";
 import * as ButtonStories from "./Button.stories";
-import { Button, PlusIcon, ArrowRightIcon, DownloadIcon, StarIcon, GridIcon, TrashIcon } from "./Button";
+import { Button, PlusIcon, ArrowRightIcon, DownloadIcon, StarIcon, GridIcon, TrashIcon, ChevronDownIcon, ButtonGroup } from "./Button";
+import { Badge } from "./components/Badges.mdx";
 import { CodePanel } from "./components/CodePanel";
 import React from "react";
 
@@ -22,6 +23,7 @@ export function Example() {
 // Variants: filled | outlined | tonal | ghost
 // Intents:  primary | success | warning | error | neutral
 // Sizes:    xs | sm | md | lg | xl
+// loading, leadingIcon, trailingIcon, iconOnly, href, fullWidth
 `;
 
 export const ButtonConfigurator = () => {
@@ -31,6 +33,7 @@ export const ButtonConfigurator = () => {
   const [withLeading,  setWithLeading]  = React.useState(false);
   const [withTrailing, setWithTrailing] = React.useState(false);
   const [isDisabled,   setIsDisabled]   = React.useState(false);
+  const [isLoading,    setIsLoading]    = React.useState(false);
 
   const variants = ["filled", "outlined", "tonal", "ghost"];
   const intents  = ["primary", "success", "warning", "error", "neutral"];
@@ -49,10 +52,11 @@ export const ButtonConfigurator = () => {
           variant={variant}
           intent={intent}
           size={size}
-          label="Button"
+          label={isLoading ? "Saving…" : "Button"}
           leadingIcon={withLeading ? <PlusIcon /> : undefined}
           trailingIcon={withTrailing ? <ArrowRightIcon /> : undefined}
           disabled={isDisabled}
+          loading={isLoading}
         />
       </div>
 
@@ -96,10 +100,54 @@ export const ButtonConfigurator = () => {
             <button className={`bc-chip ${withLeading  ? "bc-chip--on" : ""}`} onClick={() => setWithLeading(v => !v)}>Leading icon</button>
             <button className={`bc-chip ${withTrailing ? "bc-chip--on" : ""}`} onClick={() => setWithTrailing(v => !v)}>Trailing icon</button>
             <button className={`bc-chip ${isDisabled   ? "bc-chip--on" : ""}`} onClick={() => setIsDisabled(v => !v)}>Disabled</button>
+            <button className={`bc-chip ${isLoading    ? "bc-chip--on" : ""}`} onClick={() => setIsLoading(v => !v)}>Loading</button>
           </div>
         </div>
       </div>
     </div>
+  );
+};
+
+export const FormSubmitDemo = () => {
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [error, setError] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [done, setDone] = React.useState(false);
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError("Enter a valid email address.");
+      setDone(false);
+      return;
+    }
+    setError("");
+    setLoading(true);
+    window.setTimeout(() => {
+      setLoading(false);
+      setDone(true);
+    }, 900);
+  };
+
+  return (
+    <form className="bd-form-card bd-form-card--signin" onSubmit={onSubmit}>
+      <h4>Sign in</h4>
+      <div className="bd-form-field">
+        <label htmlFor="bd-email">Email</label>
+        <input id="bd-email" className="bd-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      </div>
+      <div className="bd-form-field">
+        <label htmlFor="bd-password">Password</label>
+        <input id="bd-password" className="bd-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      </div>
+      {error ? <p className="bd-form-error" role="alert">{error}</p> : null}
+      {done ? <p className="bd-form-ok" role="status">Signed in locally. No request was sent.</p> : null}
+      <div className="bd-form-actions">
+        <Button type="button" variant="outlined" intent="neutral" label="Cancel" disabled={loading} onClick={() => { setEmail(""); setPassword(""); setError(""); setDone(false); }} />
+        <Button type="submit" variant="filled" intent="primary" label={loading ? "Signing in…" : "Sign in"} loading={loading} />
+      </div>
+    </form>
   );
 };
 
@@ -159,6 +207,12 @@ export const ButtonConfigurator = () => {
     <p className="bd-desc">Semantic colour variants communicate meaning — use these for confirmations, warnings, destructive actions, and neutral interactions. Each intent supports all four variants.</p>
 
     <div className="bd-semantic-table">
+      <div className="bd-col-headers">
+        <span className="bd-intent-label" aria-hidden="true" />
+        {["Filled", "Outlined", "Tonal", "Ghost", "Disabled"].map(l => (
+          <span key={l} className="bd-col-label">{l}</span>
+        ))}
+      </div>
       {[
         { intent: "success", label: "Confirm"  },
         { intent: "primary", label: "Continue" },
@@ -175,12 +229,6 @@ export const ButtonConfigurator = () => {
           <Button variant="filled"   intent={intent} size="md" label={label} disabled />
         </div>
       ))}
-      <div className="bd-col-headers">
-        <span className="bd-intent-label" aria-hidden="true" />
-        {["Filled", "Outlined", "Tonal", "Ghost", "Disabled"].map(l => (
-          <span key={l} className="bd-col-label">{l}</span>
-        ))}
-      </div>
     </div>
   </div>
 
@@ -245,7 +293,7 @@ export const ButtonConfigurator = () => {
   {/* ─── Layout / Sizes ─────────────────────────────────────────── */}
   <div className="bd-section">
     <h2>Layout &amp; Sizes</h2>
-    <p className="bd-desc">Five sizes cover all layout contexts — from dense data tables (xs) to prominent hero actions (xl).</p>
+    <p className="bd-desc">Five sizes cover all layout contexts — from compact table and toolbar actions (<code>xs</code>, 28px) to prominent hero actions (<code>xl</code>). Icon glyphs scale with the button. There is no separate compact component: use <code>size=&quot;xs&quot;</code>.</p>
 
     <div className="bd-sizes-row bd-bg-light">
       {[
@@ -285,6 +333,86 @@ export const ButtonConfigurator = () => {
     </div>
   </div>
 
+  <div className="bd-section">
+    <h2>Loading</h2>
+    <p className="bd-desc">
+      Set <code>loading</code> while an action is in progress. The button keeps its label, swaps the leading icon for the design-system Spinner, hides a trailing icon, and ignores further activation. Change the label to the in-progress verb so the accessible name stays useful. The Spinner is not announced on its own.
+    </p>
+    <div className="bd-row bd-bg-light">
+      <Button variant="filled" intent="primary" label="Save changes" />
+      <Button variant="filled" intent="primary" label="Saving…" loading />
+      <Button variant="outlined" intent="neutral" label="Saving…" loading leadingIcon={<DownloadIcon />} />
+      <Button variant="filled" intent="primary" iconOnly label="Saving" loading />
+    </div>
+  </div>
+
+  <div className="bd-section">
+    <h2>Link button</h2>
+    <p className="bd-desc">
+      Use a <code>button</code> for actions. Pass <code>href</code> when the control navigates — it renders an anchor with the same styles. Ghost is the low-emphasis action style; it is still a button unless <code>href</code> is set.
+    </p>
+    <div className="bd-row bd-bg-light">
+      <Button href="#settings" variant="filled" intent="primary" label="Settings" />
+      <Button href="#docs" variant="ghost" intent="primary" label="View documentation" trailingIcon={<ArrowRightIcon />} />
+      <Button variant="ghost" intent="primary" label="Forgot password?" />
+    </div>
+  </div>
+
+  <div className="bd-section">
+    <h2>Button group</h2>
+    <p className="bd-desc">
+      <code>ButtonGroup</code> joins related buttons that share one height. It is a visual group, not a toggle or radio group. Mix a text button and an icon button when the extra action is an overflow menu.
+    </p>
+    <div className="bd-row bd-bg-light">
+      <ButtonGroup label="Calendar range">
+        <Button variant="outlined" intent="neutral" label="Day" />
+        <Button variant="filled" intent="primary" label="Week" />
+        <Button variant="outlined" intent="neutral" label="Month" />
+      </ButtonGroup>
+      <ButtonGroup label="Page actions">
+        <Button variant="outlined" intent="neutral" label="Previous" />
+        <Button variant="outlined" intent="neutral" label="Next" />
+        <Button variant="outlined" intent="neutral" iconOnly label="More actions" leadingIcon={<GridIcon />} />
+      </ButtonGroup>
+    </div>
+  </div>
+
+  <div className="bd-section">
+    <h2>Button with badge</h2>
+    <p className="bd-desc">
+      Counts and status belong to Badge, passed as <code>trailingIcon</code>. Do not restyle a badge inside Button.
+    </p>
+    <div className="bd-row bd-bg-light">
+      <Button variant="outlined" intent="neutral" label="Notifications" trailingIcon={<Badge size={20} color="primary">8</Badge>} />
+      <Button variant="tonal" intent="primary" label="Inbox" trailingIcon={<Badge size={20} variant="strong" color="primary">New</Badge>} />
+      <Button variant="filled" intent="primary" label="Comments" trailingIcon={<Badge size={20} variant="outline" color="neutral">12</Badge>} />
+    </div>
+  </div>
+
+  <div className="bd-section">
+    <h2>Beside an input</h2>
+    <p className="bd-desc">Button stays a button. Pair it with an input when the action applies to that field.</p>
+    <div className="bd-input-group">
+      <input className="bd-input" aria-label="Email address" placeholder="email@example.com" />
+      <Button variant="filled" intent="primary" label="Invite" />
+    </div>
+  </div>
+
+  <div className="bd-section">
+    <h2>Form actions</h2>
+    <p className="bd-desc">
+      The button defaults to <code>type=&quot;button&quot;</code> so it does not submit a form by accident. Set <code>type=&quot;submit&quot;</code> on the primary action and <code>type=&quot;button&quot;</code> on Cancel. An invalid email stays on this step.
+    </p>
+    <FormSubmitDemo />
+  </div>
+
+  <div className="bd-section">
+    <h2>Long label</h2>
+    <div className="bd-row bd-bg-light">
+      <Button variant="filled" intent="primary" label="Save changes and notify the team" leadingIcon={<PlusIcon />} />
+    </div>
+  </div>
+
   {/* ─── Usage Guidelines ───────────────────────────────────────── */}
   <div className="bd-section">
     <h2>Usage Guidelines</h2>
@@ -292,22 +420,78 @@ export const ButtonConfigurator = () => {
       <div className="bd-guideline bd-do">
         <span className="bd-verdict-do">✓ Do</span>
         <ul>
-          <li>Use one primary (filled) button per section to establish clear hierarchy.</li>
-          <li>Use descriptive, action-oriented labels: "Save changes", "Add to cart".</li>
-          <li>Pair filled buttons with outlined or ghost buttons for secondary actions.</li>
-          <li>Match button size to the density of the surrounding content.</li>
+          <li>Use one filled primary button per section to establish clear hierarchy.</li>
+          <li>Use descriptive, action-oriented labels: &quot;Save changes&quot;, &quot;Add to cart&quot;.</li>
+          <li>Pair filled buttons with outlined, tonal, or ghost buttons for secondary actions.</li>
+          <li>Use <code>href</code> for navigation and <code>type=&quot;submit&quot;</code> only for the form action.</li>
+          <li>Give every icon-only button a <code>label</code>. A tooltip does not replace that name.</li>
         </ul>
       </div>
       <div className="bd-guideline bd-dont">
         <span className="bd-verdict-dont">✕ Don't</span>
         <ul>
-          <li>Don't place more than one filled button of the same intent side by side.</li>
-          <li>Don't use vague labels like "Click here" or "Submit".</li>
-          <li>Don't mix sizes within the same button group.</li>
-          <li>Don't use icon-only buttons without an accessible aria-label.</li>
+          <li>Don&apos;t place more than one filled button of the same intent side by side.</li>
+          <li>Don&apos;t use vague labels like &quot;Click here&quot; or &quot;Submit&quot;.</li>
+          <li>Don&apos;t use a button for persistent on/off state — use Toggle.</li>
+          <li>Don&apos;t use error intent for emphasis. Reserve it for destructive actions.</li>
+          <li>Don&apos;t add pill, glossy, or elevated variants. Radius follows the size scale (6–10px).</li>
         </ul>
       </div>
     </div>
+  </div>
+
+  <div className="bd-section">
+    <h2>Button, link, toggle, menu</h2>
+    <table className="bd-api">
+      <thead>
+        <tr><th>Control</th><th>Use when</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Button</td><td>An action: save, delete, submit, open a dialog, add an item.</td></tr>
+        <tr><td>Link (<code>href</code>)</td><td>Navigation: view a profile, open docs, go to settings. It can look like a button.</td></tr>
+        <tr><td>Toggle</td><td>A persistent on/off or pressed state. Not a one-off action.</td></tr>
+        <tr><td>Menu trigger</td><td>The button opens a menu. The menu owns the action list. Button does not store that selection.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div className="bd-section">
+    <h2>Accessibility</h2>
+    <ul className="bd-a11y">
+      <li>Actions render a native <code>button</code>. Navigation renders an <code>a</code>.</li>
+      <li>Default <code>type</code> is <code>button</code>. Use <code>submit</code> or <code>reset</code> only when that is the intent.</li>
+      <li>Keyboard focus uses a visible ring. Enter and Space activate a button. Enter follows a link.</li>
+      <li>Disabled buttons do not activate. Loading buttons are also blocked, stay full contrast, and expose <code>aria-busy</code>.</li>
+      <li>Icon-only buttons set <code>aria-label</code> from <code>label</code>.</li>
+      <li>Filled, outlined, tonal, ghost, and error intents share the same focus ring.</li>
+    </ul>
+  </div>
+
+  <div className="bd-section">
+    <h2>API</h2>
+    <table className="bd-api">
+      <thead>
+        <tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>variant</code></td><td>filled | outlined | tonal | ghost</td><td>filled</td><td>Visual emphasis</td></tr>
+        <tr><td><code>intent</code></td><td>primary | success | warning | error | neutral</td><td>primary</td><td>Semantic colour</td></tr>
+        <tr><td><code>size</code></td><td>xs | sm | md | lg | xl</td><td>md</td><td>28 / 32 / 40 / 48 / 56px. <code>small</code> maps to <code>sm</code></td></tr>
+        <tr><td><code>label</code></td><td>string</td><td>Button</td><td>Visible label, or accessible name when icon-only</td></tr>
+        <tr><td><code>leadingIcon</code></td><td>ReactNode</td><td>—</td><td>Icon before the label. Hidden while loading</td></tr>
+        <tr><td><code>trailingIcon</code></td><td>ReactNode</td><td>—</td><td>Icon or Badge after the label. Hidden while loading</td></tr>
+        <tr><td><code>iconOnly</code></td><td>boolean</td><td>false</td><td>Square button. Requires <code>label</code></td></tr>
+        <tr><td><code>disabled</code></td><td>boolean</td><td>false</td><td>Unavailable action</td></tr>
+        <tr><td><code>loading</code></td><td>boolean</td><td>false</td><td>Spinner, stable width, activation blocked</td></tr>
+        <tr><td><code>type</code></td><td>button | submit | reset</td><td>button</td><td>Ignored when <code>href</code> is set</td></tr>
+        <tr><td><code>href</code></td><td>string</td><td>—</td><td>Renders an anchor instead of a button</td></tr>
+        <tr><td><code>fullWidth</code></td><td>boolean</td><td>false</td><td>Stretches to the container</td></tr>
+        <tr><td><code>className</code></td><td>string</td><td>—</td><td>Extra class on the root</td></tr>
+      </tbody>
+    </table>
+    <p className="bd-desc" style={{ marginTop: 16 }}>
+      <code>ButtonGroup</code> accepts <code>label</code> (accessible name) and <code>children</code>. It does not set variant, intent, or size — put those on each button, and keep sizes consistent.
+    </p>
   </div>
 
 </div>
@@ -538,21 +722,115 @@ export const ButtonConfigurator = () => {
     color: #111827;
     margin: 0;
   }
+  .bd-form-card--signin {
+    max-width: 480px;
+  }
   .bd-form-field {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
   }
   .bd-form-field label {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     color: #374151;
   }
   .bd-input-mock {
-    height: 36px;
+    height: 40px;
     border: 1px solid #D1D5DB;
-    border-radius: 6px;
+    border-radius: 8px;
     background: #F9FAFB;
+  }
+  .bd-form-card .bd-input,
+  .bd-input-group .bd-input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+    min-height: 40px;
+    padding: 0 14px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-family: Manrope, system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 40px;
+    color: #111827;
+    background: #FFFFFF;
+    min-width: 0;
+    flex: 1;
+  }
+  .bd-input:focus {
+    outline: none;
+    border-color: #4169E1;
+    box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.25);
+  }
+  .bd-input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 480px;
+  }
+  .bd-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  .bd-form-error {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: #D13145;
+  }
+  .bd-form-ok {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: #047857;
+  }
+  .bd-page .bdg {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    font-family: Manrope, system-ui, sans-serif;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .bd-page .bdg-label {
+    display: inline-flex;
+    align-items: center;
+  }
+  .bd-api {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .bd-api th, .bd-api td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid #E5E7EB;
+    vertical-align: top;
+    color: #374151;
+  }
+  .bd-api th {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #9CA3AF;
+  }
+  .bd-api code {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12px;
+  }
+  .bd-a11y {
+    margin: 0;
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #374151;
   }
   .bd-guidelines {
     display: grid;
